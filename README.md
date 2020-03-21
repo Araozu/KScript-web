@@ -1,6 +1,6 @@
 # Kan
 
-> Pagina geb del lenguaje de programacion Kan.
+> Pagina web del lenguaje de programacion Kan.
 
 Construido con Nuxt.js, Vue.js, F# y Fable.
 
