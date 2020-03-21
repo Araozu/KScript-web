@@ -12,7 +12,7 @@
 </template>
 
 <script lang="coffee">
-    import { generarParser } from "@/Compilador/AnalisisLexico/Gramatica.fs"
+    import { generarParser } from "@/Compilador/AnalisisLexico/Gramatica"
     import token from "./token.vue"
 
     crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")

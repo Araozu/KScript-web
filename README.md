@@ -1,22 +1,29 @@
-# kan
+# Kan
 
 > Pagina geb del lenguaje de programacion Kan.
 
-## Build Setup
+Construido con Nuxt.js, Vue.js, F# y Fable.
 
-```bash
-# install dependencies
-$ npm install
+## Requisitos
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+- node.js (construido con v12)
+- npm
+- dotnet 3.1 o superior
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+## Instalación
 
-# generate static project
-$ npm run generate
-```
+- Clonar este repositorio
+- Clonar el repositorio con el compilador en F# (Araozu/KanComp)
+- Instalar dependencias
+- Ejecutar el script "compile-compiler". En este paso es importante reemplazar la ruta que tiene el script con la ruta del compilador en F#.
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Ejecución de desarrollo
+
+`npm run dev`
+
+## Compilación para deployment
+
+`npm run generate`
+
+Para mas información visitar la documentación de Nuxt.js.
