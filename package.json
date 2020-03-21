@@ -1,0 +1,24 @@
+{
+  "name": "kan",
+  "version": "1.0.0",
+  "description": "Pagina geb del lenguaje de programacion Kan.",
+  "author": "Araozu",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "^2.5.1",
+    "nuxt": "^2.0.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2"
+  },
+  "devDependencies": {}
+}

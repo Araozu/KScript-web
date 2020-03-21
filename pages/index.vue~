@@ -1,0 +1,13 @@
+<template lang="pug">
+    div Hola mundo :c
+
+    //
+</template>
+
+<script lang="coffee">
+
+</script>
+
+<style scoped lang="sass">
+    
+</style>
