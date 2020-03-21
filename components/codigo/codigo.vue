@@ -19,7 +19,8 @@
                 required: true
         computed:
             lineas: -> @codigo.split "\n"
-    #
+
+#
 </script>
 
 <style scoped lang="sass">

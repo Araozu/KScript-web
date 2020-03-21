@@ -6,7 +6,7 @@
 <script lang="coffee">
     palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
         "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-        "if else return registro variante gestor").split " "
+        "if else return registro variante gestor cov met pub").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
 
@@ -25,6 +25,8 @@
             escapar: ->
                 token = @token
                 switch token.tipo.name
+                    when "Identacion"
+                        "&nbsp;&nbsp;&nbsp;&nbsp;"
                     when "Texto" then "\"#{token.res}\""
                     when "Identificador"
                         valor = token.res
@@ -42,9 +44,12 @@
 
 <style scoped lang="sass">
 
+    .token
+        font-size: var(--tamanoFuenteCodigo)
+
+
     @media only screen and (max-width: 450px)
         .token
-            font-size: 0.8rem
             line-height: 1.2rem
 
     //

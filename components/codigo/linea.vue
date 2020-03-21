@@ -1,9 +1,12 @@
 <template lang="pug">
     // div.linea.TextoCod(@mouseenter="selecLinea" @mouseleave="deselecLinea"
     div.linea.TextoCod(:class="lineaSeleccionada? 'Seleccionado' : ''")
-        token(v-for="(token, i) in tokens"
-            :token="token" :posicion="i" :key="i"
-        )
+        template(v-if="linea === ''")
+            br
+        template(v-else)
+            token(v-for="(token, i) in tokens"
+                :token="token" :posicion="i" :key="i"
+            )
 
     //
 </template>
