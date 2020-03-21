@@ -5,16 +5,19 @@
                 img.logo(src="@/assets/img/kan_logo.svg")
             h1.titulo Kan
             div.etiqueta
-                div Funcional · Orientado a Objetos · Identado
-
+                div Funcional · Orientado a Objetos · Seguro
+        div
+            codigo(codigo="console.log \"Hola mundo\"")
 
     //
 </template>
 
 <script lang="coffee">
+    import codigo from "@/components/codigo/codigo.vue"
 
     export default
         name: "index"
+        components: { codigo }
 
 
 #
