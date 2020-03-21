@@ -13,7 +13,8 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto&display=swap" }
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto&display=swap" },
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" }
         ]
     },
     /*
@@ -53,6 +54,11 @@ export default {
             config.module.rules.push({
                 test: /\.coffee$/,
                 loader: 'coffee-loader',
+            });
+            // Para que funcione se debe eliminar la primera linea de fable-compiler.
+            config.module.rules.push({
+                test: /\.fs(x|proj)?$/,
+                use: "fable-loader"
             });
         }
     }

@@ -1,5 +1,6 @@
 <template lang="pug">
     div.barra-nav
+        div.borde
         div
             nuxt-link(to="/") Inicio
         div
@@ -21,6 +22,16 @@
 </script>
 
 <style scoped lang="sass">
+    $altoBorde: 0.15rem
+
+    .borde
+        position: absolute
+        top: -$altoBorde
+        width: 100%
+        height: $altoBorde
+        background-color: var(--colorSecundario)
+
+
 
     .barra-nav
         position: fixed
@@ -29,7 +40,7 @@
         width: 100%
         background-color: var(--fondo)
         color: var(--color)
-        border-top: solid 3px var(--colorSecundario)
+        // border-top: solid 3px var(--colorSecundario)
 
         display: grid
         grid-template-columns: auto auto auto auto
