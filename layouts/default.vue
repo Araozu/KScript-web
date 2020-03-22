@@ -1,6 +1,7 @@
 <template>
   <div>
     <nuxt />
+    <div id="separador"></div>
     <barraNavegacion />
   </div>
 </template>
@@ -20,5 +21,9 @@
 </script>
 
 <style scoped lang="sass">
+
+    #separador
+        width: 100%
+        height: 3rem
 
 </style>

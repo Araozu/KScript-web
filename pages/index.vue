@@ -17,95 +17,87 @@
 
     datos = [
         {
-            titulo: "Múltiples parámetros nombrados por defecto"
+            titulo: "Parámetros anotados"
             codigo:
                 """
-                fun repetir
-                | m~mensaje: Txt = "Hola"
-                | i~iteraciones: Num = 1
-                =
-                    si i > 0
-                        console.log m
-                        repetir m (i - 1)
-                    sino ()
+                fun areaTriangulo b~base h~altura =
+                    (b * h) / 2
 
-                repetir _
-                    //: Hola
-
-                repetir (~iteraciones = 3) _
-                    //: Hola
-                    //: Hola
-                    //: Hola
-
+                areaTriangulo 10 20  //: 100
+                areaTriangulo (~base = 10) (~altura = 20)
+                areaTriangulo
+                    ~altura = 20
+                    ~base   = 10
                 """
         },
         {
             titulo: "Currying"
             codigo:
                 """
-                fun sumar x y = x + y
+                fun areaTriangulo b~base h~altura =
+                    (b * h) / 2
 
-                sea sumar20 = sumar 20
+                sea areaTrianguloBase20 = areaTriangulo 20
+                areaTrianguloBase20 5   //: 50
 
-                console.log <| sumar20 10  //: 30
+                sea areaTrianguloAlto50 = areaTriangulo (~altura = 50)
+                areaTrianguloAlto50 10  //: 250
                 """
         },
         {
             titulo: "Clases"
             codigo:
                 """
-                clase Animal =
+                clase Triangulo =
+                    campo base: Num
+                    campo altura: Num
 
-                    campo nombre: Txt
-                    campo vida: Num  // Puntos de vida del animal.
-                    campo dañoAtaque: Num
+                    constructor base altura
 
-                    constructor nombre vida dañoAtaque
-
-
-                    met recibirAtaque daño =
-                        @vida -= daño
-                        console.log "${@nombre} recibió ${daño} de daño!"
-
-
-                    met pub atacar objetivo =
-                        console.log "${@nombre} ataca a ${objetivo.nombre}."
-                        objetivo.recibirAtaque @dañoAtaque
+                    met calcularArea () =
+                        (@base * @altura) / 2
                 """
         },
         {
             titulo: "Covariantes"
             codigo:
                 """
-                cov Personal = Director Txt | Profesor Txt | Alumno Num
+                cov Alto = Alto Num
+                cov Base = Base Num
 
-                sea director  = Director "Juan"
-                sea profesor1 = Profesor "Mario"
-                sea alumno1   = Alumno "Bob"
+                cov Figura =
+                    | Cuadrado Alto
+                    | Triangulo Alto Base
+
+                sea triangulo = Triangulo (Alto 100) (Base 50)
+                """
+        },
+        {
+            titulo: "Pattern matching"
+            codigo:
+                """
+                fun calcularArea figura =
+                    cuando figura es
+                    | Cuadrado (Alto alto) ->
+                        alto ** 2
+                    | Triangulo (Alto alto) (Base base) ->
+                        (alto * base) / 2
+
+                calcularArea triangulo  //: 2500
                 """
         },
         {
             titulo: "Tipos nulos"
             codigo:
                 """
-                sea tabla1 = document.getElementById "tabla-uno" ?:
-                    sea elem = document.createElement "table"
-                    elem.id = "tabla-uno"
-                    document.body.appendChild elem
-                    elem
+                fun dividir x y =
+                    si y == 0
+                        ()
+                    sino
+                        x / y
 
-                tabla1.style.color = "#06060a"
-                """
-        },
-        {
-            titulo: "Inferencia de tipos"
-            codigo:
-                """
-                // Num -> Num -> Num
-                fun sumar x y = x + y
-
-                sumar 10 20    //: 30
-                sumar 10 "20"  // Error. Se esperaba un Num, no un Txt
+                sea resultado: Num? = dividir 20 0
+                console.log <| resultado.toString() ?: "Error"
                 """
         }
     ]
@@ -160,6 +152,12 @@
 
     .logo
         width: 5rem
+
+
+    @media only screen and (max-width: 950px)
+        .contenedor-demostracion
+            grid-template-columns: 48% 48%
+            grid-column-gap: 4%
 
 
     //

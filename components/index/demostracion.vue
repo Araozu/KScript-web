@@ -27,7 +27,9 @@
 <style scoped lang="sass">
 
     .titulo-demostracion
-        font-family: var(--fuenteTitulo)
+        font:
+            family: var(--fuenteTitulo)
+            size: 1.25rem
         text-align: center
 
 
