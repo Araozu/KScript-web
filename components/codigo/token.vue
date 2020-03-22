@@ -25,7 +25,7 @@
             escapar: ->
                 token = @token
                 switch token.tipo.name
-                    when "Identacion"
+                    when "Indentacion"
                         "&nbsp;&nbsp;&nbsp;&nbsp;"
                     when "Texto" then "\"#{token.res}\""
                     when "Identificador"

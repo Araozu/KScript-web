@@ -1,7 +1,6 @@
 <template lang="pug">
     div
-        p La documentacion :D
-        p Algún día...
+        p Documentación en construcción.
 
 </template>
 

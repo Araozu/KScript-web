@@ -5,11 +5,11 @@ export default {
     ** Headers of the page
     */
     head: {
-        title: process.env.npm_package_name || '',
+        title: "Kan",
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+            { hid: 'description', name: 'description', content: "Lenguaje de programación funcional que se compila a JavaScript." }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -21,7 +21,7 @@ export default {
     /*
     ** Customize the progress-bar color
     */
-    loading: { color: '#fff' },
+    loading: { color: "#03A9F4" },
     /*
     ** Global CSS
     */
@@ -55,11 +55,6 @@ export default {
             config.module.rules.push({
                 test: /\.coffee$/,
                 loader: 'coffee-loader',
-            });
-            // Para que funcione se debe eliminar la primera linea de fable-compiler.
-            config.module.rules.push({
-                test: /\.fs(x|proj)?$/,
-                use: "fable-loader"
             });
         }
     }

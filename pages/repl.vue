@@ -1,8 +1,6 @@
 <template lang="pug">
     div
-        p El REPL
-        p En construcción...
-        p Y con F#/Fable
+        p REPL en construcción (con F#...)
 
 </template>
 

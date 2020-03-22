@@ -1,7 +1,6 @@
 <template lang="pug">
     div
-        p API
-        p Algún día...
+        p API en construcción.
 
 </template>
 

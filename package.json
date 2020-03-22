@@ -1,15 +1,15 @@
 {
   "name": "kan",
   "version": "1.0.0",
-  "description": "Pagina geb del lenguaje de programacion Kan.",
+  "description": "Pagina web del lenguaje de programacion Kan.",
   "author": "Araozu",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "compile-compiler": "fable-splitter /home/araozu/Programacion/F#/KanComp --allFiles -o ./Compilador"
+    "generate": "nuxt generate -m -s",
+    "compile-compiler": "fable-splitter /home/araozu/Programacion/F#/Kan/ --allFiles -o ./Compilador"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
