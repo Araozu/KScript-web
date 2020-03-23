@@ -1,11 +1,6 @@
 <template lang="pug">
     div
-        div.contenedor-titulo
-            div.cont-logo
-                img.logo(src="@/assets/img/kan_logo.svg")
-            h1.titulo Kan
-            div.etiqueta
-                div Funcional · Orientado a Objetos · Seguro
+        titulo
         div.contenedor-demostracion
             demostracion(v-for="(obj, k) in datos" :key="k" :codigo="obj.codigo" :titulo="obj.titulo")
 
@@ -13,6 +8,7 @@
 </template>
 
 <script lang="coffee">
+    import titulo from "@/components/index/titulo.vue"
     import demostracion from "@/components/index/demostracion.vue"
 
     datos = [
@@ -104,7 +100,7 @@
 
     export default
         name: "index"
-        components: { demostracion }
+        components: { titulo, demostracion }
         data: ->
             datos: datos
 
@@ -120,44 +116,16 @@
         grid-column-gap: 1%
 
 
-    .contenedor-titulo
-        display: grid
-        grid-template-columns: 7rem 9rem auto
-        font-family: var(--fuenteTitulo)
-
-
-    .etiqueta
-        display: table
-        text-align: center
-        width: 100%
-        height: 100%
-        div
-            display: table-cell
-            vertical-align: middle
-            text-align: left
-            font-size: 1.5rem
-
-
-
-    .titulo
-        text-align: center
-        font:
-            weight: normal
-            size: 2.5rem
-
-
-    .cont-logo
-        text-align: center
-
-
-    .logo
-        width: 5rem
-
-
     @media only screen and (max-width: 950px)
         .contenedor-demostracion
             grid-template-columns: 48% 48%
             grid-column-gap: 4%
+
+
+    @media only screen and (max-width: 500px)
+        .contenedor-demostracion
+            grid-template-columns: 100%
+            grid-column-gap: 0
 
 
     //

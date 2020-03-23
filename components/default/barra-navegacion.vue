@@ -40,7 +40,8 @@
         width: 100%
         background-color: var(--fondo)
         color: var(--color)
-        // border-top: solid 3px var(--colorSecundario)
+        font-family: var(--fuenteTitulo)
+
 
         display: grid
         grid-template-columns: auto auto auto auto
