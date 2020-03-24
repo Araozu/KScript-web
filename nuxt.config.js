@@ -56,6 +56,13 @@ export default {
                 test: /\.coffee$/,
                 loader: 'coffee-loader',
             });
+            config.module.rules.push({
+                test: /\.yaml$/,
+                loader: [
+                    'json-loader',
+                    'yaml-loader'
+                ]
+            });
         }
     }
 }

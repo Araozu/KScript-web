@@ -1,7 +1,8 @@
 <template lang="pug">
     div
-        h2.titulo-demostracion {{ titulo }}
-        codigo(:codigo="codigo")
+        h2.titulo-demostracion {{ datos.titulo }}
+        p.descripcion-demostracion(v-html="datos.descripcion")
+        codigo(:codigo="datos.codigo")
 
     //
 </template>
@@ -14,11 +15,8 @@
         name: "demostracion"
         components: { codigo }
         props:
-            codigo:
-                type: String
-                required: true
-            titulo:
-                type: String
+            datos:
+                type: Object
                 required: true
 
 #
@@ -30,6 +28,10 @@
         font:
             family: var(--fuenteTitulo)
             size: 1.25rem
+        text-align: center
+
+
+    .descripcion-demostracion
         text-align: center
 
 

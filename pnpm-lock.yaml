@@ -5,6 +5,7 @@ dependencies:
   coffeescript: 2.5.1
   fable-compiler: 2.4.22
   fable-splitter: 2.1.13_fable-compiler@2.4.22
+  json-loader: 0.5.7
   node-fetch: 2.6.0
   nuxt: 2.12.0
   pug: 2.0.4
@@ -16,6 +17,7 @@ dependencies:
   vue-meta: 2.3.3
   vue-no-ssr: 1.1.1
   vue-router: 3.1.6
+  yaml-loader: 0.6.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
@@ -4376,6 +4378,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
+  /json-loader/0.5.7:
+    dev: false
+    resolution:
+      integrity: sha512-QLPs8Dj7lnf3e3QYS1zkCo+4ZwqOiF9d/nZnYozTISxXWCfNs9yuky5rJw4/W34s7POaNlbZmQGaB5NiXCbP4w==
   /json-parse-better-errors/1.0.2:
     dev: false
     resolution:
@@ -7986,6 +7992,23 @@ packages:
     dev: false
     resolution:
       integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+  /yaml-loader/0.6.0:
+    dependencies:
+      loader-utils: 1.4.0
+      yaml: 1.8.3
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-1bNiLelumURyj+zvVHOv8Y3dpCri0F2S+DCcmps0pA1zWRLjS+FhZQg4o3aUUDYESh73+pKZNI18bj7stpReow==
+  /yaml/1.8.3:
+    dependencies:
+      '@babel/runtime': 7.9.2
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-X/v7VDnK+sxbQ2Imq4Jt2PRUsRsP7UcpSl3Llg6+NRRqWLIvxkMFYtH1FmvwNGYRKKPa+EPA4qDBlI9WVG1UKw==
   /yargs/3.10.0:
     dependencies:
       camelcase: 1.2.1
@@ -8002,6 +8025,7 @@ specifiers:
   coffeescript: ^2.5.1
   fable-compiler: ^2.4.22
   fable-splitter: ^2.1.13
+  json-loader: ^0.5.7
   node-fetch: ^2.6.0
   nuxt: ^2.0.0
   pug: ^2.0.4
@@ -8013,3 +8037,4 @@ specifiers:
   vue-meta: ^2.3.3
   vue-no-ssr: ^1.1.1
   vue-router: ^3.1.6
+  yaml-loader: ^0.6.0
