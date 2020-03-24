@@ -1,0 +1,101 @@
+# Formato para rutas: /textos/{idioma}/{raiz}/{ruta}.yaml
+raiz: docs/
+ruta: inicio
+temas:
+  - titulo: Introducción
+    raiz: introduccion
+    ruta: inicio
+    temas:
+      - titulo: Motivación # Incluye un hola mundo
+        ruta: motivacion
+      - titulo: Instalación
+        ruta: instalacion
+
+  - titulo: Bases
+    raiz: bases
+    ruta: inicio # Un resumen rápido
+    temas:
+      - titulo: Constantes y variables
+        ruta: constantes
+      - titulo: Tipos de datos
+        ruta: tipos
+      - titulo: Operadores comunes
+        ruta: operadores-comunes
+      - titulo: Anotaciones de tipos
+        ruta: anotaciones-de-tipos
+      - titulo: Inferencia de tipos
+        ruta: inferencia-de-tipos
+      - titulo: Expresiones
+        ruta: expresiones
+
+  - titulo: Estructuras básicas
+    raiz: estructuras
+    ruta: inicio # Un resumen rápido
+    temas:
+      - titulo: Condicionales
+        ruta: condicionales
+      - titulo: Switch # Hablar de pattern matching
+        ruta: switch
+      - titulo: Tuplas
+        ruta: tuplas
+      - titulo: Arrays
+        ruta: arrays
+      - titulo: Bucles
+        ruta: bucles
+
+  - titulo: Funciones
+    raiz: funciones
+    ruta: inicio # Un resumen rápido
+    temas:
+      - titulo: Estructura # Incluir como llamar una funcion
+        ruta: estructura
+      - titulo: Parámetros
+        ruta: parametros
+      - titulo: Currying
+        ruta: currying
+      - titulo: Aplicación parcial
+        ruta: aplicacion-parcial
+      - titulo: Signatura
+        ruta: signatura
+      - titulo: Operadores # Incluir notacion pre-fija (+)
+        ruta: operadores
+      - titulo: Parámetros opcionales
+        ruta: parametros-opcionales
+      - titulo: Parámetros por defecto
+        ruta: parametros-por-defecto
+      - titulo: Parámetros nombrados
+        ruta: parametros-nombrados
+      - titulo: Funciones anónimas
+        ruta: funciones-anonimas
+      - titulo: Conductores
+        ruta: conductores
+      - titulo: Composición
+        ruta: composicion
+      - titulo: Generadores
+        ruta: generadores
+  - titulo: Objetos
+    raiz: objetos
+    ruta: inicio
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Mutabilidad
+        ruta: mutabilidad
+      - titulo: Métodos
+        ruta: metodos
+      - titulo: this
+        ruta: this
+  - titulo: Genéricos
+    raiz: genericos
+  - titulo: Tipos de Datos Algebraicos
+    raiz: tda
+  - titulo: Pattern Matching
+    raiz: pattern-matching
+  - titulo: Errores
+    raiz: errores
+  - titulo: Rasgos
+    raiz: rasgos
+  - titulo: Módulos
+    raiz: modulos
+  - titulo: Tipos nulos
+    raiz: tipos-nulos
