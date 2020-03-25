@@ -2,7 +2,7 @@
     div.docs
         div.contenedor-docs
             barra-lateral
-            p Olol v:
+            nuxt-child
 
 </template>
 
@@ -28,8 +28,6 @@
         display: grid
         height: 100%
         grid-template-columns: 17.5rem auto
-        grid-column-gap: 2rem
-
 
 
 </style>

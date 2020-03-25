@@ -3,7 +3,10 @@
         elemento-barra(v-for="(tema, i) in datos.temas"
             :key="i"
             :tema="tema"
-            :ruta="'/' + datos.ruta + '/'")
+            :ruta="'/' + datos.ruta + '/'"
+            :padreActivo="true"
+            :nivel="0"
+            :fragmentosUrl="fragmentosUrl")
 
 
 </template>
@@ -17,7 +20,9 @@
         components: { elementoBarra }
         data: ->
             datos: {}
-        created: ->
+        computed:
+            fragmentosUrl: -> @$route.params.pathMatch.split "/"
+        mounted: ->
             datosRaw = await fetch "/textos/indice.yaml"
             @datos = YAML.parse await datosRaw.text()
 
@@ -27,7 +32,6 @@
 <style scoped lang="sass">
 
     .barra-doc
-        border-right: solid 1px var(--colorSecundario)
         height: 100%
         overflow-y: auto
 
