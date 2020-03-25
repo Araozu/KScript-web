@@ -1,10 +1,8 @@
 # Formato para rutas: /textos/{idioma}/{raiz}/{ruta}.yaml
-raiz: docs/
-ruta: inicio
+ruta: docs
 temas:
   - titulo: Introducción
-    raiz: introduccion
-    ruta: inicio
+    ruta: introduccion
     temas:
       - titulo: Motivación # Incluye un hola mundo
         ruta: motivacion
@@ -12,8 +10,7 @@ temas:
         ruta: instalacion
 
   - titulo: Bases
-    raiz: bases
-    ruta: inicio # Un resumen rápido
+    ruta: bases # Un resumen rápido
     temas:
       - titulo: Constantes y variables
         ruta: constantes
@@ -29,8 +26,7 @@ temas:
         ruta: expresiones
 
   - titulo: Estructuras básicas
-    raiz: estructuras
-    ruta: inicio # Un resumen rápido
+    ruta: estructuras # Un resumen rápido
     temas:
       - titulo: Condicionales
         ruta: condicionales
@@ -44,8 +40,7 @@ temas:
         ruta: bucles
 
   - titulo: Funciones
-    raiz: funciones
-    ruta: inicio # Un resumen rápido
+    ruta: funciones # Un resumen rápido
     temas:
       - titulo: Estructura # Incluir como llamar una funcion
         ruta: estructura
@@ -74,8 +69,7 @@ temas:
       - titulo: Generadores
         ruta: generadores
   - titulo: Objetos
-    raiz: objetos
-    ruta: inicio
+    ruta: objetos
     temas:
       - titulo: Estructura
         ruta: estructura
@@ -86,16 +80,16 @@ temas:
       - titulo: this
         ruta: this
   - titulo: Genéricos
-    raiz: genericos
+    ruta: genericos
   - titulo: Tipos de Datos Algebraicos
-    raiz: tda
+    ruta: tda
   - titulo: Pattern Matching
-    raiz: pattern-matching
+    ruta: pattern-matching
   - titulo: Errores
-    raiz: errores
+    ruta: errores
   - titulo: Rasgos
-    raiz: rasgos
+    ruta: rasgos
   - titulo: Módulos
-    raiz: modulos
+    ruta: modulos
   - titulo: Tipos nulos
-    raiz: tipos-nulos
+    ruta: tipos-nulos
