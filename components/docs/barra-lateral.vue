@@ -21,7 +21,7 @@
         data: ->
             datos: {}
         computed:
-            fragmentosUrl: -> @$route.params.pathMatch.split "/"
+            fragmentosUrl: -> (@$route.params?.pathMatch?.split? "/") ? []
         mounted: ->
             datosRaw = await fetch "/textos/indice.yaml"
             @datos = YAML.parse await datosRaw.text()

@@ -40,7 +40,7 @@
         width: 100%
         background-color: var(--fondo)
         color: var(--color)
-        font-family: var(--fuenteTitulo)
+        font-family: var(--fuenteNormal)
 
 
         display: grid
