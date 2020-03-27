@@ -1,10 +1,54 @@
-titulo: Bienvenido
+titulo: Introducción
 txt:
   - >
-    Hola forastero, qué extraño que estés aquí. Esta documentación está siendo escrita,
-    pues (casi todo) el diseño del lenguaje ya está finalizado.
-    <br>
-    <br>
-    Por ahora, puedes ver las caracteristicas del lenguaje en la barra lateral
-    <br>
-    &lt;-
+    Bienvenido(a) a la documentación de Kan. A continuación explicaremos la
+    estructura de la documentación. Si deseas saber más acerca del lenguaje,
+    visita la página 'Motivación'.
+subtemas:
+  - titulo: Estructura de la documentación
+    txt:
+      - >
+        La documentación está divida en diferentes secciones.
+        Cada una de estas tiene una página principal, por ejemplo, esta página
+        es la página principal de la sección Introducción.
+        <br>
+        <br>
+        Cada página principal contiene un resumen de los temas a tratar,
+        principalmente sintaxis y casos de uso, y cada sección tiene páginas
+        específicas, las cuales explican a fondo cada concepto del lenguaje
+        así como conceptos de programación funcional.
+        <br>
+        <br>
+        De este modo, si quieres aprender un concepto desde 0 usarías la
+        página especifica correspondiente, mientras que si solo quieres recordar
+        la sintaxis, o ya has trabajado con lenguajes similares a este, usarías
+        el resumen de la página principal.
+  - titulo: Motivación
+    txt:
+      - >
+        Este lenguaje existe para llenar un vacio existente en la comunidad
+        de JS: Un lenguaje con sintáxis de ML, con las caracteristicas de este,
+        que sea fuertemente tipado
+        y que tome como base las APIs existentes de JavaScript.
+        <br>
+        <br>
+        Otros lenguajes similares a este son:<br>
+        <ol>
+        <li>TypeScript: Sintáxis de C, tipado, re-utiliza las APIs de JS.</li>
+        <li>
+        CoffeeScript: Sintáxis de Elixir, no tipado, re-utiliza las APIs de JS
+        </li>
+        <li>ReasonML: Sintaxis de C, tipado, tiene su propia API.</li>
+        <li>PureScript & Elm: Sintaxis de ML, tipado, tienen su propia API.</li>
+        </ol>
+        <br>
+        Kan es Funcional impuro y Estructurado, con un toque imperativo.
+  - titulo: Instalación
+    txt:
+      - |
+        El compilador del programa se encuentra en dessarrollo. No utiliza ninguna
+        librería como Yacc, por lo que el desarrollo no será rápido.
+        <br>
+        <br>
+        El código fuente del compilador se encuentra (incompleto) en GitHub. Está
+        escrito en F#.

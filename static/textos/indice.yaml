@@ -68,6 +68,11 @@ temas:
         ruta: composicion
       - titulo: Generadores
         ruta: generadores
+      - titulo: Funciones flecha
+        ruta: funciones-flecha
+      - titulo: Rest/Spread
+        ruta: rest-spread
+
   - titulo: Objetos
     ruta: objetos
     temas:
@@ -79,17 +84,85 @@ temas:
         ruta: metodos
       - titulo: this
         ruta: this
+
   - titulo: Genéricos
     ruta: genericos
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Anotaciones
+        ruta: anotaciones
+
   - titulo: Tipos de Datos Algebraicos
     ruta: tda
+    temas:
+      - titulo: Covariantes
+        ruta: covariantes
+      - titulo: Registros
+        ruta: registros
+
   - titulo: Pattern Matching
     ruta: pattern-matching
+    temas:
+      - titulo: Cuando ..
+        ruta: cuando
+      - titulo: Desestructuración
+        ruta: desestructuracion
+
   - titulo: Errores
     ruta: errores
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Recuperación
+        ruta: recuperación
+
   - titulo: Rasgos
     ruta: rasgos
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Uso
+        ruta: uso
+
   - titulo: Módulos
     ruta: modulos
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Node.js
+        ruta: nodejs
+      - titulo: ECMAScript 2015
+        ruta: ecmascript-2015
+
+  - titulo: Clases
+    ruta: clases
+    temas:
+      - titulo: Estructura
+        ruta: estructura
+      - titulo: Rasgos
+        ruta: rasgos
+      - titulo: Genéricos
+        ruta: genericos
+      - titulo: Herencia
+        ruta: herencia
+
   - titulo: Tipos nulos
     ruta: tipos-nulos
+    temas:
+      - titulo: Uso
+        ruta: uso
+      - titulo: Operadores
+        ruta: operadores
+
+  - titulo: Interoperabilidad
+    ruta: interoperabilidad
+    temas:
+      - titulo: Definiciones
+        ruta: definiciones
+      - titulo: Tipos nulos
+        ruta: tipos-nulos
+      - titulo: Promesas
+        ruta: promesas
+      - titulo: async/await
+        ruta: async-await

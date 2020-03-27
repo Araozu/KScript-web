@@ -1,5 +1,5 @@
 <template lang="pug">
-    div
+    div.doc
         div(v-if="datos.cargando && datos.cargando === true")
             | Cargando...
         div(v-else-if="datos.error && datos.error === true")
@@ -36,6 +36,7 @@
 
     export default
         name: "docs-sub"
+        components: { codigo, textos }
         data: ->
             datos: {cargando: true}
         methods:
@@ -77,6 +78,10 @@
 
 <style lang="sass">
 
+    .doc
+        overflow-y: auto
+
+
     .contenido-tema-docs
         margin: 0 auto
         width: 95%
@@ -84,23 +89,23 @@
 
     .titulo-tema-docs
         font:
-            family: "Source Sans Pro", sans-serif
-            size: 1.8rem
-            weight: lighter
-        border-left: solid 10px var(--colorSecundario)
-        padding-left: 25px
+            family: Roboto, sans-serif
+            size: 1.75rem
+            weight: 600
+
 
     .subtema-tema-docs
-        margin: 50px 0
+        margin-top: 2.5rem
+        margin-bottom: 1.5rem
         font:
-            family: "Source Sans Pro", Arial, sans-serif
-            size: 1.6rem
-            weight: lighter
-        border-left: solid 3px var(--colorSecundario)
-        padding-left: 10px
+            family: Roboto, sans-serif
+            size: 1.5rem
+            weight: 600
+        line-height: 1.5
+
 
     .pad-tema-docs
-        padding-left: 17px
+        padding-left: 0
 
     @media only screen and (max-width: 450px)
         .subtema-tema-docs
