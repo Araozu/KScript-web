@@ -4,15 +4,15 @@
             | Cargando...
         div(v-else-if="datos.error && datos.error === true")
             | Error al cargar el recurso. Razón: {{ datos.razon }}
-        div(v-else)
-            h2.titulo {{ datos.titulo }}
+        div.contenido-tema-docs(v-else)
+            h2.titulo-tema-docs {{ datos.titulo }}
             br
             template(v-for="frag in datos.txt")
                 codigo.cod(v-if="frag.substring(0,1) === '$'" :codigo="frag.substr(2)")
                 div.txt(v-else v-html="frag")
             div(v-for="tema in datos.subtemas")
-                h3.subtema {{ tema.titulo }}
-                div.pad
+                h3.subtema-tema-docs {{ tema.titulo }}
+                div.pad-tema-docs
                     textos(v-for="(frag, i) in tema.txt" :txt="frag" :key="i")
 
 
@@ -77,7 +77,12 @@
 
 <style lang="sass">
 
-    .titulo
+    .contenido-tema-docs
+        margin: 0 auto
+        width: 95%
+
+
+    .titulo-tema-docs
         font:
             family: "Source Sans Pro", sans-serif
             size: 1.8rem
@@ -85,7 +90,7 @@
         border-left: solid 10px var(--colorSecundario)
         padding-left: 25px
 
-    .subtema
+    .subtema-tema-docs
         margin: 50px 0
         font:
             family: "Source Sans Pro", Arial, sans-serif
@@ -94,11 +99,11 @@
         border-left: solid 3px var(--colorSecundario)
         padding-left: 10px
 
-    .pad
+    .pad-tema-docs
         padding-left: 17px
 
     @media only screen and (max-width: 450px)
-        .subtema
+        .subtema-tema-docs
             margin: 25px 0
             font-size: 1.4rem
 

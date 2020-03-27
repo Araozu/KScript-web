@@ -1,4 +1,10 @@
-titulo: Hola
+titulo: Bienvenido
 txt:
   - >
-    Hola documentación :D
+    Hola forastero, qué extraño que estés aquí. Esta documentación está siendo escrita,
+    pues (casi todo) el diseño del lenguaje ya está finalizado.
+    <br>
+    <br>
+    Por ahora, puedes ver las caracteristicas del lenguaje en la barra lateral
+    <br>
+    &lt;-

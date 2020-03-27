@@ -26,6 +26,8 @@
     areaTrianguloAlto50 10  //: 250
 
 - titulo: Clases
+  descripcion: |
+    Reune datos y funciones relacionados en un entorno seguro, sin perder funcionalidad.
   codigo: |
     clase Triangulo =
         campo base: Num
@@ -66,7 +68,8 @@
 
 - titulo: Tipos nulos
   descripcion: |
-
+    Programa rápidamente sin preocuparne por null,
+    void, undefined, o "Cannot read property 'x' of undefined"
   codigo: |
     fun dividir x y =
         si y == 0
