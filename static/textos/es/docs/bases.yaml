@@ -1,0 +1,108 @@
+titulo: Bases
+subtemas:
+  - titulo: Constantes
+    txt:
+      - |
+        $
+        sea nombre = "Pedro"
+
+        // Como nombre es constante no se puede re-asignar
+        // La siguiente linea da error.
+        nombre = "Juan" // Error
+  - titulo: Variables
+    txt:
+      - |
+        $
+        sea mut edad = 20
+
+        edad = 21  // OK
+  - titulo: Tipos de datos
+    txt:
+      - |
+        Kan usa los mismos tipos de datos de JS, y siempre inician en mayuscula.
+      - |
+        $
+        // Txt (nuevo nombre de string. Tambien puedes usar String)
+        sea nombre = "Hola"
+
+        // No se usan comillas simples para crear Txt
+        sea canal = 'beta' // Error
+
+
+        // Num (o Number)
+        sea edad = 20
+
+
+        // Bool (o Boolean)
+        sea esSoltero = true
+        sea esCasado  = false
+  - titulo: Operadores comunes
+    txt:
+      - |
+        $
+        // Txt
+        // La concatenación se hace con <>
+        "Hola " <> "mundo"  //: hola mundo
+
+        // Num
+        4 + 2   //: 6
+        4 - 2   //: 2
+        4 * 2   //: 8
+        4 / 2   //: 2
+        4 % 2   //: 0
+        4 ** 2  //: 16
+
+        // Bool
+        1 > 2   //: false
+        1 >= 2  //: false
+        1 < 2   //: true
+        1 <= 2  //: true
+        "a" < "b"  //: true
+
+        1 == 2    //: false
+        1 != 2    //: true
+        "1" == 1  // Error. No se pueden comparar Txt y Num
+
+        true && false  //: false
+        true || false  //: true
+        !true          //: false
+
+        // de asignación
+        // solo funcionan en variables
+        sea mut num = 10
+
+        num += 1   //: 11
+        num -= 2   //: 9
+        num *= 2   //: 18
+        num /= 3   //: 6
+        num %= 4   //: 2
+        num **= 3  //: 8
+
+  - titulo: Anotaciones de tipos
+    txt:
+      - |
+        $
+        sea nombre: Txt = "Pedro"
+        sea edad: Num = 20
+        sea esSoltero: Bool = false
+  - titulo: Inferencia de tipos
+    txt:
+      - |
+        Los tipos de datos se infieren automáticamente, no es necesario
+        anotarlos simepre.
+        <br>
+        Sin embargo, a veces puede ser útil como aclaración o para
+        indicarle al compilador qué tipo en especial queremos.
+  - titulo: Expresiones
+    txt:
+      - |
+        Todo es una expresion en Kan.
+      - |
+        $
+        sea total =
+            sea precio = 100
+            sea impuesto = 0.18
+
+            precio + (precio * impuesto) // Esta ultima linea actua como 'return'
+
+        // total = 118
