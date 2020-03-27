@@ -5,13 +5,23 @@
         div(v-else-if="datos.error && datos.error === true")
             | Error al cargar el recurso. Razón: {{ datos.razon }}
         div(v-else)
-            | Aun nos falta procesar el archivo :'D
+            h2.titulo {{ datos.titulo }}
+            br
+            template(v-for="frag in datos.txt")
+                codigo.cod(v-if="frag.substring(0,1) === '$'" :codigo="frag.substr(2)")
+                div.txt(v-else v-html="frag")
+            div(v-for="tema in datos.subtemas")
+                h3.subtema {{ tema.titulo }}
+                div.pad
+                    textos(v-for="(frag, i) in tema.txt" :txt="frag" :key="i")
 
 
 </template>
 
 <script lang="coffee">
     import YAML from "yaml"
+    import codigo from "../../components/codigo/codigo.vue"
+    import textos from "../../components/textos.vue"
 
     #: ['A] -> 'B -> (('A -> 'B) -> 'B)
     fold = (arr, state, fn) =>
@@ -67,4 +77,30 @@
 
 <style lang="sass">
 
+    .titulo
+        font:
+            family: "Source Sans Pro", sans-serif
+            size: 1.8rem
+            weight: lighter
+        border-left: solid 10px var(--colorSecundario)
+        padding-left: 25px
+
+    .subtema
+        margin: 50px 0
+        font:
+            family: "Source Sans Pro", Arial, sans-serif
+            size: 1.6rem
+            weight: lighter
+        border-left: solid 3px var(--colorSecundario)
+        padding-left: 10px
+
+    .pad
+        padding-left: 17px
+
+    @media only screen and (max-width: 450px)
+        .subtema
+            margin: 25px 0
+            font-size: 1.4rem
+
+    //
 </style>
