@@ -1,0 +1,90 @@
+titulo: Objetos
+subtemas:
+  - titulo: Estructura
+    txt:
+      - |
+        $
+        sea persona = {
+            nombre := "Abel"
+            edad := 32
+        }
+
+        sea persona =
+            nombre := "Abel"
+            edad := 32
+
+        sea persona = { nombre := "Abel", edad := 32 }
+
+
+        sea (nombre, edad) = ("Abel", 32)
+
+        sea persona = { nombre, edad }
+        sea persona = {
+            nombre
+            edad
+        }
+
+
+        persona.nombre
+        persona.edad
+
+  - titulo: Anotaciones
+    txt:
+      - |
+        $
+        sea persona = {
+            nombre: Txt := "Abel"
+            edad: Num := 32
+        }
+  - titulo: Signatura
+    txt:
+      - |
+        $
+        sea persona: {nombre: Txt, edad: Num} = {
+            nombre := "Abel"
+            edad := 32
+        }
+  - titulo: Métodos
+    txt:
+      - |
+        $
+        sea persona = {
+            nombre := "Juan"
+            apellido := "Perez"
+            nombreCompleto := fn ->
+                @nombre <> " " <> @apellido
+        }
+
+        persona.nombreCompleto ()  //: Juan Perez
+  - titulo: this
+    txt:
+      - |
+        $
+        sea producto = {
+            nombre := "Leche"
+            precio := 20
+            descuento := 0.05
+            precioFinal := fn ->
+                // Puedes usar  `this.`  o  `@`
+                sea precio = this.precio
+                sea descuento = @descuento
+
+                precio - (precio * descuento)
+        }
+      - |
+        Si usas una función anónima con una flecha doble (=>), se creará
+        el metodo como una función flecha.
+      - |
+        $
+        // Hacer
+        fn ->
+
+        // Genera
+        function () {}
+
+
+        // Hacer
+        fn =>
+
+        // Genera
+        () => {}
