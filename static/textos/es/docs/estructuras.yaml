@@ -92,7 +92,24 @@ subtemas:
   - titulo: Bucles
     txt:
       - |
-        Aun no se ha definido cómo serán los bucles. Pero es seguro que no
-        tendrán la forma de JS:
-        <br>
-        <code>for (let i = 0; i < 5; i ++)</code>
+        $
+        sea mut numeroActual = 0
+        mientras numeroActual < 10
+            console.log ("El numero actual es " <> numeroActual)
+            numeroActual -= 1
+      - |
+        $
+        sea productos = {
+            p01 := "Leche"
+            p02 := "Arroz"
+            p03 := "Atún"
+        }
+
+        para (codigo, producto) en productos
+            console.log (codigo <> " -> " <> producto)
+      - |
+        $
+        sea nombres = ["Juan", "Pedro", "Maria"]
+
+        para (posicion, nombre) de nombres
+            console.log (nombre <> " está en la posición " <> posicion)

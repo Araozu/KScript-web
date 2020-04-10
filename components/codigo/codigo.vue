@@ -32,7 +32,7 @@
 
 
     .cont
-        font-family: "Fira Code", monospace
+        font-family: "JetBrains Mono", monospace
         font-variant-ligatures: discretionary-ligatures
         border-radius: 3px
         padding: 15px 0
