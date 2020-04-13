@@ -6,7 +6,7 @@
 <script lang="coffee">
     palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
         "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-        "if else return registro variante gestor cov met pub").split " "
+        "if else return registro variante gestor cov met pub para reg").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
 
