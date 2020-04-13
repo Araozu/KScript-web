@@ -1,5 +1,9 @@
 <template lang="pug">
     div.barra-doc
+        div.cont-opcion-version
+            span Versión&nbsp;&nbsp;
+            select.opcion-version
+                option Next
         elemento-barra(v-for="(tema, i) in datos.temas"
             :key="i"
             :tema="tema"
@@ -22,8 +26,10 @@
             datos: {}
         computed:
             fragmentosUrl: -> (@$route.params?.pathMatch?.split? "/") ? []
+            idiomaActual: -> @$store.state.variables.idiomaActual
+            versionDocsActual: -> @$store.state.variables.versionDocsActual
         mounted: ->
-            datosRaw = await fetch "/textos/indice.yaml"
+            datosRaw = await fetch "/textos/#{ @idiomaActual }/docs/#{ @versionDocsActual }/indice.yaml"
             @datos = YAML.parse await datosRaw.text()
 
 
@@ -36,4 +42,9 @@
         overflow-y: auto
 
 
+    .cont-opcion-version
+        padding: 0.75rem 0.5rem
+
+
+    //
 </style>

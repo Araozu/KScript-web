@@ -39,12 +39,16 @@
         components: { codigo, textos }
         data: ->
             datos: {cargando: true}
+        computed:
+            idiomaActual: -> @$store.state.variables.idiomaActual
+            versionDocsActual: -> @$store.state.variables.versionDocsActual
         methods:
             obtenerFragmentos: (pathMatch) ->
                 ((pathMatch?.split? "/") ? []).filter ((x) => x != "")
 
             obtenerRutaDoc: (fragmentos) ->
-                (fold fragmentos, "/textos/es/docs", (nuevo, acc) =>
+                inicio = "/textos/#{ @idiomaActual }/docs/#{ @versionDocsActual }"
+                (fold fragmentos, inicio, (nuevo, acc) =>
                     acc + "/" + nuevo) + ".yaml"
 
             cargaInicial: ->
