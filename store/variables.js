@@ -2,7 +2,7 @@
 
 export const state = () => ({
     idiomaActual: "es",
-    versionDocsActual: "next",
+    versionDocsActual: "v0.0.1",
     versiones: []
 });
 
@@ -10,4 +10,3 @@ export const state = () => ({
 export const mutations = {
 
 };
-

@@ -1,0 +1,58 @@
+titulo: Bases
+subtemas:
+  - titulo: Identificadores
+    txt:
+      - |
+        Las reglas para crear identificadores en Kan (serán) las mismas de JS.
+        De momento, los identificadores:<br>
+        <br>
+        <ul>
+        <li>Inician con una minuscula, MAYUSCULA o guion bajo _.</li>
+        <li>Luego pueden tener minusculas, MAYUSCULAS, guiones bajos _ y números.</li>
+        </ul>
+        En un futuro se podrán usar los caracteres '$' y '#'.
+      - |
+        $
+        identificador
+        IdentificadorValido
+        _valido
+
+        __identificador_valido_2__
+  - titulo: Constantes
+    txt:
+      - |
+        $
+        sea nombre = "Pedro"
+      - |
+        Las constantes no se pueden re-asignar. Actualmente, intentarlo dará un mensaje
+        de error diciendo 'no implementado'.
+  - titulo: Variables
+    txt:
+      - |
+        $
+        sea mut edad = 20
+
+        edad = 21  // OK
+      - |
+        A pesar de que las variables si se pueden re-asignar, de momento
+        intentarlo dará un mensaje de error diciendo 'no implementado'.
+  - titulo: Tipos de datos
+    txt:
+      - |
+        Kan usa los mismos tipos de datos de JS. Los tipos soportados actualmente son:
+      - |
+        $
+        // Txt o string
+        sea nombre = "Hola"
+
+        // No se usan comillas simples para crear Txt
+        sea canal = 'beta' // Error
+
+
+        // Num o number
+        sea edad = 20
+
+
+        // Bool o boolean
+        sea esSoltero = true
+        sea esCasado  = false

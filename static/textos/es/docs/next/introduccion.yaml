@@ -4,6 +4,12 @@ txt:
     Bienvenido(a) a la documentación de Kan. A continuación explicaremos la
     estructura de la documentación. Si deseas saber más acerca del lenguaje,
     visita la página 'Motivación'.
+    <br>
+    <br>
+    Esta version de la documentación, 'next', tiene como intención detallar las
+    ideas que tengo sobre este lenguaje, así como las características que deseo
+    implementar. Para ver cómo es el lenguaje realmente, vísita la documentación
+    de la versión en la que estés interesado.
 subtemas:
   - titulo: Estructura de la documentación
     txt:

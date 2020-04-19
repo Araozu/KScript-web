@@ -3,7 +3,7 @@
         div.cont-opcion-version
             span Versión&nbsp;&nbsp;
             select.opcion-version
-                option Next
+                option {{ $store.state.variables.versionDocsActual }}
         elemento-barra(v-for="(tema, i) in datos.temas"
             :key="i"
             :tema="tema"

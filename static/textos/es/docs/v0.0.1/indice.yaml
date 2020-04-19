@@ -1,0 +1,11 @@
+ruta: docs
+temas:
+  - titulo: Introducción
+    ruta: introduccion
+  - titulo: Bases
+    ruta: bases
+    temas:
+      - titulo: Constantes y variables
+        ruta: constantes-y-variables
+      - titulo: Tipos de datos
+        ruta: tipos-de-datos
