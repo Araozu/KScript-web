@@ -10,22 +10,22 @@ aplicadorDeColor = (nombre, estilo) -> () ->
         nombre
 
 palenightColor = """
-.Texto {
+.TTexto {
     color: #c3e887
 }
-.Numero {
+.TNumero {
     color: #ffcb6b
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #c792ea
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #82aaff
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #ffea7d
 }
-.Comentario {
+.TComentario {
     color: #676e95
 }
 .Fondo {
@@ -34,29 +34,29 @@ palenightColor = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """
 
 
 atomOneDark = """
-.Texto {
+.TTexto {
     color: #6db369
 }
-.Numero {
+.TNumero {
     color: #d19a66
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #c679dd
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #61aeef
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #ffe968
 }
-.Comentario {
+.TComentario {
     color: #59626f
 }
 .Fondo {
@@ -65,28 +65,28 @@ atomOneDark = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """ # Comentario
 
 blackboard = """
-.Texto {
+.TTexto {
     color: #61ce3c
 }
-.Numero {
+.TNumero {
     color: #d8fa3c
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #fbde2d
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #ff6400
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #6897bb
 }
-.Comentario {
+.TComentario {
     color: #aeaeae
 }
 .Fondo {
@@ -95,28 +95,28 @@ blackboard = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """ # Comentario
 
 dracula = """
-.Texto {
+.TTexto {
     color: #f1fa8c
 }
-.Numero {
+.TNumero {
     color: #bd93f9
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #ff79c6
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #50fa7b
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #bd93f9
 }
-.Comentario {
+.TComentario {
     color: #6272a4
 }
 .Fondo {
@@ -125,28 +125,28 @@ dracula = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """ #
 
 draculaDarker = """
-.Texto {
+.TTexto {
     color: #f1fa8c
 }
-.Numero {
+.TNumero {
     color: #bd93f9
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #ff79c6
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #50fa7b
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #bd93f9
 }
-.Comentario {
+.TComentario {
     color: #6272a4
 }
 .Fondo {
@@ -155,28 +155,28 @@ draculaDarker = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """
 
 darker = """
-.Texto {
+.TTexto {
     color: #c3e88d
 }
-.Numero {
+.TNumero {
     color: #f78c6c
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #c792ea
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #82aaff
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #89ddff
 }
-.Comentario {
+.TComentario {
     color: #616161
 }
 .Fondo {
@@ -185,28 +185,28 @@ darker = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """
 
 deepOcean = """
-.Texto {
+.TTexto {
     color: #c2e77b
 }
-.Numero {
+.TNumero {
     color: #f78c6c
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #c792ea
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #81a9dd
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #89ddff
 }
-.Comentario {
+.TComentario {
     color: #717cb4
 }
 .Fondo {
@@ -215,28 +215,28 @@ deepOcean = """
 .TextoCod {
     color: #d7d7d7
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #85e9ff
 }
 """
 
 oneLight = """
-.Texto {
+.TTexto {
     color: #468B46
 }
-.Numero {
+.TNumero {
     color: #986801
 }
-.Identificador--palabraClave {
+.PalabraClave {
     color: #a626a4
 }
-.Identificador--funcionClave {
+.FuncionClave {
     color: #3f77f3
 }
-.Identificador--std {
+.TIdentificador--std {
     color: #e4564a
 }
-.Comentario {
+.TComentario {
     color: #a0a1a7
 }
 .Fondo {
@@ -246,7 +246,7 @@ oneLight = """
 .TextoCod {
     color: black
 }
-.IdentificadorTipo {
+.TIdentificadorTipo {
     color: #5392A0
 }
 """

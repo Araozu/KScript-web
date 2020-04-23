@@ -24,20 +24,17 @@
         computed:
             escapar: ->
                 token = @token
-                switch token.tipo.name
+                switch token.tipo
+                    when "PC_SEA", "PC_MUT"
+                        token.tipo = "PalabraClave"
+                        token.valor
                     when "Indentacion"
                         "&nbsp;&nbsp;&nbsp;&nbsp;"
-                    when "Texto" then "\"#{token.res}\""
-                    when "Identificador"
-                        valor = token.res
-                        modificador = ""
-                        palabrasClave.forEach((x) -> modificador += if valor is x then "--palabraClave" else "")
-                        funcionesClave.forEach((x) -> modificador += if valor is x then "--funcionClave" else "")
-                        std.forEach((x) -> modificador += if valor is x then "--std" else "")
-                        @adicional = modificador
-                        valor
-                    when "Comentario" then "//#{token.res}"
-                    else token.res
+                    when "TTexto" then "\"#{token.valor}\""
+                    when "TIdentificador"
+                        token.valor
+                    when "TComentario" then "//#{token.valor}"
+                    else token.valor
 
 #
 </script>

@@ -9,7 +9,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate -m -s",
-    "compile-compiler": "fable-splitter /home/araozu/Programacion/F#/Kan/ --allFiles -o ./Compilador"
+    "compile-compiler": "fable-splitter C:\\Users\\Fernando\\RiderProjects\\KanComp --allFiles -o ./Compilador"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
