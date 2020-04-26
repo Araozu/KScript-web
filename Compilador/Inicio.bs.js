@@ -5,6 +5,40 @@ var Parser$KanComp = require("./AnalisisSintactico/Parser.bs.js");
 var Generador$KanComp = require("./Generador/Generador.bs.js");
 var Gramatica$KanComp = require("./AnalisisLexico/Gramatica.bs.js");
 
+function tknToStr(token2) {
+  switch (token2.tag | 0) {
+    case /* TNuevaLinea */0 :
+        return "TNuevaLinea";
+    case /* TIdentificador */1 :
+        return "TIdentificador";
+    case /* TGenerico */2 :
+        return "TGenerico";
+    case /* TComentario */3 :
+        return "TComentario";
+    case /* TNumero */4 :
+        return "TNumero";
+    case /* TTexto */5 :
+        return "TTexto";
+    case /* TBool */6 :
+        return "TBool";
+    case /* TOperador */7 :
+        return "TOperador";
+    case /* TParenAb */8 :
+        return "TParenAb";
+    case /* TParenCer */9 :
+        return "TParenCer";
+    case /* TAgrupAb */10 :
+        return "TAgrupAb";
+    case /* TAgrupCer */11 :
+        return "TAgrupCer";
+    case /* PC_SEA */12 :
+        return "PC_SEA";
+    case /* PC_MUT */13 :
+        return "PC_MUT";
+
+  }
+}
+
 function main(param) {
   var lexer = Gramatica$KanComp.crearLexer("sea mut hola = 20");
   var expresion = Parser$KanComp.parseTokens(lexer);
@@ -18,7 +52,6 @@ function main(param) {
   }
 }
 
-main(/* () */0);
-
+exports.tknToStr = tknToStr;
 exports.main = main;
 /*  Not a pure module */

@@ -3,15 +3,15 @@
         textarea.entrada-kan.Fondo.TextoCod(placeholder="Código Kan" v-model="codigo")
         div.cont-botones
             button.boton-transpilar(@click="transpilar") Transpilar
-        div.resultado-repl-docs {{ resultado === '' ? 'Codigo JS': resultado }}
+        div.resultado-repl-docs(v-html="resultado === '' ? 'Codigo JS': escapar(resultado)")
 
     //
 </template>
 
 <script lang="coffee">
-    import { Lexer, Lexer$$SigToken } from "@/Compilador/AnalisisLexico/Gramatica"
-    import { parseTokens } from "@/Compilador/AnalisisSintactico/Parser"
-    import { generarJs } from "@/Compilador/Generacion/Generador"
+    import { crearLexer } from "@/Compilador/AnalisisLexico/Gramatica.bs"
+    import { parseTokens } from "@/Compilador/AnalisisSintactico/Parser.bs"
+    import { generarJs } from "@/Compilador/Generador/Generador.bs"
 
     export default
         name: "repl-docs"
@@ -20,9 +20,14 @@
             resultado: ""
         methods:
             transpilar: ->
-                lexer = new Lexer @codigo
-                expresion = parseTokens lexer
-                @resultado = generarJs expresion, true, 0
+                lexer = crearLexer @codigo
+                preExpresion = parseTokens lexer
+                if preExpresion.tag == 0
+                    expresion = preExpresion[0]
+                    @resultado = generarJs expresion, true, 0
+            escapar: (txt) ->
+                s1 = txt.replace /\n/g, "<br>"
+                s2 = s1.replace /\s/g, "&nbsp;"
 
 
 #

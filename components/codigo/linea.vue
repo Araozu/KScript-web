@@ -12,27 +12,27 @@
 </template>
 
 <script lang="coffee">
-    import { Lexer, Lexer$$SigToken } from "@/Compilador/AnalisisLexico/Gramatica"
+    import { crearLexer } from "@/Compilador/AnalisisLexico/Gramatica.bs"
+    import { tknToStr } from "@/Compilador/Inicio.bs"
     import token from "./token.vue"
 
     crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")
 
 
     obtenerTokens = (entrada) =>
-        lexer = new Lexer entrada
+        lexer = crearLexer entrada
         tokens = []
 
         posActual = 0
 
         loop
-            tokenn = Lexer$$SigToken lexer
+            tokenn = lexer.sigToken()
             nombreTipoToken = tokenn.name
 
-            if tokenn.name is "Token"
-                preToken = tokenn.fields[0]
-                nombreTipoToken = preToken.name
-                ntoken = preToken.fields[0]
-                ntoken.tipo = nombreTipoToken
+            if tokenn.tag == 0
+                preToken = tokenn[0]
+                ntoken = preToken[0]
+                ntoken.tipo = tknToStr preToken
 
                 if ntoken.inicio > posActual
                     tokens.push
