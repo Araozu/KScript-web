@@ -3,16 +3,20 @@
         div.contenedor-docs
             barra-lateral
             nuxt-child
+            repl-docs
 
+    //
 </template>
 
 <script lang="coffee">
     import barraLateral from "@/components/docs/barra-lateral.vue"
+    import replDocs from "@/components/docs/repl-docs.vue"
 
     export default
         name: "docs"
-        components: { barraLateral }
+        components: { barraLateral, replDocs }
 
+#
 </script>
 
 <style scoped lang="sass">
@@ -27,7 +31,7 @@
     .contenedor-docs
         display: grid
         height: 100%
-        grid-template-columns: 17.5rem auto
+        grid-template-columns: 17.5rem auto 37.5rem
 
 
 </style>

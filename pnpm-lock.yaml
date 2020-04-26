@@ -1,10 +1,9 @@
 dependencies:
   '@babel/core': 7.9.0
   '@nuxtjs/pwa': 3.0.0-beta.20
+  bs-platform: 7.2.2
   coffee-loader: 0.9.0_coffeescript@2.5.1
   coffeescript: 2.5.1
-  fable-compiler: 2.4.22
-  fable-splitter: 2.1.13_fable-compiler@2.4.22
   json-loader: 0.5.7
   node-fetch: 2.6.0
   nuxt: 2.12.0
@@ -1968,6 +1967,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-TpfK0TDgv71dzuTsEAlQiHeWQ/tiPqgNZVdv046fvNtBZrjbv2O3TsWCDU0AWGJJKCF/KsjNdLzR9hXOsh/CfA==
+  /bs-platform/7.2.2:
+    dev: false
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-PWcFfN+jCTtT/rMaHDhKh+W9RUTpaRunmSF9vbLYcrJbpgCNW6aFKAY33u0P3mLxwuhshN3b4FxqGUBPj6exZQ==
   /buffer-from/1.1.1:
     dev: false
     resolution:
@@ -3337,29 +3342,6 @@ packages:
       webpack: ^4.4.0 || ^5.0.0
     resolution:
       integrity: sha512-Q0iLfJnS+MT8L/KbiPxFeTLi06dBzJaAphXJg00rIlcyjSqNx5yI0/V8ODGWCcwUO1V7W2z3dpjC+8eBKBoQrA==
-  /fable-babel-plugins/2.3.0:
-    dev: false
-    resolution:
-      integrity: sha512-alGBNw5HZJzTEznXKfypFEkD5aWsspbCcoVDu9j8Mqdi77dgp4BSjhYSg61mQEg9UluIAZxRM5lhGARYbU97DQ==
-  /fable-compiler/2.4.22:
-    dev: false
-    resolution:
-      integrity: sha512-WFyyt/jXzK6E5coPOMz2i4jplyn4WV9JljT6o5UY+vYVx+hz5z1x7kepYxfO4YY6u/VRak5Q/ZM70JRhhJr1+Q==
-  /fable-splitter/2.1.13_fable-compiler@2.4.22:
-    dependencies:
-      '@babel/core': 7.9.0
-      '@babel/plugin-transform-modules-commonjs': 7.9.0_@babel+core@7.9.0
-      chalk: 2.4.2
-      chokidar: 2.1.8
-      fable-babel-plugins: 2.3.0
-      fable-compiler: 2.4.22
-      fs-extra: 7.0.1
-    dev: false
-    hasBin: true
-    peerDependencies:
-      fable-compiler: ^2.1.0
-    resolution:
-      integrity: sha512-eNXQ0uGjCFE6CaJBPSr9J5Bocn66qXLscMmTV5YwjWBJEMG/9UR1TXBm4IPMEpT4tQbyYZI+Wj/hWRf3C7thOw==
   /fast-deep-equal/3.1.1:
     dev: false
     resolution:
@@ -3517,16 +3499,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=
-  /fs-extra/7.0.1:
-    dependencies:
-      graceful-fs: 4.2.3
-      jsonfile: 4.0.0
-      universalify: 0.1.2
-    dev: false
-    engines:
-      node: '>=6 <7 || >=8'
-    resolution:
-      integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
   /fs-extra/8.1.0:
     dependencies:
       graceful-fs: 4.2.3
@@ -8023,10 +7995,9 @@ packages:
 specifiers:
   '@babel/core': ^7.9.0
   '@nuxtjs/pwa': ^3.0.0-0
+  bs-platform: ^7.2.2
   coffee-loader: ^0.9.0
   coffeescript: ^2.5.1
-  fable-compiler: ^2.4.22
-  fable-splitter: ^2.1.13
   json-loader: ^0.5.7
   node-fetch: ^2.6.0
   nuxt: ^2.0.0

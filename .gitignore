@@ -7,10 +7,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Carpeta del compilador
-Compilador/
-Compilador/*.*
-
 
 # Runtime data
 pids
