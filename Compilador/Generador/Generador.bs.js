@@ -26,8 +26,13 @@ function generarJs(expr, toplevel, nivel) {
           return "false";
         }
     case /* EOperador */5 :
-    case /* EOperadorApl */6 :
         return "/* No implementado :c */";
+    case /* EOperadorApl */6 :
+        var eOpApl = expr[0];
+        var operador = eOpApl.op.valor.valor;
+        var jsExprIzq = generarJs(eOpApl.izq, false, nivel);
+        var jsExprDer = generarJs(eOpApl.der, false, nivel);
+        return "(" + (jsExprIzq + (") " + (operador + (" (" + (jsExprDer + ")")))));
     case /* EFuncion */7 :
         var efuncion = expr[0];
         var jsFun = generarJs(efuncion.fn, false, nivel);

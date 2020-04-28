@@ -467,6 +467,9 @@ function crearLexer(entrada) {
   var lookAhead = {
     contents: undefined
   };
+  var ultimoToken = {
+    contents: undefined
+  };
   var sigTokenLuegoDeIdentacion = function (_posActual) {
     while(true) {
       var posActual = _posActual;
@@ -491,161 +494,160 @@ function crearLexer(entrada) {
       }
     };
   };
-  var sigToken = function (param) {
-    var match = lookAhead.contents;
-    if (match !== undefined) {
-      lookAhead.contents = undefined;
-      return match;
-    } else {
-      var _param = /* () */0;
-      while(true) {
-        if (posActual.contents >= tamanoEntrada) {
-          return /* EOF */0;
+  var extraerToken = function (_param) {
+    while(true) {
+      if (posActual.contents >= tamanoEntrada) {
+        return /* EOF */0;
+      } else {
+        var resultado = Lexer$KanComp.run(parserGeneral, entrada, posActual.contents);
+        if (resultado.tag) {
+          return /* ErrorLexer */Block.__(1, [resultado[0]]);
         } else {
-          var resultado = Lexer$KanComp.run(parserGeneral, entrada, posActual.contents);
-          if (resultado.tag) {
-            return /* ErrorLexer */Block.__(1, [resultado[0]]);
-          } else {
-            var ex = resultado[0];
-            var opComun = (function(ex){
-            return function opComun(param) {
-              esInicioDeLinea.contents = false;
-              posActual.contents = ex.posFinal;
-              return /* () */0;
-            }
-            }(ex));
-            var crearToken2 = (function(ex){
-            return function crearToken2(tipo, valor) {
-              opComun(/* () */0);
-              return /* Token */Block.__(0, [
-                        Curry._1(tipo, {
-                              valor: valor,
-                              inicio: ex.posInicio,
-                              final: ex.posFinal
-                            }),
-                        indentacionActual.contents
-                      ]);
-            }
-            }(ex));
-            var match$1 = ex.tipo;
-            switch (match$1) {
-              case /* Indentacion */0 :
-                  if (esInicioDeLinea.contents) {
-                    var match$2 = sigTokenLuegoDeIdentacion(ex.posFinal);
-                    var sigPos = match$2[1];
-                    var tipo = match$2[0];
-                    if (tipo !== 1) {
-                      if (tipo >= 11) {
-                        return /* EOF */0;
-                      } else {
-                        posActual.contents = ex.posFinal;
-                        posActual.contents = sigPos;
-                        indentacionActual.contents = sigPos - ex.posInicio | 0;
-                        _param = /* () */0;
-                        continue ;
-                      }
+          var ex = resultado[0];
+          var opComun = (function(ex){
+          return function opComun(param) {
+            esInicioDeLinea.contents = false;
+            posActual.contents = ex.posFinal;
+            return /* () */0;
+          }
+          }(ex));
+          var crearToken2 = (function(ex){
+          return function crearToken2(tipo, valor) {
+            opComun(/* () */0);
+            return /* Token */Block.__(0, [
+                      Curry._1(tipo, {
+                            valor: valor,
+                            inicio: ex.posInicio,
+                            final: ex.posFinal
+                          }),
+                      indentacionActual.contents
+                    ]);
+          }
+          }(ex));
+          var match = ex.tipo;
+          switch (match) {
+            case /* Indentacion */0 :
+                if (esInicioDeLinea.contents) {
+                  var match$1 = sigTokenLuegoDeIdentacion(ex.posFinal);
+                  var sigPos = match$1[1];
+                  var tipo = match$1[0];
+                  if (tipo !== 1) {
+                    if (tipo >= 11) {
+                      return /* EOF */0;
                     } else {
+                      posActual.contents = ex.posFinal;
                       posActual.contents = sigPos;
-                      indentacionActual.contents = 0;
+                      indentacionActual.contents = sigPos - ex.posInicio | 0;
                       _param = /* () */0;
                       continue ;
                     }
                   } else {
-                    posActual.contents = ex.posFinal;
+                    posActual.contents = sigPos;
+                    indentacionActual.contents = 0;
                     _param = /* () */0;
                     continue ;
                   }
-              case /* NuevaLinea */1 :
-                  var resultado_000 = /* TNuevaLinea */Block.__(0, [{
-                        valor: /* () */0,
-                        inicio: ex.posInicio,
-                        final: ex.posFinal
-                      }]);
-                  var resultado_001 = indentacionActual.contents;
-                  var resultado$1 = /* Token */Block.__(0, [
-                      resultado_000,
-                      resultado_001
-                    ]);
+                } else {
                   posActual.contents = ex.posFinal;
-                  esInicioDeLinea.contents = true;
-                  indentacionActual.contents = 0;
-                  return resultado$1;
-              case /* IdentificadorTipo */2 :
-              case /* Identificador */3 :
-                  break;
-              case /* Generico */4 :
-                  return crearToken2((function (x) {
-                                return /* TGenerico */Block.__(2, [x]);
-                              }), ex.res);
-              case /* Comentario */5 :
-                  return crearToken2((function (x) {
-                                return /* TComentario */Block.__(3, [x]);
-                              }), ex.res);
-              case /* Numero */6 :
-                  return crearToken2((function (x) {
-                                return /* TNumero */Block.__(4, [x]);
-                              }), Number(ex.res));
-              case /* Texto */7 :
-                  return crearToken2((function (x) {
-                                return /* TTexto */Block.__(5, [x]);
-                              }), ex.res);
-              case /* Operadores */8 :
-                  return crearToken2((function (x) {
-                                return /* TOperador */Block.__(7, [x]);
-                              }), ex.res);
-              case /* AgrupacionAb */9 :
-                  var match$3 = ex.res;
-                  if (match$3 === "(") {
-                    return crearToken2((function (x) {
-                                  return /* TParenAb */Block.__(8, [x]);
-                                }), ex.res);
-                  } else {
-                    return crearToken2((function (x) {
-                                  return /* TAgrupAb */Block.__(10, [x]);
-                                }), ex.res);
-                  }
-              case /* AgrupacionCer */10 :
-                  var match$4 = ex.res;
-                  if (match$4 === ")") {
-                    return crearToken2((function (x) {
-                                  return /* TParenCer */Block.__(9, [x]);
-                                }), ex.res);
-                  } else {
-                    return crearToken2((function (x) {
-                                  return /* TAgrupCer */Block.__(11, [x]);
-                                }), ex.res);
-                  }
-              case /* Nada */11 :
-                  return /* ErrorLexer */Block.__(1, ["Se encontr\xc3\xb3 un token huerfano"]);
-              
-            }
-            var match$5 = ex.res;
-            switch (match$5) {
-              case "false" :
-                  return crearToken2((function (x) {
-                                return /* TBool */Block.__(6, [x]);
-                              }), false);
-              case "mut" :
-                  return crearToken2((function (x) {
-                                return /* PC_MUT */Block.__(13, [x]);
-                              }), "mut");
-              case "sea" :
-                  return crearToken2((function (x) {
-                                return /* PC_SEA */Block.__(12, [x]);
-                              }), "sea");
-              case "true" :
-                  return crearToken2((function (x) {
-                                return /* TBool */Block.__(6, [x]);
-                              }), true);
-              default:
+                  _param = /* () */0;
+                  continue ;
+                }
+            case /* NuevaLinea */1 :
+                var resultado_000 = /* TNuevaLinea */Block.__(0, [{
+                      valor: /* () */0,
+                      inicio: ex.posInicio,
+                      final: ex.posFinal
+                    }]);
+                var resultado_001 = indentacionActual.contents;
+                var resultado$1 = /* Token */Block.__(0, [
+                    resultado_000,
+                    resultado_001
+                  ]);
+                posActual.contents = ex.posFinal;
+                esInicioDeLinea.contents = true;
+                indentacionActual.contents = 0;
+                return resultado$1;
+            case /* IdentificadorTipo */2 :
+            case /* Identificador */3 :
+                break;
+            case /* Generico */4 :
                 return crearToken2((function (x) {
-                              return /* TIdentificador */Block.__(1, [x]);
+                              return /* TGenerico */Block.__(2, [x]);
                             }), ex.res);
-            }
+            case /* Comentario */5 :
+                return crearToken2((function (x) {
+                              return /* TComentario */Block.__(3, [x]);
+                            }), ex.res);
+            case /* Numero */6 :
+                return crearToken2((function (x) {
+                              return /* TNumero */Block.__(4, [x]);
+                            }), Number(ex.res));
+            case /* Texto */7 :
+                return crearToken2((function (x) {
+                              return /* TTexto */Block.__(5, [x]);
+                            }), ex.res);
+            case /* Operadores */8 :
+                return crearToken2((function (x) {
+                              return /* TOperador */Block.__(7, [x]);
+                            }), ex.res);
+            case /* AgrupacionAb */9 :
+                var match$2 = ex.res;
+                if (match$2 === "(") {
+                  return crearToken2((function (x) {
+                                return /* TParenAb */Block.__(8, [x]);
+                              }), ex.res);
+                } else {
+                  return crearToken2((function (x) {
+                                return /* TAgrupAb */Block.__(10, [x]);
+                              }), ex.res);
+                }
+            case /* AgrupacionCer */10 :
+                var match$3 = ex.res;
+                if (match$3 === ")") {
+                  return crearToken2((function (x) {
+                                return /* TParenCer */Block.__(9, [x]);
+                              }), ex.res);
+                } else {
+                  return crearToken2((function (x) {
+                                return /* TAgrupCer */Block.__(11, [x]);
+                              }), ex.res);
+                }
+            case /* Nada */11 :
+                return /* ErrorLexer */Block.__(1, ["Se encontr\xc3\xb3 un token huerfano"]);
+            
+          }
+          var match$4 = ex.res;
+          switch (match$4) {
+            case "false" :
+                return crearToken2((function (x) {
+                              return /* TBool */Block.__(6, [x]);
+                            }), false);
+            case "mut" :
+                return crearToken2((function (x) {
+                              return /* PC_MUT */Block.__(13, [x]);
+                            }), "mut");
+            case "sea" :
+                return crearToken2((function (x) {
+                              return /* PC_SEA */Block.__(12, [x]);
+                            }), "sea");
+            case "true" :
+                return crearToken2((function (x) {
+                              return /* TBool */Block.__(6, [x]);
+                            }), true);
+            default:
+              return crearToken2((function (x) {
+                            return /* TIdentificador */Block.__(1, [x]);
+                          }), ex.res);
           }
         }
-      };
-    }
+      }
+    };
+  };
+  var sigToken = function (param) {
+    var match = lookAhead.contents;
+    var tokenRespuesta = match !== undefined ? (lookAhead.contents = undefined, match) : extraerToken(/* () */0);
+    ultimoToken.contents = tokenRespuesta;
+    return tokenRespuesta;
   };
   return {
           entrada: entrada,
@@ -658,6 +660,15 @@ function crearLexer(entrada) {
                 var sigToken$1 = sigToken(/* () */0);
                 lookAhead.contents = sigToken$1;
                 return sigToken$1;
+              }
+            }),
+          retroceder: (function (param) {
+              var match = lookAhead.contents;
+              if (match !== undefined) {
+                return /* () */0;
+              } else {
+                lookAhead.contents = ultimoToken.contents;
+                return /* () */0;
               }
             }),
           hayTokens: (function (param) {
