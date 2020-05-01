@@ -1,38 +1,44 @@
 <template lang="pug">
     div
         p API en construcción. Este es un ejemplo:
-        h1 Math
-        code JS.Math
-        p Contiene constantes y funciones matemáticas.
-        codigo(codigo="reg Math =")
+        h1 Storage
+        code JS.Storage
+        p Provee acceso a la sesión o almacenamiento local de un dominio en particular.
         h2 Propiedades
         table.tabla-api
             tbody
                 tr
-                    td E
-                    td Constante de Euler
-                tr
-                    td LN2
-                    td Logaritmo natural de 2
-                tr
-                    td PI
-                    td Ratio de la circunferencia y diametro de un circulo
+                    td length
+                    td Devuelve un entero que representa el numero de elementos almacenados en el objeto Storage.
 
         h2 Métodos
         table.tabla-api
+            thead
+                tr
+                    td Nombre
+                    td Signatura
+                    td Descripción
             tbody
                 tr
-                    td
-                        code abs: Num -> Num
-                    td Devuelve el valor absoluto de un número.
+                    td.nombre key
+                    td.signatura Num -> DOMString
+                    td.descripcion Devuelve el nombre de la clave en la posición del parámetro.
                 tr
-                    td
-                        code pow: (x: Num) -> (y: Num) -> Num
-                    td Devuelve x elevado a la potencia y.
+                    td.nombre getItem
+                    td.signatura DOMString -> DOMString?
+                    td.descripcion Devuelve el valor de la clave, o () si la clave no existe.
                 tr
-                    td
-                        code (|>): (valor: 'A) -> (funcion: 'A -> 'B) -> 'B
-                    td Aplica una función.
+                    td.nombre setItem
+                    td.signatura DOMString -> DOMString -> ()
+                    td.descripcion Agrega un valor a una clave en el objeto Storage.
+                tr
+                    td.nombre removeItem
+                    td.signatura DOMString -> ()
+                    td.descripcion Elimina un valor del objeto Storage.
+                tr
+                    td.nombre clear
+                    td.signatura () -> ()
+                    td.descripcion Elimina todas las claves del objeto Storage.
 
     //
 </template>
@@ -54,8 +60,18 @@
         border-spacing: 0
         td
             border-top: solid 1px #454545
-            padding: 1rem 0
+            padding: 1rem 0.75rem
 
+        .nombre, .signatura
+            font-family: "JetBrains Mono", monospace
+            white-space: nowrap
+
+        .nombre
+            text-decoration: underline
+            cursor: pointer
+
+        .descripcion
+            width: 100%
 
     //
 </style>

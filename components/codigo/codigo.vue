@@ -31,7 +31,6 @@
         border: solid 1px #454545
 
 
-
     .cont
         font-family: "JetBrains Mono", monospace
         font-variant-ligatures: discretionary-ligatures
