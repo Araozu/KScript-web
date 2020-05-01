@@ -93,12 +93,6 @@ function obtInfoOp(operador) {
                 4,
                 /* Izq */0
               ];
-    case "." :
-    case "?." :
-        return /* tuple */[
-                14,
-                /* Izq */0
-              ];
     case "??" :
         return /* tuple */[
                 7,
@@ -158,7 +152,7 @@ function parseTokens(lexer) {
         preTokenId = Curry._1(lexer.sigToken, /* () */0);
       }
       catch (exn){
-
+        
       }
       var infoTokenId = Expect$KanComp._TIdentificador(preTokenId, undefined, "Se esperaba un identificador");
       Expect$KanComp._TOperador(Curry._1(lexer.sigToken, /* () */0), "=", "Se esperaba el operador de asignaci\xc3\xb3n '=' luego del indentificador.");
@@ -196,7 +190,6 @@ function parseTokens(lexer) {
       }
     }
   };
-
   var sigExprOperador = function (_exprIzq, _infoOp, _precedencia, _asociatividad) {
     while(true) {
       var infoOp = _infoOp;
@@ -302,7 +295,6 @@ function parseTokens(lexer) {
           Curry._1(lexer.retroceder, /* () */0);
           return /* PExito */Block.__(0, [primeraExprId]);
       }
-
       Curry._1(lexer.retroceder, /* () */0);
       console.log("Comparando " + (String(14) + (" con " + (String(precedencia) + ""))));
       if (14 > precedencia) {
@@ -394,7 +386,7 @@ function parseTokens(lexer) {
         case /* PC_MUT */13 :
             sigExprActual = /* PError */Block.__(1, ["No se esperaba la palabra clave 'sea' aqu\xc3\xad."]);
             break;
-
+        
       }
     }
     if (typeof sigExprActual === "number" || sigExprActual.tag) {

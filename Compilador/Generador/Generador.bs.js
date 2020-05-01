@@ -33,12 +33,7 @@ function generarJs(expr, toplevel, nivel) {
         var jsExprIzq = generarJs(eOpApl.izq, false, nivel);
         var jsExprDer = generarJs(eOpApl.der, false, nivel);
         return "(" + (jsExprIzq + (") " + (operador + (" (" + (jsExprDer + ")")))));
-    case /* EFuncion */7 :
-        var efuncion = expr[0];
-        var jsFun = generarJs(efuncion.fn, false, nivel);
-        var jsParam = generarJs(efuncion.param, false, nivel);
-        return "" + (String(jsFun) + ("(" + (String(jsParam) + ")")));
-    case /* EDeclaracion */8 :
+    case /* EDeclaracion */7 :
         var dec = expr[0];
         var inicio = dec.mut ? "let" : "const";
         var id = dec.id.valor.valor;
@@ -74,7 +69,7 @@ function generarJs(expr, toplevel, nivel) {
         } else {
           return "(() => {\n" + (generarInner(exprs) + ("\n" + (indentacionNivelAnt + "})()")));
         }
-
+    
   }
 }
 
