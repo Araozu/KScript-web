@@ -26,25 +26,25 @@ function generarJs(expr, toplevel, nivel) {
           return "false";
         }
     case /* EOperador */5 :
-    case /* EOperadorApl */6 :
         return "/* No implementado :c */";
-    case /* EFuncion */7 :
-        var efuncion = expr[0];
-        var jsFun = generarJs(efuncion.fn, false, nivel);
-        var jsParam = generarJs(efuncion.param, false, nivel);
-        return "" + (String(jsFun) + ("(" + (String(jsParam) + ")")));
-    case /* EDeclaracion */8 :
+    case /* EOperadorApl */6 :
+        var eOpApl = expr[0];
+        var operador = eOpApl.op.valor.valor;
+        var jsExprIzq = generarJs(eOpApl.izq, false, nivel);
+        var jsExprDer = generarJs(eOpApl.der, false, nivel);
+        return "(" + (jsExprIzq + (") " + (operador + (" (" + (jsExprDer + ")")))));
+    case /* EDeclaracion */7 :
         var dec = expr[0];
         var inicio = dec.mut ? "let" : "const";
         var id = dec.id.valor.valor;
         var valor = generarJs(dec.valor, false, nivel + 1 | 0);
         var match = dec.valor;
-        if (match.tag === /* EDeclaracion */8) {
+        if (match.tag === /* EDeclaracion */7) {
           return inicio + (" " + (id + (" = (() => {\n" + (indentacionNivelSig + (valor + ("\n" + (indentacionNivelSig + ("return undefined;\n" + (indentacionNivel + "})()")))))))));
         } else {
           return inicio + (" " + (id + (" = " + valor)));
         }
-    case /* EBloque */9 :
+    case /* EBloque */8 :
         var exprs = expr[0];
         var toplevel$1 = toplevel;
         var generarInner = function (exprs) {
@@ -54,7 +54,7 @@ function generarJs(expr, toplevel, nivel) {
             var e = exprs[0];
             tmp = List.length(es) === 0 ? (
                 toplevel$1 ? generarJs(e, false, nivel) + ";" : (
-                    e.tag === /* EDeclaracion */8 ? generarJs(e, false, nivel) + (";\n" + (indentacionNivel + "return undefined;")) : "return " + (generarJs(e, false, nivel) + ";")
+                    e.tag === /* EDeclaracion */7 ? generarJs(e, false, nivel) + (";\n" + (indentacionNivel + "return undefined;")) : "return " + (generarJs(e, false, nivel) + ";")
                   )
               ) : generarJs(e, false, nivel) + (";" + ((
                     toplevel$1 ? "\n" : ""

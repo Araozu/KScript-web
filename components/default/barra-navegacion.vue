@@ -7,8 +7,6 @@
             nuxt-link(to="/docs/") Documentación
         div
             nuxt-link(to="/api/") API
-        div
-            nuxt-link(to="/repl/") REPL
 
     //
 </template>
@@ -42,9 +40,8 @@
         color: var(--color)
         font-family: var(--fuenteNormal)
 
-
         display: grid
-        grid-template-columns: auto auto auto auto
+        grid-template-columns: auto auto auto
 
         div
             text-align: center

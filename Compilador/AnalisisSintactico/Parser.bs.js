@@ -6,6 +6,14 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var Expect$KanComp = require("./Expect.bs.js");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 
+function obtInfoFunAppl(esCurry) {
+  return {
+          valor: esCurry ? "Ñ" : "ñ",
+          inicio: -1,
+          final: -1
+        };
+}
+
 function obtSigIndentacion(lexer, msgError, fnErrorLexer, fnEOF) {
   var hayNuevaLinea = false;
   try {
@@ -30,6 +38,105 @@ function obtSigIndentacion(lexer, msgError, fnErrorLexer, fnEOF) {
     } else {
       throw exn;
     }
+  }
+}
+
+function obtInfoOp(operador) {
+  switch (operador) {
+    case "&&" :
+        return /* tuple */[
+                6,
+                /* Izq */0
+              ];
+    case "," :
+        return /* tuple */[
+                1,
+                /* Izq */0
+              ];
+    case "+" :
+    case "-" :
+        return /* tuple */[
+                10,
+                /* Izq */0
+              ];
+    case "." :
+        return /* tuple */[
+                15,
+                /* Izq */0
+              ];
+    case "%" :
+    case "*" :
+    case "/" :
+        return /* tuple */[
+                11,
+                /* Izq */0
+              ];
+    case "!=" :
+    case "!==" :
+    case "==" :
+    case "===" :
+        return /* tuple */[
+                8,
+                /* Izq */0
+              ];
+    case "<" :
+    case "<=" :
+    case ">" :
+    case ">=" :
+        return /* tuple */[
+                9,
+                /* Izq */0
+              ];
+    case "<<" :
+    case ">>" :
+        return /* tuple */[
+                4,
+                /* Izq */0
+              ];
+    case "??" :
+        return /* tuple */[
+                7,
+                /* Izq */0
+              ];
+    case "^" :
+        return /* tuple */[
+                12,
+                /* Der */1
+              ];
+    case "%=" :
+    case "*=" :
+    case "+=" :
+    case "-=" :
+    case "/=" :
+    case "=" :
+    case "^=" :
+        return /* tuple */[
+                2,
+                /* Izq */0
+              ];
+    case "<|" :
+    case "|>" :
+        return /* tuple */[
+                3,
+                /* Izq */0
+              ];
+    case "||" :
+        return /* tuple */[
+                5,
+                /* Izq */0
+              ];
+    default:
+      if (operador === "Ñ" || operador === "ñ") {
+        return /* tuple */[
+                14,
+                /* Izq */0
+              ];
+      } else {
+        return /* tuple */[
+                13,
+                /* Izq */0
+              ];
+      }
   }
 }
 
@@ -58,13 +165,13 @@ function parseTokens(lexer) {
               "La expresi\xc3\xb3n actual est\xc3\xa1 incompleta. Se esperaba una expresi\xc3\xb3n indentada."
             ];
       }
-      var match$1 = sigExpresion(nuevoNivel, hayNuevaLinea);
+      var match$1 = sigExpresion(nuevoNivel, hayNuevaLinea, 0, /* Izq */0);
       if (typeof match$1 === "number") {
         return /* PError */Block.__(1, ["Se esperaba una expresi\xc3\xb3n luego de la asignacion."]);
       } else if (match$1.tag) {
-        return /* PError */Block.__(1, ["Se esperaba una expresión luego de la asignación:"]);
+        return /* PError */Block.__(1, ["Se esperaba una expresión luego de la asignación: " + (String(match$1[0]) + "")]);
       } else {
-        return /* PExito */Block.__(0, [/* EDeclaracion */Block.__(8, [{
+        return /* PExito */Block.__(0, [/* EDeclaracion */Block.__(7, [{
                         mut: esMut,
                         id: {
                           signatura: /* Indefinida */0,
@@ -83,53 +190,155 @@ function parseTokens(lexer) {
       }
     }
   };
-  var sigExprFuncion = function (_funExpr, _paramExpr, nivel) {
+  var sigExprOperador = function (_exprIzq, _infoOp, _precedencia, _asociatividad) {
     while(true) {
-      var paramExpr = _paramExpr;
-      var funExpr = _funExpr;
-      var exprFunAct = /* EFuncion */Block.__(7, [{
-            signatura: /* Indefinida */0,
-            fn: funExpr,
-            param: paramExpr
-          }]);
-      var match = Curry._1(lexer.sigToken, /* () */0);
-      if (typeof match === "number") {
-        return /* PExito */Block.__(0, [exprFunAct]);
-      } else if (match.tag) {
-        return /* PError */Block.__(1, [match[0]]);
+      var infoOp = _infoOp;
+      var exprIzq = _exprIzq;
+      var valorOp = infoOp.valor;
+      var match = obtInfoOp(valorOp);
+      var match$1 = sigExpresion(0, false, match[0], match[1]);
+      if (typeof match$1 === "number") {
+        return /* PError */Block.__(1, ["Se esperaba una expresión a la derecha del operador " + (String(valorOp) + "")]);
+      } else if (match$1.tag) {
+        return /* PError */Block.__(1, ["Se esperaba una expresion a la derecha del operador " + (String(valorOp) + (". Interrumpido por: " + (String(match$1[0]) + ".")))]);
       } else {
-        var token = match[0];
-        switch (token.tag | 0) {
-          case /* TIdentificador */1 :
-              var expr2 = /* EIdentificador */Block.__(0, [{
-                    signatura: /* Indefinida */0,
-                    valor: token[0]
-                  }]);
-              _paramExpr = expr2;
-              _funExpr = exprFunAct;
-              continue ;
-          case /* TNumero */4 :
-              var expr2$1 = /* ENumero */Block.__(2, [token[0]]);
-              _paramExpr = expr2$1;
-              _funExpr = exprFunAct;
-              continue ;
-          case /* TTexto */5 :
-              var expr2$2 = /* ETexto */Block.__(3, [token[0]]);
-              _paramExpr = expr2$2;
-              _funExpr = exprFunAct;
-              continue ;
-          case /* TBool */6 :
-              var expr2$3 = /* EBool */Block.__(4, [token[0]]);
-              _paramExpr = expr2$3;
-              _funExpr = exprFunAct;
-              continue ;
-          default:
-            return /* PExito */Block.__(0, [exprFunAct]);
+        var eOperadorRes = {
+          signatura: /* Indefinida */0,
+          valor: infoOp
+        };
+        var exprOpRes = /* EOperadorApl */Block.__(6, [{
+              op: eOperadorRes,
+              izq: exprIzq,
+              der: match$1[0]
+            }]);
+        var match$2 = Curry._1(lexer.sigToken, /* () */0);
+        if (typeof match$2 === "number") {
+          return /* PExito */Block.__(0, [exprOpRes]);
+        } else if (match$2.tag) {
+          return /* PError */Block.__(1, [match$2[0]]);
+        } else {
+          var token = match$2[0];
+          switch (token.tag | 0) {
+            case /* TIdentificador */1 :
+                var infoOp2_valor = "ñ";
+                var infoOp2 = {
+                  valor: infoOp2_valor,
+                  inicio: -1,
+                  final: -1
+                };
+                var match$3 = obtInfoOp("ñ");
+                Curry._1(lexer.retroceder, /* () */0);
+                _asociatividad = match$3[1];
+                _precedencia = match$3[0];
+                _infoOp = infoOp2;
+                _exprIzq = exprOpRes;
+                continue ;
+            case /* TGenerico */2 :
+                return /* PError */Block.__(1, ["No se esperaba un genérico luego de la aplicación del operador."]);
+            case /* TNuevaLinea */0 :
+            case /* TComentario */3 :
+                return /* PExito */Block.__(0, [exprOpRes]);
+            case /* TNumero */4 :
+                return /* PError */Block.__(1, ["Se encontró un número luego de la aplicacion de un operador. Si tu intencion es usar el resultado del operador como funcion, agrupalo en parentesis."]);
+            case /* TTexto */5 :
+                return /* PError */Block.__(1, ["Se encontró un texto luego de la aplicacion de un operador. Si tu intencion es usar el resultado del operador como funcion, agrupalo en parentesis."]);
+            case /* TBool */6 :
+                return /* PError */Block.__(1, ["Se encontró un bool luego de la aplicacion de un operador. Si tu intencion es usar el resultado del operador como funcion, agrupalo en parentesis."]);
+            case /* TOperador */7 :
+                var infoOp2$1 = token[0];
+                var match$4 = obtInfoOp(infoOp2$1.valor);
+                _asociatividad = match$4[1];
+                _precedencia = match$4[0];
+                _infoOp = infoOp2$1;
+                _exprIzq = exprOpRes;
+                continue ;
+            case /* TParenCer */9 :
+                Curry._1(lexer.retroceder, /* () */0);
+                return /* PExito */Block.__(0, [exprOpRes]);
+            default:
+              return /* PError */Block.__(1, ["Se encotro un token invalido luego de la aplicación del operador."]);
+          }
         }
       }
     };
   };
-  var sigExpresion = function (nivel, aceptarExprMismoNivel) {
+  var sigExprIdentificador = function (infoId, nivel, precedencia, asociatividad) {
+    var primeraExprId = /* EIdentificador */Block.__(0, [{
+          signatura: /* Indefinida */0,
+          valor: infoId
+        }]);
+    var match = Curry._1(lexer.sigToken, /* () */0);
+    if (typeof match === "number") {
+      return /* PExito */Block.__(0, [primeraExprId]);
+    } else if (match.tag) {
+      return /* PError */Block.__(1, [match[0]]);
+    } else {
+      var token = match[0];
+      switch (token.tag | 0) {
+        case /* TIdentificador */1 :
+        case /* TNumero */4 :
+        case /* TTexto */5 :
+        case /* TBool */6 :
+            break;
+        case /* TOperador */7 :
+            var infoOp = token[0];
+            var match$1 = obtInfoOp(infoOp.valor);
+            var asocOp = match$1[1];
+            var precOp = match$1[0];
+            if (precOp > precedencia || precOp === precedencia && asocOp === /* Der */1) {
+              return sigExprOperador(primeraExprId, infoOp, precOp, asocOp);
+            } else {
+              Curry._1(lexer.retroceder, /* () */0);
+              return /* PExito */Block.__(0, [primeraExprId]);
+            }
+        default:
+          Curry._1(lexer.retroceder, /* () */0);
+          return /* PExito */Block.__(0, [primeraExprId]);
+      }
+      Curry._1(lexer.retroceder, /* () */0);
+      console.log("Comparando " + (String(14) + (" con " + (String(precedencia) + ""))));
+      if (14 > precedencia) {
+        var infoOpFunApl_valor = "ñ";
+        var infoOpFunApl = {
+          valor: infoOpFunApl_valor,
+          inicio: -1,
+          final: -1
+        };
+        return sigExprOperador(primeraExprId, infoOpFunApl, 14, /* Izq */0);
+      } else if (14 === precedencia && false) {
+        var infoOpFunApl_valor$1 = "ñ";
+        var infoOpFunApl$1 = {
+          valor: infoOpFunApl_valor$1,
+          inicio: -1,
+          final: -1
+        };
+        return sigExprOperador(primeraExprId, infoOpFunApl$1, 14, /* Izq */0);
+      } else {
+        return /* PExito */Block.__(0, [primeraExprId]);
+      }
+    }
+  };
+  var sigExprParen = function (infoParen, nivel) {
+    var sigToken = sigExpresion(nivel, false, 0, /* Izq */0);
+    if (typeof sigToken === "number") {
+      var posInicio = infoParen.inicio;
+      return /* PError */Block.__(1, ["El parentesis abierto en " + (String(posInicio) + " no está cerrado.")]);
+    } else if (sigToken.tag) {
+      return sigToken;
+    } else {
+      var ultimoToken = Curry._1(lexer.sigToken, /* () */0);
+      if (typeof ultimoToken === "number") {
+        return /* PError */Block.__(1, ["El parentesis abierto en " + (String(infoParen) + ".inicio contiene una expresion, pero no está cerrado.")]);
+      } else if (ultimoToken.tag) {
+        return /* PError */Block.__(1, ["El parentesis abierto en " + (String(infoParen) + (".inicio no está cerrado debido a un error léxico: " + (String(ultimoToken[0]) + "")))]);
+      } else if (ultimoToken[0].tag === /* TParenCer */9) {
+        return /* PExito */Block.__(0, [sigToken[0]]);
+      } else {
+        return /* PError */Block.__(1, ["Se esperaba un cierre de parentesis."]);
+      }
+    }
+  };
+  var sigExpresion = function (nivel, aceptarExprMismoNivel, precedencia, asociatividad) {
     var resultado = Curry._1(lexer.sigToken, /* () */0);
     var sigExprActual;
     if (typeof resultado === "number") {
@@ -140,14 +349,14 @@ function parseTokens(lexer) {
       var token = resultado[0];
       switch (token.tag | 0) {
         case /* TIdentificador */1 :
-            sigExprActual = sigExprIdentificador(token[0], nivel);
+            sigExprActual = sigExprIdentificador(token[0], nivel, precedencia, asociatividad);
             break;
         case /* TGenerico */2 :
             sigExprActual = /* PError */Block.__(1, ["Los genericos aun no estan soportados."]);
             break;
         case /* TNuevaLinea */0 :
         case /* TComentario */3 :
-            sigExprActual = sigExpresion(nivel, aceptarExprMismoNivel);
+            sigExprActual = sigExpresion(nivel, aceptarExprMismoNivel, precedencia, asociatividad);
             break;
         case /* TNumero */4 :
             sigExprActual = /* PExito */Block.__(0, [/* ENumero */Block.__(2, [token[0]])]);
@@ -159,31 +368,17 @@ function parseTokens(lexer) {
             sigExprActual = /* PExito */Block.__(0, [/* EBool */Block.__(4, [token[0]])]);
             break;
         case /* TOperador */7 :
-            sigExprActual = /* PError */Block.__(1, ["No se puede usar un operador como expresion. Si esa es tu intenci\xc3\xb3n, rodea el operador en par\xc3\xa9ntesis, por ejemplo: (+)"]);
+            sigExprActual = /* PError */Block.__(1, ["No se puede usar un operador como expresi\xc3\xb3n. Si esa es tu intenci\xc3\xb3n, rodea el operador en par\xc3\xa9ntesis, por ejemplo: (+)"]);
             break;
         case /* TParenAb */8 :
-            var infoParen = token[0];
-            var sigToken = sigExpresion(nivel, false);
-            if (typeof sigToken === "number") {
-              var posInicio = infoParen.inicio;
-              sigExprActual = /* PError */Block.__(1, ["El parentesis abierto en " + (String(posInicio) + " no está cerrado.")]);
-            } else if (sigToken.tag) {
-              sigExprActual = sigToken;
-            } else {
-              var ultimoToken = Curry._1(lexer.sigToken, /* () */0);
-              sigExprActual = typeof ultimoToken === "number" ? /* PError */Block.__(1, ["El parentesis abierto en " + (String(infoParen) + ".inicio contiene una expresion, pero no está cerrado.")]) : (
-                  ultimoToken.tag ? /* PError */Block.__(1, ["El parentesis abierto en " + (String(infoParen) + (".inicio no está cerrado debido a un error léxico: " + (String(ultimoToken[0]) + "")))]) : (
-                      ultimoToken[0].tag === /* TParenCer */9 ? /* PExito */Block.__(0, [sigToken[0]]) : /* PError */Block.__(1, ["Se esperaba un cierre de parentesis."])
-                    )
-                );
-            }
+            sigExprActual = sigExprParen(token[0], nivel);
             break;
         case /* TParenCer */9 :
             sigExprActual = /* PError */Block.__(1, ["No se esperaba un parentesis aqu\xc3\xad."]);
             break;
         case /* TAgrupAb */10 :
         case /* TAgrupCer */11 :
-            sigExprActual = /* PError */Block.__(1, ["Otros signos de agrupacion aun no estan soportados."]);
+            sigExprActual = /* PError */Block.__(1, ["Otros signos de agrupaci\xc3\xb3n aun no estan soportados."]);
             break;
         case /* PC_SEA */12 :
             sigExprActual = sigExprDeclaracion(nivel);
@@ -206,7 +401,7 @@ function parseTokens(lexer) {
                       ];
               }), undefined);
         if (aceptarExprMismoNivel && match[0] === nivel) {
-          var sigExprTop = sigExpresion(nivel, aceptarExprMismoNivel);
+          var sigExprTop = sigExpresion(nivel, aceptarExprMismoNivel, precedencia, asociatividad);
           if (typeof sigExprTop === "number") {
             return sigExprActual;
           } else if (sigExprTop.tag) {
@@ -214,10 +409,10 @@ function parseTokens(lexer) {
           } else {
             var expr = sigExprTop[0];
             var tmp;
-            tmp = expr.tag === /* EBloque */9 ? /* EBloque */Block.__(9, [/* :: */[
+            tmp = expr.tag === /* EBloque */8 ? /* EBloque */Block.__(8, [/* :: */[
                     exprAct,
                     expr[0]
-                  ]]) : /* EBloque */Block.__(9, [/* :: */[
+                  ]]) : /* EBloque */Block.__(8, [/* :: */[
                     exprAct,
                     /* :: */[
                       expr,
@@ -240,40 +435,7 @@ function parseTokens(lexer) {
       }
     }
   };
-  var sigExprIdentificador = function (infoId, nivel) {
-    var primeraExprId = /* EIdentificador */Block.__(0, [{
-          signatura: /* Indefinida */0,
-          valor: infoId
-        }]);
-    var match = Curry._1(lexer.sigToken, /* () */0);
-    if (typeof match === "number") {
-      return /* PExito */Block.__(0, [primeraExprId]);
-    } else if (match.tag) {
-      return /* PError */Block.__(1, [match[0]]);
-    } else {
-      var token = match[0];
-      switch (token.tag | 0) {
-        case /* TIdentificador */1 :
-            var expr2 = /* EIdentificador */Block.__(0, [{
-                  signatura: /* Indefinida */0,
-                  valor: token[0]
-                }]);
-            return sigExprFuncion(primeraExprId, expr2, nivel);
-        case /* TNumero */4 :
-            var expr2$1 = /* ENumero */Block.__(2, [token[0]]);
-            return sigExprFuncion(primeraExprId, expr2$1, nivel);
-        case /* TTexto */5 :
-            var expr2$2 = /* ETexto */Block.__(3, [token[0]]);
-            return sigExprFuncion(primeraExprId, expr2$2, nivel);
-        case /* TBool */6 :
-            var expr2$3 = /* EBool */Block.__(4, [token[0]]);
-            return sigExprFuncion(primeraExprId, expr2$3, nivel);
-        default:
-          return /* PExito */Block.__(0, [primeraExprId]);
-      }
-    }
-  };
-  var exprRe = sigExpresion(0, true);
+  var exprRe = sigExpresion(0, true, 0, /* Izq */0);
   if (typeof exprRe === "number") {
     return /* ErrorParser */Block.__(1, ["EOF sin tratar en el parser."]);
   } else if (exprRe.tag) {
@@ -283,6 +445,8 @@ function parseTokens(lexer) {
   }
 }
 
+exports.obtInfoFunAppl = obtInfoFunAppl;
 exports.obtSigIndentacion = obtSigIndentacion;
+exports.obtInfoOp = obtInfoOp;
 exports.parseTokens = parseTokens;
 /* No side effect */

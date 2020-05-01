@@ -35,23 +35,20 @@ function tknToStr(token2) {
         return "PC_SEA";
     case /* PC_MUT */13 :
         return "PC_MUT";
-
+    
   }
 }
 
-function main(param) {
-  var lexer = Gramatica$KanComp.crearLexer("sea mut hola = 20");
+function flujoPrincipal(entrada) {
+  var lexer = Gramatica$KanComp.crearLexer(entrada);
   var expresion = Parser$KanComp.parseTokens(lexer);
   if (expresion.tag) {
-    console.log(expresion[0]);
-    return /* () */0;
+    return expresion[0];
   } else {
-    var js = Generador$KanComp.generarJs(expresion[0], true, 0);
-    console.log(js);
-    return /* () */0;
+    return Generador$KanComp.generarJs(expresion[0], true, 0);
   }
 }
 
 exports.tknToStr = tknToStr;
-exports.main = main;
-/*  Not a pure module */
+exports.flujoPrincipal = flujoPrincipal;
+/* Gramatica-KanComp Not a pure module */
