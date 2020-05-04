@@ -1,5 +1,5 @@
 aplicadorDeColor = (nombre, estilo) -> () ->
-    if process.client
+    if false && process.client
         elemTemp = document.getElementById "estilos"
         unless elemTemp?
             elemTemp = document.createElement "style"
@@ -8,6 +8,7 @@ aplicadorDeColor = (nombre, estilo) -> () ->
 
         elemTemp.innerHTML = estilo
         nombre
+
 
 palenightColor = """
 .TTexto {

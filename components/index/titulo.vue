@@ -5,7 +5,7 @@
                 img.logo(src="@/assets/img/kan_logo.svg")
         h1.titulo Kan
         div.etiqueta
-            div Funcional · Orientado a Objetos · Seguro
+            div JS + ML
 
 
 </template>
