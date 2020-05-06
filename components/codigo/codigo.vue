@@ -32,7 +32,7 @@
     .Fondo-alt
         background-color: var(--color-cod-fondo)
         color: var(--color-cod)
-        border: solid 1px #454545
+        border: solid 1px var(--color-borde)
 
 
     .cont

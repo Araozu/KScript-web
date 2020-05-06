@@ -59,7 +59,7 @@
         width: 100%
         border-spacing: 0
         td
-            border-top: solid 1px #454545
+            border-top: solid 1px var(--color-borde)
             padding: 1rem 0.75rem
 
         .nombre, .signatura

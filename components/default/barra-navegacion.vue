@@ -21,7 +21,7 @@
         computed:
             esClaro: -> @$store.state.variables.esClaro
             textoModoColor: -> if @esClaro then "claro" else "oscuro"
-            rutaImg: -> "/img/kan_logo_#{ if @esClaro then 'claro' else 'oscuro' }.svg"
+            rutaImg: -> "/img/kan_logo_#{ if @esClaro then 'oscuro' else 'claro' }.svg"
         methods:
             cambiarColor: ->
                 @$store.commit "variables/cambiarColor", !@esClaro
@@ -36,10 +36,11 @@
         top: 0
         left: 0
         width: 100%
-        background-color: var(--color)
-        color: var(--fondo)
+        background-color: var(--fondo)
+        color: var(--color)
         font-family: var(--fuenteNormal)
         padding-left: 3rem
+        border-bottom: solid 1px var(--color-borde)
 
         .cont-img-logo
             position: absolute
@@ -61,7 +62,7 @@
             a
                 padding: 1rem 0.5rem
                 display: inline-block
-                color: var(--fondo)
+                color: var(--color)
                 transition: background-color 50ms
                 text-decoration: none
                 cursor: pointer

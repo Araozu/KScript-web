@@ -23,10 +23,10 @@
 
     .docs
         position: fixed
-        top: 3.2rem
+        top: 3.25rem
         left: 0
         width: 100%
-        height: calc(100% - 2.35rem)
+        height: calc(100% - 3.2rem)
 
     .contenedor-docs
         display: grid
