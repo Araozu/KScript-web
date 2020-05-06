@@ -18,7 +18,11 @@
                 type: String
                 required: true
         computed:
-            lineas: -> @codigo.split "\n"
+            lineas: ->
+                fragmentos = @codigo.split "\n"
+                if fragmentos[fragmentos.length - 1] == ""
+                    fragmentos.pop()
+                fragmentos
 
 #
 </script>
