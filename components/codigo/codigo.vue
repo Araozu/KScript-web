@@ -30,8 +30,8 @@
 <style scoped lang="sass">
 
     .Fondo-alt
-        background-color: var(--fondoCodigo)
-        color: var(--colorCodigo)
+        background-color: var(--color-cod-fondo)
+        color: var(--color-cod)
         border: solid 1px #454545
 
 
