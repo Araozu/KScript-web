@@ -6,9 +6,15 @@
 <script lang="coffee">
     palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
         "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-        "if else return registro variante gestor cov met pub para reg").split " "
+        "if else return registro variante gestor covar met pub para reg").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
+
+    verificar = (valor) =>
+        for v in palabrasClave
+            if valor == v then return true
+
+        false
 
     export default
         name: "token"
@@ -32,6 +38,8 @@
                         "&nbsp;&nbsp;&nbsp;&nbsp;"
                     when "TTexto" then "\"#{token.valor}\""
                     when "TIdentificador"
+                        if verificar token.valor
+                            token.tipo = "PalabraClave"
                         token.valor
                     when "TComentario" then "//#{token.valor}"
                     else token.valor

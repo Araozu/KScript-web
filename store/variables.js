@@ -7,7 +7,7 @@ const cambiarAColor = esClaro => {
 
         claseshtml.add("tema-claro");
     } else {
-        if (claseshtml.contains("tema-oscuro"))
+        if (claseshtml.contains("tema-claro"))
             claseshtml.remove("tema-claro")
 
         claseshtml.add("tema-oscuro");
@@ -26,6 +26,7 @@ export const state = () => ({
 export const mutations = {
     cambiarColor (state, valor) {
         const nuevoValor = valor? "claro": "oscuro";
+        cambiarAColor(valor);
         if (nuevoValor === "claro") {
             state.esClaro = true;
             localStorage.setItem("modo-color", "claro");
@@ -33,13 +34,17 @@ export const mutations = {
             state.esClaro = false;
             localStorage.setItem("modo-color", "oscuro");
         }
+    },
+    establecerColor (state, valor) {
+        state.esClaro = valor;
     }
 };
 
 
 export const actions = {
-    inicializarColor ({ state }) {
+    inicializarColor ({ state, commit }) {
         const esClaro = localStorage.getItem("modo-color") === "claro";
+        commit("establecerColor", esClaro);
         cambiarAColor(esClaro);
     }
 };

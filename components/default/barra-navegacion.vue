@@ -1,12 +1,15 @@
 <template lang="pug">
     div.barra-nav
-        div.borde
-        div
-            nuxt-link(to="/") Inicio
-        div
+        div.cont-img-logo
+            img.img-logo(:src="rutaImg" alt="Logo")
+        div.ruta-barra-nav
+            nuxt-link(to="/") KAN
+        div.ruta-barra-nav
             nuxt-link(to="/docs/") Documentación
-        div
+        div.ruta-barra-nav
             nuxt-link(to="/api/") API
+        div.ruta-barra-nav
+            a(@click.prevent="cambiarColor") {{ textoModoColor }}
 
     //
 </template>
@@ -15,44 +18,56 @@
 
     export default
         name: "barra-navegacion"
+        computed:
+            esClaro: -> @$store.state.variables.esClaro
+            textoModoColor: -> if @esClaro then "claro" else "oscuro"
+            rutaImg: -> "/img/kan_logo_#{ if @esClaro then 'claro' else 'oscuro' }.svg"
+        methods:
+            cambiarColor: ->
+                @$store.commit "variables/cambiarColor", !@esClaro
 
 #
 </script>
 
 <style scoped lang="sass">
-    $altoBorde: 0.15rem
-
-    .borde
-        position: absolute
-        top: -$altoBorde
-        width: 100%
-        height: $altoBorde
-        background-color: var(--colorSecundario)
-
-
 
     .barra-nav
         position: fixed
-        bottom: 0
+        top: 0
         left: 0
         width: 100%
-        background-color: var(--fondo)
-        color: var(--color)
+        background-color: var(--color)
+        color: var(--fondo)
         font-family: var(--fuenteNormal)
+        padding-left: 3rem
 
-        display: grid
-        grid-template-columns: auto auto auto
+        .cont-img-logo
+            position: absolute
+            top: 0
+            left: 0
+            display: inline-table
+            padding: 0.5rem
 
-        div
+        .img-logo
+            display: inline-block
+            height: 2rem
+            width: auto
+
+        .ruta-barra-nav
+            display: inline-block
             text-align: center
+            padding: 0 0.15rem
+
             a
-                padding: 0.5rem 0
+                padding: 1rem 0.5rem
                 display: inline-block
-                width: 100%
-                color: var(--color)
+                color: var(--fondo)
                 transition: background-color 50ms
+                text-decoration: none
+                cursor: pointer
+                user-select: none
                 &:hover
-                    background-color: rgba(255, 255, 255, 0.25)
+                    text-decoration: underline
 
 
 

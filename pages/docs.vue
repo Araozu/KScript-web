@@ -23,7 +23,7 @@
 
     .docs
         position: fixed
-        top: 0
+        top: 3.2rem
         left: 0
         width: 100%
         height: calc(100% - 2.35rem)
