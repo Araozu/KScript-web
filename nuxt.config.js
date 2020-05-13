@@ -14,8 +14,7 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto&display=swap" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" },
-            { rel: "stylesheet", href: "https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css"}
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" }
         ]
     },
     /*
