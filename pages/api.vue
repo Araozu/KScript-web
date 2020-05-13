@@ -58,8 +58,9 @@
     .tabla-api
         width: 100%
         border-spacing: 0
-        td
-            border-top: solid 1px var(--color-borde)
+        &, td
+            border: solid 1px var(--color-borde)
+            border-collapse: collapse
             padding: 1rem 0.75rem
 
         .nombre, .signatura
