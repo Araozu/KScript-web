@@ -6,9 +6,15 @@
 <script lang="coffee">
     palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
         "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-        "if else return registro variante gestor cov met pub para reg").split " "
+        "if else return registro variante gestor covar met pub para reg").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
+
+    verificar = (valor) =>
+        for v in palabrasClave
+            if valor == v then return true
+
+        false
 
     export default
         name: "token"
@@ -24,20 +30,19 @@
         computed:
             escapar: ->
                 token = @token
-                switch token.tipo.name
+                switch token.tipo
+                    when "PC_SEA", "PC_MUT"
+                        token.tipo = "PalabraClave"
+                        token.valor
                     when "Indentacion"
                         "&nbsp;&nbsp;&nbsp;&nbsp;"
-                    when "Texto" then "\"#{token.res}\""
-                    when "Identificador"
-                        valor = token.res
-                        modificador = ""
-                        palabrasClave.forEach((x) -> modificador += if valor is x then "--palabraClave" else "")
-                        funcionesClave.forEach((x) -> modificador += if valor is x then "--funcionClave" else "")
-                        std.forEach((x) -> modificador += if valor is x then "--std" else "")
-                        @adicional = modificador
-                        valor
-                    when "Comentario" then "//#{token.res}"
-                    else token.res
+                    when "TTexto" then "\"#{token.valor}\""
+                    when "TIdentificador"
+                        if verificar token.valor
+                            token.tipo = "PalabraClave"
+                        token.valor
+                    when "TComentario" then "//#{token.valor}"
+                    else token.valor
 
 #
 </script>

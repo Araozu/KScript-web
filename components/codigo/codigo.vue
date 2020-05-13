@@ -18,7 +18,11 @@
                 type: String
                 required: true
         computed:
-            lineas: -> @codigo.split "\n"
+            lineas: ->
+                fragmentos = @codigo.split "\n"
+                if fragmentos[fragmentos.length - 1] == ""
+                    fragmentos.pop()
+                fragmentos
 
 #
 </script>
@@ -26,15 +30,16 @@
 <style scoped lang="sass">
 
     .Fondo-alt
-        background-color: var(--fondo)
-        border: solid 1px var(--colorSecundario)
-
+        background-color: var(--color-cod-fondo)
+        color: var(--color-cod)
+        border: solid 1px var(--color-borde)
 
 
     .cont
-        font-family: "JetBrains Mono", monospace
-        font-variant-ligatures: discretionary-ligatures
-        border-radius: 3px
+        font:
+            family: "JetBrains Mono", monospace
+            variant-ligatures: discretionary-ligatures
+            weight: 500
         padding: 15px 0
         cursor: text
         overflow-x: auto

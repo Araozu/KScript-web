@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <nuxt />
-    <div id="separador"></div>
-    <barraNavegacion />
-  </div>
+    <div>
+        <barraNavegacion/>
+        <div id="separador"></div>
+        <nuxt/>
+    </div>
 </template>
 
 <script lang="coffee">
     import barraNavegacion from "@/components/default/barra-navegacion.vue"
-    import { colores } from "@/components/colores.coffee"
 
     export default
         name: "default"
-        components: { barraNavegacion}
-        created: ->
-            colores.DraculaDarker()
+        components: { barraNavegacion }
+        mounted: ->
+            @$store.dispatch "variables/inicializarColor"
 
 
 #
@@ -24,6 +23,6 @@
 
     #separador
         width: 100%
-        height: 3rem
+        height: 3.5rem
 
 </style>

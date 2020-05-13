@@ -1,12 +1,13 @@
-
-html:root
-    --color: white
-    --fondo: #01070a
+\:root
+    --color: #dedede
+    --fondo: #151515
+    --fondoCodigo: #282c34
+    --colorCodigo: #d7d7d7
+    // #01070a
     --colorSecundario: #03A9F4
     --fuenteNormal: Roboto, sans-serif
     --fuenteTitulo: Sen, cursive, Roboto, sans-serif
     --tamanoFuenteCodigo: 1rem
-
 
 
 html, body
@@ -15,7 +16,69 @@ html, body
     background-color: var(--fondo)
 
 
+body
+    margin: 0
+
+
 code
     font:
         family: "JetBrains Mono", "Fira Code", monospace
         size: 1rem
+
+
+.tema-oscuro
+    --color: #dedede
+    --fondo: #151515
+    --color-borde: #454545
+    --color-cod-texto: #6db369
+    --color-cod-numero: #d19a66
+    --color-cod-palabra-clave: #c679dd
+    --color-cod-fun-clave: #61aeef
+    --color-cod-identificador: #ffe968
+    --color-cod-comentario: #59626f
+    --color-cod-fondo: #282c34
+    --color-cod: #d7d7d7
+    --color-cod-identificador-tipo: #85e9ff
+
+
+.tema-claro
+    --color: #1d1d1d
+    --fondo: #ffffff
+    --color-borde: #e3e3e3
+    --color-cod-texto: #468B46
+    --color-cod-numero: #986801
+    --color-cod-palabra-clave: #ad26a3
+    --color-cod-fun-clave: #3f77f3
+    --color-cod-identificador: #e4564a
+    --color-cod-comentario: #a0a1a7
+    --color-cod-fondo: #fafafa
+    --color-cod: #000000
+    --color-cod-identificador-tipo: #5392A0
+
+
+.TTexto
+    color: var(--color-cod-texto)
+
+.TNumero
+    color: var(--color-cod-numero)
+
+.PalabraClave
+    color: var(--color-cod-palabra-clave)
+
+.FuncionClave
+    color: var(--color-cod-fun-clave)
+
+.TIdentificador--std
+    color: var(--color-cod-identificador)
+
+.TComentario
+    color: var(--color-cod-comentario)
+
+.Fondo
+    background-color: var(--color-cod-fondo)
+
+.TextoCod
+    color: var(--color-cod)
+
+.TIdentificadorTipo
+    color: var(--color-cod-identificador-tipo)

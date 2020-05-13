@@ -12,30 +12,35 @@
 </template>
 
 <script lang="coffee">
-    import { generarParser } from "@/Compilador/AnalisisLexico/Gramatica"
+    import { crearLexer } from "@/Compilador/AnalisisLexico/Gramatica.bs"
+    import { tknToStr } from "@/Compilador/Inicio.bs"
     import token from "./token.vue"
 
     crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")
 
 
     obtenerTokens = (entrada) =>
-        generador = generarParser entrada
+        lexer = crearLexer entrada
         tokens = []
 
         posActual = 0
 
         loop
-            tokenn = generador()
-            if tokenn.name is "Exito"
-                ntoken = tokenn.fields[0]
+            tokenn = lexer.sigToken()
+            nombreTipoToken = tokenn.name
 
-                if ntoken.posInicio > posActual
+            if tokenn.tag == 0
+                preToken = tokenn[0]
+                ntoken = preToken[0]
+                ntoken.tipo = tknToStr preToken
+
+                if ntoken.inicio > posActual
                     tokens.push
-                        res: crearEspBlanco(ntoken.posInicio - posActual)
-                        tipo: "EspBlanco"
+                        valor: crearEspBlanco(ntoken.inicio - posActual)
+                        tipo: "TEspBlanco"
 
                 tokens.push ntoken
-                posActual = ntoken.posFinal
+                posActual = ntoken.final
 
             else
                 break
@@ -62,7 +67,7 @@
             numLineas:
                 type: Number
                 required: true
-        created: ->
+        mounted: ->
             @tokens = obtenerTokens @linea
 
 
