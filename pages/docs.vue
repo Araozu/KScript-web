@@ -32,27 +32,27 @@
     .contenedor-docs
         display: grid
         height: 100%
-        grid-template-columns: auto auto 37.5rem
+        grid-template-columns: 17.5rem auto 37.5rem
 
 
     @media only screen and (max-width: 1600px)
         .contenedor-docs
-            grid-template-columns: auto auto 25rem
+            grid-template-columns: 13.5rem auto 25rem
 
 
     @media only screen and (max-width: 1100px)
         .contenedor-docs
-            grid-template-columns: auto auto 20rem
+            grid-template-columns: 10rem auto 20rem
 
 
     @media only screen and (max-width: 800px)
         .contenedor-docs
-            grid-template-columns: auto auto 15rem
+            grid-template-columns: 7.5rem auto 15rem
 
 
     @media only screen and (max-width: 700px)
         .contenedor-docs
-            grid-template-columns: auto auto 0
+            grid-template-columns: 9rem auto 0
 
     //
 </style>

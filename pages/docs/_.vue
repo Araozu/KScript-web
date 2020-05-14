@@ -5,9 +5,13 @@
         div(v-else-if="datos.error && datos.error === true")
             | Error al cargar el recurso. Razón: {{ datos.razon }}
         div.contenido-tema-docs(v-else)
+            div.opciones
+                div.opcion(@click="cargaInicial")
+                    i.material-icons cached
+                    span  Regargar
             contenidoDocs(:mdhtml="htmlPagina")
 
-
+    //
 </template>
 
 <script lang="coffee">
@@ -81,6 +85,17 @@
 </script>
 
 <style lang="sass">
+
+    .opcion
+        display: inline-block
+        cursor: pointer
+        padding: 0.5rem
+        user-select: none
+        i, span
+            font-size: 1rem
+        &:hover
+            background-color: var(--color-borde)
+
 
     .doc
         overflow-y: auto
