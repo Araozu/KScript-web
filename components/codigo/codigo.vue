@@ -39,7 +39,6 @@
         font:
             family: "JetBrains Mono", monospace
             variant-ligatures: discretionary-ligatures
-            weight: 500
         padding: 15px 0
         cursor: text
         overflow-x: auto

@@ -28,10 +28,31 @@
         width: 100%
         height: calc(100% - 3.2rem)
 
+
     .contenedor-docs
         display: grid
         height: 100%
-        grid-template-columns: 17.5rem auto 37.5rem
+        grid-template-columns: auto auto 37.5rem
 
 
+    @media only screen and (max-width: 1600px)
+        .contenedor-docs
+            grid-template-columns: auto auto 25rem
+
+
+    @media only screen and (max-width: 1100px)
+        .contenedor-docs
+            grid-template-columns: auto auto 20rem
+
+
+    @media only screen and (max-width: 800px)
+        .contenedor-docs
+            grid-template-columns: auto auto 15rem
+
+
+    @media only screen and (max-width: 700px)
+        .contenedor-docs
+            grid-template-columns: auto auto 0
+
+    //
 </style>

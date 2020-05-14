@@ -40,11 +40,31 @@
     .barra-doc
         height: 100%
         overflow-y: auto
+        width: 17.5rem
 
 
     .cont-opcion-version
         padding: 0.75rem 0.5rem
 
+
+    @media only screen and (max-width: 1600px)
+        .barra-doc
+            width: 13.5rem
+
+
+    @media only screen and (max-width: 1100px)
+        .barra-doc
+            width: 10rem
+
+
+    @media only screen and (max-width: 800px)
+        .barra-doc
+            width: 7.5rem
+
+
+    @media only screen and (max-width: 700px)
+        .barra-doc
+            width: 9rem
 
     //
 </style>
