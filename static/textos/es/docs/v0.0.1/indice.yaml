@@ -9,3 +9,7 @@ temas:
         ruta: constantes-y-variables
       - titulo: Tipos de datos
         ruta: tipos-de-datos
+      - titulo: Operadores comunes
+        ruta: operadores-comunes
+      - titulo: Expresiones
+        ruta: expresiones

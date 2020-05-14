@@ -7,7 +7,9 @@ Si estás leyendo este documento en una PC, te invito a ejecutar el código de e
 en el REPL que está al costado izquierdo. De este modo, tu aprendizaje será mucho
 más rápido.
 
+
 ## Constantes
+
 
 En la programación funcional es natural trabajar con constantes, y Kan favorece
 estas sobre las variables. Podemos declarar una constante del siguiente modo:
@@ -43,3 +45,33 @@ Pero este si:
 sea precio = [200]
 precio[0] = 250   // Si funciona.
 ```
+
+
+## Variables
+
+
+En ciertas situaciones es más eficiente simplemente usar una variable en vez de un patron funcional.
+Por ello, Kan también permite trabajar con variables de forma similar a Javascript.
+
+Las variables se declaran de la siguiente manera:
+
+```
+sea mut edad = 20
+```
+
+A una declaración de constante, le añadimos la palabra clave `mut`. De ese modo podemos re-asignar el valor
+que contiene.
+
+```
+sea mut edad = 20
+edad = 21         // OK
+```
+
+
+## Consideraciones
+
+
+Las variables y constantes de Kan se compilan a let y const, de modo que tienen el mismo comportamiento que en
+JavaScript, llamense hoisting, alcance, TDZ, etc.
+
+Es necesario entender estos conceptos para trabajar adecuadamente en Kan.
