@@ -1,25 +1,45 @@
-# Hola mundo
+# Constantes y Variables
 
-## Este es un hola mundo :D
+Vamos a empezar la documentación con el concepto más básico de la programación:
+Variables.
 
-Parece que usa la etiqueta `code`...
+Si estás leyendo este documento en una PC, te invito a ejecutar el código de ejemplo
+en el REPL que está al costado izquierdo. De este modo, tu aprendizaje será mucho
+más rápido.
 
-Parece que lo conseguí :D
+## Constantes
 
-Y puedo colocar un `sea` en el codigo y se resaltara correctamente :)
+En la programación funcional es natural trabajar con constantes, y Kan favorece
+estas sobre las variables. Podemos declarar una constante del siguiente modo:
 
-Y en bloque?
-
-```kan
-console.log("Hola mundo");
-const hola = 20;
-const adios = "hola";
-
-() => {
-    foldl(hola, adios, []);
-};
+```
+sea constante = 10
 ```
 
-Estoy satisfecho. Esto es un millon de veces mejor que lo que ya tenia.
+La primera palabra que colocamos es `sea`. Esta indica que estamos declarando
+una constante. Luego, le asignamos un nombre, en este caso es `constante`.
+Finalmente, asignamos un valor a esta constante, el cual es `10`.
 
-Ahora solo tengo que arreglar el layout. sad
+Una vez hecho esto, podemos usar nuestra constante en el resto del código,
+como estamos acostumbrados:
+
+```
+constante + 20  //: 30
+```
+
+Esta constante tiene el mismo comportamiento a las constantes de JavaScript.
+Eso quiere decir que no podemos cambiar su valor directamente.
+
+Por ejemplo, el sig. código no funcionará:
+
+```
+sea precio = 200
+precio = 220     //! Error: precio es una constante, y no se puede cambiar su valor.
+```
+
+Pero este si:
+
+```
+sea precio = [200]
+precio[0] = 250   // Si funciona.
+```
