@@ -5,7 +5,7 @@
 </template>
 
 <script lang="coffee">
-    import { kanAHtml } from "../../components/codigo/kanAHTML.coffee"
+    import { kanAHtml } from "../codigo/kanAHTML.coffee"
 
     export default
         name: "contenido-docs"

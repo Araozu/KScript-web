@@ -15,7 +15,7 @@
     import DOMPurify from "dompurify"
     import marked from "marked"
     import codigo from "../../components/codigo/codigo.vue"
-    import contenidoDocs from "./contenido-docs.vue"
+    import contenidoDocs from "../../components/docs/contenido-docs.vue"
 
 
     #: ['A] -> 'B -> (('A -> 'B) -> 'B)
