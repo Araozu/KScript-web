@@ -5,23 +5,18 @@
         div(v-else-if="datos.error && datos.error === true")
             | Error al cargar el recurso. Razón: {{ datos.razon }}
         div.contenido-tema-docs(v-else)
-            h2.titulo-tema-docs {{ datos.titulo }}
-            br
-            template(v-for="frag in datos.txt")
-                codigo.cod(v-if="frag.substring(0,1) === '$'" :codigo="frag.substr(2)")
-                div.txt(v-else v-html="frag")
-            div(v-for="tema in datos.subtemas")
-                h3.subtema-tema-docs {{ tema.titulo }}
-                div.pad-tema-docs
-                    textos(v-for="(frag, i) in tema.txt" :txt="frag" :key="i")
+            contenidoDocs(:mdhtml="htmlPagina")
 
 
 </template>
 
 <script lang="coffee">
     import YAML from "yaml"
+    import DOMPurify from "dompurify"
+    import marked from "marked"
     import codigo from "../../components/codigo/codigo.vue"
-    import textos from "../../components/textos.vue"
+    import contenidoDocs from "./contenido-docs.vue"
+
 
     #: ['A] -> 'B -> (('A -> 'B) -> 'B)
     fold = (arr, state, fn) =>
@@ -36,9 +31,10 @@
 
     export default
         name: "docs-sub"
-        components: { codigo, textos }
+        components: { codigo, contenidoDocs }
         data: ->
             datos: {cargando: true}
+            htmlPagina: ""
         computed:
             idiomaActual: -> @$store.state.variables.idiomaActual
             versionDocsActual: -> @$store.state.variables.versionDocsActual
@@ -49,10 +45,12 @@
             obtenerRutaDoc: (fragmentos) ->
                 inicio = "/textos/#{ @idiomaActual }/docs/#{ @versionDocsActual }"
                 (fold fragmentos, inicio, (nuevo, acc) =>
-                    acc + "/" + nuevo) + ".yaml"
+                    acc + "/" + nuevo) + ".md"
 
             cargaInicial: ->
                 @cargarDatos @$route.params?.pathMatch
+
+            escaparHtml: (texto) -> DOMPurify.sanitize texto
 
             cargarDatos: (pathMatch) ->
                 vm = this
@@ -63,7 +61,9 @@
                     try
                         resRaw = await fetch ruta
                         if resRaw.status == 200
-                            YAML.parse (await resRaw.text())
+                            html = marked (await resRaw.text())
+                            @htmlPagina = @escaparHtml html
+                            @datos = { cargando: false }
                         else
                             throw new Error("Archivo no encontrado.")
                     catch e

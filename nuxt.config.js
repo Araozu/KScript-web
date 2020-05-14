@@ -14,7 +14,8 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto&display=swap" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" }
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" },
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/icon?family=Material+Icons" },
         ]
     },
     /*
@@ -40,9 +41,7 @@ export default {
     /*
     ** Nuxt.js modules
     */
-    modules: [
-        '@nuxtjs/pwa',
-    ],
+    modules: [],
     /*
     ** Build configuration
     */

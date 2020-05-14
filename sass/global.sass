@@ -22,8 +22,7 @@ body
 
 code
     font:
-        family: "JetBrains Mono", "Fira Code", monospace
-        size: 1rem
+        family: "JetBrains Mono", monospace
 
 
 .tema-oscuro
@@ -82,3 +81,46 @@ code
 
 .TIdentificadorTipo
     color: var(--color-cod-identificador-tipo)
+
+
+// Estilos para el codigo.
+
+.Fondo-alt
+    background-color: var(--color-cod-fondo)
+    color: var(--color-cod)
+    border: solid 1px var(--color-borde)
+
+
+.cont
+    font:
+        family: "JetBrains Mono", monospace
+        variant-ligatures: discretionary-ligatures
+    padding: 15px 0
+    cursor: text
+    overflow-x: auto
+    white-space: nowrap
+
+
+.cont-inline
+    display: inline-block
+    font:
+        family: "JetBrains Mono", monospace
+        variant-ligatures: discretionary-ligatures
+    cursor: text
+
+
+.TextoCod
+    padding: 0 15px
+
+
+@media only screen and (max-width: 450px)
+    .linea
+        line-height: 1rem
+
+.token
+    font-size: var(--tamanoFuenteCodigo)
+
+
+@media only screen and (max-width: 450px)
+    .token
+        line-height: 1.2rem
