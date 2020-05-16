@@ -19,9 +19,9 @@ Si evaluamos (resolvemos) esta operación, obtenemos como resultado 2. Por lo ta
 Kan amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es una expresión:
 
 ```
-1.5 * 2             //: 3
-"Hola" <> " mundo"  //: Hola mundo
-true && true        //: true
+1.5 * 2             //= 3
+"Hola" <> " mundo"  //= Hola mundo
+true && true        //= true
 ```
 
 Estas son fáciles de comprender, pero la clave es que toda estructura en Kan es una

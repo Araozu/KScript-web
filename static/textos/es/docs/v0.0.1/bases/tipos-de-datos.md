@@ -35,7 +35,7 @@ sea nombreCompleto = "${nombre} Perez"  // Proximamente: Juan Perez
 Para evitar ambiguedades con el operador `+`, en Kan se concatenan los strings con el operador `<>`.
 
 ```
-"Hola" <> " mundo!"  //: Hola mundo
+"Hola" <> " mundo!"  //= Hola mundo
 "Hola" + " mundo:"   //! Error: el operador `+` se usa con números.
 ```
 
@@ -52,11 +52,11 @@ sea porcentaje = 0.05
 Los números usan los operadores comunes.
 
 ```
-10 + 20  //: 30
-45 - 12  //: 33
-5 * 2    //: 10
-5 / 2    //: 2.5
-5 ** 2   //: 25
+10 + 20  //= 30
+45 - 12  //= 33
+5 * 2    //= 10
+5 / 2    //= 2.5
+5 ** 2   //= 25
 ```
 
 
@@ -70,9 +70,9 @@ sea activo = false
 ```
 
 ```
-true && false   //: false
-true || false   //: true
-!true           //: false
+true && false   //= false
+true || false   //= true
+!true           //= false
 ```
 
 
@@ -82,8 +82,8 @@ No se puede operar con tipos de datos incompatibles. Por ejemplo, concatenar un 
 Kan tampoco cambia los tipos de datos implícitamente.
 
 ```
-"10" <> 10  //: Error
-"10" + 10   //: Error
+"10" <> 10  //= Error
+"10" + 10   //= Error
 
-true + 2    //: Error
+true + 2    //= Error
 ```

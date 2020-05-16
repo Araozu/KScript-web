@@ -20,16 +20,41 @@ página especifica correspondiente, mientras que si solo quieres recordar
 la sintaxis, o ya has trabajado con lenguajes similares a este, usarías
 el resumen de la página principal.
 
-## v0.0.1
+## Comentarios
 
-Esta es la primera versión del lenguaje que se puede considerar "completa".
-Cuenta con las faces imprescindibles de un compilador (análisis lexico,
-análisis sintáctico, generacion de código), y también brinda soporte para
-ciertas estructuras del lenguaje.
+A lo largo de la documentación se incluirán ejemplos de código. Estos a su vez
+tendrán comentarios para indicar lo que está pasando con el siguiente formato:
 
-En un futuro además de añadir más estructuras definidas en la versión 'next'
-del lenguaje, también se añadirá una fase de análisis semántico, así como
-compatibilidad con los archivos *.d.ts de typescript.
+- `//=` indica el valor resultante
+  
+  Por ejemplo:
+  
+  ```
+  sea total = 10 * 5  //= 50
+  ```
+  
+  Nos dice que el valor de `total` es `50`.
+  
+- `//:` indica tipo de dato
+
+  Por ejemplo
+  
+  ```
+  sea nombre = "Juan"  //: string
+  ```
+  
+  Nos dice que el tipo de dato de `nombre` es `string`.
+  
+- `//!` indica un error
+
+  Por ejemplo
+  
+  ```
+  console.log apellido  //! Error: `apellido` no está definido.
+  ```
+  
+  Nos indica que hay un error en esa linea. La razón está en el comentario.
+  
 
 ## Motivación
 
@@ -50,6 +75,17 @@ ampliamente influenciado por C/C#/C++/Java.
 
 Así que el programador decidió que si nadie iba a crear un lenguaje que se adapte
 a sus necesidades, el mismo tendría que hacerlo.
+
+## v0.0.1
+
+Esta es la primera versión del lenguaje que se puede considerar "completa".
+Cuenta con las faces imprescindibles de un compilador (análisis lexico,
+análisis sintáctico, generacion de código), y también brinda soporte para
+ciertas estructuras del lenguaje.
+
+En un futuro además de añadir más estructuras definidas en la versión 'next'
+del lenguaje, también se añadirá una fase de análisis semántico, así como
+compatibilidad con los archivos *.d.ts de typescript.
 
 ## Instalación
 

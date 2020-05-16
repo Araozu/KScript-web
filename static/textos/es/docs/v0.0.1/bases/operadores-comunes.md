@@ -7,13 +7,13 @@ Kan usa la mayoría de operadores de JS, para facilitar la claridad y consistenc
 Concatenación de texto:
 
 ```
-"Hola" <> "mundo"  //: Hola mundo
+"Hola" <> "mundo"  //= Hola mundo
 ```
 
 Suma de numeros:
 
 ```
-10.25 + 8.5   //: 18.75
+10.25 + 8.5   //= 18.75
 ```
 
 ## Operadores comunes
@@ -21,12 +21,12 @@ Suma de numeros:
 Números:
 
 ```
-10 + 5   //: 15
-10 - 5   //: 5
-10 * 5   //: 50
-10 / 5   //: 2
-10 % 5   //: 0
-10 ** 5  //: 100000
+10 + 5   //= 15
+10 - 5   //= 5
+10 * 5   //= 50
+10 / 5   //= 2
+10 % 5   //= 0
+10 ** 5  //= 100000
 ```
 
 Variables numéricas:
@@ -34,12 +34,12 @@ Variables numéricas:
 ```
 sea mut numero = 10
 
-numero += 5   //: 15
-numero -= 5   //: 10
-numero *= 2   //: 20
-numero /= 4   //: 5
-numero %= 3   //: 2
-numero **= 3  //: 8
+numero += 5   //= 15
+numero -= 5   //= 10
+numero *= 2   //= 20
+numero /= 4   //= 5
+numero %= 3   //= 2
+numero **= 3  //= 8
 ```
 
 No hay un operador `<>=` para concatenar un string consigo mismo.
@@ -51,18 +51,18 @@ existentes.
 
 ```
 sea mut i = 0
-i++            //: 0
-++i            //: 2
-i--            //: 2
---i            //: 0
+i++            //= 0
+++i            //= 2
+i--            //= 2
+--i            //= 0
 ```
 
 ## Operadores lógicos
 
 ```
-true && false  //: false
-true || false  //: true
-!true          //: false
+true && false  //= false
+true || false  //= true
+!true          //= false
 ```
 
 # Operadores de comparación
@@ -70,16 +70,16 @@ true || false  //: true
 Estos operadores son capaces de operar en diferentes tipos de datos.
 
 ```
-10 > 20   //: false
-20 >= 20  //: true
-15 < 30   //: true
-15 <= 15  //: true
+10 > 20   //= false
+20 >= 20  //= true
+15 < 30   //= true
+15 <= 15  //= true
 ```
 
 La comparación de string se comporta igual a JS.
 
 ```
-"a" < "A"  //: true
+"a" < "A"  //= true
 ```
 
 Los operadores para probar igualdad funcionan diferente a JS:
@@ -89,8 +89,8 @@ Los operadores para probar igualdad funcionan diferente a JS:
   Funciona de la siguiente manera:
   
   ```
-  10 == 10  //: true, los dos valores son iguales
-  15 != 15  //: false, los dos valores no son diferentes.
+  10 == 10  //= true, los dos valores son iguales
+  15 != 15  //= false, los dos valores no son diferentes.
   
   "10" == 10  //! Error: no se pueden comparar un string y number.
   "15" != 15  //! Error: no se pueden comparar un string  y number.
@@ -101,8 +101,8 @@ Los operadores para probar igualdad funcionan diferente a JS:
   Compara profundamente los valores, por lo tanto:
   
   ```
-  [0, 1, 2] == [0, 1, 2]  //: true
-  [0, 1]    == [0, 1, 2]  //: false
+  [0, 1, 2] == [0, 1, 2]  //= true
+  [0, 1]    == [0, 1, 2]  //= false
   ```
   
   Esto tambien funciona con objetos.
@@ -114,8 +114,8 @@ Los operadores para probar igualdad funcionan diferente a JS:
   ```
   sea arr = [0, 1, 2]
   
-  arr === [0, 1, 2]  //: false
-  arr === arr        //: true
+  arr === [0, 1, 2]  //= false
+  arr === arr        //= true
   ```
 
 ## Operadores con bits

@@ -26,7 +26,7 @@ Una vez hecho esto, podemos usar nuestra constante en el resto del código,
 como estamos acostumbrados:
 
 ```
-constante + 20  //: 30
+constante + 20  //= 30
 ```
 
 Esta constante tiene el mismo comportamiento a las constantes de JavaScript.
@@ -70,8 +70,11 @@ edad = 21         // OK
 
 ## Consideraciones
 
-
 Las variables y constantes de Kan se compilan a let y const, de modo que tienen el mismo comportamiento que en
 JavaScript, llamense hoisting, alcance, TDZ, etc.
 
 Es necesario entender estos conceptos para trabajar adecuadamente en Kan.
+
+A partir de ahora, al tratar nuevos temas usaré como ejemplos únicamente constantes.
+Sin embargo, los conceptos también se aplican a las variables, a menos que se indique
+lo contrario.

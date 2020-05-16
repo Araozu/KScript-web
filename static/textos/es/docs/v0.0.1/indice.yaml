@@ -13,3 +13,5 @@ temas:
         ruta: operadores-comunes
       - titulo: Expresiones
         ruta: expresiones
+      - titulo: Inferencia de tipos
+        ruta: inferencia-de-tipos
