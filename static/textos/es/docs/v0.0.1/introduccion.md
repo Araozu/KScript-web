@@ -53,14 +53,9 @@ a sus necesidades, el mismo tendría que hacerlo.
 
 ## Instalación
 
-Ya que el compilador está escrito en F#, necesitarás un entorno de ejecución
-de dotnet core. Específicamente, se usó la versión 3.1 del mismo.
+El compilador está escrito en ReasonML, y permite compilar archivos y ejecutar un
+REPL. Este se encuentra en [GitHub](https://github.com/Araozu/Kan-Reason "Repositorio del compilador de Kan"), solo
+necesitas clonarlo e instalar dependencias.
 
-Luego, necesitarás descargar el compilador desde GitHub. En la sección releases
-se encuentran los archivos necesarios. Por el momento aún no hay un archivo
-.exe, solo un .dll.
+Los scripts se encuentran en package.json.
 
-Finalmente, ejecuta el archivo .dll con el parametro --repl. Eso abrirá un REPL
-básico en el cual se transpilará el codigo. En un futuro se podrá compilar
-archivos enteros, o ejecutar el código directamente en el REPL haciendo uso de
-Node.js.

@@ -52,6 +52,7 @@
 
     .frase
         p
+            line-height: initial
             margin: 0
             font:
                 family: Roboto, sans-serif

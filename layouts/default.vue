@@ -23,6 +23,6 @@
 
     #separador
         width: 100%
-        height: 3.5rem
+        height: 4rem
 
 </style>

@@ -23,7 +23,7 @@
 
     .docs
         position: fixed
-        top: 3.25rem
+        top: 3.6rem
         left: 0
         width: 100%
         height: calc(100% - 3.2rem)
@@ -32,22 +32,15 @@
     .contenedor-docs
         display: grid
         height: 100%
-        grid-template-columns: 17.5rem auto 37.5rem
-
-
-    @media only screen and (max-width: 1600px)
-        .contenedor-docs
-            grid-template-columns: 13.5rem auto 25rem
-
+        grid-template-columns: 15% auto 30%
 
     @media only screen and (max-width: 1100px)
         .contenedor-docs
-            grid-template-columns: 10rem auto 20rem
-
+            grid-template-columns: 15% auto 40%
 
     @media only screen and (max-width: 800px)
         .contenedor-docs
-            grid-template-columns: 7.5rem auto 15rem
+            grid-template-columns: 15% auto 30%
 
 
     @media only screen and (max-width: 700px)

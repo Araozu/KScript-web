@@ -1,14 +1,15 @@
 <template lang="pug">
     div.doc
+        div.opciones
+            div.opcion(@click="cargaInicial")
+                i.material-icons cached
+                span  Regargar
+
         div(v-if="datos.cargando && datos.cargando === true")
             | Cargando...
         div(v-else-if="datos.error && datos.error === true")
             | Error al cargar el recurso. Razón: {{ datos.razon }}
         div.contenido-tema-docs(v-else)
-            div.opciones
-                div.opcion(@click="cargaInicial")
-                    i.material-icons cached
-                    span  Regargar
             contenidoDocs(:mdhtml="htmlPagina")
 
     //
