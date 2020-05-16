@@ -116,8 +116,8 @@ y lo evaluamos, pasará lo siguiente:
 4. Se evalua `20 + 30`. Como esta es la última expresión del bloque, se devuelve
    su valor. En este caso, `50`
 
-Como solo se devuelve el valor de la última expresión, el resultado de las primeras 4
-expresiones es ignorado.
+Como solo se devuelve el valor de la última expresión, los resultados de las primeras 3
+expresiones son ignorados.
 
 
 ## Constantes/Variables y bloques de código.

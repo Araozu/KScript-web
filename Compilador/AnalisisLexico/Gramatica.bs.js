@@ -458,14 +458,20 @@ function crearLexer(entrada) {
   var esInicioDeLinea = {
     contents: true
   };
+  var numLineaActual = {
+    contents: 1
+  };
+  var posAbsInicioLinea = {
+    contents: 0
+  };
   var posActual = {
     contents: 0
   };
   var indentacionActual = {
     contents: 0
   };
-  var lookAhead = {
-    contents: undefined
+  var tokensRestantes = {
+    contents: /* [] */0
   };
   var ultimoToken = {
     contents: undefined
@@ -518,7 +524,9 @@ function crearLexer(entrada) {
                       Curry._1(tipo, {
                             valor: valor,
                             inicio: ex.posInicio,
-                            final: ex.posFinal
+                            final: ex.posFinal,
+                            numLinea: numLineaActual.contents,
+                            posInicioLinea: posAbsInicioLinea.contents
                           }),
                       indentacionActual.contents
                     ]);
@@ -556,7 +564,9 @@ function crearLexer(entrada) {
                 var resultado_000 = /* TNuevaLinea */Block.__(0, [{
                       valor: /* () */0,
                       inicio: ex.posInicio,
-                      final: ex.posFinal
+                      final: ex.posFinal,
+                      numLinea: numLineaActual.contents,
+                      posInicioLinea: posAbsInicioLinea.contents
                     }]);
                 var resultado_001 = indentacionActual.contents;
                 var resultado$1 = /* Token */Block.__(0, [
@@ -566,6 +576,8 @@ function crearLexer(entrada) {
                 posActual.contents = ex.posFinal;
                 esInicioDeLinea.contents = true;
                 indentacionActual.contents = 0;
+                numLineaActual.contents = numLineaActual.contents + 1 | 0;
+                posAbsInicioLinea.contents = ex.posFinal;
                 return resultado$1;
             case /* IdentificadorTipo */2 :
             case /* Identificador */3 :
@@ -644,33 +656,46 @@ function crearLexer(entrada) {
     };
   };
   var sigToken = function (param) {
-    var match = lookAhead.contents;
-    var tokenRespuesta = match !== undefined ? (lookAhead.contents = undefined, match) : extraerToken(/* () */0);
+    var match = tokensRestantes.contents;
+    var tokenRespuesta = match ? (tokensRestantes.contents = match[1], match[0]) : extraerToken(/* () */0);
     ultimoToken.contents = tokenRespuesta;
     return tokenRespuesta;
+  };
+  var lookAhead = function (param) {
+    var match = tokensRestantes.contents;
+    if (match) {
+      return match[0];
+    } else {
+      var sigToken$1 = sigToken(/* () */0);
+      tokensRestantes.contents = /* :: */[
+        sigToken$1,
+        /* [] */0
+      ];
+      return sigToken$1;
+    }
+  };
+  var retroceder = function (param) {
+    var match = tokensRestantes.contents;
+    if (match) {
+      return /* () */0;
+    } else {
+      var match$1 = ultimoToken.contents;
+      if (match$1 !== undefined) {
+        tokensRestantes.contents = /* :: */[
+          match$1,
+          /* [] */0
+        ];
+        return /* () */0;
+      } else {
+        return /* () */0;
+      }
+    }
   };
   return {
           entrada: entrada,
           sigToken: sigToken,
-          lookAhead: (function (param) {
-              var match = lookAhead.contents;
-              if (match !== undefined) {
-                return match;
-              } else {
-                var sigToken$1 = sigToken(/* () */0);
-                lookAhead.contents = sigToken$1;
-                return sigToken$1;
-              }
-            }),
-          retroceder: (function (param) {
-              var match = lookAhead.contents;
-              if (match !== undefined) {
-                return /* () */0;
-              } else {
-                lookAhead.contents = ultimoToken.contents;
-                return /* () */0;
-              }
-            }),
+          lookAhead: lookAhead,
+          retroceder: retroceder,
           hayTokens: (function (param) {
               return posActual.contents < entrada.length;
             })
