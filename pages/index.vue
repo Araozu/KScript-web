@@ -1,13 +1,13 @@
 <template lang="pug">
     div
         primer-banner
-        // caracteristicas
+        caracteristicas
 
     //
 </template>
 
 <script lang="coffee">
-    import caracteristicas from "@/components/index/caracteristicas.vue"
+    import caracteristicas from "@/components/index/caracteristicas2.vue"
     import primerBanner from "../components/index/primer-banner.vue"
 
     export default

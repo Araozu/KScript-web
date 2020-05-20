@@ -18,19 +18,18 @@
 
     codigoExhibicion =
         """
-        covar Respuesta =
-            | Si
-            | No
+        covar BST<T> =
+            | Hoja
+            | Nodo con (T, BST<T>, BST<T>)
 
-        fun preguntar pregunta =
-            sea respuesta = prompt pregunta "si"
-            si respuesta == "si" -> Si
-            sino si respuesta == "no" -> No
-            sino
-                alert "Por favor, responde 'si' o 'no."
-                preguntar pregunta
-
-        preguntar "322?"
+        fun insertar arbol dato =
+            cuando arbol es
+            | Hoja -> Nodo (dato, Hoja, Hoja)
+            | Nodo (valor, izq, der) ->
+                si valor < dato
+                    Nodo (dato, insertar izq dato, der)
+                sino
+                    Nodo (dato, izq, insertar der dato)
         """
 
     export default
