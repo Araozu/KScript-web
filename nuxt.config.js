@@ -5,14 +5,14 @@ export default {
     ** Headers of the page
     */
     head: {
-        title: "Kan - JS + ML",
+        title: "Kei - JS con estilo",
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: "Lenguaje de programación funcional que se compila a JavaScript." }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Roboto&display=swap" },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Sen&display=swap" },
             { rel: "stylesheet", href: "https://fonts.googleapis.com/icon?family=Material+Icons" },
