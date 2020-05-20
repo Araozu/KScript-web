@@ -1,15 +1,17 @@
 <template lang="pug">
     div.barra-nav
-        div.cont-img-logo
+        nuxt-link.link-logo-barra-nav(to="/")
             img.img-logo(:src="rutaImg" alt="Logo")
-        div.ruta-barra-nav
-            nuxt-link(to="/") KAN
-        div.ruta-barra-nav
-            nuxt-link(to="/docs/") Documentación
-        div.ruta-barra-nav
-            nuxt-link(to="/api/") API
-        div.ruta-barra-nav
-            a(@click.prevent="cambiarColor") {{ textoModoColor }}
+
+        ul.lista-links-barra-nav
+            li.ruta-barra-nav
+                nuxt-link(to="/") Kei
+            li.ruta-barra-nav
+                nuxt-link(to="/docs/") Documentación
+            li.ruta-barra-nav
+                nuxt-link(to="/api/") API
+            li.ruta-barra-nav
+                a(@click.prevent="cambiarColor") {{ textoModoColor }}
 
     //
 </template>
@@ -21,7 +23,7 @@
         computed:
             esClaro: -> @$store.state.variables.esClaro
             textoModoColor: -> if @esClaro then "claro" else "oscuro"
-            rutaImg: -> "/img/kan_logo_#{ if @esClaro then 'oscuro' else 'claro' }.svg"
+            rutaImg: -> "/img/kei_logo_#{ if @esClaro then 'dark' else 'light' }.svg"
         methods:
             cambiarColor: ->
                 @$store.commit "variables/cambiarColor", !@esClaro
@@ -31,6 +33,16 @@
 
 <style scoped lang="sass">
 
+    .lista-links-barra-nav
+        padding: 0
+        margin: 0
+        display: inline-block
+        vertical-align: top
+        li
+            list-style-type: none
+            padding: 0 0.15rem
+
+
     .barra-nav
         position: fixed
         top: 0
@@ -39,37 +51,32 @@
         background-color: var(--fondo)
         color: var(--color)
         font-family: var(--fuenteNormal)
-        padding-left: 3rem
         border-bottom: solid 1px var(--color-borde)
 
-        .cont-img-logo
-            position: absolute
-            top: 0
-            left: 0
-            display: inline-table
-            padding: 0.5rem
 
-        .img-logo
+    .img-logo
+        margin-right: 1rem
+        display: inline-block
+        height: 2.5rem
+        width: auto
+        transform: translateX(0.5rem) translateY(0.5rem)
+
+
+    .ruta-barra-nav
+        display: inline-block
+        text-align: center
+        padding: 0 0.15rem
+
+        a
+            padding: 1rem 0.5rem
             display: inline-block
-            height: 2rem
-            width: auto
-
-        .ruta-barra-nav
-            display: inline-block
-            text-align: center
-            padding: 0 0.15rem
-
-            a
-                padding: 1rem 0.5rem
-                display: inline-block
-                color: var(--color)
-                transition: background-color 50ms
-                text-decoration: none
-                cursor: pointer
-                user-select: none
-                &:hover
-                    text-decoration: underline
-
+            color: var(--color)
+            transition: background-color 50ms
+            text-decoration: none
+            cursor: pointer
+            user-select: none
+            &:hover
+                text-decoration: underline
 
 
 //

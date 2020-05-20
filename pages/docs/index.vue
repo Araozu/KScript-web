@@ -6,6 +6,6 @@
 
     export default
         name: "docs-index"
-        created: -> @$router.replace "./introduccion"
+        created: -> @$router.replace "/docs/introduccion"
 
 </script>
