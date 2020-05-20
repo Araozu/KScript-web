@@ -89,3 +89,10 @@ equivale a
 ((sumar 10 20): number)
 ```
 
+
+## Consideraciones
+
+
+Actualmente no se usan los tipos de datos en tiempo de compilación. Esta característica
+se activará cuando consiga integrar las definiciones .d.ts de TypeScript.
+
