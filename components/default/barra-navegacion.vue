@@ -23,7 +23,7 @@
         computed:
             esClaro: -> @$store.state.variables.esClaro
             textoModoColor: -> if @esClaro then "claro" else "oscuro"
-            rutaImg: -> "/img/kei_logo_#{ if @esClaro then 'dark' else 'light' }.svg"
+            rutaImg: -> "/img/logo-misti-lambda.svg"
         methods:
             cambiarColor: ->
                 @$store.commit "variables/cambiarColor", !@esClaro
