@@ -4,9 +4,8 @@
 </template>
 
 <script lang="coffee">
-    palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
-        "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-        "if else return registro variante gestor covar met pub para reg con").split " "
+    palabrasClave = ("let const rec if else match when is in for while " +
+        "fun fn class method of trait type object as impl covar pub reg def").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
 

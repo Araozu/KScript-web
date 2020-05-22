@@ -21,8 +21,26 @@
                 div.codigo-caracteristica
                     codigo(:codigo="codCarac1")
 
-            div.cont-motto
-                h2.motto Y más...  (muy pronto)
+            div.cont-motto(style="background-color: #3F51B5;")
+                h2.motto Funcional
+
+            div.cont-caracteristica
+                div.descripcion-caracteristica
+                    p.
+                        Tienes acceso a estructuras funcionales, las cuales le dan capacidades nuevas a
+                        JavaScript, de forma transparente y retro compatible.
+                div.codigo-caracteristica
+                    codigo(:codigo="codCarac2")
+
+            div.cont-motto(style="background-color: #673AB7;")
+                h2.motto Rasgos
+
+            div.cont-caracteristica
+                div.descripcion-caracteristica
+                    p Implementa funcionalidad en común sin crear jerarquias enormes.
+                    p Los rasgos permiten la re-utilización de código de forma fácil, rápida, y sobre todo, plana.
+                div.codigo-caracteristica
+                    codigo(:codigo="codCarac3")
 
     //
 </template>
@@ -46,12 +64,44 @@
         const total = carrito.reduce (fn acc elem -> acc + elem.precio) 0
         """
 
+    codCarac2 = """
+        reg DetalleTarjeta = {
+            titular: string
+            numero: number
+            ccv: number
+        }
+
+        covar MetodoDePago =
+            | Efectivo
+            | Tarjeta of DetalleTarjeta
+            | PayPal of string
+            | TarjetaDeRegalo of string
+            | PagoEfectivo of string
+        """
+
+
+    codCarac3 = """
+        trait Comparable for T =
+            def (==): T -> T -> boolean
+            def (!=): T -> T -> boolean
+
+        impl Comparable for DetalleTarjeta =
+            fun (==) dt1 dt2 =
+                dt1.titular == dt2.titular
+                && dt1.numero == dt2.numero
+                && dt1.ccv == dr2.ccv
+
+            fun (!=) dt1 dt2 = !dt1 == dt2
+        """
+
     export default
         name: "index"
         layout: "layout-inicio"
         components: { primerBanner, codigo }
         data: -> {
             codCarac1
+            codCarac2
+            codCarac3
         }
 
 
