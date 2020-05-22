@@ -32,7 +32,7 @@ Números:
 Variables numéricas:
 
 ```
-sea mut numero = 10
+let mut numero = 10
 
 numero += 5   //= 15
 numero -= 5   //= 10
@@ -50,7 +50,7 @@ Estos operadores existes para tener compatibilidad con código y usuarios de JS
 existentes.
 
 ```
-sea mut i = 0
+let mut i = 0
 i++            //= 0
 ++i            //= 2
 i--            //= 2
@@ -112,7 +112,7 @@ Los operadores para probar igualdad funcionan diferente a JS:
   En lugar de comparar el valor, este operador compara referencias. Por ejemplo:
   
   ```
-  sea arr = [0, 1, 2]
+  let arr = [0, 1, 2]
   
   arr === [0, 1, 2]  //= false
   arr === arr        //= true
@@ -120,7 +120,7 @@ Los operadores para probar igualdad funcionan diferente a JS:
 
 ## Operadores con bits
 
-Estos operadores no existen en Kan, porque han sido reemplazados con otros operadores usados en programación funcional, como composición de funciones (`<<` y `>>`).
+Estos operadores no existen en Misti, porque han sido reemplazados con otros operadores usados en programación funcional, como composición de funciones (`<<` y `>>`).
 
 Los siguientes operadores **no** funcionan igual que JS:
 
@@ -128,7 +128,7 @@ Los siguientes operadores **no** funcionan igual que JS:
 
 ## Operadores adicionales
 
-Kan incorpora los siguientes operadores a la libreria estandar para el facil manejo de
+Misti incorpora los siguientes operadores a la libreria estandar para el facil manejo de
 programación funcional y tipos nulos:
 
 `<|  |>  <<  >>  ?  ?.  ??  ?:  !!`

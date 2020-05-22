@@ -1,6 +1,6 @@
 # Expresiones
 
-En Kan, como en varios lenguajes funcionales, todo es una expresión.
+En Misti como en varios lenguajes funcionales, todo es una expresión.
 Sin embargo, para un programador que no conoce otros lenguajes funcionales como
 Haskell, Ocaml, o F#, esta frase no significa nada.
 
@@ -16,7 +16,7 @@ Por ejemplo, `1 + 1` contiene 2 números y un operador, los cuales son los símb
 Si evaluamos (resolvemos) esta operación, obtenemos como resultado 2. Por lo tanto,
 `1 + 1` es una expresión.
 
-Kan amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es una expresión:
+Misti amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es una expresión:
 
 ```
 1.5 * 2             //= 3
@@ -32,14 +32,14 @@ expresión, y eso veremos a continuación.
 Al declarar una constante se tiene la siguiente estructura:
 
 ```
-sea <identificador> = <expresion>
+let <identificador> = <expresion>
 ```
 
 Allí reemplazamos `<identificador>` con un nombre, por ejemplo `total`,
 y reemplazamos `<expresion>` con un valor, por ejemplo `100 + 20`.
 
 ```
-sea total = 100 + 20
+let total = 100 + 20
 ```
 
 Entonces, podemos declarar una constante/variable, y asignarle cualquier expresión.
@@ -51,7 +51,7 @@ Veamos cómo nos puede ser útil.
 ¿Tendría sentido hacer lo siguiente?:
 
 ```
-sea num1 = (sea num2 = 10)
+let num1 = (sea num2 = 10)
 ```
 
 Aunque no lo parezca, esto es código válido. Y eso es porque las declaraciones son
@@ -60,7 +60,7 @@ expresiones.
 ¿Qué significa eso? Significa que evaluar el siguiente código devuelve un resultado.
 
 ```
-sea num2 = 10
+let num2 = 10
 ```
 
 Ese código lo único que hace es asociar `10` al nombre `num2`. Por lo tanto, no devuelve
@@ -71,14 +71,14 @@ Entonces, podemos decir que el código inicial
 
 
 ```
-sea num1 = (sea num2 = 10)
+let num1 = (sea num2 = 10)
 ```
 
 equivale** a
 
 
 ```
-sea num1 = undefined
+let num1 = undefined
 ```
 
 
@@ -129,8 +129,8 @@ usar dentro de la misma función.
 Entones, definamos el siguiente bloque:
 
 ```
-sea precioUnitario = 200
-sea descuento = 0.05     // 5% de descuento
+let precioUnitario = 200
+let descuento = 0.05     // 5% de descuento
 precioUnitario - (precioUnitario * descuento)
 ```
 
@@ -141,9 +141,9 @@ Cuando se evalue, obtendremos como resultado `190`, el valor de la última expre
 Ahora que sabemos que los bloques son expresiones, podemos hacer lo siguiente:
 
 ```
-sea total =
-    sea precioUnitario = 200
-    sea descuento = 0.05     // 5% de descuento
+let total =
+    let precioUnitario = 200
+    let descuento = 0.05     // 5% de descuento
     precioUnitario - (precioUnitario * descuento)
 ```
 
@@ -158,12 +158,12 @@ La estructura vista anteriormente no tiene limitaciones. Es posible escribir có
 el siguiente:
 
 ```
-sea valor1 =
-    sea valor2 =
-        sea valor3 = 10
+let valor1 =
+    let valor2 =
+        let valor3 = 10
         valor3 * 2
     
-    sea valor4 = 80
+    let valor4 = 80
     
     valor4 / valor2
 ```
@@ -173,7 +173,7 @@ evita en lo posible hacerlo.
 
 ## Consideraciones
 
-Los bloques de código son una estructura fundamental en Kan. Es importante que entiendas
+Los bloques de código son una estructura fundamental en Misti. Es importante que entiendas
 cómo funcionan para poder entender el resto de conceptos, como condicionales, bucles,
 funciones, etc.
 
@@ -182,20 +182,21 @@ Para declarar un bloque de código, todas las expresiones deben tener la misma i
 Por ejemplo, si el bloque inicia con 4 espacios en blanco, todas las expresiones del bloque deben tener 4 espacios en blanco.
 
 ```
-    sea nombre = "Juan"
-    sea apellido = "Perez"
+    let nombre = "Juan"
+    let apellido = "Perez"
     nombre <> " " <> apellido
 ```
 
 Si alguna expresion tiene una cantidad diferente, está fuera del bloque:
 
 ```
-    sea nombre = "Juan"     // Dentro del bloque
-    sea apellido = "Perez"  // Dentro del bloque
+    let nombre = "Juan"     // Dentro del bloque
+    let apellido = "Perez"  // Dentro del bloque
 nombre <> " " <> apellido   // Fuera del bloque
 ```
 
 
 \* Técnicamente no es `undefined`, sino un valor especial llamado Unidad, el 
 cual actua como si fuera `undefined`. No uses `undefined` en tu código, pues obtendrás
-un error, en su lugar usa la unidad, que se representa como `()`. Para más información vistia la sección de tipos nulos.
+un error, en su lugar usa la unidad, que se representa como `()`. Para más información
+visita la sección de tipos nulos.

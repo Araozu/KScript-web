@@ -1,6 +1,6 @@
 # Introducción
 
-Bienvenido(a) a la documentación de Kan. A lo largo de las siguientes páginas
+Bienvenido(a) a la documentación de Misti. A lo largo de las siguientes páginas
 aprenderás todo sobre este lenguaje, desde las razones por las que fue creado,
 hasta la sintaxis y semántica del mismo.
 
@@ -15,7 +15,7 @@ y cada sección tiene páginas específicas, las cuales explican
 a fondo cada concepto del lenguaje
 así como conceptos de programación funcional.
 
-De este modo, si quieres aprender un concepto desde 0 usarías la
+De ese modo, si quieres aprender un concepto desde 0 usarías la
 página especifica correspondiente, mientras que si solo quieres recordar
 la sintaxis, o ya has trabajado con lenguajes similares a este, usarías
 el resumen de la página principal.
@@ -30,7 +30,7 @@ tendrán comentarios para indicar lo que está pasando con el siguiente formato:
   Por ejemplo:
   
   ```
-  sea total = 10 * 5  //= 50
+  let total = 10 * 5  //= 50
   ```
   
   Nos dice que el valor de `total` es `50`.
@@ -40,7 +40,7 @@ tendrán comentarios para indicar lo que está pasando con el siguiente formato:
   Por ejemplo
   
   ```
-  sea nombre = "Juan"  //: string
+  let nombre = "Juan"  //: string
   ```
   
   Nos dice que el tipo de dato de `nombre` es `string`.
@@ -54,44 +54,58 @@ tendrán comentarios para indicar lo que está pasando con el siguiente formato:
   ```
   
   Nos indica que hay un error en esa linea. La razón está en el comentario.
-  
 
-## Motivación
+## ¿Exáctamente qué es Misti?
 
-Cierto día, un programador descubrió F#, programación funcional y la sintaxis
-de ML luego de ver un post en reddit, quedando asombrado.
+Misti es una nueva sintaxis para el lenguaje de programación JavaScript, la cual reduce
+la cantidad de parentesis, comas, puntos y comas y llaves. JS tiene una sintaxis basada
+en C como la siguiente:
 
-Queriendo hacer uso de esta nueva sintaxis y paradigma, se apresuró a buscar
-lenguajes similares a F# que pueda usar en el desarrollo front-end.
+```javascript
+const concatenarEnMayuscula = (s1, s2) => {
+    return s1.toUpperCase() + y.toUpperCase();
+};
 
-Así encontró Coffeescript, el cual tiene una sintaxis similar a ML, usa las
-APIs de JS, y es un poco más funcional. Sin embargo, era de tipado debil.
+concatenarEnMayuscula("hola", "mundo");
+```
 
-Luego encontró ReasonML, el cual es mucho más funcional y de tipado fuerte,
-pero con la sintáxis de C y una nueva API.
+Misti tiene una sintaxis basada en ML:
 
-TypeScript, a pesar de usar las APIs de JS y tener tipado fuerte, sigue estando
-ampliamente influenciado por C/C#/C++/Java.
+```
+fun concatenarEnMayuscula s1 s2 =
+    s1.toUpperCase() <> s2.toUppercase()
+    
+concatenarEnMayuscula "hola" "mundo"
+```
 
-Así que el programador decidió que si nadie iba a crear un lenguaje que se adapte
-a sus necesidades, el mismo tendría que hacerlo.
+Misti es funcional impuro, con caracteristicas imperativas y orientadas a objetos.
+Sin embargo, las caracteristicas de Misti tienden más a las de los lenguajes como
+F# y Haskell, que a Java o C.
 
-## v0.0.1
+Misti (planea incluir) varias características de los lenguajes funcionales al
+ecosistema de JavaScript, como son:
 
-Esta es la primera versión del lenguaje que se puede considerar "completa".
-Cuenta con las faces imprescindibles de un compilador (análisis lexico,
-análisis sintáctico, generacion de código), y también brinda soporte para
-ciertas estructuras del lenguaje.
+- Covariantes
+- Registros
+- Pattern Matching
+- Rasgos
+- Tuberias
+- Composición de funciones
+- Operadores personalizados
+- Tipos nulos
 
-En un futuro además de añadir más estructuras definidas en la versión 'next'
-del lenguaje, también se añadirá una fase de análisis semántico, así como
-compatibilidad con los archivos *.d.ts de typescript.
+Finalmente, Misti usa la misma API de JavaScript. Una vez que aprendas la sintáxis, estás
+listo para programar con las misma librerias de JS. Es por ello que como meta a (muy)
+largo plazo tenemos integración con las definiciones de Typecript.
 
-## Instalación
+## ¿Para que aprender otra sintaxis?
 
-El compilador está escrito en ReasonML, y permite compilar archivos y ejecutar un
-REPL. Este se encuentra en [GitHub](https://github.com/Araozu/Kan-Reason "Repositorio del compilador de Kan"), solo
-necesitas clonarlo e instalar dependencias.
+Personalmente creo que las ventajas que ofrece Misti compensan la curva de aprendizaje.
+JavaScript no cuenta con muchas características, o estructuras avanzadas que permitan
+el desarrollo a gran escala.
 
-Los scripts se encuentran en package.json.
+Ultimamente la programación funcional está ganando popularidad, y JavaScript
+necesita más que funciones de primera clase. Varios patrones de FP o no se pueden hacer
+en JS, o hacerlos sería tan complicado que no valen la pena. Buscamos solucionar
+ese problema.
 
