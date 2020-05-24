@@ -24,7 +24,7 @@ Misti amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es un
 true && true        //= true
 ```
 
-Estas son fáciles de comprender, pero la clave es que toda estructura en Kan es una
+Estas son fáciles de comprender, pero la clave es que toda estructura en Misti es una
 expresión, y eso veremos a continuación.
 
 ## Constantes y variables
@@ -32,14 +32,14 @@ expresión, y eso veremos a continuación.
 Al declarar una constante se tiene la siguiente estructura:
 
 ```
-let <identificador> = <expresion>
+const <identificador> = <expresion>
 ```
 
 Allí reemplazamos `<identificador>` con un nombre, por ejemplo `total`,
 y reemplazamos `<expresion>` con un valor, por ejemplo `100 + 20`.
 
 ```
-let total = 100 + 20
+const total = 100 + 20
 ```
 
 Entonces, podemos declarar una constante/variable, y asignarle cualquier expresión.
@@ -51,7 +51,7 @@ Veamos cómo nos puede ser útil.
 ¿Tendría sentido hacer lo siguiente?:
 
 ```
-let num1 = (sea num2 = 10)
+const num1 = (sea num2 = 10)
 ```
 
 Aunque no lo parezca, esto es código válido. Y eso es porque las declaraciones son
@@ -60,7 +60,7 @@ expresiones.
 ¿Qué significa eso? Significa que evaluar el siguiente código devuelve un resultado.
 
 ```
-let num2 = 10
+const num2 = 10
 ```
 
 Ese código lo único que hace es asociar `10` al nombre `num2`. Por lo tanto, no devuelve
@@ -71,14 +71,14 @@ Entonces, podemos decir que el código inicial
 
 
 ```
-let num1 = (sea num2 = 10)
+const num1 = (sea num2 = 10)
 ```
 
 equivale** a
 
 
 ```
-let num1 = undefined
+const num1 = undefined
 ```
 
 
@@ -129,8 +129,8 @@ usar dentro de la misma función.
 Entones, definamos el siguiente bloque:
 
 ```
-let precioUnitario = 200
-let descuento = 0.05     // 5% de descuento
+const precioUnitario = 200
+const descuento = 0.05     // 5% de descuento
 precioUnitario - (precioUnitario * descuento)
 ```
 
@@ -141,9 +141,9 @@ Cuando se evalue, obtendremos como resultado `190`, el valor de la última expre
 Ahora que sabemos que los bloques son expresiones, podemos hacer lo siguiente:
 
 ```
-let total =
-    let precioUnitario = 200
-    let descuento = 0.05     // 5% de descuento
+const total =
+    const precioUnitario = 200
+    const descuento = 0.05     // 5% de descuento
     precioUnitario - (precioUnitario * descuento)
 ```
 
@@ -158,18 +158,81 @@ La estructura vista anteriormente no tiene limitaciones. Es posible escribir có
 el siguiente:
 
 ```
-let valor1 =
-    let valor2 =
-        let valor3 = 10
+const valor1 =
+    const valor2 =
+        const valor3 = 10
         valor3 * 2
     
-    let valor4 = 80
+    const valor4 = 80
     
     valor4 / valor2
 ```
 
 Sin embargo, es buena práctica de programación no tener código muy indentado, así que
 evita en lo posible hacerlo.
+
+## Dividir expresiones en varias lineas
+
+Si por alguna razon las operaciones que realizas son largas, necesitas sabes las reglas
+de indentación para poder dividir una expresión en varias lineas.
+
+A continuación se muestran ejemplos equivalentes:
+
+```
+"Este " <> "es " <> "un " <> "texto " <> "largo"
+
+"Este " <> "es " <> "un " <>
+"texto " <> "largo"
+
+"Este " <> "es " <> "un "
+<> "texto " <> "largo"
+
+"Este " <> "es " <> "un " <>
+    "texto " <> "largo"
+    
+"Este " <> "es " <> "un "
+    <> "texto " <> "largo"
+```
+
+Se puede colocar el operador al final de la linea, al inicio de la nueva linea o indentado en la nueva linea.
+
+En el siguiente ejemplo vemos cómo se hace lo mismo en una declaración.
+
+```
+const txt1 = "Este " <> "es " <> "un " <> "texto " <> "largo"
+
+const txt2 = "Este " <> "es " <> "un " <>
+             "texto " <> "largo"
+             
+const txt3 = "Este " <> "es " <> "un "
+             <> "texto " <> "largo"
+             
+const txt3 = "Este " <> "es " <> "un "
+                 <> "texto " <> "largo"
+
+const txt3 = "Este " <> "es " <> "un " <>
+                 "texto " <> "largo"
+```
+
+Al dividir la expresión es necesario iniciar en la columna en la que inicia la expresión.
+Es decir, en:
+
+```
+const txt2 = "Este " <> "es " <> "un " <>
+             "texto " <> "largo"
+```
+
+La expresión inicia en la columna 14, cuando se abre la comilla. Por lo tanto, para que
+la siguiente linea se considere como parte de la expresión, debe empezar también en
+la columna 14, o más adelante.
+
+Si se continua en una columna anterior, se cuenta como una expresión diferente:
+
+```
+const txt2 = "Este " <> "es " <> "un " <>
+    "texto " <> "largo"  // Es una expresión diferente.
+```
+
 
 ## Consideraciones
 
@@ -182,16 +245,16 @@ Para declarar un bloque de código, todas las expresiones deben tener la misma i
 Por ejemplo, si el bloque inicia con 4 espacios en blanco, todas las expresiones del bloque deben tener 4 espacios en blanco.
 
 ```
-    let nombre = "Juan"
-    let apellido = "Perez"
+    const nombre = "Juan"
+    const apellido = "Perez"
     nombre <> " " <> apellido
 ```
 
 Si alguna expresion tiene una cantidad diferente, está fuera del bloque:
 
 ```
-    let nombre = "Juan"     // Dentro del bloque
-    let apellido = "Perez"  // Dentro del bloque
+    const nombre = "Juan"     // Dentro del bloque
+    const apellido = "Perez"  // Dentro del bloque
 nombre <> " " <> apellido   // Fuera del bloque
 ```
 

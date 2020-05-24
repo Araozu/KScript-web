@@ -11,14 +11,14 @@ más rápido.
 ## Constantes
 
 
-En la programación funcional es natural trabajar con constantes, y Kan favorece
+En la programación funcional es natural trabajar con constantes, y Misti favorece
 estas sobre las variables. Podemos declarar una constante del siguiente modo:
 
 ```
-let constante = 10
+const constante = 10
 ```
 
-La primera palabra que colocamos es `let`. Esta indica que estamos declarando
+La primera palabra que colocamos es `const`. Esta indica que estamos declarando
 una constante. Luego, le asignamos un nombre, en este caso es `constante`.
 Finalmente, asignamos un valor a esta constante, el cual es `10`.
 
@@ -35,14 +35,14 @@ Eso quiere decir que no podemos cambiar su valor directamente.
 Por ejemplo, el sig. código no funcionará:
 
 ```
-let precio = 200
+const precio = 200
 precio = 220     //! Error: precio es una constante, y no se puede cambiar su valor.
 ```
 
 Pero este si:
 
 ```
-let precio = [200]
+const precio = [200]
 precio[0] = 250   // Si funciona.
 ```
 
@@ -54,24 +54,24 @@ Por ello Misti también permite trabajar con variables de forma similar a Javasc
 Las variables se declaran de la siguiente manera:
 
 ```
-let mut edad = 20
+const let edad = 20
 ```
 
-A una declaración de constante, le añadimos la palabra clave `mut`. De ese modo podemos re-asignar el valor
+Como en JavaScript usamos let. De ese modo podemos re-asignar el valor
 que contiene.
 
 ```
-let mut edad = 20
+let edad = 20
 edad = 21         // OK
 ```
 
 
 ## Consideraciones
 
-Las variables y constantes de Kan se compilan a let y const, de modo que tienen el mismo comportamiento que en
+Las variables y constantes de Misti se compilan a let y const, de modo que tienen el mismo comportamiento que en
 JavaScript, llamense hoisting, alcance, TDZ, etc.
 
-Es necesario entender estos conceptos para trabajar adecuadamente en Kan.
+Es necesario entender estos conceptos para trabajar adecuadamente en Misti.
 
 A partir de ahora, al tratar nuevos temas usaré como ejemplos únicamente constantes.
 Sin embargo, los conceptos también se aplican a las variables, a menos que se indique

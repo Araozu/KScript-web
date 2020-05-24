@@ -12,7 +12,7 @@ expresiones, y cómo podemos nosotros especificar estos.
 Vamos a crear una constante:
 
 ```
-let nombre = "Juan"
+const nombre = "Juan"
 ```
 
 Nosotros sabemos que `nombre` es un string, y también que hay cosas que no podemos
@@ -26,9 +26,9 @@ Y el compilador tambien lo sabe, porque este es capaz de inferir qué tipos de d
 estamos usando, sea el tipo que sea. Por ejemplo:
 
 ```
-let apellido = "Perez"  //: string
-let edad = 30           //: number
-let despierto = false   //: boolean
+const apellido = "Perez"  //: string
+const edad = 30           //: number
+const despierto = false   //: boolean
 
 20.5 * 27.5      //: number
 "Ho" <> "la"     //: string
@@ -56,7 +56,7 @@ Para anotar una declaración:
 Por ejemplo:
 
 ```
-let nombre: string = "Juan"
+const nombre: string = "Juan"
 ```
 
 Así de simple. Cada sección explicará las anotaciones que le conciernen. Es decir,

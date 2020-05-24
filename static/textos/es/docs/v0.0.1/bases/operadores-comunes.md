@@ -1,6 +1,6 @@
 # Operadores comunes
 
-Kan usa la mayoría de operadores de JS, para facilitar la claridad y consistencia.
+Misti usa la mayoría de operadores de JS, para facilitar la claridad y consistencia.
 
 ## Operadores especiales
 
@@ -32,7 +32,7 @@ Números:
 Variables numéricas:
 
 ```
-let mut numero = 10
+let numero = 10
 
 numero += 5   //= 15
 numero -= 5   //= 10
@@ -50,7 +50,7 @@ Estos operadores existes para tener compatibilidad con código y usuarios de JS
 existentes.
 
 ```
-let mut i = 0
+let i = 0
 i++            //= 0
 ++i            //= 2
 i--            //= 2
@@ -65,7 +65,7 @@ true || false  //= true
 !true          //= false
 ```
 
-# Operadores de comparación
+## Operadores de comparación
 
 Estos operadores son capaces de operar en diferentes tipos de datos.
 
@@ -112,7 +112,7 @@ Los operadores para probar igualdad funcionan diferente a JS:
   En lugar de comparar el valor, este operador compara referencias. Por ejemplo:
   
   ```
-  let arr = [0, 1, 2]
+  const arr = [0, 1, 2]
   
   arr === [0, 1, 2]  //= false
   arr === arr        //= true
@@ -135,3 +135,4 @@ programación funcional y tipos nulos:
 
 Para saber más de estos operadores, visita las secciones de tuberias, composición
 de funciones, y tipos nulos.
+
