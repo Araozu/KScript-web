@@ -12,23 +12,21 @@
 
         div.caracteristicas
             div.cont-motto
-                h2.motto Menos ruido
+                h2.motto Tipos de datos algebraicos
 
             div.cont-caracteristica
                 div.descricipcion-caracteristica
-                    p La sintaxis es más limpia, permitiendo concentrarte en la lógica fácilmente.
-                    p Es más facil trabajar cuando no tienes que descifrar el código.
+                    p Crea tipos de datos complejos fácilmente, y opera con ellos.
                 div.codigo-caracteristica
                     codigo(:codigo="codCarac1")
 
             div.cont-motto(style="background-color: #3F51B5;")
-                h2.motto Funcional
+                h2.motto Inferencia de tipos
 
             div.cont-caracteristica
                 div.descripcion-caracteristica
                     p.
-                        Tienes acceso a estructuras funcionales, las cuales le dan capacidades nuevas a
-                        JavaScript, de forma transparente y retro compatible.
+                        Programa de forma segura, pero sin tener que anotar cada linea.
                 div.codigo-caracteristica
                     codigo(:codigo="codCarac2")
 
@@ -38,9 +36,18 @@
             div.cont-caracteristica
                 div.descripcion-caracteristica
                     p Implementa funcionalidad en común sin crear jerarquias enormes.
-                    p Los rasgos permiten la re-utilización de código de forma fácil, rápida, y sobre todo, plana.
+                    p Los rasgos permiten la re-utilización de código de forma fácil, rápida, y plana.
                 div.codigo-caracteristica
                     codigo(:codigo="codCarac3")
+
+            div.cont-motto(style="background-color: #9C27B0;")
+                h2.motto Clases
+
+            div.cont-caracteristica
+                div.descripcion-caracteristica
+                    p O usa las clases como azúcar sintáctico para prototype.
+                div.codigo-caracteristica
+                    codigo(:codigo="codCarac4")
 
     //
 </template>
@@ -50,48 +57,39 @@
     import codigo from "../components/codigo/codigo.vue"
 
     codCarac1 = """
-        const carrito = [
-            {
-                nombre := "Pan"
-                precio := 3
-            }
-            {
-                nombre := "Arroz"
-                precio := 10
-            }
-        ]
+        reg Producto = {
+            id: number
+            nombre: string
+            precio: number
+        }
 
-        const total = carrito.reduce (fn acc elem -> acc + elem.precio) 0
+        type Carrito = [Producto]
         """
 
     codCarac2 = """
-        reg DetalleTarjeta = {
-            titular: string
-            numero: number
-            ccv: number
-        }
+        const carritoUsuario = [
+            { id := 1, nombre := "Pan", precio := 3 }
+            { id := 2, nombre := "Arroz", precio := 10 }
+        ]
 
-        covar MetodoDePago =
-            | Efectivo
-            | Tarjeta of DetalleTarjeta
-            | PayPal of string
-            | TarjetaDeRegalo of string
-            | PagoEfectivo of string
+        //: carritoUsuario es de tipo Carrito
+        //  No se necesitó anotar el tipo de dato
         """
 
-
     codCarac3 = """
-        trait Comparable for T =
-            def (==): T -> T -> boolean
-            def (!=): T -> T -> boolean
+        impl Igualable Producto =
+            fun (==) producto1 producto2 =
+                producto1.id == producto2.id
 
-        impl Comparable for DetalleTarjeta =
-            fun (==) dt1 dt2 =
-                dt1.titular == dt2.titular
-                && dt1.numero == dt2.numero
-                && dt1.ccv == dr2.ccv
+            fun (!=) p1 p2 = !p1 == p2
 
-            fun (!=) dt1 dt2 = !dt1 == dt2
+        carritoUsuario[0] == carritoUsuario[1]  //= false
+        """
+
+    codCarac4 = """
+        class Gato: Animal =
+
+            method getName () = name
         """
 
     export default
@@ -102,6 +100,7 @@
             codCarac1
             codCarac2
             codCarac3
+            codCarac4
         }
 
 

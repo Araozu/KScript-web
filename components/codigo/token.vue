@@ -5,7 +5,7 @@
 
 <script lang="coffee">
     palabrasClave = ("let const rec if else match when is in for while " +
-        "fun fn class method of trait type object as impl covar pub reg def").split " "
+        "fun fn class method of trait type object as impl covar pub reg def type").split " "
     funcionesClave = "constructor get set log".split " "
     std = "Lista impr imprf console".split " "
 
