@@ -34,7 +34,17 @@
 #
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
+
+    .language-javascript::before
+        content: "JavaScript"
+        border-top: solid 1px var(--color-borde)
+        border-left: solid 1px var(--color-borde)
+        border-right: solid 1px var(--color-borde)
+        display: block
+        font:
+            family: Roboto, sans-serif
+        padding: 0.25rem
 
 
     //
