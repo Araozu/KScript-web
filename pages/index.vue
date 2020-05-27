@@ -5,10 +5,11 @@
                 h1
                     | Misti es un lenguaje de programación funcional
                     br
-                    | que se compila a JS.
+                    | que se compila a JavaScript.
+
+                nuxt-link(to="/docs/").boton-inicio Documentación
                 br
-                div.cont-boton-inicio
-                    nuxt-link(to="/docs/").boton-inicio Documentación
+                nuxt-link(to="/api/").boton-inicio API
 
             div.transicion-img-inicial
             div.img-inicial
@@ -51,6 +52,28 @@
                     p O usa las clases como azúcar sintáctico para prototype.
                 div.codigo-caracteristica
                     codigo(:codigo="codCarac4")
+
+            div.cont-motto(style="background-color: #E91E63;")
+                h2.motto Interoperabilidad
+
+            div.cont-caracteristica
+                div.descripcion-caracteristica
+                    p Define estructura en Misti, úsala en JavaScript.
+                    p Todo el código se compila a JavaScript fácíl de entender y de usar.
+                div.codigo-caracteristica
+                    code.language-javascript
+                        codigo(:codigo="codCarac5")
+
+
+            div.cont-motto(style="background-color: #f44336;")
+                h2.motto Seguridad
+
+            div.cont-caracteristica
+                div.descripcion-caracteristica
+                    p Misti comprueba los tipos de datos de sus estructuras en tiempo de ejecución.
+                div.codigo-caracteristica
+                    code.language-javascript
+                        codigo(:codigo="codCarac6")
 
     //
 </template>
@@ -99,6 +122,26 @@
             constructor of super vidas
         """
 
+    codCarac5 = """
+        // Representación del registro Producto en JS
+        function Producto(id, nombre, precio) {
+            if (!new.target) return new Producto(id, nombre, precio);
+            this.id = id;
+            this.nombre = nombre;
+            this.precio = precio;
+            Object.freeze(this);
+        }
+        """
+
+    codCarac6 = """
+        function imprimirProducto(producto) {
+            if (!producto instanceof Producto)
+                console.warn("La función actual recibe un parámetro incorrecto.");
+
+            console.log(producto.nombre + " tiene un costo de " + producto.precio);
+        }
+        """
+
     export default
         name: "index"
         layout: "layout-inicio"
@@ -108,6 +151,8 @@
             codCarac2
             codCarac3
             codCarac4
+            codCarac5
+            codCarac6
         }
 
 
@@ -116,16 +161,16 @@
 
 <style scoped lang="sass">
 
-    .cont-boton-inicio
-        text-align: center
-
-        .boton-inicio
-            padding: 0.5rem 1rem
-            border: none
-            border-radius: 2px
-            background-color: #f44336
-            color: white
-            text-decoration: none
+    .boton-inicio
+        display: inline-block
+        margin: 0.5rem 0
+        padding: 1rem 2rem
+        border: none
+        border-radius: 2px
+        background-color: #f44336
+        color: white
+        text-decoration: none
+        font-size: 1.25rem
 
 
     .cont-motto
@@ -157,10 +202,11 @@
         top: 0
         left: 0
         height: 100vh
-        width: 100%
+        width: 95%
         position: absolute
         z-index: 3
         color: white
+        padding: 0 2.5%
 
 
     .transicion-img-inicial

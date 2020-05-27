@@ -5,7 +5,7 @@
 
         ul.lista-links-barra-nav
             li.ruta-barra-nav
-                nuxt-link(to="/") Kei
+                nuxt-link(to="/") Misti
             li.ruta-barra-nav
                 nuxt-link(to="/docs/") Documentación
             li.ruta-barra-nav
