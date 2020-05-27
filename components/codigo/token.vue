@@ -1,13 +1,10 @@
 <template lang="pug">
-    span.token(:class="token.tipo + adicional" v-html="escapar")
+    span.token(:class="token.tipo" v-html="escapar")
     //
 </template>
 
 <script lang="coffee">
-    palabrasClave = ("let const rec if else match when is in for while " +
-        "fun fn class method of trait type object as impl covar pub reg def type").split " "
-    funcionesClave = "constructor get set log".split " "
-    std = "Lista impr imprf console".split " "
+    import { palabrasClave, funcionesClave, std, escaparToken } from "./kanAHTML.coffee"
 
     verificar = (valor) =>
         for v in palabrasClave
@@ -17,8 +14,6 @@
 
     export default
         name: "token"
-        data: ->
-            adicional: ""
         props:
             token:
                 type: Object
@@ -28,20 +23,9 @@
                 required: true
         computed:
             escapar: ->
-                token = @token
-                switch token.tipo
-                    when "PC_SEA", "PC_MUT"
-                        token.tipo = "PalabraClave"
-                        token.valor
-                    when "Indentacion"
-                        "&nbsp;&nbsp;&nbsp;&nbsp;"
-                    when "TTexto" then "\"#{token.valor}\""
-                    when "TIdentificador"
-                        if verificar token.valor
-                            token.tipo = "PalabraClave"
-                        token.valor
-                    when "TComentario" then "//#{token.valor}"
-                    else token.valor
+                [valor, claseAdicional] = escaparToken @token
+                @token.tipo += " #{ claseAdicional }"
+                valor
 
 #
 </script>

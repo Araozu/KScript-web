@@ -32,21 +32,24 @@ obtenerTokens = (entrada) =>
     tokens
 
 
-palabrasClave = ("sea mut rec si o sino cuando es en and or not por mientras " +
-    "fun fn clase abierto abierta campo metodo de rasgo tipo objeto const let " +
-    "if else return registro variante gestor covar met pub para reg").split " "
-funcionesClave = "constructor get set log".split " "
-std = "Lista impr imprf console".split " "
+export palabrasClave = ("let const rec if else match when is in for while " +
+    "fun fn class method of trait type object as impl covar pub reg def type " +
+    "member").split " "
+export funcionesClave = "constructor get set log".split " "
+export std = "Lista impr imprf console".split " "
 
 verificar = (valor) =>
     for v in palabrasClave
-        if valor == v then return true
+        if valor == v then return "PalabraClave"
+
+    for v in funcionesClave
+        if valor == v then return "FuncionClave"
 
     false
 
 
 #: Token -> (Txt, Txt)
-escaparToken = (token) ->
+export escaparToken = (token) ->
     switch token.tipo
         when "PC_SEA", "PC_MUT"
             [token.valor, "PalabraClave"]
@@ -55,8 +58,7 @@ escaparToken = (token) ->
         when "TTexto"
             ["\"#{token.valor}\"", ""]
         when "TIdentificador"
-            tipo = if verificar token.valor then token.tipo = "PalabraClave" else ""
-            [token.valor, tipo]
+            [token.valor, verificar token.valor]
         when "TComentario"
             ["//#{token.valor}", ""]
         else
