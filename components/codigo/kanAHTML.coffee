@@ -34,7 +34,12 @@ obtenerTokens = (entrada) =>
 
 export palabrasClave = ("let const rec if else match when is in for while " +
     "fun fn class method of trait type object as impl covar pub reg def type " +
-    "member").split " "
+    "member extends return new this break case catch class const continue debugger " +
+    "default delete do else export extends finally for function if import in " +
+    "instanceof new return super switch this throw try typeof var void while with yield " +
+    "enum implements package public interface  private static protected await " +
+    "abstract boolean byte char double final float goto int long native short " +
+    "synchronized throws transient volatile").split " "
 export funcionesClave = "constructor get set log".split " "
 export std = "Lista impr imprf console".split " "
 
@@ -61,6 +66,12 @@ export escaparToken = (token) ->
             [token.valor, verificar token.valor]
         when "TComentario"
             ["//#{token.valor}", ""]
+        when "TOperador"
+            claseAdicional =
+                switch token.valor
+                    when ".", ",", ";" then ""
+                    else "TOperador_Color"
+            [token.valor, claseAdicional]
         else
             [token.valor, ""]
 

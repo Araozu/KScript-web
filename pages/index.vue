@@ -6,6 +6,9 @@
                     | Misti es un lenguaje de programación funcional
                     br
                     | que se compila a JS.
+                br
+                div.cont-boton-inicio
+                    nuxt-link(to="/docs/").boton-inicio Documentación
 
             div.transicion-img-inicial
             div.img-inicial
@@ -87,9 +90,13 @@
         """
 
     codCarac4 = """
-        class Gato: Animal =
+        class Animal =
+            member nombre: string
+            constructor of nombre
 
-            method getName () = name
+        class Gato: Animal =
+            member vidas: string
+            constructor of super vidas
         """
 
     export default
@@ -108,6 +115,18 @@
 </script>
 
 <style scoped lang="sass">
+
+    .cont-boton-inicio
+        text-align: center
+
+        .boton-inicio
+            padding: 0.5rem 1rem
+            border: none
+            border-radius: 2px
+            background-color: #f44336
+            color: white
+            text-decoration: none
+
 
     .cont-motto
         background-color: var(--colorSecundario)

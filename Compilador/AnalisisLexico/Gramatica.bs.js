@@ -62,8 +62,9 @@ var operadores = /* :: */[
                                                       /* :: */[
                                                         ",",
                                                         /* :: */[
-                                                          " ,",
-                                                          /* [] */0
+                                                          ",",
+                                                                [";", 0]
+                                                          /* [] */
                                                         ]
                                                       ]
                                                     ]
@@ -626,7 +627,7 @@ function crearLexer(entrada) {
                 }
             case /* Nada */11 :
                 return /* ErrorLexer */Block.__(1, ["Se encontr\xc3\xb3 un token huerfano"]);
-            
+
           }
           var match$4 = ex.res;
           switch (match$4) {

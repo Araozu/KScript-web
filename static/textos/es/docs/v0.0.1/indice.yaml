@@ -15,3 +15,10 @@ temas:
         ruta: expresiones
       - titulo: Inferencia de tipos
         ruta: inferencia-de-tipos
+  - titulo: Interoperabilidad
+    ruta: interoperabilidad
+    temas:
+      - titulo: Clases
+        ruta: clases
+      - titulo: Covariantes
+        ruta: covariantes
