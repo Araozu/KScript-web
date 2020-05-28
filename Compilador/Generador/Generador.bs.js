@@ -8,41 +8,92 @@ function generarJs(expr, toplevel, nivel) {
   var indentacionNivel = $$String.make((nivel << 2), /* " " */32);
   var indentacionNivelSig = $$String.make(((nivel + 1 | 0) << 2), /* " " */32);
   var indentacionNivelAnt = nivel === 0 ? "" : $$String.make(((nivel - 1 | 0) << 2), /* " " */32);
+  var generarJS_EIdentificador = function (identificador) {
+    return /* tuple */[
+            identificador.valorId.valor,
+            0
+          ];
+  };
   switch (expr.tag | 0) {
     case /* EIdentificador */0 :
-        return expr[0].valor.valor;
+        return generarJS_EIdentificador(expr[0]);
     case /* EUnidad */1 :
-        return "undefined";
+        return /* tuple */[
+                "undefined",
+                0
+              ];
     case /* ENumero */2 :
-        return expr[0].valor.toString();
-    case /* ETexto */3 :
         var info = expr[0];
-        return "\"" + (info.valor + "\"");
-    case /* EBool */4 :
+        return /* tuple */[
+                info.valor.toString(),
+                0
+              ];
+    case /* ETexto */3 :
         var info$1 = expr[0];
-        if (info$1.valor) {
-          return "true";
-        } else {
-          return "false";
-        }
+        return /* tuple */[
+                "\"" + (info$1.valor + "\""),
+                0
+              ];
+    case /* EBool */4 :
+        var info$2 = expr[0];
+        return /* tuple */[
+                info$2.valor ? "true" : "false",
+                0
+              ];
     case /* EOperador */5 :
-        return "/* No implementado :c */";
+        return /* tuple */[
+                "/* No implementado :c */",
+                0
+              ];
     case /* EOperadorApl */6 :
         var eOpApl = expr[0];
-        var operador = eOpApl.op.valor.valor;
-        var jsExprIzq = generarJs(eOpApl.izq, false, nivel);
-        var jsExprDer = generarJs(eOpApl.der, false, nivel);
-        return "(" + (jsExprIzq + (") " + (operador + (" (" + (jsExprDer + ")")))));
+        var op = eOpApl.op;
+        var operador = op.valorOp.valor;
+        var precedenciaOp = op.precedencia;
+        var match = generarJs(eOpApl.izq, false, nivel);
+        var precedenciaJsIzq = match[1];
+        var jsExprIzq = match[0];
+        var match$1 = generarJs(eOpApl.der, false, nivel);
+        var precedenciaJsDer = match$1[1];
+        var jsExprDer = match$1[0];
+        var jsIzqFinal = precedenciaJsIzq > 0 && precedenciaJsIzq < precedenciaOp ? "(" + (String(jsExprIzq) + ")") : jsExprIzq;
+        var exprDerFinal = precedenciaJsDer > 0 && precedenciaJsDer < precedenciaOp ? "(" + (String(jsExprDer) + ")") : jsExprDer;
+        var jsOpFinal;
+        switch (operador) {
+          case "," :
+              jsOpFinal = operador + " ";
+              break;
+          case "." :
+          case "?." :
+              jsOpFinal = operador;
+              break;
+          default:
+            jsOpFinal = operador === "ñ" || operador === "Ñ" ? " " : " " + (operador + " ");
+        }
+        var jsRetorno = jsIzqFinal + (jsOpFinal + exprDerFinal);
+        return /* tuple */[
+                jsRetorno,
+                precedenciaOp
+              ];
     case /* EDeclaracion */7 :
         var dec = expr[0];
         var inicio = dec.mut ? "let" : "const";
-        var id = dec.id.valor.valor;
-        var valor = generarJs(dec.valor, false, nivel + 1 | 0);
-        var match = dec.valor;
-        if (match.tag === /* EDeclaracion */7) {
-          return inicio + (" " + (id + (" = (() => {\n" + (indentacionNivelSig + (valor + ("\n" + (indentacionNivelSig + ("return undefined;\n" + (indentacionNivel + "})()")))))))));
+        var match$2 = generarJS_EIdentificador(dec.id);
+        var id = match$2[0];
+        var match$3 = generarJs(dec.valorDec, false, nivel + 1 | 0);
+        var strJs = match$3[0];
+        var match$4 = dec.valorDec;
+        if (match$4.tag === /* EDeclaracion */7) {
+          var jsRetorno$1 = inicio + (" " + (id + (" = (() => {\n" + (indentacionNivelSig + (strJs + ("\n" + (indentacionNivelSig + ("return undefined;\n" + (indentacionNivel + "})()")))))))));
+          return /* tuple */[
+                  jsRetorno$1,
+                  0
+                ];
         } else {
-          return inicio + (" " + (id + (" = " + valor)));
+          return /* tuple */[
+                  inicio + (" " + (id + (" = " + strJs))),
+                  0
+                ];
         }
     case /* EBloque */8 :
         var exprs = expr[0];
@@ -52,23 +103,33 @@ function generarJs(expr, toplevel, nivel) {
           if (exprs) {
             var es = exprs[1];
             var e = exprs[0];
-            tmp = List.length(es) === 0 ? (
-                toplevel$1 ? generarJs(e, false, nivel) + ";" : (
-                    e.tag === /* EDeclaracion */7 ? generarJs(e, false, nivel) + (";\n" + (indentacionNivel + "return undefined;")) : "return " + (generarJs(e, false, nivel) + ";")
-                  )
-              ) : generarJs(e, false, nivel) + (";" + ((
+            if (List.length(es) === 0) {
+              if (toplevel$1) {
+                var match = generarJs(e, false, nivel);
+                tmp = match[0] + ";";
+              } else if (e.tag === /* EDeclaracion */7) {
+                var match$1 = generarJs(e, false, nivel);
+                tmp = match$1[0] + (";\n" + (indentacionNivel + "return undefined;"));
+              } else {
+                var match$2 = generarJs(e, false, nivel);
+                tmp = "return " + (match$2[0] + ";");
+              }
+            } else {
+              var match$3 = generarJs(e, false, nivel);
+              tmp = match$3[0] + (";" + ((
                     toplevel$1 ? "\n" : ""
                   ) + ("\n" + generarInner(es))));
+            }
           } else {
             tmp = "";
           }
           return indentacionNivel + tmp;
         };
-        if (toplevel$1) {
-          return generarInner(exprs);
-        } else {
-          return "(() => {\n" + (generarInner(exprs) + ("\n" + (indentacionNivelAnt + "})()")));
-        }
+        var jsRestorno = toplevel$1 ? generarInner(exprs) : "(() => {\n" + (generarInner(exprs) + ("\n" + (indentacionNivelAnt + "})()")));
+        return /* tuple */[
+                jsRestorno,
+                0
+              ];
     
   }
 }

@@ -1,9 +1,7 @@
 <template lang="pug">
     div.barra-doc
         div.cont-opcion-version
-            span Versión&nbsp;&nbsp;
-            select.opcion-version
-                option {{ $store.state.variables.versionDocsActual }}
+            span v0.0.3
         elemento-barra(v-for="(tema, i) in datos.temas"
             :key="i"
             :tema="tema"
@@ -40,6 +38,7 @@
     .barra-doc
         height: 100%
         overflow-y: auto
+        border-right: solid 1px var(--color-borde)
 
 
     .cont-opcion-version

@@ -89,9 +89,9 @@ function _TIdentificador(resLexer, valorOpc, msgError) {
   }
 }
 
-function _PC_SEA(resLexer, valorOpc, msgError) {
+function _PC_LET(resLexer, valorOpc, msgError) {
   var preToken = extraerToken(resLexer, msgError);
-  if (preToken.tag === /* PC_SEA */12) {
+  if (preToken.tag === /* PC_LET */12) {
     var infoToken = preToken[0];
     if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
       throw [
@@ -109,9 +109,9 @@ function _PC_SEA(resLexer, valorOpc, msgError) {
   }
 }
 
-function _PC_MUT(resLexer, valorOpc, msgError) {
+function _PC_CONST(resLexer, valorOpc, msgError) {
   var preToken = extraerToken(resLexer, msgError);
-  if (preToken.tag === /* PC_MUT */13) {
+  if (preToken.tag === /* PC_CONST */13) {
     var infoToken = preToken[0];
     if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
       throw [
@@ -155,7 +155,7 @@ exports.extraerToken = extraerToken;
 exports._Any = _Any;
 exports._TNuevaLinea = _TNuevaLinea;
 exports._TIdentificador = _TIdentificador;
-exports._PC_SEA = _PC_SEA;
-exports._PC_MUT = _PC_MUT;
+exports._PC_LET = _PC_LET;
+exports._PC_CONST = _PC_CONST;
 exports._TOperador = _TOperador;
 /* No side effect */

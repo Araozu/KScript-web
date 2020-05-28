@@ -3,6 +3,7 @@
 
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
+var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Lexer$KanComp = require("./Lexer.bs.js");
 
 var operadores = /* :: */[
@@ -62,9 +63,8 @@ var operadores = /* :: */[
                                                       /* :: */[
                                                         ",",
                                                         /* :: */[
-                                                          ",",
-                                                                [";", 0]
-                                                          /* [] */
+                                                          ";",
+                                                          /* [] */0
                                                         ]
                                                       ]
                                                     ]
@@ -375,7 +375,15 @@ var parseIdentificadorTipo = Lexer$KanComp.mapP((function (param) {
         return param[0] + param[1];
       }), Lexer$KanComp.$pipe$great$great$pipe(parseMayuscula, parseRestoIdentificador));
 
-var parseNuevaLinea = Lexer$KanComp.parseCaracter("\n");
+var parseNuevaLCarac = Lexer$KanComp.parseCaracter("\n");
+
+var parseNuevoWin = Lexer$KanComp.parseCaracter("\r");
+
+var parseNuevaLineaWin = Lexer$KanComp.mapP((function (param) {
+        return param[0] + param[1];
+      }), Lexer$KanComp.$pipe$great$great$pipe(parseNuevoWin, parseNuevaLCarac));
+
+var parseNuevaLinea = Lexer$KanComp.$less$pipe$great(parseNuevaLCarac, parseNuevaLineaWin);
 
 var pEB = Lexer$KanComp.parseCaracter(" ");
 
@@ -475,6 +483,9 @@ function crearLexer(entrada) {
     contents: /* [] */0
   };
   var ultimoToken = {
+    contents: undefined
+  };
+  var resultadoLookAheadSignificativo = {
     contents: undefined
   };
   var sigTokenLuegoDeIdentacion = function (_posActual) {
@@ -627,21 +638,21 @@ function crearLexer(entrada) {
                 }
             case /* Nada */11 :
                 return /* ErrorLexer */Block.__(1, ["Se encontr\xc3\xb3 un token huerfano"]);
-
+            
           }
           var match$4 = ex.res;
           switch (match$4) {
+            case "const" :
+                return crearToken2((function (x) {
+                              return /* PC_CONST */Block.__(13, [x]);
+                            }), "const");
             case "false" :
                 return crearToken2((function (x) {
                               return /* TBool */Block.__(6, [x]);
                             }), false);
-            case "mut" :
+            case "let" :
                 return crearToken2((function (x) {
-                              return /* PC_MUT */Block.__(13, [x]);
-                            }), "mut");
-            case "sea" :
-                return crearToken2((function (x) {
-                              return /* PC_SEA */Block.__(12, [x]);
+                              return /* PC_LET */Block.__(12, [x]);
                             }), "sea");
             case "true" :
                 return crearToken2((function (x) {
@@ -692,6 +703,66 @@ function crearLexer(entrada) {
       }
     }
   };
+  var lookAheadSignificativo = function (param) {
+    var obtSigTokenSign = function (_tokensList, _hayNuevaLinea) {
+      while(true) {
+        var hayNuevaLinea = _hayNuevaLinea;
+        var tokensList = _tokensList;
+        var sigToken = extraerToken(/* () */0);
+        if (typeof sigToken === "number" || sigToken.tag) {
+          return /* tuple */[
+                  sigToken,
+                  -1,
+                  hayNuevaLinea,
+                  tokensList
+                ];
+        } else if (sigToken[0].tag) {
+          return /* tuple */[
+                  sigToken,
+                  sigToken[1],
+                  hayNuevaLinea,
+                  Pervasives.$at(tokensList, /* :: */[
+                        sigToken,
+                        /* [] */0
+                      ])
+                ];
+        } else {
+          _hayNuevaLinea = true;
+          _tokensList = Pervasives.$at(tokensList, /* :: */[
+                sigToken,
+                /* [] */0
+              ]);
+          continue ;
+        }
+      };
+    };
+    var match = resultadoLookAheadSignificativo.contents;
+    if (match !== undefined) {
+      return match;
+    } else {
+      var match$1 = obtSigTokenSign(tokensRestantes.contents, false);
+      var token = match$1[0];
+      tokensRestantes.contents = match$1[3];
+      var resultado_001 = match$1[1];
+      var resultado_002 = match$1[2];
+      var resultado_003 = function (param) {
+        resultadoLookAheadSignificativo.contents = undefined;
+        tokensRestantes.contents = /* :: */[
+          token,
+          /* [] */0
+        ];
+        return /* () */0;
+      };
+      var resultado = /* tuple */[
+        token,
+        resultado_001,
+        resultado_002,
+        resultado_003
+      ];
+      resultadoLookAheadSignificativo.contents = resultado;
+      return resultado;
+    }
+  };
   return {
           entrada: entrada,
           sigToken: sigToken,
@@ -699,7 +770,8 @@ function crearLexer(entrada) {
           retroceder: retroceder,
           hayTokens: (function (param) {
               return posActual.contents < entrada.length;
-            })
+            }),
+          lookAheadSignificativo: lookAheadSignificativo
         };
 }
 

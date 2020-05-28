@@ -31,10 +31,10 @@ function tknToStr(token2) {
         return "TAgrupAb";
     case /* TAgrupCer */11 :
         return "TAgrupCer";
-    case /* PC_SEA */12 :
-        return "PC_SEA";
-    case /* PC_MUT */13 :
-        return "PC_MUT";
+    case /* PC_LET */12 :
+        return "PC_LET";
+    case /* PC_CONST */13 :
+        return "PC_CONST";
     
   }
 }
@@ -45,7 +45,7 @@ function flujoPrincipal(entrada) {
   if (expresion.tag) {
     return expresion[0];
   } else {
-    return Generador$KanComp.generarJs(expresion[0], true, 0);
+    return Generador$KanComp.generarJs(expresion[0], true, 0)[0];
   }
 }
 

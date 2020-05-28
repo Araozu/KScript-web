@@ -328,7 +328,7 @@ function parseVariasOpciones(parsers) {
                     }]);
         }
       } else {
-        return /* Error */Block.__(1, ["Ningun parser se adapta a la entrada."]);
+        return /* Error */Block.__(1, ["Ningun parser se adapta a la entrada. En la posicíon " + (String(pos) + ".")]);
       }
     };
   };
