@@ -24,7 +24,7 @@
                 preExpresion = parseTokens lexer
                 if preExpresion.tag == 0
                     expresion = preExpresion[0]
-                    @resultado = generarJs expresion, true, 0
+                    @resultado = (generarJs expresion, true, 0)[0]
             escapar: (txt) ->
                 s1 = txt.replace /\n/g, "<br>"
                 s2 = s1.replace /\s/g, "&nbsp;"
