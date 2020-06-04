@@ -5,6 +5,7 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Lexer$KanComp = require("./Lexer.bs.js");
+var Caml_exceptions = require("bs-platform/lib/js/caml_exceptions.js");
 
 var operadores = /* :: */[
   "+",
@@ -462,6 +463,41 @@ var parserGeneral = Lexer$KanComp.parseVariasOpciones(/* :: */[
       ]
     ]);
 
+var EstadoInvalido = Caml_exceptions.create("Gramatica-KanComp.EstadoInvalido");
+
+function tknToStr(token2) {
+  switch (token2.tag | 0) {
+    case /* TNuevaLinea */0 :
+        return "TNuevaLinea";
+    case /* TGenerico */2 :
+        return "TGenerico";
+    case /* TComentario */3 :
+        return "TComentario";
+    case /* TNumero */4 :
+        return "TNumero";
+    case /* TTexto */5 :
+        return "TTexto";
+    case /* TBool */6 :
+        return "TBool";
+    case /* TIdentificador */1 :
+    case /* TOperador */7 :
+        return token2[0].valor;
+    case /* TParenAb */8 :
+        return "TParenAb";
+    case /* TParenCer */9 :
+        return "TParenCer";
+    case /* TAgrupAb */10 :
+        return "TAgrupAb";
+    case /* TAgrupCer */11 :
+        return "TAgrupCer";
+    case /* PC_LET */12 :
+        return "PC_LET";
+    case /* PC_CONST */13 :
+        return "PC_CONST";
+    
+  }
+}
+
 function crearLexer(entrada) {
   var tamanoEntrada = entrada.length;
   var esInicioDeLinea = {
@@ -487,6 +523,26 @@ function crearLexer(entrada) {
   };
   var resultadoLookAheadSignificativo = {
     contents: undefined
+  };
+  var tokensRestantesAStr = function (param) {
+    var _tokens = tokensRestantes.contents;
+    var _acc = "";
+    while(true) {
+      var acc = _acc;
+      var tokens = _tokens;
+      if (tokens) {
+        var x = tokens[0];
+        var stdAdc;
+        stdAdc = typeof x === "number" ? "EOF" : (
+            x.tag ? "ErrorLexer(" + (String(x[0]) + ")") : tknToStr(x[0])
+          );
+        _acc = acc + (stdAdc + ", ");
+        _tokens = tokens[1];
+        continue ;
+      } else {
+        return acc;
+      }
+    };
   };
   var sigTokenLuegoDeIdentacion = function (_posActual) {
     while(true) {
@@ -667,9 +723,35 @@ function crearLexer(entrada) {
       }
     };
   };
+  tokensRestantes.contents = /* :: */[
+    extraerToken(/* () */0),
+    /* [] */0
+  ];
   var sigToken = function (param) {
     var match = tokensRestantes.contents;
-    var tokenRespuesta = match ? (tokensRestantes.contents = match[1], match[0]) : extraerToken(/* () */0);
+    var tokenRespuesta;
+    if (match) {
+      var match$1 = match[1];
+      var token1 = match[0];
+      if (match$1) {
+        tokensRestantes.contents = Pervasives.$at(/* :: */[
+              match$1[0],
+              /* [] */0
+            ], match$1[1]);
+        tokenRespuesta = token1;
+      } else {
+        tokensRestantes.contents = /* :: */[
+          extraerToken(/* () */0),
+          /* [] */0
+        ];
+        tokenRespuesta = token1;
+      }
+    } else {
+      throw [
+            EstadoInvalido,
+            /* () */0
+          ];
+    }
     ultimoToken.contents = tokenRespuesta;
     return tokenRespuesta;
   };
@@ -678,61 +760,97 @@ function crearLexer(entrada) {
     if (match) {
       return match[0];
     } else {
-      var sigToken$1 = sigToken(/* () */0);
-      tokensRestantes.contents = /* :: */[
-        sigToken$1,
-        /* [] */0
-      ];
-      return sigToken$1;
+      throw [
+            EstadoInvalido,
+            /* () */0
+          ];
     }
   };
   var retroceder = function (param) {
     var match = tokensRestantes.contents;
     if (match) {
-      return /* () */0;
-    } else {
-      var match$1 = ultimoToken.contents;
-      if (match$1 !== undefined) {
-        tokensRestantes.contents = /* :: */[
-          match$1,
-          /* [] */0
-        ];
+      if (match[1]) {
         return /* () */0;
       } else {
-        return /* () */0;
+        var match$1 = ultimoToken.contents;
+        if (match$1 !== undefined) {
+          tokensRestantes.contents = /* :: */[
+            match$1,
+            /* :: */[
+              match[0],
+              /* [] */0
+            ]
+          ];
+          return /* () */0;
+        } else {
+          return /* () */0;
+        }
       }
+    } else {
+      throw [
+            EstadoInvalido,
+            /* () */0
+          ];
     }
   };
-  var lookAheadSignificativo = function (param) {
-    var obtSigTokenSign = function (_tokensList, _hayNuevaLinea) {
+  var lookAheadSignificativo = function (ignorarPrimerToken) {
+    var pre = function (_tokensAct, _hayNuevaLinea) {
       while(true) {
         var hayNuevaLinea = _hayNuevaLinea;
-        var tokensList = _tokensList;
-        var sigToken = extraerToken(/* () */0);
-        if (typeof sigToken === "number" || sigToken.tag) {
-          return /* tuple */[
-                  sigToken,
-                  -1,
-                  hayNuevaLinea,
-                  tokensList
-                ];
-        } else if (sigToken[0].tag) {
-          return /* tuple */[
-                  sigToken,
-                  sigToken[1],
-                  hayNuevaLinea,
-                  Pervasives.$at(tokensList, /* :: */[
-                        sigToken,
-                        /* [] */0
-                      ])
-                ];
+        var tokensAct = _tokensAct;
+        if (tokensAct) {
+          var t = tokensAct[0];
+          if (typeof t === "number" || t.tag) {
+            return /* tuple */[
+                    t,
+                    -1,
+                    hayNuevaLinea,
+                    tokensAct
+                  ];
+          } else if (t[0].tag) {
+            return /* tuple */[
+                    t,
+                    t[1],
+                    hayNuevaLinea,
+                    tokensAct
+                  ];
+          } else {
+            _hayNuevaLinea = true;
+            _tokensAct = tokensAct[1];
+            continue ;
+          }
         } else {
-          _hayNuevaLinea = true;
-          _tokensList = Pervasives.$at(tokensList, /* :: */[
-                sigToken,
-                /* [] */0
-              ]);
-          continue ;
+          var tokensList = /* [] */0;
+          var _hayNuevaLinea$1 = hayNuevaLinea;
+          while(true) {
+            var hayNuevaLinea$1 = _hayNuevaLinea$1;
+            var sigToken = extraerToken(/* () */0);
+            if (typeof sigToken !== "number" && !sigToken.tag) {
+              if (sigToken[0].tag) {
+                return /* tuple */[
+                        sigToken,
+                        sigToken[1],
+                        hayNuevaLinea$1,
+                        Pervasives.$at(tokensList, /* :: */[
+                              sigToken,
+                              /* [] */0
+                            ])
+                      ];
+              } else {
+                _hayNuevaLinea$1 = true;
+                continue ;
+              }
+            }
+            return /* tuple */[
+                    sigToken,
+                    -1,
+                    hayNuevaLinea$1,
+                    Pervasives.$at(tokensList, /* :: */[
+                          sigToken,
+                          /* [] */0
+                        ])
+                  ];
+          };
         }
       };
     };
@@ -740,11 +858,33 @@ function crearLexer(entrada) {
     if (match !== undefined) {
       return match;
     } else {
-      var match$1 = obtSigTokenSign(tokensRestantes.contents, false);
-      var token = match$1[0];
-      tokensRestantes.contents = match$1[3];
-      var resultado_001 = match$1[1];
-      var resultado_002 = match$1[2];
+      var match$1 = tokensRestantes.contents;
+      var match$2;
+      if (match$1) {
+        if (ignorarPrimerToken) {
+          var match$3 = pre(match$1[1], false);
+          match$2 = /* tuple */[
+            match$3[0],
+            match$3[1],
+            match$3[2],
+            Pervasives.$at(/* :: */[
+                  match$1[0],
+                  /* [] */0
+                ], match$3[3])
+          ];
+        } else {
+          match$2 = pre(tokensRestantes.contents, false);
+        }
+      } else {
+        throw [
+              EstadoInvalido,
+              /* () */0
+            ];
+      }
+      var token = match$2[0];
+      tokensRestantes.contents = match$2[3];
+      var resultado_001 = match$2[1];
+      var resultado_002 = match$2[2];
       var resultado_003 = function (param) {
         resultadoLookAheadSignificativo.contents = undefined;
         tokensRestantes.contents = /* :: */[
@@ -763,6 +903,21 @@ function crearLexer(entrada) {
       return resultado;
     }
   };
+  var debug = function (param) {
+    console.log("\n-----------------------------");
+    console.log("Estado actual del lexer:");
+    var v = esInicioDeLinea.contents;
+    console.log("esInicioDeLinea: " + (String(v) + ""));
+    var v$1 = posActual.contents;
+    console.log("posActual: " + (String(v$1) + ""));
+    var v$2 = tokensRestantesAStr(/* () */0);
+    console.log("tokensRestantes: [" + (String(v$2) + "]"));
+    var v$3 = ultimoToken.contents;
+    console.log("ultimoToken:");
+    console.log(v$3);
+    console.log("-----------------------------\n");
+    return /* () */0;
+  };
   return {
           entrada: entrada,
           sigToken: sigToken,
@@ -771,7 +926,8 @@ function crearLexer(entrada) {
           hayTokens: (function (param) {
               return posActual.contents < entrada.length;
             }),
-          lookAheadSignificativo: lookAheadSignificativo
+          lookAheadSignificativo: lookAheadSignificativo,
+          debug: debug
         };
 }
 
@@ -826,5 +982,7 @@ exports.parseCorcheteCer = parseCorcheteCer;
 exports.parseSignoAgrupacionAb = parseSignoAgrupacionAb;
 exports.parseSignoAgrupacionCer = parseSignoAgrupacionCer;
 exports.parserGeneral = parserGeneral;
+exports.EstadoInvalido = EstadoInvalido;
+exports.tknToStr = tknToStr;
 exports.crearLexer = crearLexer;
 /* parseDigito Not a pure module */
