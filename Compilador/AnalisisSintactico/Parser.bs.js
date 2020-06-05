@@ -152,14 +152,37 @@ function parseTokens(lexer) {
       } else if (match$1.tag) {
         return /* PError */Block.__(1, ["Se esperaba una expresión luego de la asignación: " + (String(match$1[0]) + "")]);
       } else {
-        return /* PExito */Block.__(0, [/* EDeclaracion */Block.__(7, [{
-                        mut: esMut,
-                        id: {
-                          signatura: /* Indefinida */0,
-                          valorId: infoTokenId
-                        },
-                        valorDec: match$1[0]
-                      }])]);
+        var exprDeclaracion = /* EDeclaracion */Block.__(7, [{
+              mut: esMut,
+              id: {
+                signatura: /* Indefinida */0,
+                valorId: infoTokenId
+              },
+              valorDec: match$1[0]
+            }]);
+        var exprRespuesta = /* PExito */Block.__(0, [exprDeclaracion]);
+        var sigExpresionRaw = sigExpresion(nivel, nivel, true, 0, /* Izq */0, true);
+        if (typeof sigExpresionRaw === "number") {
+          return exprRespuesta;
+        } else if (sigExpresionRaw.tag) {
+          return /* PError */Block.__(1, [sigExpresionRaw[0]]);
+        } else {
+          var nuevaExpr = sigExpresionRaw[0];
+          if (nuevaExpr.tag === /* EBloque */8) {
+            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                            exprDeclaracion,
+                            nuevaExpr[0]
+                          ]])]);
+          } else {
+            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                            exprDeclaracion,
+                            /* :: */[
+                              nuevaExpr,
+                              /* [] */0
+                            ]
+                          ]])]);
+          }
+        }
       }
     }
     catch (raw_exn){

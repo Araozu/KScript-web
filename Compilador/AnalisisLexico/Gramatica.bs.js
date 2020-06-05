@@ -740,6 +740,7 @@ function crearLexer(entrada) {
             ], match$1[1]);
         tokenRespuesta = token1;
       } else {
+        resultadoLookAheadSignificativo.contents = undefined;
         tokensRestantes.contents = /* :: */[
           extraerToken(/* () */0),
           /* [] */0
