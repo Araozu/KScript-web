@@ -56,7 +56,7 @@ verificar = (valor) =>
 #: Token -> (Txt, Txt)
 export escaparToken = (token) ->
     switch token.tipo
-        when "PC_SEA", "PC_MUT"
+        when "PC_LET", "PC_CONST"
             [token.valor, "PalabraClave"]
         when "Indentacion"
             ["&nbsp;&nbsp;&nbsp;&nbsp;", ""]

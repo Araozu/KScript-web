@@ -349,13 +349,29 @@ var parseTexto = Lexer$KanComp.between(parseComilla, parseResto, parseComilla);
 
 var parseBarra = Lexer$KanComp.parseCaracter("/");
 
-var parseInicio = Lexer$KanComp.mapP((function (param) {
+var parseInicio = Lexer$KanComp.$less$bang$great((function (param) {
         return param[0] + param[1];
       }), Lexer$KanComp.$pipe$great$great$pipe(parseBarra, parseBarra));
 
-var parseResto$1 = Lexer$KanComp.mapP(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenos("\n")));
+var parseResto$1 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenos("\n")));
 
 var parseComentario = Lexer$KanComp.$great$great$pipe(parseInicio, parseResto$1);
+
+var parseBarra$1 = Lexer$KanComp.parseCaracter("/");
+
+var parseAst = Lexer$KanComp.parseCaracter("*");
+
+var parseInicio$1 = Lexer$KanComp.$less$bang$great((function (param) {
+        return "";
+      }), Lexer$KanComp.$pipe$great$great$pipe(parseBarra$1, parseAst));
+
+var parseFinal = Lexer$KanComp.$less$bang$great((function (param) {
+        return "";
+      }), Lexer$KanComp.$pipe$great$great$pipe(parseAst, parseBarra$1));
+
+var parseResto$2 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenos2("*", "/")));
+
+var parseComentarioMulti = Lexer$KanComp.$pipe$great$great(Lexer$KanComp.$great$great$pipe(parseInicio$1, parseResto$2), parseFinal);
 
 var pTest = Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(parseDigito, parseMayuscula), parseMinuscula), parseGuionBajo), parseComillaSimple);
 
@@ -433,24 +449,27 @@ var parserGeneral = Lexer$KanComp.parseVariasOpciones(/* :: */[
       /* :: */[
         Lexer$KanComp.mapTipo(parseNuevaLinea, /* NuevaLinea */1),
         /* :: */[
-          Lexer$KanComp.mapTipo(parseIdentificadorTipo, /* IdentificadorTipo */2),
+          Lexer$KanComp.mapTipo(parseComentarioMulti, /* Comentario */5),
           /* :: */[
-            Lexer$KanComp.mapTipo(parseIdentificador, /* Identificador */3),
+            Lexer$KanComp.mapTipo(parseComentario, /* Comentario */5),
             /* :: */[
-              Lexer$KanComp.mapTipo(parseGenerico, /* Generico */4),
+              Lexer$KanComp.mapTipo(parseIdentificadorTipo, /* IdentificadorTipo */2),
               /* :: */[
-                Lexer$KanComp.mapTipo(parseComentario, /* Comentario */5),
+                Lexer$KanComp.mapTipo(parseIdentificador, /* Identificador */3),
                 /* :: */[
-                  Lexer$KanComp.mapTipo(parseNumero, /* Numero */6),
+                  Lexer$KanComp.mapTipo(parseGenerico, /* Generico */4),
                   /* :: */[
-                    Lexer$KanComp.mapTipo(parseTexto, /* Texto */7),
+                    Lexer$KanComp.mapTipo(parseNumero, /* Numero */6),
                     /* :: */[
-                      Lexer$KanComp.mapTipo(parseOperadores, /* Operadores */8),
+                      Lexer$KanComp.mapTipo(parseTexto, /* Texto */7),
                       /* :: */[
-                        Lexer$KanComp.mapTipo(parseSignoAgrupacionAb, /* AgrupacionAb */9),
+                        Lexer$KanComp.mapTipo(parseOperadores, /* Operadores */8),
                         /* :: */[
-                          Lexer$KanComp.mapTipo(parseSignoAgrupacionCer, /* AgrupacionCer */10),
-                          /* [] */0
+                          Lexer$KanComp.mapTipo(parseSignoAgrupacionAb, /* AgrupacionAb */9),
+                          /* :: */[
+                            Lexer$KanComp.mapTipo(parseSignoAgrupacionCer, /* AgrupacionCer */10),
+                            /* [] */0
+                          ]
                         ]
                       ]
                     ]
@@ -709,7 +728,7 @@ function crearLexer(entrada) {
             case "let" :
                 return crearToken2((function (x) {
                               return /* PC_LET */Block.__(12, [x]);
-                            }), "sea");
+                            }), "let");
             case "true" :
                 return crearToken2((function (x) {
                               return /* TBool */Block.__(6, [x]);
@@ -968,6 +987,7 @@ exports.parseOperadores = parseOperadores;
 exports.parseNumero = parseNumero;
 exports.parseTexto = parseTexto;
 exports.parseComentario = parseComentario;
+exports.parseComentarioMulti = parseComentarioMulti;
 exports.parseRestoIdentificador = parseRestoIdentificador;
 exports.parseGenerico = parseGenerico;
 exports.parseIdentificador = parseIdentificador;

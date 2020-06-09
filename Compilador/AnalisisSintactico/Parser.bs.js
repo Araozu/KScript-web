@@ -7,6 +7,14 @@ var $$String = require("bs-platform/lib/js/string.js");
 var Expect$KanComp = require("./Expect.bs.js");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 
+function $great$great$eq(a, f) {
+  if (typeof a === "number" || a.tag) {
+    return a;
+  } else {
+    return Curry._1(f, a[0]);
+  }
+}
+
 function obtInfoFunAppl(esCurry) {
   return {
           valor: esCurry ? "Ñ" : "ñ",
@@ -310,11 +318,7 @@ function parseTokens(lexer) {
                   return /* PError */Block.__(1, ["No se esperaba un genérico luego de la aplicación del operador.\n\n" + (String(textoError) + "")]);
                 }
             case /* TComentario */3 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  return /* PExito */Block.__(0, [exprOpRes]);
-                }
+                continue ;
             case /* TOperador */7 :
                 var infoOp2 = token[0];
                 Curry._1(fnEnOp, /* () */0);
@@ -495,10 +499,11 @@ function parseTokens(lexer) {
                   return /* PError */Block.__(1, [lexerRes[0]]);
                 } else {
                   var token$1 = lexerRes[0];
-                  var exit = 0;
                   switch (token$1.tag | 0) {
                     case /* TNuevaLinea */0 :
-                        if (!aceptarSoloOperador) {
+                        if (aceptarSoloOperador) {
+                          return Curry._1(funValorDefecto, /* () */0);
+                        } else {
                           Curry._1(lexer.retroceder, /* () */0);
                           var match$1 = Curry._1(lexer.lookAheadSignificativo, true);
                           var fnEstablecer = match$1[3];
@@ -561,13 +566,15 @@ function parseTokens(lexer) {
                             return expresionRespuesta;
                           }
                         }
-                        break;
-                    case /* TIdentificador */1 :
-                    case /* TNumero */4 :
-                    case /* TTexto */5 :
-                    case /* TBool */6 :
-                        exit = 2;
-                        break;
+                    case /* TGenerico */2 :
+                        if (aceptarSoloOperador) {
+                          return Curry._1(funValorDefecto, /* () */0);
+                        } else {
+                          var textoError = generarTextoError(token$1[0]);
+                          return /* PError */Block.__(1, ["No se esperaba un genérico luego del identificador.\n\n" + (String(textoError) + "")]);
+                        }
+                    case /* TComentario */3 :
+                        continue ;
                     case /* TOperador */7 :
                         var infoOp = token$1[0];
                         Curry._1(fnEnOp, /* () */0);
@@ -580,40 +587,83 @@ function parseTokens(lexer) {
                           Curry._1(lexer.retroceder, /* () */0);
                           return /* PExito */Block.__(0, [primeraExprId]);
                         }
+                    case /* TParenAb */8 :
+                        if (aceptarSoloOperador) {
+                          return Curry._1(funValorDefecto, /* () */0);
+                        } else {
+                          var sigExpr = sigExprParen(token$1[0], nivel$1, nivel$1);
+                          if (typeof sigExpr === "number" || sigExpr.tag) {
+                            return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
+                          } else {
+                            var infoOpFunApl_valor = "ñ";
+                            var infoOpFunApl = {
+                              valor: infoOpFunApl_valor,
+                              inicio: -1,
+                              final: -1,
+                              numLinea: -1,
+                              posInicioLinea: -1
+                            };
+                            var match$3 = obtInfoOp("ñ");
+                            return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
+                                            op: {
+                                              signaturaOp: /* Indefinida */0,
+                                              valorOp: infoOpFunApl,
+                                              precedencia: match$3[0],
+                                              asociatividad: match$3[1]
+                                            },
+                                            izq: primeraExprId,
+                                            der: sigExpr[0]
+                                          }])]);
+                          }
+                        }
+                    case /* TParenCer */9 :
+                        if (aceptarSoloOperador) {
+                          return Curry._1(funValorDefecto, /* () */0);
+                        } else {
+                          Curry._1(lexer.retroceder, /* () */0);
+                          return /* PExito */Block.__(0, [primeraExprId]);
+                        }
+                    case /* TAgrupAb */10 :
+                        var textoError$1 = generarTextoError(token$1[0]);
+                        return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$1) + "")]);
+                    case /* TAgrupCer */11 :
+                        var textoError$2 = generarTextoError(token$1[0]);
+                        return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$2) + "")]);
+                    case /* PC_LET */12 :
+                        var textoError$3 = generarTextoError(token$1[0]);
+                        return /* PError */Block.__(1, ["No se esperaba la palabra clave \'let\' luego de la aplicación del operador.\n\n" + (String(textoError$3) + "")]);
+                    case /* PC_CONST */13 :
+                        var textoError$4 = generarTextoError(token$1[0]);
+                        return /* PError */Block.__(1, ["No se esperaba la palabra clave \'const\' luego de la aplicación del operador.\n\n" + (String(textoError$4) + "")]);
                     default:
-                      
-                  }
-                  if (exit === 2 && !aceptarSoloOperador) {
-                    Curry._1(lexer.retroceder, /* () */0);
-                    if (14 > precedencia$1) {
-                      var infoOpFunApl_valor = "ñ";
-                      var infoOpFunApl = {
-                        valor: infoOpFunApl_valor,
-                        inicio: -1,
-                        final: -1,
-                        numLinea: -1,
-                        posInicioLinea: -1
-                      };
-                      return sigExprOperador(primeraExprId, infoOpFunApl, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
-                    } else if (14 === precedencia$1 && false) {
-                      var infoOpFunApl_valor$1 = "ñ";
-                      var infoOpFunApl$1 = {
-                        valor: infoOpFunApl_valor$1,
-                        inicio: -1,
-                        final: -1,
-                        numLinea: -1,
-                        posInicioLinea: -1
-                      };
-                      return sigExprOperador(primeraExprId, infoOpFunApl$1, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
-                    } else {
-                      return /* PExito */Block.__(0, [primeraExprId]);
-                    }
-                  }
-                  if (aceptarSoloOperador) {
-                    return Curry._1(funValorDefecto, /* () */0);
-                  } else {
-                    Curry._1(lexer.retroceder, /* () */0);
-                    return /* PExito */Block.__(0, [primeraExprId]);
+                      if (aceptarSoloOperador) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        Curry._1(lexer.retroceder, /* () */0);
+                        if (14 > precedencia$1) {
+                          var infoOpFunApl_valor$1 = "ñ";
+                          var infoOpFunApl$1 = {
+                            valor: infoOpFunApl_valor$1,
+                            inicio: -1,
+                            final: -1,
+                            numLinea: -1,
+                            posInicioLinea: -1
+                          };
+                          return sigExprOperador(primeraExprId, infoOpFunApl$1, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
+                        } else if (14 === precedencia$1 && false) {
+                          var infoOpFunApl_valor$2 = "ñ";
+                          var infoOpFunApl$2 = {
+                            valor: infoOpFunApl_valor$2,
+                            inicio: -1,
+                            final: -1,
+                            numLinea: -1,
+                            posInicioLinea: -1
+                          };
+                          return sigExprOperador(primeraExprId, infoOpFunApl$2, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
+                        } else {
+                          return /* PExito */Block.__(0, [primeraExprId]);
+                        }
+                      }
                   }
                 }
               };
@@ -659,6 +709,7 @@ function parseTokens(lexer) {
   }
 }
 
+exports.$great$great$eq = $great$great$eq;
 exports.obtInfoFunAppl = obtInfoFunAppl;
 exports.obtInfoOp = obtInfoOp;
 exports.parseTokens = parseTokens;
