@@ -40,7 +40,7 @@ export palabrasClave = ("let const rec if else match when is in for while " +
     "enum implements package public interface  private static protected await " +
     "abstract boolean byte char double final float goto int long native short " +
     "synchronized throws transient volatile").split " "
-export funcionesClave = "constructor get set log".split " "
+export funcionesClave = "constructor get set".split " "
 export std = "Lista impr imprf console".split " "
 
 verificar = (valor) =>
@@ -79,7 +79,7 @@ export escaparToken = (token) ->
 crearHtmlToken = (token) =>
     contenedorToken = document.createElement "span"
     [htmlToken, claseAdicional] = escaparToken(token)
-    contenedorToken.className = "#{token.tipo} #{claseAdicional}"
+    contenedorToken.className = "token #{token.tipo} #{claseAdicional}"
     contenedorToken.innerHTML = htmlToken
 
     contenedorToken
@@ -88,7 +88,7 @@ crearHtmlToken = (token) =>
 crearHtmlLinea = (linea, esBloque) =>
     contenedorLinea = document.createElement "div"
     if esBloque
-        contenedorLinea.className = "TextoCod"
+        contenedorLinea.className = "LineaCodigo TextoCod"
 
     if linea != ""
         tokens = obtenerTokens linea

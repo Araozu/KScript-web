@@ -34,14 +34,15 @@ code
     --color: #dedede
     --fondo: #151515
     --color-borde: #454545
-    --color-cod-texto: #6db369
-    --color-cod-numero: #d19a66
-    --color-cod-palabra-clave: #c679dd
-    --color-cod-fun-clave: #61aeef
+    --color-cod-texto: #43cd65
+    --color-cod-numero: #ffb86c
+    --color-cod-palabra-clave: rgb(255, 115, 253)
+    --color-cod-fun-clave: #58b2dc
+    --color-cod-operador: #4ec9b0
     --color-cod-identificador: #ffe968
-    --color-cod-comentario: #59626f
-    --color-cod-fondo: #282c34
-    --color-cod: #d7d7d7
+    --color-cod-comentario: #818181
+    --color-cod-fondo: #1c1c1c
+    --color-cod: #dedede
     --color-cod-identificador-tipo: #85e9ff
 
 
@@ -49,14 +50,15 @@ code
     --color: #1d1d1d
     --fondo: #ffffff
     --color-borde: #e3e3e3
-    --color-cod-texto: #468B46
-    --color-cod-numero: #986801
-    --color-cod-palabra-clave: #ad26a3
-    --color-cod-fun-clave: #3f77f3
-    --color-cod-identificador: #e4564a
-    --color-cod-comentario: #a0a1a7
-    --color-cod-fondo: #fafafa
-    --color-cod: #000000
+    --color-cod-texto: #032f62
+    --color-cod-numero: #005CC5
+    --color-cod-palabra-clave: #D73A49
+    --color-cod-operador: #D73A49
+    --color-cod-fun-clave: #005cc5
+    --color-cod-identificador: #005CC5
+    --color-cod-comentario: #6A737D
+    --color-cod-fondo: #f6f8fa
+    --color-cod: #24292e
     --color-cod-identificador-tipo: #5392A0
 
 
@@ -69,8 +71,12 @@ code
 .PalabraClave
     color: var(--color-cod-palabra-clave)
 
-.FuncionClave, .TOperador_Color
+.FuncionClave
     color: var(--color-cod-fun-clave)
+
+.TOperador_Color
+    color: var(--color-cod-operador)
+
 
 .TIdentificador--std
     color: var(--color-cod-identificador)
@@ -94,6 +100,16 @@ code
     background-color: var(--color-cod-fondo)
     color: var(--color-cod)
     border: solid 1px var(--color-borde)
+
+
+.LineaCodigo
+    line-height: 1.35rem
+    white-space: pre
+
+
+@media only screen and (max-width: 450px)
+    .LineaCodigo
+        line-height: 1.2rem
 
 
 .cont

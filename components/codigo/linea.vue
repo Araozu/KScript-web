@@ -1,6 +1,6 @@
 <template lang="pug">
     // div.linea.TextoCod(@mouseenter="selecLinea" @mouseleave="deselecLinea"
-    div.linea.TextoCod(:class="lineaSeleccionada? 'Seleccionado' : ''")
+    div.linea.LineaCodigo.TextoCod(:class="lineaSeleccionada? 'Seleccionado' : ''")
         template(v-if="linea === ''")
             br
         template(v-else)
@@ -79,6 +79,10 @@
 
     .TextoCod
         padding: 0 15px
+
+    .linea
+        white-space: pre
+
 
     @media only screen and (max-width: 450px)
         .linea
