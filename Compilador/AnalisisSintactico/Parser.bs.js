@@ -318,6 +318,7 @@ function parseTokens(lexer) {
                   return /* PError */Block.__(1, ["No se esperaba un genérico luego de la aplicación del operador.\n\n" + (String(textoError) + "")]);
                 }
             case /* TComentario */3 :
+                _lexerRes = Curry._1(lexer.sigToken, /* () */0);
                 continue ;
             case /* TOperador */7 :
                 var infoOp2 = token[0];
@@ -574,6 +575,8 @@ function parseTokens(lexer) {
                           return /* PError */Block.__(1, ["No se esperaba un genérico luego del identificador.\n\n" + (String(textoError) + "")]);
                         }
                     case /* TComentario */3 :
+                        console.log("Atorado en parser?");
+                        _lexerRes = Curry._1(lexer.sigToken, /* () */0);
                         continue ;
                     case /* TOperador */7 :
                         var infoOp = token$1[0];

@@ -274,6 +274,27 @@ function parseCualquierMenos(caracter) {
   return /* Parser */[inner];
 }
 
+function parseCualquierMenosP(parserAEvitar) {
+  var inner = function (entrada, inicio) {
+    if (entrada === "" || inicio >= entrada.length) {
+      return /* Error */Block.__(1, ["Entrada terminada"]);
+    } else {
+      var resultado = run(parserAEvitar, entrada, inicio);
+      if (resultado.tag) {
+        return /* Exito */Block.__(0, [{
+                    res: $$String.sub(entrada, inicio, 1),
+                    posInicio: inicio,
+                    posFinal: inicio + 1 | 0,
+                    tipo: /* Nada */11
+                  }]);
+      } else {
+        return /* Error */Block.__(1, ["Parser cumplido"]);
+      }
+    }
+  };
+  return /* Parser */[inner];
+}
+
 function parseCualquierMenos2(carac1, carac2) {
   var inner = function (entrada, inicio) {
     if (entrada === "" || inicio >= entrada.length) {
@@ -284,13 +305,6 @@ function parseCualquierMenos2(carac1, carac2) {
         var c2 = $$String.sub(entrada, inicio + 1 | 0, 1);
         if (c2 === carac2) {
           return /* Error */Block.__(1, ["Caracteres encontrados."]);
-        } else if (c2 !== carac1 && carac1 !== carac2) {
-          return /* Exito */Block.__(0, [{
-                      res: carac1 + carac2,
-                      posInicio: inicio,
-                      posFinal: inicio + 2 | 0,
-                      tipo: /* Nada */11
-                    }]);
         } else {
           return /* Exito */Block.__(0, [{
                       res: c2,
@@ -424,6 +438,7 @@ exports.parseVarios1 = parseVarios1;
 exports.parseSegundoOpcional = parseSegundoOpcional;
 exports.$less$question$great = $less$question$great;
 exports.parseCualquierMenos = parseCualquierMenos;
+exports.parseCualquierMenosP = parseCualquierMenosP;
 exports.parseCualquierMenos2 = parseCualquierMenos2;
 exports.crearSome = crearSome;
 exports.pOpc = pOpc;

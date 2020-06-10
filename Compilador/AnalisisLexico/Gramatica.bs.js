@@ -347,31 +347,46 @@ var parseResto = Lexer$KanComp.mapP(charListToStr, Lexer$KanComp.parseVarios(Lex
 
 var parseTexto = Lexer$KanComp.between(parseComilla, parseResto, parseComilla);
 
+var parseNuevaLCarac = Lexer$KanComp.parseCaracter("\n");
+
+var parseNuevoWin = Lexer$KanComp.parseCaracter("\r");
+
+var parseNuevaLineaWin = Lexer$KanComp.mapP((function (param) {
+        return param[0] + param[1];
+      }), Lexer$KanComp.$pipe$great$great$pipe(parseNuevoWin, parseNuevaLCarac));
+
+var parseNuevaLinea = Lexer$KanComp.$less$pipe$great(parseNuevaLCarac, parseNuevaLineaWin);
+
 var parseBarra = Lexer$KanComp.parseCaracter("/");
 
 var parseInicio = Lexer$KanComp.$less$bang$great((function (param) {
-        return param[0] + param[1];
+        return "//";
       }), Lexer$KanComp.$pipe$great$great$pipe(parseBarra, parseBarra));
 
-var parseResto$1 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenos("\n")));
+var parseResto$1 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenosP(parseNuevaLinea)));
 
-var parseComentario = Lexer$KanComp.$great$great$pipe(parseInicio, parseResto$1);
+var parseComentario = Lexer$KanComp.$less$bang$great((function (param) {
+        return param[0] + param[1];
+      }), Lexer$KanComp.$pipe$great$great$pipe(parseInicio, parseResto$1));
 
 var parseBarra$1 = Lexer$KanComp.parseCaracter("/");
 
 var parseAst = Lexer$KanComp.parseCaracter("*");
 
 var parseInicio$1 = Lexer$KanComp.$less$bang$great((function (param) {
-        return "";
+        return "/*";
       }), Lexer$KanComp.$pipe$great$great$pipe(parseBarra$1, parseAst));
 
 var parseFinal = Lexer$KanComp.$less$bang$great((function (param) {
-        return "";
+        return "*/";
       }), Lexer$KanComp.$pipe$great$great$pipe(parseAst, parseBarra$1));
 
-var parseResto$2 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenos2("*", "/")));
+var parseResto$2 = Lexer$KanComp.$less$bang$great(charListToStr, Lexer$KanComp.parseVarios(Lexer$KanComp.parseCualquierMenosP(parseFinal)));
 
-var parseComentarioMulti = Lexer$KanComp.$pipe$great$great(Lexer$KanComp.$great$great$pipe(parseInicio$1, parseResto$2), parseFinal);
+var parseComentarioMulti = Lexer$KanComp.$less$bang$great((function (param) {
+        var match = param[0];
+        return match[0] + (match[1] + param[1]);
+      }), Lexer$KanComp.$pipe$great$great$pipe(Lexer$KanComp.$pipe$great$great$pipe(parseInicio$1, parseResto$2), parseFinal));
 
 var pTest = Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(parseDigito, parseMayuscula), parseMinuscula), parseGuionBajo), parseComillaSimple);
 
@@ -391,16 +406,6 @@ var parseIdentificador = Lexer$KanComp.mapP((function (param) {
 var parseIdentificadorTipo = Lexer$KanComp.mapP((function (param) {
         return param[0] + param[1];
       }), Lexer$KanComp.$pipe$great$great$pipe(parseMayuscula, parseRestoIdentificador));
-
-var parseNuevaLCarac = Lexer$KanComp.parseCaracter("\n");
-
-var parseNuevoWin = Lexer$KanComp.parseCaracter("\r");
-
-var parseNuevaLineaWin = Lexer$KanComp.mapP((function (param) {
-        return param[0] + param[1];
-      }), Lexer$KanComp.$pipe$great$great$pipe(parseNuevoWin, parseNuevaLCarac));
-
-var parseNuevaLinea = Lexer$KanComp.$less$pipe$great(parseNuevaLCarac, parseNuevaLineaWin);
 
 var pEB = Lexer$KanComp.parseCaracter(" ");
 
@@ -562,6 +567,21 @@ function crearLexer(entrada) {
         return acc;
       }
     };
+  };
+  var debug = function (param) {
+    console.log("\n-----------------------------");
+    console.log("Estado actual del lexer:");
+    var v = esInicioDeLinea.contents;
+    console.log("esInicioDeLinea: " + (String(v) + ""));
+    var v$1 = posActual.contents;
+    console.log("posActual: " + (String(v$1) + ""));
+    var v$2 = tokensRestantesAStr(/* () */0);
+    console.log("tokensRestantes: [" + (String(v$2) + "]"));
+    var v$3 = ultimoToken.contents;
+    console.log("ultimoToken:");
+    console.log(v$3);
+    console.log("-----------------------------\n");
+    return /* () */0;
   };
   var sigTokenLuegoDeIdentacion = function (_posActual) {
     while(true) {
@@ -923,28 +943,13 @@ function crearLexer(entrada) {
       return resultado;
     }
   };
-  var debug = function (param) {
-    console.log("\n-----------------------------");
-    console.log("Estado actual del lexer:");
-    var v = esInicioDeLinea.contents;
-    console.log("esInicioDeLinea: " + (String(v) + ""));
-    var v$1 = posActual.contents;
-    console.log("posActual: " + (String(v$1) + ""));
-    var v$2 = tokensRestantesAStr(/* () */0);
-    console.log("tokensRestantes: [" + (String(v$2) + "]"));
-    var v$3 = ultimoToken.contents;
-    console.log("ultimoToken:");
-    console.log(v$3);
-    console.log("-----------------------------\n");
-    return /* () */0;
-  };
   return {
           entrada: entrada,
           sigToken: sigToken,
           lookAhead: lookAhead,
           retroceder: retroceder,
           hayTokens: (function (param) {
-              return posActual.contents < entrada.length;
+              return posActual.contents <= entrada.length;
             }),
           lookAheadSignificativo: lookAheadSignificativo,
           debug: debug
@@ -986,13 +991,13 @@ exports.parseOperador = parseOperador;
 exports.parseOperadores = parseOperadores;
 exports.parseNumero = parseNumero;
 exports.parseTexto = parseTexto;
+exports.parseNuevaLinea = parseNuevaLinea;
 exports.parseComentario = parseComentario;
 exports.parseComentarioMulti = parseComentarioMulti;
 exports.parseRestoIdentificador = parseRestoIdentificador;
 exports.parseGenerico = parseGenerico;
 exports.parseIdentificador = parseIdentificador;
 exports.parseIdentificadorTipo = parseIdentificadorTipo;
-exports.parseNuevaLinea = parseNuevaLinea;
 exports.parseIndentacion = parseIndentacion;
 exports.parseParenAb = parseParenAb;
 exports.parseParenCer = parseParenCer;

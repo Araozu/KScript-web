@@ -1,7 +1,7 @@
 <template lang="pug">
     div.barra-doc
         div.cont-opcion-version
-            span v0.0.3
+            span v0.0.13
         elemento-barra(v-for="(tema, i) in datos.temas"
             :key="i"
             :tema="tema"
