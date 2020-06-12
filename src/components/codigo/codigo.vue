@@ -23,7 +23,7 @@ div(ref="elem")
                 type: Boolean
                 default: true
         setup: (props, context) =>
-            elem = ref(null)
+            elem = ref null
 
             onMounted (=>
                 elemento = elem.value
