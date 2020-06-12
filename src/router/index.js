@@ -21,7 +21,7 @@ const routes = [
             {
                 path: ":catchAll(.*)",
                 name: "Docs_",
-                component: Docs_
+                component: () => import("../views/Docs/_.vue")
             }
         ]
     }

@@ -21,6 +21,9 @@ div.doc
     import marked from "marked"
     import codigo from "../../components/codigo/codigo.vue"
     import contenidoDocs from "../../components/docs/contenido-docs.vue"
+    import { ref, computed, onMounted } from "vue"
+    import { useStore } from "vuex"
+    import { useRoute, onBeforeRouteUpdate } from "vue-router"
 
 
     #: ['A] -> 'B -> (('A -> 'B) -> 'B)
@@ -33,56 +36,62 @@ div.doc
 
             res
 
+    obtenerFragmentos = (pathMatch) ->
+        ((pathMatch?.split? "/") ? []).filter ((x) => x != "")
+
+    escaparHtml = (texto) => DOMPurify.sanitize texto
+
+    obtenerRutaDoc = (fragmentos, idiomaActual, versionDocsActual) =>
+        inicio = "/textos/#{ idiomaActual }/docs/#{ versionDocsActual }"
+        (fold fragmentos, inicio, (nuevo, acc) =>
+            acc + "/" + nuevo) + ".md"
 
     export default
         name: "docs-sub"
         components: { codigo, contenidoDocs }
-        data: ->
-            datos: {cargando: true}
-            htmlPagina: ""
-        computed:
-            idiomaActual: -> @$store.state.variables.idiomaActual
-            versionDocsActual: -> @$store.state.variables.versionDocsActual
-        methods:
-            obtenerFragmentos: (pathMatch) ->
-                ((pathMatch?.split? "/") ? []).filter ((x) => x != "")
+        setup: =>
+            state = useStore().state
+            route = useRoute()
+            datos = ref({ cargando: true })
+            htmlPagina = ref("")
 
-            obtenerRutaDoc: (fragmentos) ->
-                inicio = "/textos/#{ @idiomaActual }/docs/#{ @versionDocsActual }"
-                (fold fragmentos, inicio, (nuevo, acc) =>
-                    acc + "/" + nuevo) + ".md"
+            idiomaActual  = computed(=> state.variables.idiomaActual )
+            versionDocsActual = computed(=> state.variables.versionDocsActual )
 
-            cargaInicial: ->
-                @cargarDatos @$route.fullPath.substr 6
+            cargarDatos = (pathMatch) =>
+                datos.value = { cargando: true }
+                fragmentos = obtenerFragmentos pathMatch
+                ruta = obtenerRutaDoc fragmentos, idiomaActual.value, versionDocsActual.value
+                datos.value =
+                    try
+                        resRaw = await fetch ruta
+                        if resRaw.status == 200
+                            html = marked (await resRaw.text())
+                            htmlPagina.value = escaparHtml html
+                            datos.value = { cargando: false }
+                        else
+                            throw new Error("Archivo no encontrado.")
+                    catch e
+                        console.log e
+                        error: true
+                        razon: e.message
 
-            escaparHtml: (texto) -> DOMPurify.sanitize texto
+            cargaInicial = =>
+                cargarDatos route.fullPath.substr 6
 
-            cargarDatos: (pathMatch) ->
-                vm = this
-                vm.datos = {cargando: true}
-                fragmentos = @obtenerFragmentos pathMatch
-                ruta = @obtenerRutaDoc fragmentos
-                vm.datos =
-                        try
-                            resRaw = await fetch ruta
-                            if resRaw.status == 200
-                                html = marked (await resRaw.text())
-                                @htmlPagina = @escaparHtml html
-                                @datos = { cargando: false }
-                            else
-                                throw new Error("Archivo no encontrado.")
-                        catch e
-                            console.log e
-                            error: true
-                            razon: e.message
+            onMounted(cargaInicial)
 
-        beforeRouteUpdate: (to, from, next) ->
-            @cargarDatos @$route.fullPath.substr 6
-            next()
-        mounted: ->
-            @cargaInicial()
+            onBeforeRouteUpdate (to, from, next) =>
+                cargarDatos to.fullPath.substr 6
+                next()
 
+            {
+                datos
+                htmlPagina
+                cargaInicial
+            }
 
+#
 </script>
 
 <style lang="sass">
