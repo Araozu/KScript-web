@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div(ref="elem")
     // linea(v-for="(linea, i) in lineas"
     //     :key="i" :pos="i" :linea="linea" :numLineas="lineas.length"
     // )
@@ -7,6 +7,7 @@ div
 </template>
 
 <script lang="coffee">
+    import { ref, onMounted } from "vue"
     import linea from "./linea.vue"
     import { kanAHtml } from "./kanAHTML.coffee"
 
@@ -21,16 +22,18 @@ div
             esBloque:
                 type: Boolean
                 default: true
-        computed:
-            lineas: ->
-                fragmentos = @codigo.split "\n"
-                if fragmentos[fragmentos.length - 1] == ""
-                    fragmentos.pop()
-                fragmentos
-        mounted: ->
-            elemento = @$el.nextElementSibling
-            elementoCodigo = kanAHtml @codigo, @esBloque
-            elemento.appendChild elementoCodigo
+        setup: (props, context) =>
+            elem = ref(null)
+
+            onMounted (=>
+                elemento = elem.value
+                elementoCodigo = kanAHtml props.codigo, props.esBloque
+                elemento.appendChild elementoCodigo
+            )
+
+            {
+                elem
+            }
 
 
 #
