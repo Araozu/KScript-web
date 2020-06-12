@@ -1,25 +1,19 @@
-# Kan
+# misti-web
 
-> Pagina web del lenguaje de programacion Kan.
+## Project setup
+```
+pnpm install
+```
 
-Construido con Nuxt.js, Vue.js, F# y Fable.
+### Compiles and hot-reloads for development
+```
+pnpm run serve
+```
 
-## Requisitos
+### Compiles and minifies for production
+```
+pnpm run build
+```
 
-- node.js (construido con v12)
-- npm
-
-## Instalación
-
-- Clonar este repositorio
-- Instalar dependencias
-
-## Ejecución de desarrollo
-
-`npm run dev`
-
-## Compilación para deployment
-
-`npm run generate`
-
-Para mas información visitar la documentación de Nuxt.js.
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
