@@ -120,7 +120,7 @@ Los operadores para probar igualdad funcionan diferente a JS:
 
 ## Operadores con bits
 
-Estos operadores no existen en Misti, porque han sido reemplazados con otros operadores usados en programación funcional, como composición de funciones (`<<` y `>>`).
+Estos operadores no existen en Misti, porque han sido reemplazados con otros operadores usados en programación funcional.
 
 Los siguientes operadores **no** funcionan igual que JS:
 

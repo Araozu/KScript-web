@@ -1,48 +1,45 @@
 # Bases
 
 ## Identificadores
-    
-Las reglas para crear identificadores en Misti (serán) las mismas de JS.
-De momento, los identificadores:
 
-- Inician con una minuscula, MAYUSCULA o guion bajo _
-- Luego pueden tener minusculas, MAYUSCULAS, guiones bajos _ y números
+- Inician con guion bajo o una letra.
+- Luego pueden tener numeros, letras, guiones bajos y comillas simples.
+- No pueden ser un único guion bajo.
 
-En un futuro se podrán usar los caracteres '$'.
+En un futuro se podrá usar el dolar `$`.
 
 ```
 identificador
 IdentificadorValido
-_valido
+_valido'
+__identificador'valido'2__
 
-__identificador_valido_2__
+_  //! Invalido.
 ```
 
 ## Constantes
 
 ```
-let nombre = "Pedro"
+const nombre = "Pedro"
 ```
 
 
 ## Variables
 
 ```
-let mut edad = 20
+let edad = 20
 
 edad = 21  // OK
 ```
 
 ## Tipos de datos
 
-Misti usa los mismos tipos de datos de JS. Los tipos soportados actualmente son:
-
 ```
 // Txt o string
-let nombre = "Hola"
+const nombre = "Hola"
 
 // No se usan comillas simples para crear Txt
-let canal = 'beta' // Error
+const canal = 'beta' // Error
 
 
 // Num o number
@@ -53,3 +50,45 @@ let edad = 20
 let esSoltero = true
 let esCasado  = false
 ```
+
+## Operadores
+
+```
+"Hola" <> "mundo"  //= Hola mundo
+
+10 + 5   //= 15
+10 - 5   //= 5
+10 * 5   //= 50
+10 / 5   //= 2
+10 % 5   //= 0
+10 ** 5  //= 100000
+
+let numero = 10
+numero += 5   //= 15
+numero -= 5   //= 10
+numero *= 2   //= 20
+numero /= 4   //= 5
+numero %= 3   //= 2
+numero **= 3  //= 8
+
+let i = 0
+i++            //= 0
+++i            //= 2
+i--            //= 2
+--i            //= 0
+
+true && false  //= false
+true || false  //= true
+!true          //= false
+
+10 > 20   //= false
+20 >= 20  //= true
+15 < 30   //= true
+15 <= 15  //= true
+
+// Otros
+<|  |>  <<  >>  ?  ?.  ??  ?:  !!
+```
+
+No hay operadores para bits.
+

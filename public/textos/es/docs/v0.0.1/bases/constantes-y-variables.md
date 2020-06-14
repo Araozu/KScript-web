@@ -54,7 +54,7 @@ Por ello Misti también permite trabajar con variables de forma similar a Javasc
 Las variables se declaran de la siguiente manera:
 
 ```
-const let edad = 20
+let edad = 20
 ```
 
 Como en JavaScript usamos let. De ese modo podemos re-asignar el valor
@@ -64,6 +64,59 @@ que contiene.
 let edad = 20
 edad = 21         // OK
 ```
+
+## Identificadores
+
+Los identificadores en Misti tienen 1 adición respecto a JavaScript. 
+Los nombres de variables inician con un guion bajo o una letra, y luego pueden contener
+guiones bajos, letras, numeros, y **comillas simples**.
+
+```
+// Nombres validos.
+url1
+_url2
+Url3
+
+// Con comillas simples
+resultado
+resultado'
+resultado''
+
+// Comillas en medio
+texto'yaml
+pos'cursor
+
+```
+
+### Restricciones
+
+- No se puede poner una comilla al inicio de un identificador.
+
+  ```
+  const 'nombre = "Juan" //! Error: 'nombre no es un identificador válido.
+  ```
+  
+  Las comillas al inicio se usan para definir un genérico, no un identificador normal.
+  
+- Un único guion bajo no es un identificador válido.
+
+  ```
+  const _ = "Hola"
+  console.log _   //! Error: `_` no es un identificador válido.
+  ```
+  
+  Un único identificador se usa para ignorar algún valor, por lo tanto no es válido
+  como identificador.
+  
+  En el código anterior intentamos crear una constante con nombre `_`. Sin embargo,
+  como ese identificador se usa para ignorar algún valor, sería equivalente a hacer
+  lo siguiente en JavaScript:
+  
+  ```javascript
+  "Hola";
+  ```
+  
+  La utilidad de este identificador se verá más adelante, cuando veamos funciones.
 
 
 ## Consideraciones
