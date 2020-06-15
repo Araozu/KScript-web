@@ -2,6 +2,8 @@ ruta: docs
 temas:
   - titulo: Introducción
     ruta: introduccion
+  - titulo: Objetivos
+    ruta: objetivos
   - titulo: Bases
     ruta: bases
     temas:

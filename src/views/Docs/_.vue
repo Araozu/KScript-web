@@ -101,10 +101,19 @@ div.doc
         cursor: pointer
         padding: 0.5rem
         user-select: none
+        color: var(--color)
         i, span
             font-size: 1rem
         &:hover
-            background-color: var(--color-borde)
+            background-color: var(--colorSecundario)
+            color: white
+
+
+    .opciones
+        background-color: var(--fondo)
+        position: sticky
+        top: 0
+        border-bottom: solid 3px var(--colorSecundario)
 
 
     .doc

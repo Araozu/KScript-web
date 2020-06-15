@@ -7,6 +7,50 @@ var $$String = require("bs-platform/lib/js/string.js");
 var Expect$KanComp = require("./Expect.bs.js");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 
+function obtPosExpr(_ex) {
+  while(true) {
+    var ex = _ex;
+    switch (ex.tag | 0) {
+      case /* EIdentificador */0 :
+          var infoId = ex[0];
+          return {
+                  inicioPE: infoId.valorId.inicio,
+                  numLineaPE: infoId.valorId.numLinea,
+                  posInicioLineaPE: infoId.valorId.posInicioLinea
+                };
+      case /* EOperadorApl */6 :
+          _ex = ex[0].izq;
+          continue ;
+      case /* EDeclaracion */7 :
+          var eDec = ex[0];
+          return {
+                  inicioPE: eDec.inicioDec,
+                  numLineaPE: eDec.numLineaDec,
+                  posInicioLineaPE: eDec.posInicioLineaDec
+                };
+      case /* EBloque */8 :
+          var exprs = ex[0];
+          if (exprs) {
+            _ex = exprs[0];
+            continue ;
+          } else {
+            return {
+                    inicioPE: 0,
+                    numLineaPE: 0,
+                    posInicioLineaPE: 0
+                  };
+          }
+      default:
+        var info = ex[0];
+        return {
+                inicioPE: info.inicio,
+                numLineaPE: info.numLinea,
+                posInicioLineaPE: info.posInicioLinea
+              };
+    }
+  };
+}
+
 function $great$great$eq(a, f) {
   if (typeof a === "number" || a.tag) {
     return a;
@@ -15,13 +59,13 @@ function $great$great$eq(a, f) {
   }
 }
 
-function obtInfoFunAppl(esCurry) {
+function obtInfoFunAppl(esCurry, inicio, numLinea, posInicioLinea) {
   return {
           valor: esCurry ? "Ñ" : "ñ",
-          inicio: -1,
-          final: -1,
-          numLinea: -1,
-          posInicioLinea: -1
+          inicio: inicio,
+          final: inicio + 1 | 0,
+          numLinea: numLinea,
+          posInicioLinea: posInicioLinea
         };
 }
 
@@ -139,9 +183,8 @@ function parseTokens(lexer) {
   };
   var sigExprDeclaracion = function (nivel, esMut) {
     try {
-      var tokenIdentificador = Curry._1(lexer.sigToken, /* () */0);
-      var infoTokenId = Expect$KanComp._TIdentificador(tokenIdentificador, undefined, "Se esperaba un identificador");
-      Expect$KanComp._TOperador(Curry._1(lexer.sigToken, /* () */0), "=", "Se esperaba el operador de asignaci\xc3\xb3n '=' luego del indentificador.");
+      var infoTokenId = Expect$KanComp._TIdentificador(lexer.sigToken, undefined, "Se esperaba un identificador");
+      Expect$KanComp._TOperador(lexer.sigToken, "=", "Se esperaba el operador de asignaci\xc3\xb3n '=' luego del indentificador.");
       var match = Curry._1(lexer.lookAheadSignificativo, false);
       var hayNuevaLinea = match[2];
       var nuevoNivel = match[1];
@@ -166,7 +209,10 @@ function parseTokens(lexer) {
                 signatura: /* Indefinida */0,
                 valorId: infoTokenId
               },
-              valorDec: match$1[0]
+              valorDec: match$1[0],
+              inicioDec: infoTokenId.inicio,
+              numLineaDec: infoTokenId.numLinea,
+              posInicioLineaDec: infoTokenId.posInicioLinea
             }]);
         var exprRespuesta = /* PExito */Block.__(0, [exprDeclaracion]);
         var sigExpresionRaw = sigExpresion(nivel, nivel, true, 0, /* Izq */0, true);
@@ -333,15 +379,9 @@ function parseTokens(lexer) {
                   if (typeof sigExpr === "number" || sigExpr.tag) {
                     return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
                   } else {
-                    var infoOpFunApl_valor = "ñ";
-                    var infoOpFunApl = {
-                      valor: infoOpFunApl_valor,
-                      inicio: -1,
-                      final: -1,
-                      numLinea: -1,
-                      posInicioLinea: -1
-                    };
-                    var match$4 = obtInfoOp("ñ");
+                    var posEI = obtPosExpr(exprIzq);
+                    var infoOpFunApl = obtInfoFunAppl(false, posEI.inicioPE, posEI.numLineaPE, posEI.posInicioLineaPE);
+                    var match$4 = obtInfoOp(infoOpFunApl.valor);
                     return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
                                     op: {
                                       signaturaOp: /* Indefinida */0,
@@ -393,15 +433,9 @@ function parseTokens(lexer) {
               if (aceptarSoloOp) {
                 return Curry._1(funValorDefecto, /* () */0);
               } else {
-                var infoOp2_valor = "ñ";
-                var infoOp2$1 = {
-                  valor: infoOp2_valor,
-                  inicio: -1,
-                  final: -1,
-                  numLinea: -1,
-                  posInicioLinea: -1
-                };
-                var match$5 = obtInfoOp("ñ");
+                var posEI$1 = obtPosExpr(exprIzq);
+                var infoOp2$1 = obtInfoFunAppl(false, posEI$1.inicioPE, posEI$1.numLineaPE, posEI$1.posInicioLineaPE);
+                var match$5 = obtInfoOp(infoOp2$1.valor);
                 Curry._1(lexer.retroceder, /* () */0);
                 return sigExprOperador(exprOpRes, infoOp2$1, nivel, match$5[0], match$5[1], esExprPrincipal);
               }
@@ -598,15 +632,8 @@ function parseTokens(lexer) {
                           if (typeof sigExpr === "number" || sigExpr.tag) {
                             return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
                           } else {
-                            var infoOpFunApl_valor = "ñ";
-                            var infoOpFunApl = {
-                              valor: infoOpFunApl_valor,
-                              inicio: -1,
-                              final: -1,
-                              numLinea: -1,
-                              posInicioLinea: -1
-                            };
-                            var match$3 = obtInfoOp("ñ");
+                            var infoOpFunApl = obtInfoFunAppl(false, infoId$1.inicio, infoId$1.numLinea, infoId$1.posInicioLinea);
+                            var match$3 = obtInfoOp(infoOpFunApl.valor);
                             return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
                                             op: {
                                               signaturaOp: /* Indefinida */0,
@@ -644,24 +671,10 @@ function parseTokens(lexer) {
                       } else {
                         Curry._1(lexer.retroceder, /* () */0);
                         if (14 > precedencia$1) {
-                          var infoOpFunApl_valor$1 = "ñ";
-                          var infoOpFunApl$1 = {
-                            valor: infoOpFunApl_valor$1,
-                            inicio: -1,
-                            final: -1,
-                            numLinea: -1,
-                            posInicioLinea: -1
-                          };
+                          var infoOpFunApl$1 = obtInfoFunAppl(false, infoId$1.inicio, infoId$1.numLinea, infoId$1.posInicioLinea);
                           return sigExprOperador(primeraExprId, infoOpFunApl$1, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
                         } else if (14 === precedencia$1 && false) {
-                          var infoOpFunApl_valor$2 = "ñ";
-                          var infoOpFunApl$2 = {
-                            valor: infoOpFunApl_valor$2,
-                            inicio: -1,
-                            final: -1,
-                            numLinea: -1,
-                            posInicioLinea: -1
-                          };
+                          var infoOpFunApl$2 = obtInfoFunAppl(false, infoId$1.inicio, infoId$1.numLinea, infoId$1.posInicioLinea);
                           return sigExprOperador(primeraExprId, infoOpFunApl$2, nivel$1, 14, /* Izq */0, esExprPrincipal$1);
                         } else {
                           return /* PExito */Block.__(0, [primeraExprId]);
@@ -712,6 +725,7 @@ function parseTokens(lexer) {
   }
 }
 
+exports.obtPosExpr = obtPosExpr;
 exports.$great$great$eq = $great$great$eq;
 exports.obtInfoFunAppl = obtInfoFunAppl;
 exports.obtInfoOp = obtInfoOp;

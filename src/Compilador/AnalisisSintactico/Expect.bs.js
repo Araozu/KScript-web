@@ -69,24 +69,29 @@ function _TNuevaLinea(resLexer, valorOpc, msgError) {
   }
 }
 
-function _TIdentificador(resLexer, valorOpc, msgError) {
-  var preToken = extraerToken(resLexer, msgError);
-  if (preToken.tag === /* TIdentificador */1) {
-    var infoToken = preToken[0];
-    if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
-      throw [
-            ErrorComun,
-            ""
-          ];
-    } else {
-      return infoToken;
+function _TIdentificador(fnObtToken, valorOpc, msgError) {
+  while(true) {
+    var preToken = extraerToken(Curry._1(fnObtToken, /* () */0), msgError);
+    switch (preToken.tag | 0) {
+      case /* TIdentificador */1 :
+          var infoToken = preToken[0];
+          if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
+            throw [
+                  ErrorComun,
+                  ""
+                ];
+          } else {
+            return infoToken;
+          }
+      case /* TComentario */3 :
+          continue ;
+      default:
+        throw [
+              ErrorComun,
+              msgError
+            ];
     }
-  } else {
-    throw [
-          ErrorComun,
-          msgError
-        ];
-  }
+  };
 }
 
 function _PC_LET(resLexer, valorOpc, msgError) {
@@ -129,24 +134,29 @@ function _PC_CONST(resLexer, valorOpc, msgError) {
   }
 }
 
-function _TOperador(resLexer, valorOpc, msgError) {
-  var preToken = extraerToken(resLexer, msgError);
-  if (preToken.tag === /* TOperador */7) {
-    var infoToken = preToken[0];
-    if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
-      throw [
-            ErrorComun,
-            ""
-          ];
-    } else {
-      return infoToken;
+function _TOperador(fnObtToken, valorOpc, msgError) {
+  while(true) {
+    var preToken = extraerToken(Curry._1(fnObtToken, /* () */0), msgError);
+    switch (preToken.tag | 0) {
+      case /* TComentario */3 :
+          continue ;
+      case /* TOperador */7 :
+          var infoToken = preToken[0];
+          if (valorOpc !== undefined && infoToken.valor !== valorOpc) {
+            throw [
+                  ErrorComun,
+                  ""
+                ];
+          } else {
+            return infoToken;
+          }
+      default:
+        throw [
+              ErrorComun,
+              msgError
+            ];
     }
-  } else {
-    throw [
-          ErrorComun,
-          msgError
-        ];
-  }
+  };
 }
 
 exports.ErrorComun = ErrorComun;
