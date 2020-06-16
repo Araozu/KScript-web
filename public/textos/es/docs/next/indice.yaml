@@ -1,5 +1,5 @@
 # Formato para rutas: /textos/{idioma}/{raiz}/{ruta}.yaml
-ruta: docs
+ruta: docs/next
 temas:
   - titulo: Introducción
     ruta: introduccion
