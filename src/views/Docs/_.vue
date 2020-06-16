@@ -41,8 +41,8 @@ div.doc
 
     escaparHtml = (texto) => DOMPurify.sanitize texto
 
-    obtenerRutaDoc = (fragmentos, idiomaActual, versionDocsActual) =>
-        inicio = "/textos/#{ idiomaActual }/docs/#{ versionDocsActual }"
+    obtenerRutaDoc = (fragmentos, idiomaActual) =>
+        inicio = "/textos/#{ idiomaActual }/docs"
         (fold fragmentos, inicio, (nuevo, acc) =>
             acc + "/" + nuevo) + ".md"
 
@@ -56,12 +56,11 @@ div.doc
             htmlPagina = ref("")
 
             idiomaActual  = computed(=> state.variables.idiomaActual )
-            versionDocsActual = computed(=> state.variables.versionDocsActual )
 
             cargarDatos = (pathMatch) =>
                 datos.value = { cargando: true }
                 fragmentos = obtenerFragmentos pathMatch
-                ruta = obtenerRutaDoc fragmentos, idiomaActual.value, versionDocsActual.value
+                ruta = obtenerRutaDoc fragmentos, idiomaActual.value
                 datos.value =
                     try
                         resRaw = await fetch ruta
