@@ -3,11 +3,6 @@ ruta: docs/next
 temas:
   - titulo: Introducción
     ruta: introduccion
-    temas:
-      - titulo: Motivación # Incluye un hola mundo
-        ruta: motivacion
-      - titulo: Instalación
-        ruta: instalacion
 
   - titulo: Bases
     ruta: bases # Un resumen rápido
