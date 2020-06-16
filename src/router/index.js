@@ -10,13 +10,14 @@ const routes = [
         component: Inicio
     },
     {
-        path: "/docs/",
+        path: "/docs/:version/",
         name: "Docs",
         component: Docs,
         children: [
             {
                 path: "",
-                redirect: "/docs/introduccion/"
+                name: "DocsInicio",
+                component: () => import("../views/Docs/index.vue")
             },
             {
                 path: ":catchAll(.*)",
