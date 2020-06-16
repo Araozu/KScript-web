@@ -39,7 +39,7 @@ export palabrasClave = ("let const rec if else match when is in for while " +
     "instanceof new return super switch this throw try typeof var void while with yield " +
     "enum implements package public interface  private static protected await " +
     "abstract boolean byte char double final float goto int long native short " +
-    "synchronized throws transient volatile").split " "
+    "synchronized throws transient volatile then").split " "
 export funcionesClave = "constructor get set".split " "
 export std = "Lista impr imprf console".split " "
 
