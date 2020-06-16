@@ -7,7 +7,7 @@ div
                 br
                 | que se compila a JavaScript.
 
-            router-link(to="/docs/").boton-inicio Documentación
+            router-link(:to="rutaDocs").boton-inicio Documentación
             br
             router-link(to="/api/").boton-inicio API
 
@@ -79,7 +79,8 @@ div
 </template>
 
 <script lang="coffee">
-    import { reactive } from "vue"
+    import { computed } from "vue"
+    import { useStore } from "vuex"
     import primerBanner from "../components/index/primer-banner.vue"
     import codigo from "../components/codigo/codigo.vue"
 
@@ -146,14 +147,24 @@ div
     export default
         name: "Inicio"
         components: { primerBanner, codigo }
-        setup: -> {
-            codCarac1
-            codCarac2
-            codCarac3
-            codCarac4
-            codCarac5
-            codCarac6
-        }
+        setup: ->
+            store = useStore()
+
+            versionesDocs = computed (=> store.state.variables.versiones)
+            rutaDocs = computed (=>
+                sigVer = versionesDocs.value.find (x) => x != "next"
+                "/docs/#{ sigVer }/"
+            )
+
+            {
+                rutaDocs
+                codCarac1
+                codCarac2
+                codCarac3
+                codCarac4
+                codCarac5
+                codCarac6
+            }
 
 #
 </script>

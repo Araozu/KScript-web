@@ -28,8 +28,10 @@ div.barra-nav
             rutaImg = ref "/img/logo-misti-lambda.svg"
             esClaro = computed (=>  store.state.variables.esClaro)
             textoModoColor = computed (=> if esClaro.value then "claro" else "oscuro" )
+            versionesDocs = computed (=> store.state.variables.versiones)
             rutaDocs = computed (=>
-                "/docs/#{ store.state.variables.versionDocsActual }/"
+                sigVer = versionesDocs.value.find (x) => x != "next"
+                "/docs/#{ sigVer }/"
             )
 
             cambiarColor = =>
