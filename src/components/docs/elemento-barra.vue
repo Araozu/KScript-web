@@ -15,6 +15,7 @@ div.elemento-barra
 </template>
 
 <script lang="coffee">
+    import { computed } from "vue"
 
     export default
         name: "elemento-barra"
@@ -34,20 +35,27 @@ div.elemento-barra
             fragmentosUrl:
                 type: Array
                 required: true
-        computed:
-            rutaActual: -> @ruta + @tema.ruta + "/"
-            esRutaActiva: ->
-                if @padreActivo
-                    rutaActual = @fragmentosUrl[@nivel] ? ""
-                    (rutaActual isnt "") and (@tema.ruta is rutaActual)
+        setup: (props) =>
+            rutaActual = computed (=> props.ruta + props.tema.ruta + "/" )
+            esRutaActiva = computed (=>
+                if props.padreActivo
+                    rutaActual = props.fragmentosUrl[props.nivel] ? ""
+                    (rutaActual isnt "") and (props.tema.ruta is rutaActual)
                 else false
-            clases: ->
-                if @esRutaActiva then["elemento-activo-barra-docs"]
+            )
+            clases = computed (=>
+                if esRutaActiva.value then ["elemento-activo-barra-docs"]
                 else []
+            )
+
+            {
+                rutaActual
+                esRutaActiva
+                clases
+            }
 
 
-
-
+#
 </script>
 
 <style scoped lang="sass">
