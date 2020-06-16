@@ -1,12 +1,14 @@
 <template lang="pug">
 div.barra-doc
-    // div.cont-opcion-version
-        span v0.0.13
     div.cont-opcion-version
         span Versión del lenguaje:
+        br
         select(v-model="versionDocs")
-            option v0.0.13
-            option next
+            option(v-for="(version, i) in versionesDisponibles" :key="i") {{ version }}
+
+        div(v-if="!versionActualExiste")
+            p No existe esta versión de la documentación, por favor escoge otra.
+
     elemento-barra(v-for="(tema, i) in datos.temas"
         :key="i"
         :tema="tema"
@@ -16,13 +18,14 @@ div.barra-doc
         :fragmentosUrl="fragmentosUrl")
 
 
+//
 </template>
 
 <script lang="coffee">
     import YAML from "yaml"
     import elementoBarra from "./elemento-barra.vue"
     import { ref, computed, onMounted, watchEffect, watch } from "vue"
-    import { useRoute } from "vue-router"
+    import { useRoute, useRouter } from "vue-router"
     import { useStore } from "vuex"
 
     export default
@@ -31,13 +34,13 @@ div.barra-doc
         setup: =>
             store = useStore()
             route = useRoute()
+            router = useRouter()
 
             datos = ref {}
-            versionDocs = ref "v0.0.13"
+            versionDocs = ref route.params.version
 
             watch versionDocs, (version) =>
-                console.log version
-                store.commit "variables/estVersionDocsActual", version
+                router.push "/docs/#{version}/"
 
             versionDocsActual = computed (=> route.params.version)
             idiomaActual = computed (=> store.state.variables.idiomaActual)
@@ -45,6 +48,10 @@ div.barra-doc
                 vDocs = route.params.version
                 strRes = route.fullPath.substr (7 + vDocs.length)
                 (strRes.split? "/") ? []
+            )
+            versionesDisponibles = computed (=> store.state.variables.versiones )
+            versionActualExiste = computed(=>
+                !!(versionesDisponibles.value.find (x) => x == versionDocsActual.value)
             )
 
             watchEffect (=>
@@ -62,6 +69,8 @@ div.barra-doc
                 fragmentosUrl
                 idiomaActual
                 versionDocsActual
+                versionesDisponibles
+                versionActualExiste
             }
 
 #
@@ -70,7 +79,7 @@ div.barra-doc
 <style scoped lang="sass">
 
     .barra-doc
-        height: 100%
+        height: calc(100vh - 3.25rem)
         overflow-y: auto
         border-right: solid 1px var(--color-borde)
 
