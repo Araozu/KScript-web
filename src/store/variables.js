@@ -1,3 +1,4 @@
+import YAML from "yaml"
 const cambiarAColor = esClaro => {
     const claseshtml = document.documentElement.classList;
     if (esClaro) {
@@ -18,7 +19,6 @@ export default {
     state() {
         return {
             idiomaActual: "es",
-            versionDocsActual: "v0.0.1",
             versiones: [],
             esClaro: true
         }
@@ -37,13 +37,22 @@ export default {
         },
         establecerColor(state, valor) {
             state.esClaro = valor;
+        },
+        estVersionesDocs(state, valor) {
+            state.versiones = valor;
         }
     },
     actions: {
-        inicializarColor({state, commit}) {
+        inicializarColor({commit}) {
             const esClaro = localStorage.getItem("modo-color") === "claro";
             commit("establecerColor", esClaro);
             cambiarAColor(esClaro);
+        },
+        async inicializarListaVersiones({state, commit}) {
+            const respuesta = await fetch(`/textos/${state.idiomaActual}/docs/indice.yaml`);
+            const textoRes = await respuesta.text();
+            const obj = YAML.parse(textoRes);
+            commit("estVersionesDocs", obj.versiones);
         }
     }
 };

@@ -19,7 +19,10 @@ div#app
         setup: =>
             { dispatch } = useStore()
 
-            onMounted (-> dispatch "variables/inicializarColor")
+            onMounted (->
+                dispatch "variables/inicializarColor"
+                dispatch "variables/inicializarListaVersiones"
+            )
 
             {
                 mostrarBarra: computed(=> useRoute().path != "/")
