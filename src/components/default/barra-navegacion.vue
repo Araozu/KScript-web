@@ -7,7 +7,7 @@ div.barra-nav
         li.ruta-barra-nav
             router-link(to="/") Misti
         li.ruta-barra-nav
-            router-link(to="/docs/") Documentación
+            router-link(:to="rutaDocs") Documentación
         li.ruta-barra-nav
             router-link(to="/api/") API
         li.ruta-barra-nav
@@ -17,16 +17,31 @@ div.barra-nav
 </template>
 
 <script lang="coffee">
+    import { ref, computed } from "vue"
+    import { useStore } from "vuex"
 
     export default
         name: "barra-navegacion"
-        computed:
-            esClaro: -> @$store.state.variables.esClaro
-            textoModoColor: -> if @esClaro then "claro" else "oscuro"
-            rutaImg: -> "/img/logo-misti-lambda.svg"
-        methods:
-            cambiarColor: ->
-                @$store.commit "variables/cambiarColor", !@esClaro
+        setup: =>
+            store = useStore()
+
+            rutaImg = ref "/img/logo-misti-lambda.svg"
+            esClaro = computed (=>  store.state.variables.esClaro)
+            textoModoColor = computed (=> if esClaro.value then "claro" else "oscuro" )
+            rutaDocs = computed (=>
+                "/docs/#{ store.state.variables.versionDocsActual }/"
+            )
+
+            cambiarColor = =>
+                store.commit "variables/cambiarColor", !esClaro.value
+
+            {
+                rutaImg
+                esClaro
+                textoModoColor
+                rutaDocs
+                cambiarColor
+            }
 
 #
 </script>
