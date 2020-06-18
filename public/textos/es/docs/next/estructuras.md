@@ -22,7 +22,7 @@ if esSoltero then "soltero" else "casado"
 
 // Como expresion
 const estadoCivil =
-    if esSoltero then "soltero"
+    if esSoltero th~~~~en "soltero"
     else "casado"
 
 

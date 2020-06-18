@@ -23,14 +23,14 @@ temas:
   - titulo: Estructuras básicas
     ruta: estructuras # Un resumen rápido
     temas:
-      - titulo: Condicionales
-        ruta: condicionales
-      - titulo: Switch # Hablar de pattern matching
-        ruta: switch
       - titulo: Tuplas
         ruta: tuplas
       - titulo: Arrays
         ruta: arrays
+      - titulo: Condicionales
+        ruta: condicionales
+      - titulo: Switch # Hablar de pattern matching
+        ruta: switch
       - titulo: Bucles
         ruta: bucles
 
@@ -67,6 +67,11 @@ temas:
         ruta: funciones-flecha
       - titulo: Rest/Spread
         ruta: rest-spread
+  - titulo: Pattern Matching
+    ruta: pattern-matching
+    temas:
+      - titulo: Patrones activos
+        ruta: patrones-activos
 
   - titulo: Objetos
     ruta: objetos
