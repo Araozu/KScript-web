@@ -123,12 +123,12 @@ temas:
   - titulo: Módulos
     ruta: modulos
     temas:
-      - titulo: Estructura
-        ruta: estructura
-      - titulo: Node.js
+      - titulo: Import
+        ruta: import
+      - titulo: Export
+        ruta: export
+      - titulo: Nodejs
         ruta: nodejs
-      - titulo: ECMAScript 2015
-        ruta: ecmascript-2015
 
   - titulo: Clases
     ruta: clases
