@@ -11,3 +11,20 @@ Si deseas aprender el lenguaje visita una de las versiones que inician con v
 y definido.
 
 La mayoría de los temas se encuentran vacios, pues solo se usan para definir estructura.
+
+## Estado de la sintaxis
+
+Cada sección indicará el estado de la sintaxis. Puede ser
+
+- En uso:
+  El tema ha sido aprovado, implementado y se está usando en la última versión del compilador.
+
+- Aprovado:
+  El tema ha sido aprobado pero aún no ha sido implementado.
+
+- En diseño:
+  Se está probando la viabilidad, si es coherente con el lenguaje, si aporta algún beneficio.
+  Usualmente habrán razones en el mismo documento.
+
+- Experimental:
+  Simplemente una idea de cómo podria ser.
