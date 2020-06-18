@@ -20,10 +20,22 @@ div(v-html="mdhtml" ref="elem")
                     nuevaDir = elemento.href.substring (origin.length + 2)
                     router.push nuevaDir
 
+    actualizarCodTerminal = (elem) =>
+        elemCont = document.createElement "div"
+        codigo = elem.innerText
+        elemCont.innerText = codigo
+        elemCont.className = "cont Fondo-alt"
+        elemCont.style.padding = "15px"
+        elem.innerText = ""
+        elem.appendChild elemCont
+
 
     actualizarElementosCode = (elemHtml) =>
         elementos = elemHtml.querySelectorAll "code"
         for elemento in elementos
+            if elemento.className == "language-terminal"
+                actualizarCodTerminal elemento
+                continue
 
             nombreElementoPadre = elemento.parentElement.nodeName
             esBloque = false
