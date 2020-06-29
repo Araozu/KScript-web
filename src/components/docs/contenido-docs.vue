@@ -44,6 +44,11 @@ div(v-html="mdhtml" ref="elem")
                 esBloque = true
 
             elementoHtmlCodigoKan = kanAHtml elemento.innerText, esBloque
+            if elemento.className == "language-err"
+                elementoHtmlCodigoKan.className += " Fondo-alt-err"
+            else if elemento.className == "language-ok"
+                elementoHtmlCodigoKan.className += " Fondo-alt-ok"
+
             elemento.removeChild elemento.firstChild
             elemento.appendChild elementoHtmlCodigoKan
 

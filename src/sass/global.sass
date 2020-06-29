@@ -3,6 +3,8 @@
     --fondo: #151515
     --fondoCodigo: #282c34
     --colorCodigo: #d7d7d7
+    --color-borde-error: #f44336
+    --color-borde-exito: #4CAF50
     // #01070a
     --colorSecundario: #2196F3
     --fuenteNormal: Roboto, sans-serif
@@ -33,6 +35,7 @@ code
 .tema-oscuro
     --color: #dedede
     --fondo: #151515
+    --color-link: #29B6F6
     --color-borde: #454545
     --color-cod-texto: #43cd65
     --color-cod-numero: #ffb86c
@@ -49,6 +52,7 @@ code
 .tema-claro
     --color: #1d1d1d
     --fondo: #ffffff
+    --color-link: #0277BD
     --color-borde: #e3e3e3
     --color-cod-texto: #032f62
     --color-cod-numero: #005CC5
@@ -100,6 +104,14 @@ code
     background-color: var(--color-cod-fondo)
     color: var(--color-cod)
     border: solid 1px var(--color-borde)
+
+
+.Fondo-alt-err
+    border: solid 2px var(--color-borde-error)
+
+
+.Fondo-alt-ok
+    border: solid 2px var(--color-borde-exito)
 
 
 .LineaCodigo
@@ -158,6 +170,10 @@ code
         font:
             family: Roboto, sans-serif
         padding: 0.25rem
+
+
+a
+    color: var(--color-link)
 
 
 blockquote
