@@ -39,20 +39,20 @@ temas:
     temas:
       - titulo: Estructura # Incluir como llamar una funcion
         ruta: estructura
-      - titulo: Parámetros
-        ruta: parametros
-      - titulo: Currying
-        ruta: currying
-      - titulo: Aplicación parcial
-        ruta: aplicacion-parcial
       - titulo: Signatura
         ruta: signatura
-      - titulo: Operadores # Incluir notacion pre-fija (+)
-        ruta: operadores
+      - titulo: Parámetros
+        ruta: parametros
       - titulo: Parámetros opcionales
         ruta: parametros-opcionales
       - titulo: Parámetros por defecto
         ruta: parametros-por-defecto
+      - titulo: Currying
+        ruta: currying
+      - titulo: Aplicación parcial
+        ruta: aplicacion-parcial
+      - titulo: Operadores # Incluir notacion pre-fija (+)
+        ruta: operadores
       - titulo: Parámetros nombrados
         ruta: parametros-nombrados
       - titulo: Funciones anónimas
