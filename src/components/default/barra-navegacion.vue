@@ -5,8 +5,6 @@ div.barra-nav
 
     ul.lista-links-barra-nav
         li.ruta-barra-nav
-            router-link(to="/") Misti
-        li.ruta-barra-nav
             router-link(:to="rutaDocs") Documentación
         li.ruta-barra-nav
             router-link(to="/api/") API
@@ -25,8 +23,10 @@ div.barra-nav
         setup: =>
             store = useStore()
 
-            rutaImg = ref "/img/logo-misti-lambda.svg"
             esClaro = computed (=>  store.state.variables.esClaro)
+            rutaImg = computed(=>
+                if esClaro.value == true then "/img/misti-logo-largo.svg"
+                else "/img/misti-logo-largo_dark.svg")
             textoModoColor = computed (=> if esClaro.value then "claro" else "oscuro" )
             versionesDocs = computed (=> store.state.variables.versiones)
             rutaDocs = computed (=>
@@ -75,9 +75,8 @@ div.barra-nav
     .img-logo
         margin-right: 1rem
         display: inline-block
-        height: 2.5rem
+        height: 3.25rem
         width: auto
-        transform: translateX(0.5rem) translateY(0.5rem)
 
 
     .ruta-barra-nav

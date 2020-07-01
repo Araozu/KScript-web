@@ -33,7 +33,7 @@ div.docs
     .contenedor-docs
         display: grid
         height: 100%
-        grid-template-columns: 15% auto 30%
+        grid-template-columns: 17.5rem auto 30rem
 
     @media only screen and (max-width: 1100px)
         .contenedor-docs
