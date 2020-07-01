@@ -1,6 +1,6 @@
 # Switch
 
-| En diseño
+> En diseño
 
 En lugar de switch, Misti tiene pattern matching!
 

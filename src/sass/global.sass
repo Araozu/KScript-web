@@ -7,8 +7,8 @@
     --color-borde-exito: #4CAF50
     // #01070a
     --colorSecundario: #f1d91d
-    --fuenteNormal: Roboto, sans-serif
-    --fuenteTitulo: Sen, cursive, Roboto, sans-serif
+    --fuenteNormal: "Open Sans", sans-serif
+    --fuenteTitulo: Sen, "Open Sans", sans-serif
     --tamanoFuenteCodigo: 1rem
 
 
@@ -16,6 +16,13 @@ html, body
     font-family: var(--fuenteNormal)
     color: var(--color)
     background-color: var(--fondo)
+
+
+h1, h2, h3, h4, h5
+    font:
+        family: var(--fuenteTitulo)
+    margin-top: 3rem
+    margin-bottom: 1.5rem
 
 
 body
@@ -142,6 +149,7 @@ code
         family: "JetBrains Mono", monospace
         variant-ligatures: discretionary-ligatures
     cursor: text
+    padding: 0 5px
 
 
 .TextoCod
