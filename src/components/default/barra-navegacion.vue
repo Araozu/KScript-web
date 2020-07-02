@@ -34,8 +34,7 @@ div.barra-nav
                 "/docs/#{ sigVer }/"
             )
 
-            cambiarColor = =>
-                store.commit "variables/cambiarColor", !esClaro.value
+            cambiarColor = => store.commit "variables/cambiarColor", !esClaro.value
 
             {
                 rutaImg

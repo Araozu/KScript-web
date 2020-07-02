@@ -11,6 +11,8 @@ div
 
                 router-link.boton-principal(:to="rutaDocs" title="Documentación") Documentación
                 a.boton-npm(href="https://www.npmjs.com/package/misti" target="_blank" title="Ir a npm") npm
+                button.boton-color(@click="cambiarColor")
+                    i.material-icons brightness_4
 
         h2 Con Misti, el JavaScript que escribes es...
 
@@ -100,14 +102,18 @@ div
         setup: ->
             store = useStore()
 
+            esClaro = computed (=>  store.state.variables.esClaro)
             versionesDocs = computed (=> store.state.variables.versiones)
             rutaDocs = computed (=>
                 sigVer = versionesDocs.value.find (x) => x != "next"
                 "/docs/#{ sigVer }/"
             )
 
+            cambiarColor = => store.commit "variables/cambiarColor", !esClaro.value
+
             {
                 rutaDocs
+                cambiarColor
                 codCarac1
                 codCarac2
                 codCarac3
@@ -142,7 +148,7 @@ div
                 margin-top: 1.5rem
                 margin-bottom: 3rem
 
-    .boton-principal, .boton-npm
+    .boton-principal, .boton-npm, .boton-color
         display: inline-block
         font:
             family: var(--fuenteTitulo)
@@ -152,6 +158,7 @@ div
         border-radius: 3px
         margin-right: 2rem
         user-select: none
+        cursor: pointer
 
 
     .boton-principal
@@ -162,6 +169,17 @@ div
     .boton-npm
         background-color: #CB0000
         color: white
+
+
+    .boton-color
+        background-color: var(--color)
+        color: var(--fondo)
+        padding-top: 0.9rem
+        padding-bottom: 0.9rem
+        border: 0
+
+        i
+            vertical-align: bottom
 
 
     //
