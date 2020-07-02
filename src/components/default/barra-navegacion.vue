@@ -67,7 +67,7 @@ div.barra-nav
         height: 3.25rem
         background-color: var(--fondo)
         color: var(--color)
-        font-family: var(--fuenteNormal)
+        font-family: var(--fuenteTitulo)
         border-bottom: solid 1px var(--color-borde)
 
 

@@ -3,7 +3,7 @@ div.doc
     div.opciones
         div.opcion(@click="cargaInicial")
             i.material-icons cached
-            span  Regargar
+            span  Recargar
 
     div(v-if="datos.cargando && datos.cargando === true")
         | Cargando...
@@ -113,6 +113,11 @@ div.doc
         position: sticky
         top: 0
         border-bottom: solid 3px var(--colorSecundario)
+        font-family: var(--fuenteTitulo)
+
+        .material-icons
+            vertical-align: bottom
+            font-size: 1.175rem
 
 
     .doc
