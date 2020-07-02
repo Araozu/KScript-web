@@ -6,12 +6,42 @@ div
                 img(src="/img/misti-logo-beta.svg")
             div.titulo
                 h1 Misti
-                h2 Seguridad para el dinamismo de JavaScript.
+                // Arena ven a mi
+                h2 Seguridad en tiempo de ejecución para el dinamismo de ES6.
 
-    p Pagina de inicio en construccion.
+                router-link.boton-principal(:to="rutaDocs" title="Documentación") Documentación
+                a.boton-npm(href="https://www.npmjs.com/package/misti" target="_blank" title="Ir a npm") npm
 
-    router-link(:to="rutaDocs")
-        h3 Documentacion
+        h2 Con Misti, el JavaScript que escribes es...
+
+        h3 Más funcional
+
+        p.
+            Usa estructuras funcionales en JavaScript, sin compromisos.
+
+        codigo(:codigo="codCarac1")
+
+        h3 Más conciso
+
+        p.
+            Programa más rápidamente, de una forma comprensible.
+
+        codigo(:codigo="codCarac2")
+
+        h3 Más dinámico
+
+        p.
+            Usa objetos libremente, sin tener que apegarte a un esquema.
+
+        codigo(:codigo="codCarac3")
+
+        h3 Más seguro
+
+        p.
+            Verifica tus tipos de datos, y brinda alternativas en caso de error.
+
+        codigo(:codigo="codCarac4")
+
 
 //
 </template>
@@ -23,62 +53,44 @@ div
     import codigo from "../components/codigo/codigo.vue"
 
     codCarac1 = """
-        reg Producto = {
-            id: number
-            nombre: string
-            precio: number
-        }
+        covar MetodoPago =
+            | GiftCard of number
+            | Tarjeta of string
+            | PayPal of string
 
-        type Carrito = [Producto]
+        const metodoPago = GiftCard 10022
         """
 
     codCarac2 = """
-        const carritoUsuario = [
-            { id := 1, nombre := "Pan", precio := 3 }
-            { id := 2, nombre := "Arroz", precio := 10 }
-        ]
+        const carrito = [...]
 
-        //: carritoUsuario es de tipo Carrito
-        //  No se necesitó anotar el tipo de dato
+        const total =
+            carrito
+            |> Array::map (verificarStock >> aplicarDescuento)
+            |> Array::filter esValido
+            |> Array::reduce obtenerPrecio
+            |> aplicarImpuesto
         """
 
     codCarac3 = """
-        impl Igualable Producto =
-            fun (==) producto1 producto2 =
-                producto1.id == producto2.id
+        fun articuloAStr articulo =
+            "${articulo.id} -> ${articulo.nombre}"
 
-            fun (!=) p1 p2 = !p1 == p2
-
-        carritoUsuario[0] == carritoUsuario[1]  //= false
-        """
-
-    codCarac4 = """
-        class Animal =
-            member nombre: string
-            constructor of nombre
-
-        class Gato: Animal =
-            member vidas: string
-            constructor of super vidas
-        """
-
-    codCarac5 = """
-        // Representación del registro Producto en JS
-        function Producto(id, nombre, precio) {
-            if (!new.target) return new Producto(id, nombre, precio);
-            this.id = id;
-            this.nombre = nombre;
-            this.precio = precio;
-            Object.freeze(this);
+        articuloAStr {
+            id := 10433
+            nombre := "Pan Bimbo 250g."
         }
         """
 
-    codCarac6 = """
-        function imprimirProducto(producto) {
-            if (!producto instanceof Producto)
-                console.warn("La función actual recibe un parámetro incorrecto.");
+    codCarac4 = """
+        fun articuloAStr {id, nombre} = Some "${id} -> ${nombre}"
 
-            console.log(producto.nombre + " tiene un costo de " + producto.precio);
+        fun articuloAStr _ = None
+
+        // No lanza una excepción
+        articuloAStr {
+            nombre := "Juan"
+            apellido := "Perez"
         }
         """
 
@@ -100,8 +112,6 @@ div
                 codCarac2
                 codCarac3
                 codCarac4
-                codCarac5
-                codCarac6
             }
 
 #
@@ -128,6 +138,31 @@ div
         .titulo
             h1
                 font-size: 3rem
+            h2
+                margin-top: 1.5rem
+                margin-bottom: 3rem
+
+    .boton-principal, .boton-npm
+        display: inline-block
+        font:
+            family: var(--fuenteTitulo)
+            size: 1.5rem
+        text-decoration: none
+        padding: 1rem 2rem
+        border-radius: 3px
+        margin-right: 2rem
+        user-select: none
+
+
+    .boton-principal
+        background-color: #F1D91D
+        color: #151515
+
+
+    .boton-npm
+        background-color: #CB0000
+        color: white
+
 
     //
 </style>
