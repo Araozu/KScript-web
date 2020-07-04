@@ -2,11 +2,9 @@
 
 ## Identificadores
 
-- Inician con guion bajo o una letra.
-- Luego pueden tener numeros, letras, guiones bajos y comillas simples.
+- Inician con guion bajo, una letra o un dolar `$`.
+- Luego pueden tener numeros, letras, guiones bajos, comillas simples y dolar `$`.
 - No pueden ser un único guion bajo.
-
-En un futuro se podrá usar el dolar `$`.
 
 ```
 identificador

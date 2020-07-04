@@ -304,6 +304,8 @@ var parseGuionBajo = Lexer$KanComp.parseCaracter("_");
 
 var parseComillaSimple = Lexer$KanComp.parseCaracter("'");
 
+var parseDolar = Lexer$KanComp.parseCaracter("$");
+
 function charListToStr(caracteres) {
   var _acc = "";
   var _param = caracteres;
@@ -388,7 +390,7 @@ var parseComentarioMulti = Lexer$KanComp.$less$bang$great((function (param) {
         return match[0] + (match[1] + param[1]);
       }), Lexer$KanComp.$pipe$great$great$pipe(Lexer$KanComp.$pipe$great$great$pipe(parseInicio$1, parseResto$2), parseFinal));
 
-var pTest = Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(parseDigito, parseMayuscula), parseMinuscula), parseGuionBajo), parseComillaSimple);
+var pTest = Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(parseDigito, parseMayuscula), parseMinuscula), parseGuionBajo), parseComillaSimple), parseDolar);
 
 var parseRestoIdentificador = Lexer$KanComp.mapP(charListToStr, Lexer$KanComp.parseVarios(pTest));
 
@@ -401,7 +403,7 @@ var parseGenerico = Lexer$KanComp.mapP(tuplaAStr, Lexer$KanComp.$pipe$great$grea
 
 var parseIdentificador = Lexer$KanComp.mapP((function (param) {
         return param[0] + param[1];
-      }), Lexer$KanComp.$pipe$great$great$pipe(Lexer$KanComp.$less$pipe$great(parseGuionBajo, parseMinuscula), parseRestoIdentificador));
+      }), Lexer$KanComp.$pipe$great$great$pipe(Lexer$KanComp.$less$pipe$great(Lexer$KanComp.$less$pipe$great(parseGuionBajo, parseMinuscula), parseDolar), parseRestoIdentificador));
 
 var parseIdentificadorTipo = Lexer$KanComp.mapP((function (param) {
         return param[0] + param[1];
@@ -986,6 +988,7 @@ exports.parseMayuscula = parseMayuscula;
 exports.parseMinuscula = parseMinuscula;
 exports.parseGuionBajo = parseGuionBajo;
 exports.parseComillaSimple = parseComillaSimple;
+exports.parseDolar = parseDolar;
 exports.charListToStr = charListToStr;
 exports.parseOperador = parseOperador;
 exports.parseOperadores = parseOperadores;

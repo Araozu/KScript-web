@@ -13,6 +13,7 @@ div.repl-docs
 </template>
 
 <script lang="coffee">
+    import { ref } from "vue"
     import { crearLexer } from "@/Compilador/AnalisisLexico/Gramatica.bs"
     import { parseTokens } from "@/Compilador/AnalisisSintactico/Parser.bs"
     import { generarJs } from "@/Compilador/Generador/Generador.bs"
@@ -40,16 +41,23 @@ div.repl-docs
             )
         ), ""
 
+    escapar = (txt, esCodigo = true) ->
+        s1 = txt.replace /\n/g, "<br>"
+        if esCodigo
+            s1.replace /\s\s+/g, "&nbsp;"
+        else
+            reemplazarEspacios s1
+
     export default
         name: "repl-docs"
-        data: ->
-            codigo: ""
-            resultado: {vacio: true}
-        methods:
-            transpilar: ->
-                lexer = crearLexer @codigo
+        setup: ->
+            codigo = ref ""
+            resultado = ref {vacio: true}
+
+            transpilar = =>
+                lexer = crearLexer codigo.value
                 preExpresion = parseTokens lexer
-                @resultado =
+                resultado.value =
                     switch preExpresion.tag
                         when 0
                             expresion = preExpresion[0]
@@ -64,12 +72,12 @@ div.repl-docs
                             err: true
                             msg: "Error Sintáctico:\n#{preExpresion[0]}"
 
-            escapar: (txt, esCodigo = true) ->
-                s1 = txt.replace /\n/g, "<br>"
-                if esCodigo
-                    s1.replace /\s\s+/g, "&nbsp;"
-                else
-                    reemplazarEspacios s1
+            {
+                codigo
+                resultado
+                transpilar
+                escapar
+            }
 
 
 #

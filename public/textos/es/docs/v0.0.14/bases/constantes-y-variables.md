@@ -68,24 +68,26 @@ edad = 21         // OK
 ## Identificadores
 
 Los identificadores en Misti tienen 1 adición respecto a JavaScript. 
-Los nombres de variables inician con un guion bajo o una letra, y luego pueden contener
-guiones bajos, letras, numeros, y **comillas simples**.
+Los nombres de variables inician con un guion bajo, una letra o un dolar, y luego pueden contener
+guiones bajos, letras, numeros, **comillas simples** y dolar.
 
 ```
 // Nombres validos.
 url1
 _url2
 Url3
+$url4
 
 // Con comillas simples
 resultado
 resultado'
 resultado''
+$resultado'''
 
 // Comillas en medio
 texto'yaml
 pos'cursor
-
+$pos$cursor
 ```
 
 ### Restricciones
