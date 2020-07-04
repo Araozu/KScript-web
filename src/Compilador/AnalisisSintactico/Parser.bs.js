@@ -200,42 +200,54 @@ function parseTokens(lexer) {
       var match$1 = sigExpresion(nuevoNivel, nivel, true, 0, /* Izq */0, true);
       if (typeof match$1 === "number") {
         return /* PError */Block.__(1, ["Se esperaba una expresi\xc3\xb3n luego de la asignacion."]);
-      } else if (match$1.tag) {
-        return /* PError */Block.__(1, ["Se esperaba una expresión luego de la asignación: " + (String(match$1[0]) + "")]);
       } else {
-        var exprDeclaracion = /* EDeclaracion */Block.__(7, [{
-              mut: esMut,
-              id: {
-                signatura: /* Indefinida */0,
-                valorId: infoTokenId
-              },
-              valorDec: match$1[0],
-              inicioDec: infoTokenId.inicio,
-              numLineaDec: infoTokenId.numLinea,
-              posInicioLineaDec: infoTokenId.posInicioLinea
-            }]);
-        var exprRespuesta = /* PExito */Block.__(0, [exprDeclaracion]);
-        var sigExpresionRaw = sigExpresion(nivel, nivel, true, 0, /* Izq */0, true);
-        if (typeof sigExpresionRaw === "number") {
-          return exprRespuesta;
-        } else if (sigExpresionRaw.tag) {
-          return /* PError */Block.__(1, [sigExpresionRaw[0]]);
-        } else {
-          var nuevaExpr = sigExpresionRaw[0];
-          if (nuevaExpr.tag === /* EBloque */8) {
-            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                            exprDeclaracion,
-                            nuevaExpr[0]
-                          ]])]);
-          } else {
-            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                            exprDeclaracion,
-                            /* :: */[
-                              nuevaExpr,
-                              /* [] */0
-                            ]
-                          ]])]);
-          }
+        switch (match$1.tag | 0) {
+          case /* PExito */0 :
+              var exprDeclaracion = /* EDeclaracion */Block.__(7, [{
+                    mut: esMut,
+                    id: {
+                      signatura: /* Indefinida */0,
+                      valorId: infoTokenId
+                    },
+                    valorDec: match$1[0],
+                    inicioDec: infoTokenId.inicio,
+                    numLineaDec: infoTokenId.numLinea,
+                    posInicioLineaDec: infoTokenId.posInicioLinea
+                  }]);
+              var exprRespuesta = /* PExito */Block.__(0, [exprDeclaracion]);
+              var sigExpresionRaw = sigExpresion(nivel, nivel, true, 0, /* Izq */0, true);
+              if (typeof sigExpresionRaw === "number") {
+                return exprRespuesta;
+              } else {
+                switch (sigExpresionRaw.tag | 0) {
+                  case /* PExito */0 :
+                      var nuevaExpr = sigExpresionRaw[0];
+                      if (nuevaExpr.tag === /* EBloque */8) {
+                        return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                        exprDeclaracion,
+                                        nuevaExpr[0]
+                                      ]])]);
+                      } else {
+                        return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                        exprDeclaracion,
+                                        /* :: */[
+                                          nuevaExpr,
+                                          /* [] */0
+                                        ]
+                                      ]])]);
+                      }
+                  case /* PError */1 :
+                      return /* PError */Block.__(1, [sigExpresionRaw[0]]);
+                  case /* PErrorLexer */2 :
+                      return /* PErrorLexer */Block.__(2, [sigExpresionRaw[0]]);
+                  
+                }
+              }
+          case /* PError */1 :
+              return /* PError */Block.__(1, ["Se esperaba una expresión luego de la asignación: " + (String(match$1[0]) + "")]);
+          case /* PErrorLexer */2 :
+              return /* PErrorLexer */Block.__(2, [match$1[0]]);
+          
         }
       }
     }
@@ -256,192 +268,211 @@ function parseTokens(lexer) {
     var match$1 = sigExpresion(nivel, nivel, false, precOp1, asocOp1, false);
     if (typeof match$1 === "number") {
       match$1 === /* PEOF */0;
-    } else if (match$1.tag) {
-      return /* PError */Block.__(1, ["Se esperaba una expresion a la derecha del operador " + (String(valorOp) + (" :\n" + (String(match$1[0]) + ".")))]);
     } else {
-      var eOperadorRes = {
-        signaturaOp: /* Indefinida */0,
-        valorOp: infoOp,
-        precedencia: precOp1,
-        asociatividad: asocOp1
-      };
-      var exprOpRes = /* EOperadorApl */Block.__(6, [{
-            op: eOperadorRes,
-            izq: exprIzq,
-            der: match$1[0]
-          }]);
-      var _lexerRes = Curry._1(lexer.sigToken, /* () */0);
-      var _aceptarSoloOp = false;
-      var _fnEnOp = function (param) {
-        return /* () */0;
-      };
-      var _funValorDefecto = function (param) {
-        return /* PReturn */1;
-      };
-      while(true) {
-        var funValorDefecto = _funValorDefecto;
-        var fnEnOp = _fnEnOp;
-        var aceptarSoloOp = _aceptarSoloOp;
-        var lexerRes = _lexerRes;
-        if (typeof lexerRes === "number") {
-          return /* PExito */Block.__(0, [exprOpRes]);
-        } else if (lexerRes.tag) {
-          return /* PError */Block.__(1, [lexerRes[0]]);
-        } else {
-          var token = lexerRes[0];
-          switch (token.tag | 0) {
-            case /* TNuevaLinea */0 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  Curry._1(lexer.retroceder, /* () */0);
-                  var match$2 = Curry._1(lexer.lookAheadSignificativo, true);
-                  var fnEstablecer = match$2[3];
-                  var indentacion = match$2[1];
-                  var expresionRespuesta = /* PExito */Block.__(0, [exprOpRes]);
-                  if (esExprPrincipal && indentacion >= nivel) {
-                    if (indentacion === nivel) {
-                      var nuevaFnEst = (function(fnEstablecer){
-                      return function nuevaFnEst(param) {
-                        Curry._1(fnEstablecer, /* () */0);
-                        Curry._1(lexer.sigToken, /* () */0);
-                        return /* () */0;
-                      }
-                      }(fnEstablecer));
-                      var funSiNoEsOp = (function(fnEstablecer,expresionRespuesta){
-                      return function funSiNoEsOp(param) {
-                        Curry._1(fnEstablecer, /* () */0);
-                        var sigExpresionRaw = sigExpresion(nivel, nivel, false, 0, /* Izq */0, true);
-                        if (typeof sigExpresionRaw === "number") {
-                          return expresionRespuesta;
-                        } else if (sigExpresionRaw.tag) {
-                          return /* PError */Block.__(1, [sigExpresionRaw[0]]);
-                        } else {
-                          var nuevaExpr = sigExpresionRaw[0];
-                          if (nuevaExpr.tag === /* EBloque */8) {
-                            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                                            exprOpRes,
-                                            nuevaExpr[0]
-                                          ]])]);
+      switch (match$1.tag | 0) {
+        case /* PExito */0 :
+            var eOperadorRes = {
+              signaturaOp: /* Indefinida */0,
+              valorOp: infoOp,
+              precedencia: precOp1,
+              asociatividad: asocOp1
+            };
+            var exprOpRes = /* EOperadorApl */Block.__(6, [{
+                  op: eOperadorRes,
+                  izq: exprIzq,
+                  der: match$1[0]
+                }]);
+            var _lexerRes = Curry._1(lexer.sigToken, /* () */0);
+            var _aceptarSoloOp = false;
+            var _fnEnOp = function (param) {
+              return /* () */0;
+            };
+            var _funValorDefecto = function (param) {
+              return /* PReturn */1;
+            };
+            while(true) {
+              var funValorDefecto = _funValorDefecto;
+              var fnEnOp = _fnEnOp;
+              var aceptarSoloOp = _aceptarSoloOp;
+              var lexerRes = _lexerRes;
+              if (typeof lexerRes === "number") {
+                return /* PExito */Block.__(0, [exprOpRes]);
+              } else if (lexerRes.tag) {
+                return /* PError */Block.__(1, [lexerRes[0]]);
+              } else {
+                var token = lexerRes[0];
+                switch (token.tag | 0) {
+                  case /* TNuevaLinea */0 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        Curry._1(lexer.retroceder, /* () */0);
+                        var match$2 = Curry._1(lexer.lookAheadSignificativo, true);
+                        var fnEstablecer = match$2[3];
+                        var indentacion = match$2[1];
+                        var expresionRespuesta = /* PExito */Block.__(0, [exprOpRes]);
+                        if (esExprPrincipal && indentacion >= nivel) {
+                          if (indentacion === nivel) {
+                            var nuevaFnEst = (function(fnEstablecer){
+                            return function nuevaFnEst(param) {
+                              Curry._1(fnEstablecer, /* () */0);
+                              Curry._1(lexer.sigToken, /* () */0);
+                              return /* () */0;
+                            }
+                            }(fnEstablecer));
+                            var funSiNoEsOp = (function(fnEstablecer,expresionRespuesta){
+                            return function funSiNoEsOp(param) {
+                              Curry._1(fnEstablecer, /* () */0);
+                              var sigExpresionRaw = sigExpresion(nivel, nivel, false, 0, /* Izq */0, true);
+                              if (typeof sigExpresionRaw === "number") {
+                                return expresionRespuesta;
+                              } else {
+                                switch (sigExpresionRaw.tag | 0) {
+                                  case /* PExito */0 :
+                                      var nuevaExpr = sigExpresionRaw[0];
+                                      if (nuevaExpr.tag === /* EBloque */8) {
+                                        return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                                        exprOpRes,
+                                                        nuevaExpr[0]
+                                                      ]])]);
+                                      } else {
+                                        return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                                        exprOpRes,
+                                                        /* :: */[
+                                                          nuevaExpr,
+                                                          /* [] */0
+                                                        ]
+                                                      ]])]);
+                                      }
+                                  case /* PError */1 :
+                                      return /* PError */Block.__(1, [sigExpresionRaw[0]]);
+                                  case /* PErrorLexer */2 :
+                                      return sigExpresionRaw;
+                                  
+                                }
+                              }
+                            }
+                            }(fnEstablecer,expresionRespuesta));
+                            _funValorDefecto = funSiNoEsOp;
+                            _fnEnOp = nuevaFnEst;
+                            _aceptarSoloOp = true;
+                            _lexerRes = match$2[0];
+                            continue ;
                           } else {
-                            return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                                            exprOpRes,
-                                            /* :: */[
-                                              nuevaExpr,
-                                              /* [] */0
-                                            ]
-                                          ]])]);
+                            Curry._1(fnEstablecer, /* () */0);
+                            _funValorDefecto = (function (param) {
+                                return /* PReturn */1;
+                              });
+                            _fnEnOp = (function (param) {
+                                return /* () */0;
+                              });
+                            _aceptarSoloOp = false;
+                            _lexerRes = Curry._1(lexer.sigToken, /* () */0);
+                            continue ;
+                          }
+                        } else {
+                          return expresionRespuesta;
+                        }
+                      }
+                  case /* TGenerico */2 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var textoError = generarTextoError(token[0]);
+                        return /* PError */Block.__(1, ["No se esperaba un genérico luego de la aplicación del operador.\n\n" + (String(textoError) + "")]);
+                      }
+                  case /* TComentario */3 :
+                      _lexerRes = Curry._1(lexer.sigToken, /* () */0);
+                      continue ;
+                  case /* TOperador */7 :
+                      var infoOp2 = token[0];
+                      Curry._1(fnEnOp, /* () */0);
+                      var match$3 = obtInfoOp(infoOp2.valor);
+                      return sigExprOperador(exprOpRes, infoOp2, nivel, match$3[0], match$3[1], esExprPrincipal);
+                  case /* TParenAb */8 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var sigExpr = sigExprParen(token[0], nivel, nivel);
+                        if (typeof sigExpr === "number") {
+                          return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
+                        } else {
+                          switch (sigExpr.tag | 0) {
+                            case /* PExito */0 :
+                                var posEI = obtPosExpr(exprIzq);
+                                var infoOpFunApl = obtInfoFunAppl(false, posEI.inicioPE, posEI.numLineaPE, posEI.posInicioLineaPE);
+                                var match$4 = obtInfoOp(infoOpFunApl.valor);
+                                return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
+                                                op: {
+                                                  signaturaOp: /* Indefinida */0,
+                                                  valorOp: infoOpFunApl,
+                                                  precedencia: match$4[0],
+                                                  asociatividad: match$4[1]
+                                                },
+                                                izq: exprOpRes,
+                                                der: sigExpr[0]
+                                              }])]);
+                            case /* PErrorLexer */2 :
+                                return sigExpr;
+                            default:
+                              return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
                           }
                         }
                       }
-                      }(fnEstablecer,expresionRespuesta));
-                      _funValorDefecto = funSiNoEsOp;
-                      _fnEnOp = nuevaFnEst;
-                      _aceptarSoloOp = true;
-                      _lexerRes = match$2[0];
-                      continue ;
+                  case /* TParenCer */9 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        Curry._1(lexer.retroceder, /* () */0);
+                        return /* PExito */Block.__(0, [exprOpRes]);
+                      }
+                  case /* TAgrupAb */10 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var textoError$1 = generarTextoError(token[0]);
+                        return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$1) + "")]);
+                      }
+                  case /* TAgrupCer */11 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var textoError$2 = generarTextoError(token[0]);
+                        return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$2) + "")]);
+                      }
+                  case /* PC_LET */12 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var textoError$3 = generarTextoError(token[0]);
+                        return /* PError */Block.__(1, ["No se esperaba la palabra clave \'let\' luego de la aplicación del operador.\n\n" + (String(textoError$3) + "")]);
+                      }
+                  case /* PC_CONST */13 :
+                      if (aceptarSoloOp) {
+                        return Curry._1(funValorDefecto, /* () */0);
+                      } else {
+                        var textoError$4 = generarTextoError(token[0]);
+                        return /* PError */Block.__(1, ["No se esperaba la palabra clave \'const\' luego de la aplicación del operador.\n\n" + (String(textoError$4) + "")]);
+                      }
+                  default:
+                    if (aceptarSoloOp) {
+                      return Curry._1(funValorDefecto, /* () */0);
                     } else {
-                      Curry._1(fnEstablecer, /* () */0);
-                      _funValorDefecto = (function (param) {
-                          return /* PReturn */1;
-                        });
-                      _fnEnOp = (function (param) {
-                          return /* () */0;
-                        });
-                      _aceptarSoloOp = false;
-                      _lexerRes = Curry._1(lexer.sigToken, /* () */0);
-                      continue ;
+                      var posEI$1 = obtPosExpr(exprIzq);
+                      var infoOp2$1 = obtInfoFunAppl(false, posEI$1.inicioPE, posEI$1.numLineaPE, posEI$1.posInicioLineaPE);
+                      var match$5 = obtInfoOp(infoOp2$1.valor);
+                      Curry._1(lexer.retroceder, /* () */0);
+                      return sigExprOperador(exprOpRes, infoOp2$1, nivel, match$5[0], match$5[1], esExprPrincipal);
                     }
-                  } else {
-                    return expresionRespuesta;
-                  }
                 }
-            case /* TGenerico */2 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var textoError = generarTextoError(token[0]);
-                  return /* PError */Block.__(1, ["No se esperaba un genérico luego de la aplicación del operador.\n\n" + (String(textoError) + "")]);
-                }
-            case /* TComentario */3 :
-                _lexerRes = Curry._1(lexer.sigToken, /* () */0);
-                continue ;
-            case /* TOperador */7 :
-                var infoOp2 = token[0];
-                Curry._1(fnEnOp, /* () */0);
-                var match$3 = obtInfoOp(infoOp2.valor);
-                return sigExprOperador(exprOpRes, infoOp2, nivel, match$3[0], match$3[1], esExprPrincipal);
-            case /* TParenAb */8 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var sigExpr = sigExprParen(token[0], nivel, nivel);
-                  if (typeof sigExpr === "number" || sigExpr.tag) {
-                    return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
-                  } else {
-                    var posEI = obtPosExpr(exprIzq);
-                    var infoOpFunApl = obtInfoFunAppl(false, posEI.inicioPE, posEI.numLineaPE, posEI.posInicioLineaPE);
-                    var match$4 = obtInfoOp(infoOpFunApl.valor);
-                    return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
-                                    op: {
-                                      signaturaOp: /* Indefinida */0,
-                                      valorOp: infoOpFunApl,
-                                      precedencia: match$4[0],
-                                      asociatividad: match$4[1]
-                                    },
-                                    izq: exprOpRes,
-                                    der: sigExpr[0]
-                                  }])]);
-                  }
-                }
-            case /* TParenCer */9 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  Curry._1(lexer.retroceder, /* () */0);
-                  return /* PExito */Block.__(0, [exprOpRes]);
-                }
-            case /* TAgrupAb */10 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var textoError$1 = generarTextoError(token[0]);
-                  return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$1) + "")]);
-                }
-            case /* TAgrupCer */11 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var textoError$2 = generarTextoError(token[0]);
-                  return /* PError */Block.__(1, ["Este signo de agrupación aun no está soportado.\n\n" + (String(textoError$2) + "")]);
-                }
-            case /* PC_LET */12 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var textoError$3 = generarTextoError(token[0]);
-                  return /* PError */Block.__(1, ["No se esperaba la palabra clave \'let\' luego de la aplicación del operador.\n\n" + (String(textoError$3) + "")]);
-                }
-            case /* PC_CONST */13 :
-                if (aceptarSoloOp) {
-                  return Curry._1(funValorDefecto, /* () */0);
-                } else {
-                  var textoError$4 = generarTextoError(token[0]);
-                  return /* PError */Block.__(1, ["No se esperaba la palabra clave \'const\' luego de la aplicación del operador.\n\n" + (String(textoError$4) + "")]);
-                }
-            default:
-              if (aceptarSoloOp) {
-                return Curry._1(funValorDefecto, /* () */0);
-              } else {
-                var posEI$1 = obtPosExpr(exprIzq);
-                var infoOp2$1 = obtInfoFunAppl(false, posEI$1.inicioPE, posEI$1.numLineaPE, posEI$1.posInicioLineaPE);
-                var match$5 = obtInfoOp(infoOp2$1.valor);
-                Curry._1(lexer.retroceder, /* () */0);
-                return sigExprOperador(exprOpRes, infoOp2$1, nivel, match$5[0], match$5[1], esExprPrincipal);
               }
-          }
-        }
-      };
+            };
+        case /* PError */1 :
+            return /* PError */Block.__(1, ["Se esperaba una expresion a la derecha del operador " + (String(valorOp) + (" :\n" + (String(match$1[0]) + ".")))]);
+        case /* PErrorLexer */2 :
+            return /* PErrorLexer */Block.__(2, [match$1[0]]);
+        
+      }
     }
     return /* PError */Block.__(1, ["Se esperaba una expresión a la derecha del operador " + (String(valorOp) + "")]);
   };
@@ -456,24 +487,29 @@ function parseTokens(lexer) {
       } else {
         return /* PError */Block.__(1, ["Error de indentaci\xc3\xb3n. El parentesis no ha sido cerrado."]);
       }
-    } else if (sigToken.tag) {
-      return sigToken;
     } else {
-      var ultimoToken = Curry._1(lexer.sigToken, /* () */0);
-      if (typeof ultimoToken === "number") {
-        var textoErr$1 = generarTextoError(infoParen);
-        var numLinea$1 = infoParen.numLinea;
-        var numColumna$1 = infoParen.inicio - infoParen.posInicioLinea | 0;
-        return /* PError */Block.__(1, ["El parentesis abierto en " + (String(numLinea$1) + ("," + (String(numColumna$1) + (" contiene una expresion, pero no está cerrado.\n\n" + (String(textoErr$1) + "")))))]);
-      } else if (ultimoToken.tag) {
-        var textoErr$2 = generarTextoError(infoParen);
-        var numLinea$2 = infoParen.numLinea;
-        var numColumna$2 = infoParen.inicio - infoParen.posInicioLinea | 0;
-        return /* PError */Block.__(1, ["El parentesis abierto en " + (String(numLinea$2) + ("," + (String(numColumna$2) + (" no está cerrado.\n\n" + (String(textoErr$2) + ("\nDebido a un error léxico: " + (String(ultimoToken[0]) + "")))))))]);
-      } else if (ultimoToken[0].tag === /* TParenCer */9) {
-        return /* PExito */Block.__(0, [sigToken[0]]);
-      } else {
-        return /* PError */Block.__(1, ["Se esperaba un cierre de parentesis."]);
+      switch (sigToken.tag | 0) {
+        case /* PExito */0 :
+            var ultimoToken = Curry._1(lexer.sigToken, /* () */0);
+            if (typeof ultimoToken === "number") {
+              var textoErr$1 = generarTextoError(infoParen);
+              var numLinea$1 = infoParen.numLinea;
+              var numColumna$1 = infoParen.inicio - infoParen.posInicioLinea | 0;
+              return /* PError */Block.__(1, ["El parentesis abierto en " + (String(numLinea$1) + ("," + (String(numColumna$1) + (" contiene una expresion, pero no está cerrado.\n\n" + (String(textoErr$1) + "")))))]);
+            } else if (ultimoToken.tag) {
+              var textoErr$2 = generarTextoError(infoParen);
+              var numLinea$2 = infoParen.numLinea;
+              var numColumna$2 = infoParen.inicio - infoParen.posInicioLinea | 0;
+              return /* PError */Block.__(1, ["El parentesis abierto en " + (String(numLinea$2) + ("," + (String(numColumna$2) + (" no está cerrado.\n\n" + (String(textoErr$2) + ("\nDebido a un error léxico: " + (String(ultimoToken[0]) + "")))))))]);
+            } else if (ultimoToken[0].tag === /* TParenCer */9) {
+              return /* PExito */Block.__(0, [sigToken[0]]);
+            } else {
+              return /* PError */Block.__(1, ["Se esperaba un cierre de parentesis."]);
+            }
+        case /* PError */1 :
+        case /* PErrorLexer */2 :
+            return sigToken;
+        
       }
     }
   };
@@ -491,7 +527,7 @@ function parseTokens(lexer) {
       if (typeof resultado === "number") {
         return /* PEOF */0;
       } else if (resultado.tag) {
-        return /* PError */Block.__(1, [resultado[0]]);
+        return /* PErrorLexer */Block.__(2, [resultado[0]]);
       } else {
         var token = resultado[0];
         switch (token.tag | 0) {
@@ -559,23 +595,29 @@ function parseTokens(lexer) {
                                 var sigExpresionRaw = sigExpresion(nivel$1, nivel$1, false, 0, /* Izq */0, true);
                                 if (typeof sigExpresionRaw === "number") {
                                   return expresionRespuesta;
-                                } else if (sigExpresionRaw.tag) {
-                                  return /* PError */Block.__(1, [sigExpresionRaw[0]]);
                                 } else {
-                                  var nuevaExpr = sigExpresionRaw[0];
-                                  if (nuevaExpr.tag === /* EBloque */8) {
-                                    return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                                                    primeraExprId,
-                                                    nuevaExpr[0]
-                                                  ]])]);
-                                  } else {
-                                    return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
-                                                    primeraExprId,
-                                                    /* :: */[
-                                                      nuevaExpr,
-                                                      /* [] */0
-                                                    ]
-                                                  ]])]);
+                                  switch (sigExpresionRaw.tag | 0) {
+                                    case /* PExito */0 :
+                                        var nuevaExpr = sigExpresionRaw[0];
+                                        if (nuevaExpr.tag === /* EBloque */8) {
+                                          return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                                          primeraExprId,
+                                                          nuevaExpr[0]
+                                                        ]])]);
+                                        } else {
+                                          return /* PExito */Block.__(0, [/* EBloque */Block.__(8, [/* :: */[
+                                                          primeraExprId,
+                                                          /* :: */[
+                                                            nuevaExpr,
+                                                            /* [] */0
+                                                          ]
+                                                        ]])]);
+                                        }
+                                    case /* PError */1 :
+                                        return /* PError */Block.__(1, [sigExpresionRaw[0]]);
+                                    case /* PErrorLexer */2 :
+                                        return sigExpresionRaw;
+                                    
                                   }
                                 }
                               }
@@ -629,21 +671,28 @@ function parseTokens(lexer) {
                           return Curry._1(funValorDefecto, /* () */0);
                         } else {
                           var sigExpr = sigExprParen(token$1[0], nivel$1, nivel$1);
-                          if (typeof sigExpr === "number" || sigExpr.tag) {
+                          if (typeof sigExpr === "number") {
                             return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
                           } else {
-                            var infoOpFunApl = obtInfoFunAppl(false, infoId$1.inicio, infoId$1.numLinea, infoId$1.posInicioLinea);
-                            var match$3 = obtInfoOp(infoOpFunApl.valor);
-                            return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
-                                            op: {
-                                              signaturaOp: /* Indefinida */0,
-                                              valorOp: infoOpFunApl,
-                                              precedencia: match$3[0],
-                                              asociatividad: match$3[1]
-                                            },
-                                            izq: primeraExprId,
-                                            der: sigExpr[0]
-                                          }])]);
+                            switch (sigExpr.tag | 0) {
+                              case /* PExito */0 :
+                                  var infoOpFunApl = obtInfoFunAppl(false, infoId$1.inicio, infoId$1.numLinea, infoId$1.posInicioLinea);
+                                  var match$3 = obtInfoOp(infoOpFunApl.valor);
+                                  return /* PExito */Block.__(0, [/* EOperadorApl */Block.__(6, [{
+                                                  op: {
+                                                    signaturaOp: /* Indefinida */0,
+                                                    valorOp: infoOpFunApl,
+                                                    precedencia: match$3[0],
+                                                    asociatividad: match$3[1]
+                                                  },
+                                                  izq: primeraExprId,
+                                                  der: sigExpr[0]
+                                                }])]);
+                              case /* PErrorLexer */2 :
+                                  return sigExpr;
+                              default:
+                                return /* PError */Block.__(1, ["Hay un parentesis sin cerrar."]);
+                            }
                           }
                         }
                     case /* TParenCer */9 :
@@ -718,10 +767,16 @@ function parseTokens(lexer) {
   var exprRe = sigExpresion(0, 0, true, 0, /* Izq */0, true);
   if (typeof exprRe === "number") {
     return /* ExitoParser */Block.__(0, [/* EBloque */Block.__(8, [/* [] */0])]);
-  } else if (exprRe.tag) {
-    return /* ErrorParser */Block.__(1, [exprRe[0]]);
   } else {
-    return /* ExitoParser */Block.__(0, [exprRe[0]]);
+    switch (exprRe.tag | 0) {
+      case /* PExito */0 :
+          return /* ExitoParser */Block.__(0, [exprRe[0]]);
+      case /* PError */1 :
+          return /* ErrorParser */Block.__(2, [exprRe[0]]);
+      case /* PErrorLexer */2 :
+          return /* ErrorLexerP */Block.__(1, [exprRe[0]]);
+      
+    }
   }
 }
 

@@ -3,7 +3,11 @@ div.repl-docs
     textarea.entrada-kan.Fondo.TextoCod(placeholder="Código Kan" v-model="codigo")
     div.cont-botones
         button.boton-transpilar(@click="transpilar") Transpilar
-    div.resultado-repl-docs(v-html="resultado === '' ? 'Codigo JS': escapar(resultado)")
+
+    div.resultado-repl-docs
+        div(v-if="resultado.ok" v-html="escapar(resultado.cod)")
+        div.resultado-error(v-if="resultado.err" v-html="escapar(resultado.msg, false)")
+
 
 //
 </template>
@@ -13,21 +17,59 @@ div.repl-docs
     import { parseTokens } from "@/Compilador/AnalisisSintactico/Parser.bs"
     import { generarJs } from "@/Compilador/Generador/Generador.bs"
 
+    reemplazarEspacios = (txt) =>
+        letras = txt.split ""
+        i = 0
+        Array::join.call (
+            Array::map.call letras, ((letra) =>
+                if letra == " "
+                    i++
+                    if i == 1
+                        ""
+                    else if i == 2
+                        "&nbsp;"
+                    else
+                        "&nbsp;"
+                else
+                    if i == 1
+                        i = 0
+                        " " + letra
+                    else
+                        i = 0
+                        letra
+            )
+        ), ""
+
     export default
         name: "repl-docs"
         data: ->
             codigo: ""
-            resultado: ""
+            resultado: {vacio: true}
         methods:
             transpilar: ->
                 lexer = crearLexer @codigo
                 preExpresion = parseTokens lexer
-                if preExpresion.tag == 0
-                    expresion = preExpresion[0]
-                    @resultado = (generarJs expresion, true, 0)[0]
-            escapar: (txt) ->
+                @resultado =
+                    switch preExpresion.tag
+                        when 0
+                            expresion = preExpresion[0]
+                            {
+                                ok: true
+                                cod: (generarJs expresion, true, 0)[0]
+                            }
+                        when 1
+                            err: true
+                            msg: "Error Lexico:\n#{preExpresion[0]}"
+                        when 2
+                            err: true
+                            msg: "Error Sintáctico:\n#{preExpresion[0]}"
+
+            escapar: (txt, esCodigo = true) ->
                 s1 = txt.replace /\n/g, "<br>"
-                s2 = s1.replace /\s/g, "&nbsp;"
+                if esCodigo
+                    s1.replace /\s\s+/g, "&nbsp;"
+                else
+                    reemplazarEspacios s1
 
 
 #
@@ -65,6 +107,9 @@ div.repl-docs
         width: 100%
         height: calc(50% - 1.5rem)
 
+
+    .resultado-error
+        color: var(--color-borde-error)
 
     //
 </style>
