@@ -2,13 +2,13 @@
 
 ## Condicionales
 
-Se coloca `then` luego de cada if/else if para poder diferenciar entre la condición y
+Se coloca `do` luego de cada if/else if para poder diferenciar entre la condición y
 la expresión a ejecutar.
 
 ```
-if 1 + 1 == 3 then
+if 1 + 1 == 3 do
     console.log "1 + 1 = 3"
-else if 1 + 1 == 4 then
+else if 1 + 1 == 4 do
     console.log "1 + 1 = 4"
 else
     console.log "No sé cuanto es 1 + 1"
@@ -17,21 +17,21 @@ else
 // En una linea
 const esSoltero = false
 
-if esSoltero then "soltero" else "casado"
+if esSoltero do "soltero" else "casado"
 
 
 // Como expresion
 const estadoCivil =
-    if esSoltero th~~~~en "soltero"
+    if esSoltero do "soltero"
     else "casado"
 
 
 // Como expresion en una linea
-const estadoCivil = if esSoltero then "soltero" else "casado"
+const estadoCivil = if esSoltero do "soltero" else "casado"
 
 
 // Como statement
-if esSoltero then
+if esSoltero do
     console.log "soltero"
 
 // No hacemos nada si no es soltero.

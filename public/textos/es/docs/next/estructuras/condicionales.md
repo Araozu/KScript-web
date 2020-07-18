@@ -4,17 +4,17 @@
 
 ## Contenido
 
-- Se coloca `if`, la condición, `then` y la expresión a ejecutar.
+- Se coloca `if`, la condición, `do` y la expresión a ejecutar.
 - Las condiciones con `else if` funcionan igual.
 - No es necesario encerrar la condición en paréntesis
-- No es necesario colocar `then` luego de `else`.
+- No es necesario colocar `do` luego de `else`.
 
 ```
 const nombre = "Juan"
 
-if nombre == "Pedro" then
+if nombre == "Pedro" do
     console.log "Hola Pedro"
-else if nombre == "Juan" then
+else if nombre == "Juan" do
     console.log "Hola Juan"
 else
     console.log "Hola forastero"
@@ -32,7 +32,7 @@ se usan en su lugar.
 Los condicionales se pueden usar como expresiones, es decir:
 
 ```
-const mensaje = if edad > 18 then "si"
+const mensaje = if edad > 18 do "si"
                 else "no"
 ```
 
@@ -43,13 +43,13 @@ A continuación se muestran otros estilos de indentación.
 
 ```
 
-const mensaje = if true then
+const mensaje = if true do
                     console.log "Hola mundo"
                 else
                     console.log "Adios mundo"
 
 const mensaje =
-    if true then
+    if true do
         console.log "Hola mundo"
     else
         console.log "Adios mundo"
@@ -57,6 +57,5 @@ const mensaje =
 
 ## Discusión
 
-En un principo se planeaba no usar `then`, sino que sea la indentación la que delimite
-la condición. Pero para hacer el lenguaje más consistente se agregó `then`.
+Se usa `do` en lugar de `then` para que los condicionales sean más concisos.
 
