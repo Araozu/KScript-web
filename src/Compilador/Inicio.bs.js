@@ -70,15 +70,8 @@ function flujo2(entrada, nombreArchivo, fn) {
     case /* ExitoParser */0 :
         return Generador2$KanComp.crearCodeWithSourceMap(expresion[0], true, 0, nombreArchivo)[0];
     case /* ErrorLexerP */1 :
-        throw [
-              Caml_builtin_exceptions.match_failure,
-              /* tuple */[
-                "Inicio.re",
-                38,
-                4
-              ]
-            ];
     case /* ErrorParser */2 :
+        console.log(expresion[0]);
         return Curry._4(fn, 0, 0, undefined, [""]);
     
   }
