@@ -14,36 +14,74 @@ div
                 button.boton-color(@click="cambiarColor")
                     i.material-icons brightness_4
 
-        h2 Con Misti, el JavaScript que escribes es...
+        h2 Características
 
-        h3 Más funcional
-
-        p.
-            Usa estructuras funcionales en JavaScript, sin compromisos.
-
-        codigo(:codigo="codCarac1")
-
-        h3 Más conciso
+        h3 Sintáxis de ML
 
         p.
-            Programa más rápidamente, de una forma comprensible.
+            La sintaxis contiene menos parentesis, comas, puntos y comas y llaves.
+            Todo ello con el fin de que el código se más facil de comprender.
+        p.
+            Por ejemplo, el siguiente bloque de código crea un elemento div e imprime una alerta
+            al hacerle click.
 
-        codigo(:codigo="codCarac2")
-
-        h3 Más dinámico
+        codigo(:codigo="codigo1")
 
         p.
-            Usa objetos libremente, sin tener que apegarte a un esquema.
+            Es basado en indentación, similar a Python. Sin embargo, se acerca más a lenguajes como
+            F# u OCaml.
 
-        codigo(:codigo="codCarac3")
-
-        h3 Más seguro
+        h3 Expresiones
 
         p.
-            Verifica tus tipos de datos, y brinda alternativas en caso de error.
+            Similar a otros lenguajes funcionales, en Misti todo es una expresión.
+            Esto quiere decir que todas las estructuras se pueden usar en todos lados.
 
-        codigo(:codigo="codCarac4")
+        p.
+            Por ejemplo, si se quiere asignar un descuento de 7.5% si el valor de la compra supera
+            los $200, o 5 en el caso contrario, en JavaScript, se haría lo siguiente:
 
+        codigo.language-javascript(:codigo="codigo2")
+
+        p.
+            En Misti, los condicionales (y el resto de estructuras) son expresiones, por lo que
+            se puede expresar esa misma lógica de forma segura y concisa.
+
+        codigo(:codigo="codigo3")
+
+        h3 Tipos de datos algebraicos
+
+        p.
+            Misti ofrece acceso a los tipos de datos algebraicos a JavaScript. Son una forma
+            rápida, concisa y segura de definir tipos de datos.
+
+        p.
+            Si quisieramos modelar los tipos de heroes de un juego, haríamos:
+
+        codigo(:codigo="codigo4")
+
+        p.
+            Y más adelante, se hace referencia a estos valores.
+
+        codigo(:codigo="codigo5")
+
+        h3 Contratos
+
+        p.
+            Misti permite validación de tipos de datos y valores en tiempo de ejecución opcional.
+            Esto es posible gracias a pattern matching.
+
+        p.
+            Por ejemplo, la siguiente función para dividir requiere 2 parámetros, ambos de tipo
+            number, y el último diferente de cero. Entonces, se definen esos requisitos en la función,
+            como pre-condiciones.
+
+        codigo(:codigo="codigo6")
+
+        p.
+            Si una llamada no satisface las condiciones en tiempo de ejecución, se lanza una excepción.<br>
+            Se pueden usar otros tipos de datos, definir post-condiciones, incluso múltiples definiciones
+            para manejar casos adicionales.
 
 //
 </template>
@@ -54,46 +92,58 @@ div
     import primerBanner from "../components/index/primer-banner.vue"
     import codigo from "../components/codigo/codigo.vue"
 
-    codCarac1 = """
-        covar MetodoPago =
-            | GiftCard of number
-            | Tarjeta of string
-            | PayPal of string
+    codigo1 =
+        """
+        const div = document.createElement "div"
 
-        const metodoPago = GiftCard 10022
+        div.addEventListener "click" (fn e ->
+            e.preventDefault()
+            alert "Hiciste click en el div."
+        )
         """
 
-    codCarac2 = """
-        const carrito = [...]
-
-        const total =
-            carrito
-            |> Array::map (verificarStock >> aplicarDescuento)
-            |> Array::filter esValido
-            |> Array::reduce obtenerPrecio
-            |> aplicarImpuesto
+    codigo2 =
         """
-
-    codCarac3 = """
-        fun articuloAStr articulo =
-            "${articulo.id} -> ${articulo.nombre}"
-
-        articuloAStr {
-            id := 10433
-            nombre := "Pan Bimbo 250g."
+        let descuento;
+        if (precio > 200) {
+            descuento = 7.5;
+        } else {
+            descuento = 5;
         }
         """
 
-    codCarac4 = """
-        fun articuloAStr {id, nombre} = Some "${id} -> ${nombre}"
+    codigo3 =
+        """
+        const descuento =
+            if precio > 200 do 7.5
+            else 5
+        """
 
-        fun articuloAStr _ = None
+    codigo4 =
+        """
+        covar TipoHeroe =
+            | Fuerza
+            | Agilidad
+            | Inteligencia
+        """
 
-        // No lanza una excepción
-        articuloAStr {
-            nombre := "Juan"
-            apellido := "Perez"
+    codigo5 =
+        """
+        const heroeZeuz = {
+            nombre := "Zeuz"
+            vida := 750
+            mana := 500
+            tipo := Inteligencia
         }
+        """
+
+    codigo6 =
+        """
+        fun dividir
+        | x: number
+        | y: number where y != 0
+        =
+            x / y
         """
 
     export default
@@ -114,10 +164,12 @@ div
             {
                 rutaDocs
                 cambiarColor
-                codCarac1
-                codCarac2
-                codCarac3
-                codCarac4
+                codigo1
+                codigo2
+                codigo3
+                codigo4
+                codigo5
+                codigo6
             }
 
 #
