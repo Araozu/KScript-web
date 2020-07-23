@@ -155,6 +155,9 @@ temas:
       - titulo: Operadores
         ruta: operadores
 
+  - titulo: Contratos
+    ruta: contratos
+
   - titulo: Interoperabilidad
     ruta: interoperabilidad
     temas:
