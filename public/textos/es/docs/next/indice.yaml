@@ -55,14 +55,10 @@ temas:
         ruta: parametros-nombrados
       - titulo: Funciones anónimas
         ruta: funciones-anonimas
-      - titulo: Conductores
-        ruta: conductores
-      - titulo: Composición
-        ruta: composicion
-      - titulo: Generadores
-        ruta: generadores
-      - titulo: Funciones flecha
-        ruta: funciones-flecha
+      - titulo: Tuberías
+        ruta: tuberias
+      - titulo: Composición de funciones
+        ruta: composicion-de-funciones
       - titulo: Rest/Spread
         ruta: rest-spread
   - titulo: Pattern Matching
