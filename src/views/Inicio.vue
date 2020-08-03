@@ -130,18 +130,18 @@ div
     codigo5 =
         """
         const heroeZeuz = {
-            nombre := "Zeuz"
-            vida := 750
-            mana := 500
-            tipo := Inteligencia
+            nombre: "Zeuz"
+            vida: 750
+            mana: 500
+            tipo: Inteligencia
         }
         """
 
     codigo6 =
         """
         fun dividir
-        | x: number
-        | y: number where y != 0
+        | x:> number
+        | y:> number where y != 0
         =
             x / y
         """
