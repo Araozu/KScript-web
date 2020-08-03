@@ -127,6 +127,20 @@ code
     line-height: 1.35rem
     white-space: pre
 
+.cont-lineas
+    padding: 10px 0
+
+
+.cont-num-linea
+    padding: 10px 0.5rem
+    border-right: solid 1px var(--color-borde)
+    text-align: right
+    line-height: 1.35rem
+
+
+.num-linea
+    opacity: 0.5
+
 
 @media only screen and (max-width: 450px)
     .LineaCodigo
@@ -137,10 +151,23 @@ code
     font:
         family: "JetBrains Mono", monospace
         variant-ligatures: discretionary-ligatures
-    padding: 15px 0
+    padding-right: 15px
     cursor: text
     overflow-x: auto
     white-space: nowrap
+    display: grid
+    grid-template-columns: 1.75rem auto
+
+.cont-ancho-lineas-1
+    grid-template-columns: 1.75rem auto
+
+
+.cont-ancho-lineas-10
+    grid-template-columns: 2.25rem auto
+
+
+.cont-ancho-lineas-100
+    grid-template-columns: 2.75rem auto
 
 
 .cont-inline

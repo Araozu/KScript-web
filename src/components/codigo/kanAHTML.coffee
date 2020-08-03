@@ -107,7 +107,30 @@ export kanAHtml = (codigo, esBloque) =>
     elemContenedor = document.createElement "div"
     elemContenedor.className = "#{if esBloque then 'cont' else 'cont-inline'} Fondo-alt"
 
-    for linea in lineas
-        elemContenedor.appendChild (crearHtmlLinea linea, esBloque)
+    contNumLinea = document.createElement "div"
+    contLineas = document.createElement "div"
+
+    for linea, numLinea in lineas
+        if esBloque
+            indicadorNumLinea = document.createElement "div"
+            indicadorNumLinea.innerText = numLinea + 1
+            indicadorNumLinea.className = "num-linea"
+            contNumLinea.appendChild indicadorNumLinea
+
+        contLineas.appendChild (crearHtmlLinea linea, esBloque)
+
+    if esBloque
+        contNumLinea.className = "cont-num-linea"
+        contLineas.className = "cont-lineas"
+        elemContenedor.appendChild contNumLinea
+
+    if lineas.length < 10
+        elemContenedor.className += " cont-ancho-lineas-1"
+    else if lineas.length < 100
+        elemContenedor.className += " cont-ancho-lineas-10"
+    else
+        elemContenedor.className += " cont-ancho-lineas-100"
+
+    elemContenedor.appendChild contLineas
 
     elemContenedor

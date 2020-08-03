@@ -101,6 +101,7 @@ div.doc
         padding: 0.5rem
         user-select: none
         color: var(--color)
+        z-index: 2
         i, span
             font-size: 1rem
         &:hover
