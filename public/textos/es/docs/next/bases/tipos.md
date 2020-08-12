@@ -10,6 +10,12 @@ Misti usa los mismos tipos de datos de JavaScript.
 const nombre = "Juan"
 ```
 
+Solo se crean con comillas dobles, usar comillas simples significa otra cosa.
+
+```
+const apellido = 'Perez'  //! Error. No se esperaba un genérico
+```
+
 ## Number
 
 ```

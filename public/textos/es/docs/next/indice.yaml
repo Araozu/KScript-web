@@ -15,8 +15,6 @@ temas:
         ruta: operadores-comunes
       - titulo: Anotaciones de tipos
         ruta: anotaciones-de-tipos
-      - titulo: Inferencia de tipos
-        ruta: inferencia-de-tipos
       - titulo: Expresiones
         ruta: expresiones
 

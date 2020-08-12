@@ -2,10 +2,13 @@
 
 > En uso (parcial)
 
+Los operadores heredados de JavaScript no realizan ningún tipo de
+verificación de los tipos de datos. Funcionan igualmente a JavaScript.
+
 ```
 // Txt
-// La concatenación se hace con <>
-"Hola " <> "mundo"  //: hola mundo
+// La concatenación se hace con +, como en JavaScript
+"Hola " + "mundo"  //: hola mundo
 
 // Num
 4 + 2   //: 6
@@ -22,9 +25,8 @@
 1 <= 2  //: true
 "a" < "b"  //: true
 
-1 == 2    //: false
-1 != 2    //: true
-"1" == 1  // Error. No se pueden comparar Txt y Num
+1 == "1"   //: true
+1 === "1"  //: false
 
 true && false  //: false
 true || false  //: true
@@ -44,6 +46,5 @@ num **= 3  //: 8
 
 ## Discusión
 
-El operador `<>` solo trabaja con strings, sin embargo el compilador aun no aplica
-este comportamiento.
+Eliminado el operador `<>` porque no sería posible incluirlo en todas las llamadas.
 

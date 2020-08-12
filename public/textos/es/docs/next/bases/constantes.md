@@ -29,4 +29,10 @@ let edad = 20
 edad = 21  // OK
 ```
 
+No se puede declarar una variable y dejarla sin valor (por ahora)
 
+```
+let edad   //! Error. Se esperaba el operador de asignacion '='
+
+// ...
+```
