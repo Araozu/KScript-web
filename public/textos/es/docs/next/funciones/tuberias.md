@@ -4,7 +4,7 @@
 
 "Conducen" parametros a funciones.
 
-## Izquierda
+## `<|`
 
 Simplemente aplica la función
 
@@ -24,7 +24,7 @@ se compila a:
 console.log(1 + 2, 3 + 4);
 ```
 
-## Derecha
+## `|>`
 
 Permite unir varias funciones.
 
@@ -39,3 +39,34 @@ Permite unir varias funciones.
 multiplicar2(restar2(sumar5(10)));
 ```
 
+## `|.`
+
+Hacer `a b |. c` es equivalente a `(a b).c` en Misti, o `a(b).c` en JavaScript.
+
+## `.|`
+
+Hacer `a .| b c` es equivalente a `(b c).a` en Misti, o `b(c).a` en JavaScript.
+
+## `?|`
+
+Dado `a ?| b`:
+
+- Si `a` existe y es una función, ejecuta la función `a` con el parámetro `b`. Es decir, hace
+  `a b`.
+- Sino devuelve `()`.
+
+```
+localStorage?.getItem ?| "usuario"
+```
+
+## `|?`
+
+Dado `b |? a`:
+
+- Si `a` existe y es una función, ejecuta la función `a` con el parámetro `b`. Es decir,
+  hace `a b`. Nótese que el orden es el inverso al operador anterior.
+- Sino devuelve `()`
+
+```
+"usuario" |? localStorage?.getItem
+```

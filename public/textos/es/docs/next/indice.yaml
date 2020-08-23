@@ -21,16 +21,17 @@ temas:
   - titulo: Estructuras básicas
     ruta: estructuras # Un resumen rápido
     temas:
-      - titulo: Tuplas
-        ruta: tuplas
-      - titulo: Arrays
-        ruta: arrays
+      - titulo: Arrays y Tuplas
+        ruta: arrays-y-tuplas
       - titulo: Condicionales
         ruta: condicionales
       - titulo: Switch # Hablar de pattern matching
         ruta: switch
       - titulo: Bucles
         ruta: bucles
+
+  - titulo: Tipos nulos
+    ruta: tipos-nulos
 
   - titulo: Funciones
     ruta: funciones # Un resumen rápido
@@ -70,13 +71,6 @@ temas:
     temas:
       - titulo: Estructura
         ruta: estructura
-      - titulo: Mutabilidad
-        ruta: mutabilidad
-      - titulo: Métodos
-        ruta: metodos
-      - titulo: this
-        ruta: this
-
   - titulo: Genéricos
     ruta: genericos
     temas:
@@ -138,14 +132,6 @@ temas:
         ruta: genericos
       - titulo: Herencia
         ruta: herencia
-
-  - titulo: Tipos nulos
-    ruta: tipos-nulos
-    temas:
-      - titulo: Uso
-        ruta: uso
-      - titulo: Operadores
-        ruta: operadores
 
   - titulo: Contratos
     ruta: contratos
