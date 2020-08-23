@@ -128,7 +128,7 @@ div.doc
 
     .contenido-tema-docs
         margin: 0 auto
-        width: 95%
+        width: 90%
 
 
     .titulo-tema-docs
