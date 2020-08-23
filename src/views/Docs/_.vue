@@ -115,6 +115,7 @@ div.doc
         top: 0
         border-bottom: solid 3px var(--colorSecundario)
         font-family: var(--fuenteTitulo)
+        z-index: 2
 
         .material-icons
             vertical-align: bottom
