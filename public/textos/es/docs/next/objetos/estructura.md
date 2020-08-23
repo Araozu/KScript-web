@@ -4,7 +4,7 @@
 
 ## Sintaxis
 
-La misma de JavaScript.
+La sintaxis es similar a JavaScript.
 
 ```
 const persona = {nombre: "Juan", apellido: "Perez"}
@@ -26,6 +26,8 @@ const persona = {
 
 ## Métodos
 
+> Experimental
+
 - Usando funcionen anonimas
 - Usando palabra clave `met` (experimental)
 
@@ -37,3 +39,10 @@ const persona = {
     met nombreCompleto = this.nombre <> this.apellido
 }
 ```
+
+Para hacer uso de `this` en los métodos con funciones anónimas se usa
+una flecha simple `->`.
+En `met` siempre se tiene acceso a `this`.
+
+
+
