@@ -1,22 +1,19 @@
-import { crearLexer } from "../../Compilador/AnalisisLexico/Gramatica.bs"
-import { tknToStr } from "../../Compilador/Inicio.bs"
+import { Lexer } from "misti"
 
 crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")
 
 obtenerTokens = (entrada) =>
-    lexer = crearLexer entrada
+    lexer = new Lexer entrada
     tokens = []
 
     posActual = 0
 
     loop
         tokenn = lexer.sigToken()
-        nombreTipoToken = tokenn.name
 
-        if tokenn.tag == 0
-            preToken = tokenn[0]
-            ntoken = preToken[0]
-            ntoken.tipo = tknToStr preToken
+        if tokenn.type == "TokenLexer"
+            ntoken = tokenn.token.token
+            ntoken.tipo = tokenn.token.type
 
             if ntoken.inicio > posActual
                 tokens.push

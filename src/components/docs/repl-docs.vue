@@ -14,9 +14,7 @@ div.repl-docs
 
 <script lang="coffee">
     import { ref } from "vue"
-    import { crearLexer } from "@/Compilador/AnalisisLexico/Gramatica.bs"
-    import { parseTokens } from "@/Compilador/AnalisisSintactico/Parser.bs"
-    import { generarJs } from "@/Compilador/Generador/Generador.bs"
+    import { Lexer, parseTokens, crearCodeWithSourceMap } from "misti"
 
     reemplazarEspacios = (txt) =>
         letras = txt.split ""
@@ -55,22 +53,23 @@ div.repl-docs
             resultado = ref {vacio: true}
 
             transpilar = =>
-                lexer = crearLexer codigo.value
+                lexer = new Lexer codigo.value
                 preExpresion = parseTokens lexer
                 resultado.value =
-                    switch preExpresion.tag
-                        when 0
-                            expresion = preExpresion[0]
+                    switch preExpresion.type
+                        when "ExitoParser"
+                            expresion = preExpresion.expr
+                            strRes = (crearCodeWithSourceMap expresion, true, 0, null)[0].toString()
                             {
                                 ok: true
-                                cod: (generarJs expresion, true, 0)[0]
+                                cod: strRes
                             }
-                        when 1
+                        when "ErrorLexerP"
                             err: true
-                            msg: "Error Lexico:\n#{preExpresion[0]}"
-                        when 2
+                            msg: "Error Lexico:\n#{preExpresion.err}"
+                        when "ErrorParser"
                             err: true
-                            msg: "Error Sintáctico:\n#{preExpresion[0]}"
+                            msg: "Error Sintáctico:\n#{preExpresion.err}"
 
             {
                 codigo
