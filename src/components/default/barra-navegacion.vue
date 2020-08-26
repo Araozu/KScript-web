@@ -6,8 +6,10 @@ div.barra-nav
     ul.lista-links-barra-nav
         li.ruta-barra-nav
             router-link(:to="rutaDocs") Documentación
-        li.ruta-barra-nav
+        // li.ruta-barra-nav
             router-link(to="/api/") API
+        li.ruta-barra-nav
+            a(href="https://github.com/Araozu/misti" target="_blank") GitHub
         li.ruta-barra-nav
             a(@click.prevent="cambiarColor") {{ textoModoColor }}
 

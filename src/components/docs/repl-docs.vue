@@ -1,6 +1,6 @@
 <template lang="pug">
 div.repl-docs
-    textarea.entrada-kan.Fondo.TextoCod(placeholder="Código Kan" v-model="codigo")
+    textarea.entrada-kan.Fondo.TextoCod(placeholder="Código Misti" v-model="codigo")
     div.cont-botones
         button.boton-transpilar(@click="transpilar") Transpilar
 
