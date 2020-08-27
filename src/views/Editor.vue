@@ -2,7 +2,11 @@
 div.pad
     h1 Editor
     div.contenedor-test
-        codigo(:codigo="codigo" :esBloque="true")
+        div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas")
+            div.cont-num-linea
+                div.num-linea(v-for="(_, pos) in lineas") {{ pos + 1 }}
+            div.cont-lineas
+                linea-editor-codigo(v-for="(linea, pos) in lineas" :linea="linea" :key="pos")
         textarea.codigo-raw(:value="codigo" ref="refTextArea")
         cursor(:lineas="lineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43")
 
@@ -12,29 +16,39 @@ div.pad
 <script>
     import {ref, computed, onMounted} from "vue";
     import Codigo from "@/components/codigo/codigo";
-    import Cursor from "@/components/codigo/cursor";
+    import Cursor from "@/components/Editor/cursor";
+    import LineaEditorCodigo from "@/components/Editor/linea-editor-codigo"
 
     export default {
         name: "Editor",
-        components: {Cursor, Codigo},
+        components: {LineaEditorCodigo, Cursor, Codigo},
         setup() {
             const codigo = ref(`console.log "Hola mundo"\nconst s = 20 - 40\nconsole.log "Adios mundo"\nlet a = 80\n`);
             const refTextArea = ref(null);
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
+            const claseContNumLineas = computed(() => {
+                if (lineas.value.length < 10) return "cont-ancho-lineas-1";
+                else if (lineas.value.length < 100) return "cont-ancho-lineas-10";
+                else return "cont-ancho-lineas-100";
+            });
 
             onMounted(() => {
                 const elem = refTextArea.value;
-                let posAnterior = 0;
+                let posAnteriorFinal = 0;
 
                 const listener = () => {
                     const posNuevaInicio = elem.selectionStart;
                     const posNuevaFinal = elem.selectionEnd;
 
-                    if (posNuevaInicio === posNuevaFinal && posNuevaInicio !== posAnterior) {
-                        posAbsCursor.value = posNuevaInicio;
-                        posAnterior = posNuevaInicio;
+                    if (posNuevaInicio === posNuevaFinal && posNuevaFinal !== posAnteriorFinal) {
+                        posAbsCursor.value = posNuevaFinal;
+                        posAnteriorFinal = posNuevaFinal;
+                    } else if (posNuevaFinal !== posAnteriorFinal) {
+                        // Llamar a funcion de resaltado
+                        posAbsCursor.value = posNuevaFinal;
+                        posAnteriorFinal = posNuevaFinal;
                     }
                 };
 
@@ -45,6 +59,7 @@ div.pad
                 codigo,
                 refTextArea,
                 lineas,
+                claseContNumLineas,
                 posAbsCursor
             }
         }
@@ -53,6 +68,15 @@ div.pad
 </script>
 
 <style scoped lang="sass">
+
+    .contenedor-codigo
+        box-sizing: border-box
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        min-height: 15rem
+
 
     .codigo-raw
         position: absolute

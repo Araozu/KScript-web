@@ -2,7 +2,7 @@ import { Lexer } from "misti"
 
 crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")
 
-obtenerTokens = (entrada) =>
+export obtenerTokens = (entrada) =>
     lexer = new Lexer entrada
     tokens = []
 
