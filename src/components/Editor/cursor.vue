@@ -10,7 +10,7 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'p
     export default {
         name: "cursor",
         props: {
-            lineas: {
+            largosLineas: {
                 type: Array,
                 required: true
             },
@@ -49,8 +49,8 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'p
             const actualizarCursor = (nuevaPos) => {
                 let posAbsolutaActual = 0;
                 let offsetLinea = 0;
-                for (const s of props.lineas) {
-                    if (nuevaPos <= posAbsolutaActual + s.length) {
+                for (const largoLinea of props.largosLineas) {
+                    if (nuevaPos <= posAbsolutaActual + largoLinea) {
                         posXIndicador.value = nuevaPos - posAbsolutaActual;
                         posYIndicador.value = offsetLinea;
                         cursorMoviendose.value = true;
@@ -74,7 +74,7 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'p
 
                         break;
                     } else {
-                        posAbsolutaActual += s.length + 1;
+                        posAbsolutaActual += largoLinea + 1;
                         offsetLinea++;
                     }
                 }

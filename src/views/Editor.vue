@@ -6,9 +6,13 @@ div.pad
             div.cont-num-linea
                 div.num-linea(v-for="(_, pos) in lineas") {{ pos + 1 }}
             div.cont-lineas
-                linea-editor-codigo(v-for="(linea, pos) in lineas" :linea="linea" :key="pos")
+                linea-editor-codigo(v-for="(linea, pos) in lineas"
+                    :linea="linea"
+                    :resaltadoArr="resaltadoLineas[pos]"
+                    :key="pos"
+                )
         textarea.codigo-raw(:value="codigo" ref="refTextArea")
-        cursor(:lineas="lineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43")
+        cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43")
 
 //
 </template>
@@ -28,6 +32,10 @@ div.pad
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
+            const resaltadoLineas = computed(() => lineas.value.map(() => [0, 0]));
+            const largosLineas = computed(() => lineas.value.map((l) => l.length));
+
+            // const lineas = computed(() => codigo.value.split("\n"));
             const claseContNumLineas = computed(() => {
                 if (lineas.value.length < 10) return "cont-ancho-lineas-1";
                 else if (lineas.value.length < 100) return "cont-ancho-lineas-10";
@@ -59,6 +67,8 @@ div.pad
                 codigo,
                 refTextArea,
                 lineas,
+                largosLineas,
+                resaltadoLineas,
                 claseContNumLineas,
                 posAbsCursor
             }

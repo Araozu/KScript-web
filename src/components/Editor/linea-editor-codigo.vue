@@ -20,6 +20,10 @@ div.LineaCodigo.TextoCod.cont-linea-codigo
             linea: {
                 type: String,
                 required: true
+            },
+            resaltadoArr: {
+                type: Array,
+                required: true
             }
         },
         setup(props) {
@@ -46,7 +50,7 @@ div.LineaCodigo.TextoCod.cont-linea-codigo
     .resaltado
         position: absolute
         top: 0
-        left: 0
+        left: 15px
         height: 1.35rem
         width: 5rem
         background-color: var(--color-cod)
