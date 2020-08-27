@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 import Inicio from "../views/Inicio.vue"
 import Docs from "../views/Docs.vue"
 import Docs_ from "../views/Docs/_.vue"
+import Editor from "../views/Editor";
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
                 component: () => import("../views/Docs/_.vue")
             }
         ]
+    },
+    {
+        path: "/editor",
+        name: "Editor",
+        component: Editor
     }
 ];
 
