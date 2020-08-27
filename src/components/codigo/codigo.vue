@@ -8,7 +8,7 @@ div(ref="elem")
     import { kanAHtml } from "./kanAHTML.coffee"
 
     export default
-        name: "contenedor-codigo"
+        name: "codigo"
         props:
             codigo:
                 type: String

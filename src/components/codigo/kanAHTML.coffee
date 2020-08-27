@@ -98,8 +98,6 @@ crearHtmlLinea = (linea, esBloque) =>
 #: Txt -> HTMLElement
 export kanAHtml = (codigo, esBloque) =>
     lineas = codigo.split "\n"
-    if lineas[lineas.length - 1] == ""
-        lineas.pop()
 
     elemContenedor = document.createElement "div"
     elemContenedor.className = "#{if esBloque then 'cont' else 'cont-inline'} Fondo-alt"
