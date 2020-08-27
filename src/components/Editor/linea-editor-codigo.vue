@@ -1,6 +1,6 @@
 <template lang="pug">
-div.LineaCodigo.TextoCod.cont-linea-codigo
-    div.resaltado
+div.LineaCodigo.TextoCod.cont-linea-codigo(:style="estilosContLineaCodigo")
+    div.resaltado(:style="[estilosResaltado, estilosContLineaCodigo]")
     template(v-if="linea === ''")
         br
     template(v-else)
@@ -11,7 +11,7 @@ div.LineaCodigo.TextoCod.cont-linea-codigo
 </template>
 
 <script>
-    import {computed} from "vue";
+    import {ref, computed, watchEffect} from "vue";
     import {obtenerTokens, escaparToken} from "../codigo/kanAHTML.coffee";
 
     export default {
@@ -34,8 +34,32 @@ div.LineaCodigo.TextoCod.cont-linea-codigo
                 })
             );
 
+            const estilosResaltado = ref({});
+
+            const manejarResaltado = () => {
+                const [izq, der] = props.resaltadoArr;
+
+                if (izq !== der ) {
+                    estilosResaltado.value = {
+                        transform: `translateX(${izq * 0.6}rem)`,
+                        width: `${(der - izq) * 0.6}rem`
+                    };
+                } else {
+                    estilosResaltado.value = {};
+                }
+            };
+
+            watchEffect(manejarResaltado);
+
+            const px = Math.round(parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.35)
+            const estilosContLineaCodigo = ref({
+                lineHeight: `${px}px`,
+                height: `${px}px`,
+            });
             return {
-                datosTokens
+                estilosResaltado,
+                datosTokens,
+                estilosContLineaCodigo
             }
         }
     }
@@ -51,8 +75,8 @@ div.LineaCodigo.TextoCod.cont-linea-codigo
         position: absolute
         top: 0
         left: 15px
-        height: 1.35rem
-        width: 5rem
+        height: 100%
+        width: 0
         background-color: var(--color-cod)
         opacity: 0.25
 

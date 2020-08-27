@@ -32,7 +32,7 @@ div.pad
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
-            const resaltadoLineas = computed(() => lineas.value.map(() => [0, 0]));
+            const resaltadoLineas = computed(() => lineas.value.map(() => [1, 4]));
             const largosLineas = computed(() => lineas.value.map((l) => l.length));
 
             // const lineas = computed(() => codigo.value.split("\n"));
