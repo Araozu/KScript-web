@@ -32,7 +32,7 @@ div.pad
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
-            const resaltadoLineas = computed(() => lineas.value.map(() => [1, 4]));
+            const resaltadoLineas = computed(() => lineas.value.map(() => [0, 0]));
             const largosLineas = computed(() => lineas.value.map((l) => l.length));
 
             // const lineas = computed(() => codigo.value.split("\n"));
@@ -42,20 +42,65 @@ div.pad
                 else return "cont-ancho-lineas-100";
             });
 
+            // TODO: No funciona en reversa????
+            let resaltado = false;
+            const resaltarCodigo = (inicio, final) => {
+                console.log(inicio, final);
+                resaltado = true;
+                let posAbsolutaActual = 0;
+                let lineaActual = 0;
+                let posRelativaActual = 0;
+                let i = 0;
+                for (; i < largosLineas.value.length; i++) {
+                    const largoLinea = largosLineas.value[i];
+                    if (inicio <= posAbsolutaActual + largoLinea) {
+                        const posInicioResaltado = inicio - posAbsolutaActual;
+
+                        if (final <= posAbsolutaActual + largoLinea) {
+                            const posFinalResaltado = final - posAbsolutaActual;
+                            resaltadoLineas.value[lineaActual] = [posInicioResaltado, posFinalResaltado];
+                            return;
+                        }
+
+                        break;
+                    } else {
+                        posAbsolutaActual += largoLinea + 1;
+                        posRelativaActual = 0;
+                        lineaActual++;
+                    }
+                }
+            };
+
+            const limpiarResaltado = () => {
+                if (resaltado) {
+                    for (let i = 0; i < resaltadoLineas.value.length; i++) {
+                        const [izq, der] = resaltadoLineas.value[i];
+                        if (izq !== 0 && der !== 0) {
+                            resaltadoLineas.value[i] = [0, 0];
+                        }
+                    }
+                    resaltado = false;
+                }
+            };
+
             onMounted(() => {
                 const elem = refTextArea.value;
+                let posAnteriorInicio = 0;
                 let posAnteriorFinal = 0;
 
                 const listener = () => {
                     const posNuevaInicio = elem.selectionStart;
                     const posNuevaFinal = elem.selectionEnd;
+                    limpiarResaltado();
 
                     if (posNuevaInicio === posNuevaFinal && posNuevaFinal !== posAnteriorFinal) {
                         posAbsCursor.value = posNuevaFinal;
                         posAnteriorFinal = posNuevaFinal;
-                    } else if (posNuevaFinal !== posAnteriorFinal) {
-                        // Llamar a funcion de resaltado
+                    } else if (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio && posNuevaInicio !== posNuevaFinal) {
+                        console.log("No deberia ser??");
+                        resaltarCodigo(posNuevaInicio, posNuevaFinal);
                         posAbsCursor.value = posNuevaFinal;
+                        posAnteriorInicio = posNuevaInicio;
                         posAnteriorFinal = posNuevaFinal;
                     }
                 };
