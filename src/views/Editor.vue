@@ -32,13 +32,11 @@ div.pad
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
+            const numLineas = computed(() => lineas.value.length);
             const resaltadoLineas = ref([]);
-            watchEffect(() => {
-                resaltadoLineas.value = lineas.value.map(() => [0, 0]);
-            });
+            watchEffect(() => resaltadoLineas.value = new Array(numLineas.value).fill([0, 0]));
             const largosLineas = computed(() => lineas.value.map((l) => l.length));
 
-            // const lineas = computed(() => codigo.value.split("\n"));
             const claseContNumLineas = computed(() => {
                 if (lineas.value.length < 10) return "cont-ancho-lineas-1";
                 else if (lineas.value.length < 100) return "cont-ancho-lineas-10";
@@ -51,27 +49,57 @@ div.pad
                 let posAbsolutaActual = 0;
                 let lineaActual = 0;
                 let posRelativaActual = 0;
-                let i = 0;
-                for (; i < largosLineas.value.length; i++) {
+                let inicioMarcado = false;
+                let finalMarcado = false;
+
+                // TODO: Al asignar verificar que esos valores no esten ya actualmente?
+                for (let i = 0; i < largosLineas.value.length; i++) {
                     const largoLinea = largosLineas.value[i];
 
-                    // Verifica que la posicion de inicio este en la linea actual.
-                    if (inicio <= posAbsolutaActual + largoLinea) {
+                    // Si la posicion de inicio este en la linea actual.
+                    if (!inicioMarcado && inicio <= posAbsolutaActual + largoLinea) {
+                        inicioMarcado = true;
                         const posInicioResaltado = inicio - posAbsolutaActual;
 
-                        // Si la selección termina en la misma linea
+                        // Si la selección termina en esta linea
                         if (final <= posAbsolutaActual + largoLinea) {
                             const posFinalResaltado = final - posAbsolutaActual;
                             resaltadoLineas.value[lineaActual] = [posInicioResaltado, posFinalResaltado];
-                            return;
+                            finalMarcado = true;
+                        }
+                        // Si la selección no termina en esta linea
+                        else {
+                            resaltadoLineas.value[lineaActual] = [posInicioResaltado, largoLinea];
                         }
 
-                        break;
-                    } else {
-                        posAbsolutaActual += largoLinea + 1;
-                        posRelativaActual = 0;
-                        lineaActual++;
                     }
+                    // Si la posicion de inicio esta en una linea anterior
+                    else if (inicioMarcado && !finalMarcado) {
+
+                        // Si la selección termina en esta linea
+                        if (final <= posAbsolutaActual + largoLinea) {
+                            const posFinalResaltado = final - posAbsolutaActual;
+                            resaltadoLineas.value[lineaActual] = [0, posFinalResaltado];
+                            finalMarcado = true;
+                        }
+                        // Si la selección no termina en esta linea
+                        else {
+                            resaltadoLineas.value[lineaActual] = [0, largoLinea];
+                        }
+
+                    }
+                    // Recorre las lineas no seleccionadas, verificando su validez
+                    else {
+                        const [izq, der] = resaltadoLineas.value[lineaActual];
+                        if (izq !== 0 || der !== 0) {
+                            resaltadoLineas.value[lineaActual] = [0, 0];
+                        }
+                    }
+
+                    // Actualizar los valores de las posiciones para pasar a la sig. linea.
+                    posAbsolutaActual += largoLinea + 1;
+                    posRelativaActual = 0;
+                    lineaActual++;
                 }
             };
 
