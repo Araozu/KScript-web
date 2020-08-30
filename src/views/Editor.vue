@@ -54,9 +54,12 @@ div.pad
                 let i = 0;
                 for (; i < largosLineas.value.length; i++) {
                     const largoLinea = largosLineas.value[i];
+
+                    // Verifica que la posicion de inicio este en la linea actual.
                     if (inicio <= posAbsolutaActual + largoLinea) {
                         const posInicioResaltado = inicio - posAbsolutaActual;
 
+                        // Si la selección termina en la misma linea
                         if (final <= posAbsolutaActual + largoLinea) {
                             const posFinalResaltado = final - posAbsolutaActual;
                             resaltadoLineas.value[lineaActual] = [posInicioResaltado, posFinalResaltado];
@@ -76,7 +79,7 @@ div.pad
                 if (resaltado) {
                     for (let i = 0; i < resaltadoLineas.value.length; i++) {
                         const [izq, der] = resaltadoLineas.value[i];
-                        if (izq !== 0 && der !== 0) {
+                        if (izq !== 0 || der !== 0) {
                             resaltadoLineas.value[i] = [0, 0];
                         }
                     }
