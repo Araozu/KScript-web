@@ -93,13 +93,13 @@ div.pad
                     const posNuevaInicio = elem.selectionStart;
                     const posNuevaFinal = elem.selectionEnd;
 
-                    if (posNuevaInicio === posNuevaFinal && posNuevaFinal !== posAnteriorFinal) {
+                    if (posNuevaInicio === posNuevaFinal && (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio)) {
                         posAbsCursor.value = posNuevaFinal;
                         posAnteriorFinal = posNuevaFinal;
                         limpiarResaltado();
                     } else if (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio && posNuevaInicio !== posNuevaFinal) {
                         resaltarCodigo(posNuevaInicio, posNuevaFinal);
-                        posAbsCursor.value = posNuevaFinal;
+                        posAbsCursor.value = elem.selectionDirection === "forward"? posNuevaFinal: posNuevaInicio;
                         posAnteriorInicio = posNuevaInicio;
                         posAnteriorFinal = posNuevaFinal;
                     }
