@@ -18,7 +18,7 @@ div.pad
 </template>
 
 <script>
-    import {ref, computed, onMounted} from "vue";
+    import {ref, computed, watchEffect, onMounted} from "vue";
     import Codigo from "@/components/codigo/codigo";
     import Cursor from "@/components/Editor/cursor";
     import LineaEditorCodigo from "@/components/Editor/linea-editor-codigo"
@@ -32,7 +32,10 @@ div.pad
             const posAbsCursor = ref(0);
 
             const lineas = computed(() => codigo.value.split("\n"));
-            const resaltadoLineas = computed(() => lineas.value.map(() => [0, 0]));
+            const resaltadoLineas = ref([]);
+            watchEffect(() => {
+                resaltadoLineas.value = lineas.value.map(() => [0, 0]);
+            });
             const largosLineas = computed(() => lineas.value.map((l) => l.length));
 
             // const lineas = computed(() => codigo.value.split("\n"));
@@ -42,10 +45,8 @@ div.pad
                 else return "cont-ancho-lineas-100";
             });
 
-            // TODO: No funciona en reversa????
             let resaltado = false;
             const resaltarCodigo = (inicio, final) => {
-                console.log(inicio, final);
                 resaltado = true;
                 let posAbsolutaActual = 0;
                 let lineaActual = 0;
@@ -91,13 +92,12 @@ div.pad
                 const listener = () => {
                     const posNuevaInicio = elem.selectionStart;
                     const posNuevaFinal = elem.selectionEnd;
-                    limpiarResaltado();
 
                     if (posNuevaInicio === posNuevaFinal && posNuevaFinal !== posAnteriorFinal) {
                         posAbsCursor.value = posNuevaFinal;
                         posAnteriorFinal = posNuevaFinal;
+                        limpiarResaltado();
                     } else if (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio && posNuevaInicio !== posNuevaFinal) {
-                        console.log("No deberia ser??");
                         resaltarCodigo(posNuevaInicio, posNuevaFinal);
                         posAbsCursor.value = posNuevaFinal;
                         posAnteriorInicio = posNuevaInicio;
