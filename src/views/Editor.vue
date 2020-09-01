@@ -12,7 +12,7 @@ div.pad
                     :key="pos"
                 )
         textarea.codigo-raw(:value="codigo" ref="refTextArea")
-        cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43")
+        cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43" :enFoco="enFoco")
 
 //
 </template>
@@ -30,6 +30,7 @@ div.pad
             const codigo = ref(`console.log "Hola mundo"\nconst s = 20 - 40\nconsole.log "Adios mundo"\nlet a = 80\n`);
             const refTextArea = ref(null);
             const posAbsCursor = ref(0);
+            const enFoco = ref(false);
 
             const lineas = computed(() => codigo.value.split("\n"));
             const numLineas = computed(() => lineas.value.length);
@@ -115,10 +116,23 @@ div.pad
                 }
             };
 
+            const fnFocus = () => enFoco.value = true;
+            const fnBlur = () => enFoco.value = false;
+
             onMounted(() => {
                 const elem = refTextArea.value;
                 let posAnteriorInicio = 0;
                 let posAnteriorFinal = 0;
+
+                refTextArea.value.addEventListener("focus", fnFocus);
+                refTextArea.value.addEventListener("blur", fnBlur);
+
+                refTextArea.value.addEventListener("focusout", (ev) => {
+                    console.log("Perdiendo foco. Se podra cancelar?");
+                    console.log(ev);
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                });
 
                 const listener = () => {
                     const posNuevaInicio = elem.selectionStart;
@@ -141,6 +155,7 @@ div.pad
 
             return {
                 codigo,
+                enFoco,
                 refTextArea,
                 lineas,
                 largosLineas,

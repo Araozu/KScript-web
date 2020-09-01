@@ -25,6 +25,10 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'p
             posLeft: {
                 type: Number,
                 required: true
+            },
+            enFoco: {
+                type: Boolean,
+                required: true
             }
         },
         setup(props) {
@@ -35,10 +39,12 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'p
 
             const dummyPosAbsCursor = computed(() => props.posAbsCursor);
 
-            const estilosIndicador = computed(() => ({
-                transform: `translateX(${posXIndicador.value * 0.6}rem) translateY(${posYIndicador.value * 1.35}rem)`,
-                opacity: (cursorOculto.value && !cursorMoviendose.value? "0": "0.9")
-            }));
+            const estilosIndicador = computed(() => {
+                return {
+                    transform: `translateX(${posXIndicador.value * 0.6}rem) translateY(${posYIndicador.value * 1.35}rem)`,
+                    opacity: (!props.enFoco || (cursorOculto.value && !cursorMoviendose.value) ? "0" : "0.9")
+                }
+            });
 
             let intervaloParpadeoCursor;
             const funParpadeoCursor = () => {
