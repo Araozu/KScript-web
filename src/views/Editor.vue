@@ -9,9 +9,12 @@ div.pad
                 linea-editor-codigo(v-for="(linea, pos) in lineas"
                     :linea="linea"
                     :resaltadoArr="resaltadoLineas[pos]"
-                    :key="pos"
+                    :key="linea"
                 )
-        textarea.codigo-raw(:value="codigo" ref="refTextArea")
+        textarea.codigo-raw(
+            :value="codigo" ref="refTextArea"
+            @keydown.tab.prevent="enTabD"
+        )
         cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43" :enFoco="enFoco")
 
 //
@@ -32,7 +35,9 @@ div.pad
             const posAbsCursor = ref(0);
             const enFoco = ref(false);
 
-            const lineas = computed(() => codigo.value.split("\n"));
+            // const lineas = computed(() => codigo.value.split("\n"));
+            const lineas = ref([]);
+            watchEffect(() => lineas.value = codigo.value.split("\n"));
             const numLineas = computed(() => lineas.value.length);
             const resaltadoLineas = ref([]);
             watchEffect(() => resaltadoLineas.value = new Array(numLineas.value).fill([0, 0]));
@@ -53,7 +58,6 @@ div.pad
                 let inicioMarcado = false;
                 let finalMarcado = false;
 
-                // TODO: Al asignar verificar que esos valores no esten ya actualmente?
                 for (let i = 0; i < largosLineas.value.length; i++) {
                     const largoLinea = largosLineas.value[i];
 
@@ -119,6 +123,56 @@ div.pad
             const fnFocus = () => enFoco.value = true;
             const fnBlur = () => enFoco.value = false;
 
+            //: number -> [posAbsolutaActual: number, lineaActual: number]
+            const obtNumLineaActual = (posAbs) => {
+                let posAbsolutaActual = 0;
+                let lineaActual = 0;
+
+                for (let i = 0; i < largosLineas.value.length; i++) {
+                    const largoLinea = largosLineas.value[i];
+
+                    if (posAbs - 1 <= posAbsolutaActual + largoLinea) {
+                        return [posAbsolutaActual, lineaActual];
+                    }
+
+                    // Actualizar los valores de las posiciones para pasar a la sig. linea.
+                    posAbsolutaActual += largoLinea + 1;
+                    lineaActual++;
+                }
+
+                return [posAbsolutaActual, lineaActual];
+            };
+
+            const manejarInput = (ev) => {
+                const elem = refTextArea.value;
+                console.table({
+                    data: ev.data,
+                    type: ev.inputType,
+                    selectEnd: elem.selectionEnd
+                });
+
+                // Obtener el tipo de entrada
+                switch (ev.inputType) {
+                    case "insertText": {
+                        const [posAbsInicioLinea, numLineaActual] = obtNumLineaActual(elem.selectionEnd);
+                        console.log("Num linea actual =", numLineaActual);
+                        const s = ev.target.value;
+                        const s1 = s.substr(posAbsInicioLinea);
+                        const str = s1.substring(0, s1.indexOf("\n"));
+                        console.log(str);
+                        lineas.value[numLineaActual] = str;
+                        console.log(lineas.value);
+                    }
+                }
+
+                // Obtener el numero de linea actual
+
+                // Actualizar el texto de la linea en el array
+
+                // Dejar que vue recompile la linea internamente mcjphb oatgpa 0.05
+
+            };
+
             onMounted(() => {
                 const elem = refTextArea.value;
                 let posAnteriorInicio = 0;
@@ -126,13 +180,7 @@ div.pad
 
                 refTextArea.value.addEventListener("focus", fnFocus);
                 refTextArea.value.addEventListener("blur", fnBlur);
-
-                refTextArea.value.addEventListener("focusout", (ev) => {
-                    console.log("Perdiendo foco. Se podra cancelar?");
-                    console.log(ev);
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                });
+                refTextArea.value.addEventListener("input", manejarInput);
 
                 const listener = () => {
                     const posNuevaInicio = elem.selectionStart;
@@ -153,7 +201,12 @@ div.pad
                 setInterval(listener, 50);
             });
 
+            const enTabD = () => {
+                console.log(":D");
+            };
+
             return {
+                enTabD,
                 codigo,
                 enFoco,
                 refTextArea,

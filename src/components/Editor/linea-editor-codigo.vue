@@ -4,8 +4,7 @@ div.LineaCodigo.TextoCod.cont-linea-codigo(:style="estilosContLineaCodigo")
     template(v-if="linea === ''")
         br
     template(v-else)
-        template(v-for="datos in datosTokens")
-            span(:class="datos[0]" v-html="datos[1]")
+        span(v-for="datos in datosTokens" :class="datos[0]" v-html="datos[1]")
 
 //
 </template>
