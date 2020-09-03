@@ -147,3 +147,5 @@ temas:
         ruta: promesas
       - titulo: async/await
         ruta: async-await
+  - titulo: JSX
+    ruta: jsx
