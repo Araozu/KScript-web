@@ -12,9 +12,9 @@ div.pad
                     :key="linea"
                 )
         textarea.codigo-raw(
-            :value="codigo" ref="refTextArea"
+            ref="refTextArea"
             @keydown.tab.prevent="enTabD"
-        )
+        ) {{ codigo }}
         cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43" :enFoco="enFoco")
 
 //
