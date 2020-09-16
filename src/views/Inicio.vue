@@ -3,10 +3,9 @@ div
     div.contenedor-principal
         div.cont-logo-principal
             div.cont-logo
-                img(src="/img/misti-logo-beta.svg")
+                img(src="/img/KScript_logo_cuadrado_claro.svg")
             div.titulo
-                h1 Misti
-                // Arena ven a mi
+                h1 K'Script
                 h2 Seguridad en tiempo de ejecución para el dinamismo de ES6.
 
                 router-link.boton-principal(:to="rutaDocs" title="Documentación") Documentación
@@ -214,8 +213,8 @@ div
 
 
     .boton-principal
-        background-color: #F1D91D
-        color: #151515
+        background-color: #f44336
+        color: white
 
 
     .boton-npm
