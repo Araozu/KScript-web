@@ -9,9 +9,11 @@ div.barra-nav
         // li.ruta-barra-nav
             router-link(to="/api/") API
         li.ruta-barra-nav
-            a(href="https://github.com/Araozu/misti" target="_blank") GitHub
+            a(href="https://github.com/Araozu/kscript" target="_blank") GitHub
         li.ruta-barra-nav
-            a(@click.prevent="cambiarColor") {{ textoModoColor }}
+            a(href="https://www.npmjs.com/package/kscript" target="_blank") npm
+        li.ruta-barra-nav
+            a(@click.prevent="cambiarColor") Tema {{ textoModoColor }}
 
 //
 </template>

@@ -9,7 +9,7 @@ div
                 h2 Seguridad en tiempo de ejecución para el dinamismo de ES6.
 
                 router-link.boton-principal(:to="rutaDocs" title="Documentación") Documentación
-                a.boton-npm(href="https://www.npmjs.com/package/misti" target="_blank" title="Ir a npm") npm
+                a.boton-npm(href="https://www.npmjs.com/package/kscript" target="_blank" title="Ir a npm") npm
                 button.boton-color(@click="cambiarColor")
                     i.material-icons brightness_4
 
