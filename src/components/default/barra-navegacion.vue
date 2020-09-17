@@ -1,7 +1,7 @@
 <template lang="pug">
 div.barra-nav
     router-link.link-logo-barra-nav(to="/")
-        img.img-logo(:src="rutaImg" alt="Logo")
+        img.img-logo(src="/img/KScript_logo_cuadrado_claro.svg" alt="Logo")
 
     ul.lista-links-barra-nav
         li.ruta-barra-nav
@@ -74,7 +74,7 @@ div.barra-nav
 
 
     .img-logo
-        margin-right: 1rem
+        margin: 0 1rem
         display: inline-block
         height: 3.25rem
         width: auto
@@ -94,7 +94,9 @@ div.barra-nav
             cursor: pointer
             user-select: none
             &:hover
-                text-decoration: underline
+                // text-decoration: underline
+                border-bottom: solid 3px var(--colorSecundario)
+
 
 
 //
