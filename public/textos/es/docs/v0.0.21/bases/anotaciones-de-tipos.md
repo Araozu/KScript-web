@@ -2,7 +2,7 @@
 
 > En diseño
 
-En Misti es posibler colocar anotaciones de los tipos de datos de las variables/constantes.
+En KS es posibler colocar anotaciones de los tipos de datos de las variables/constantes.
 Estas anotaciones no realizan ninguna verificación, solamente se usan como sugerencia. En
 un futuro se implementará una forma de validar los tipos de datos (Contratos). 
 

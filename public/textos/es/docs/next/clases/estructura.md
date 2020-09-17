@@ -2,7 +2,7 @@
 
 > En diseño
 
-Todas las estructuras en Misti son herramientas. Cada una cumple una función
+Todas las estructuras en KS son herramientas. Cada una cumple una función
 y se usan en diferentes escenarios. Las clases no son diferentes.
 
 ## Estructura
@@ -34,12 +34,12 @@ class PoderAutoLanzable:> Poder =
 
 ## Diferencias
 
-Esta sección es sumamente importante. Misti es mucho más estricto con OOP que otros
+Esta sección es sumamente importante. KS es mucho más estricto con OOP que otros
 lenguajes o el propio JavaScript. Las más importantes son:
 
 - No existen campos/métodos estáticos
 
-  Misti cuenta con otras formas para obtener el mismo comportamiento,
+  KS cuenta con otras formas para obtener el mismo comportamiento,
   a diferencia de por ejemplo Java, donde debido a que todo se basa en clases,
   es necesario crear campos/métodos estáticos.
 

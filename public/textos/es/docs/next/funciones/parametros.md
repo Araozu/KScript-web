@@ -3,14 +3,14 @@
 > En diseño
 
 Aunque ya hemos visto la estructura básica de los parámetros, JavaScript tiene un comportamiento más complejo,
-el cual Misti debe incluir para poder tener la mayor compatibilidad con el mismo.
+el cual KS debe incluir para poder tener la mayor compatibilidad con el mismo.
 
 ## Cómo se compila la invocación de funciones a JS
 
-La invocación de funciones en Misti tiene el mismo comportamiento que en JS. Se puede llamar a
+La invocación de funciones en KS tiene el mismo comportamiento que en JS. Se puede llamar a
 una función con la cantidad de parámetros adecuada, con menos parámetros o con más parámetros.
 
-A continuación vamos a mostrar una función de ejemplo, y varias invocaciones a esta en Misti,
+A continuación vamos a mostrar una función de ejemplo, y varias invocaciones a esta en KS,
 y luego en el JS compilado.
 
 ```

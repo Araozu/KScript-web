@@ -1,15 +1,11 @@
 <template lang="pug">
 div.inicio-docs
     div(v-if="versionActualExiste")
-        h1 Bienvenido a la documentación de Misti
+        h1 Bienvenido a la documentación de KScript
 
-        p
-            | Estás en la documentación de la versión
-            b &nbsp;{{ version }}&nbsp;
-            | de Misti.
-            | Los temas y los detalles de esta versión se encuentran en el menú lateral.
+        h2 Versión {{ version }}
 
-        p Haz click en un tema para verlo.
+        p En la barra lateral se encuentra la documentación de esta versión del lenguaje.
 
     div(v-else)
         h1 404

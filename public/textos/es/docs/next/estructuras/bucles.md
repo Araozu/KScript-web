@@ -2,7 +2,7 @@
 
 > En diseño
 
-En misti, solo existen los bucles for each y while
+En KS, solo existen los bucles for each y while
 
 ## For of (arrays)
 

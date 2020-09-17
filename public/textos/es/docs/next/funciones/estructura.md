@@ -33,7 +33,7 @@ quisieramos imprimir el valor de `10 + 20` por consola, haríamos esto:
 console.log(10 + 20);  // 30
 ```
 
-Sin embargo, hacer algo parecido en Misti da lugar a un error:
+Sin embargo, hacer algo parecido en KS da lugar a un error:
 
 ```err
 console.log 10 + 20   //! Error. El operador '+' trabaja con number.
@@ -56,7 +56,7 @@ console.log (10 + 20)  // 30
 
 ## Funciones sin parámetros
 
-Tecnicamente, en Misti todas las funciones necesitan al menos 1 parámetro. Pero existe una forma de
+Tecnicamente, en KS todas las funciones necesitan al menos 1 parámetro. Pero existe una forma de
 crear y llamar funciones 'sin parámetros'. Por ejemplo, la siguiente función imprime "Hola mundo" en
 la consola:
 

@@ -1,6 +1,6 @@
 # Next 
 
-Esta es la documentación de Misti, en su versión next.
+Esta es la documentación de KS, en su versión next.
 
 Aquí se encuentran definidos todas las estructuras del lenguaje,
 los cuales se implementarán en un futuro.

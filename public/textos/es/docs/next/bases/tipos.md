@@ -2,7 +2,7 @@
 
 > En uso
 
-Misti usa los mismos tipos de datos de JavaScript.
+KS usa los mismos tipos de datos de JavaScript.
 
 ## String
 

@@ -1,6 +1,6 @@
 # Operadores comunes
 
-Misti usa la mayoría de operadores de JS, para facilitar la claridad y consistencia.
+KS usa la mayoría de operadores de JS, para facilitar la claridad y consistencia.
 
 ## Operadores especiales
 
@@ -120,7 +120,7 @@ Los operadores para probar igualdad funcionan diferente a JS:
 
 ## Operadores con bits
 
-Estos operadores no existen en Misti, porque han sido reemplazados con otros operadores usados en programación funcional.
+Estos operadores no existen en KS, porque han sido reemplazados con otros operadores usados en programación funcional.
 
 Los siguientes operadores **no** funcionan igual que JS:
 
@@ -128,7 +128,7 @@ Los siguientes operadores **no** funcionan igual que JS:
 
 ## Operadores adicionales
 
-Misti incorpora los siguientes operadores a la libreria estandar para el facil manejo de
+KS incorpora los siguientes operadores a la libreria estandar para el facil manejo de
 programación funcional y tipos nulos:
 
 `<|  |>  <<  >>  ?  ?.  ??  ?:  !!`

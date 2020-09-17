@@ -2,7 +2,7 @@
 
 > En diseño
 
-A diferencia de otros lenguajes funcionales, Misti no cuenta con currying automático,
+A diferencia de otros lenguajes funcionales, KS no cuenta con currying automático,
 debido a que esto entra en conflicto con la semántica de JavaScript.
 
 En JavaScript puedes llamar una función con con cualquier cantidad de parámetros,
@@ -19,11 +19,11 @@ arr.map((x, pos, that) => x + 1 + pos);
 El callback es una función que toma 3 parámetros, pero si pasas una función con más o menos
 parámetros no habrá problema. Esto es posible debido a la sintáxis de JavaScript.
 
-Si quisieramos tener el mismo comportamiento en Misti, tendriamos que saber la signatura de
+Si quisieramos tener el mismo comportamiento en KS, tendriamos que saber la signatura de
 todas las funciones y exigir la cantidad exacta de parámetros. Lo primero es imposible y lo
 segundo limita las capacidades de JavaScript.
 
-Por lo tanto, Misti no cuenta con Currying, sin embargo, es posible aplicar parcialmente
+Por lo tanto, KS no cuenta con Currying, sin embargo, es posible aplicar parcialmente
 una función de forma sencilla.
 
 ## Propuesta 1
@@ -43,7 +43,7 @@ const nuevaFun = (...params) => f.call(undefined, 1, 2, 3, 4, ...params);
 
 ## Signatura
 
-En Misti se usan flechas simples y dobles en la signatura, y ayudan a diferenciar
+En KS se usan flechas simples y dobles en la signatura, y ayudan a diferenciar
 los parámetros de una función.
 
 Las flechas simples `->` indican parámetros, y la flecha doble `=>` indica el

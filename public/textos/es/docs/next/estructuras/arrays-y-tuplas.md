@@ -3,7 +3,7 @@
 > En diseño
 
 Los Arrays en JavaScript pueden tener cualquier tamaño y cualquier tipo de dato en su
-interior. En Misti son iguales.
+interior. En KS son iguales.
 
 ## Arrays
 
@@ -46,7 +46,7 @@ const numeros:> [4 number] = [1, "2", (), null, 5]  //! Error.
 
 ## Tuplas
 
-Las tuplas en Misti son simplemente una anotación para un array con un número fijo
+Las tuplas en KS son simplemente una anotación para un array con un número fijo
 de elementos y sus tipos de datos. Por ejemplo, dado el siguiente array:
 
 ```

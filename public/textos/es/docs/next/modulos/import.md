@@ -4,7 +4,7 @@
 
 ## Contenido
 
-Misti usará los módulos de ECMAScript 2015, pero con el estilo de Python:
+KS usará los módulos de ECMAScript 2015, pero con el estilo de Python:
 
 ```
 from "vue" import Vue
@@ -15,7 +15,7 @@ from "react" import React, { Component }
 
 from "./foo.js" import { foo }
 
-from "../scripts/bar.misti" import { bar as baz }
+from "../scripts/bar.ks" import { bar as baz }
 
 import "./Button.css"
 

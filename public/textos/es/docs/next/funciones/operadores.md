@@ -2,7 +2,7 @@
 
 > En diseño
 
-Misti permite declarar operadores de la siguiente manera:
+KS permite declarar operadores de la siguiente manera:
 
 ```
 fun (<*>) x y = x.concat y 

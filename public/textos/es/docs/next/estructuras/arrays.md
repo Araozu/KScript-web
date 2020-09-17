@@ -2,7 +2,7 @@
 
 > En diseño
 
-Los arrays en Misti contienen varios elementos de un mismo tipo.
+Los arrays en KS contienen varios elementos de un mismo tipo.
 
 ```
 const numeros = [1, 2, 3]

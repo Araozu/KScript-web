@@ -1,6 +1,6 @@
 # Tipos de datos
 
-Los tipos de datos de Misti son los mismos de JavaScript, con algunas diferencias.
+Los tipos de datos de KS son los mismos de JavaScript, con algunas diferencias.
 
 
 ## String (o Txt)
@@ -14,7 +14,7 @@ const apellido = "Perez"
 
 #### Solo se definen con comillas dobles
 
-En Misti no es posible crear strings con comillas simples. Hacerlo significa un error.
+En KS no es posible crear strings con comillas simples. Hacerlo significa un error.
 
 ```
 const strCorrecto   = "Juan"
@@ -23,7 +23,7 @@ const strIncorrecto = 'Juan'  //! Error. No se reconoce como string.
 
 Las comillas simples se usan para declarar genéricos, que aún no están soportados.
 
-Misti soportará interpolación de strings en un futuro. Sin embargo, se haran dentro de comillas dobles y no tildes.
+KS soportará interpolación de strings en un futuro. Sin embargo, se haran dentro de comillas dobles y no tildes.
 
 ```
 const nombre = "Juan"
@@ -32,7 +32,7 @@ const nombreCompleto = "${nombre} Perez"  // Proximamente: Juan Perez
 
 #### Se concatena con el operador `<>`
 
-Para evitar ambiguedades con el operador `+`, en Misti se concatenan los strings con el operador `<>`.
+Para evitar ambiguedades con el operador `+`, en KS se concatenan los strings con el operador `<>`.
 
 ```
 "Hola" <> " mundo!"  //= Hola mundo
@@ -79,7 +79,7 @@ true || false   //= true
 ## Consideraciones
 
 No se puede operar con tipos de datos incompatibles. Por ejemplo, concatenar un string y un número.
-Misti tampoco cambia los tipos de datos implícitamente.
+KS tampoco cambia los tipos de datos implícitamente.
 
 ```
 "10" <> 10  //! Error

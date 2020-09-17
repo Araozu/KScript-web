@@ -2,7 +2,7 @@
 
 > En uso
 
-En Misti y varios lenguajes de programación funcionales se dice que todo es una expresión.
+En KS y varios lenguajes de programación funcionales se dice que todo es una expresión.
 Si vienes de un lenguaje que no cuenta con esta característica, puede que no entiendas
 muy bien qué significa esto.
 

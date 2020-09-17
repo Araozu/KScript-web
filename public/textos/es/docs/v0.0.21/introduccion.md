@@ -1,6 +1,6 @@
 # Introducción
 
-Bienvenido(a) a la documentación de Misti. A lo largo de las siguientes páginas
+Bienvenido(a) a la documentación de KS. A lo largo de las siguientes páginas
 aprenderás todo sobre este lenguaje, desde las razones por las que fue creado,
 hasta la sintaxis y semántica del mismo.
 
@@ -55,9 +55,9 @@ tendrán comentarios para indicar lo que está pasando con el siguiente formato:
   
   Nos indica que hay un error en esa linea. La razón está en el comentario.
 
-## ¿Exáctamente qué es Misti?
+## ¿Exáctamente qué es KS?
 
-Misti es una nueva sintaxis para el lenguaje de programación JavaScript, la cual reduce
+KS es una nueva sintaxis para el lenguaje de programación JavaScript, la cual reduce
 la cantidad de parentesis, comas, puntos y comas y llaves. JS tiene una sintaxis basada
 en C como la siguiente:
 
@@ -69,7 +69,7 @@ const concatenarEnMayuscula = (s1, s2) => {
 concatenarEnMayuscula("hola", "mundo");
 ```
 
-Misti tiene una sintaxis basada en ML:
+KS tiene una sintaxis basada en ML:
 
 ```
 fun concatenarEnMayuscula s1 s2 =
@@ -78,11 +78,11 @@ fun concatenarEnMayuscula s1 s2 =
 concatenarEnMayuscula "hola" "mundo"
 ```
 
-Misti es funcional impuro, con caracteristicas imperativas y orientadas a objetos.
-Sin embargo, las caracteristicas de Misti tienden más a las de los lenguajes como
+KS es funcional impuro, con caracteristicas imperativas y orientadas a objetos.
+Sin embargo, las caracteristicas de KS tienden más a las de los lenguajes como
 F# y Haskell, que a Java o C.
 
-Misti (planea incluir) varias características de los lenguajes funcionales al
+KS (planea incluir) varias características de los lenguajes funcionales al
 ecosistema de JavaScript, como son:
 
 - Covariantes
@@ -94,13 +94,13 @@ ecosistema de JavaScript, como son:
 - Operadores personalizados
 - Tipos nulos
 
-Finalmente, Misti usa la misma API de JavaScript. Una vez que aprendas la sintáxis, estás
+Finalmente, KS usa la misma API de JavaScript. Una vez que aprendas la sintáxis, estás
 listo para programar con las misma librerias de JS. Es por ello que como meta a (muy)
 largo plazo tenemos integración con las definiciones de Typecript.
 
 ## ¿Para que aprender otra sintaxis?
 
-Personalmente creo que las ventajas que ofrece Misti compensan la curva de aprendizaje.
+Personalmente creo que las ventajas que ofrece KS compensan la curva de aprendizaje.
 JavaScript no cuenta con muchas características, o estructuras avanzadas que permitan
 el desarrollo a gran escala.
 

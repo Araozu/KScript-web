@@ -41,11 +41,11 @@ multiplicar2(restar2(sumar5(10)));
 
 ## `|.`
 
-Hacer `a b |. c` es equivalente a `(a b).c` en Misti, o `a(b).c` en JavaScript.
+Hacer `a b |. c` es equivalente a `(a b).c` en KS, o `a(b).c` en JavaScript.
 
 ## `.|`
 
-Hacer `a .| b c` es equivalente a `(b c).a` en Misti, o `b(c).a` en JavaScript.
+Hacer `a .| b c` es equivalente a `(b c).a` en KS, o `b(c).a` en JavaScript.
 
 ## `?|`
 

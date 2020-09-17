@@ -1,6 +1,6 @@
 # Expresiones
 
-En Misti como en varios lenguajes funcionales, todo es una expresión.
+En KS como en varios lenguajes funcionales, todo es una expresión.
 Sin embargo, para un programador que no conoce otros lenguajes funcionales como
 Haskell, Ocaml, o F#, esta frase no significa nada.
 
@@ -16,7 +16,7 @@ Por ejemplo, `1 + 1` contiene 2 números y un operador, los cuales son los símb
 Si evaluamos (resolvemos) esta operación, obtenemos como resultado 2. Por lo tanto,
 `1 + 1` es una expresión.
 
-Misti amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es una expresión:
+KS amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es una expresión:
 
 ```
 1.5 * 2             //= 3
@@ -24,7 +24,7 @@ Misti amplía ese concepto. Por ejemplo, cada una de las siguientes lineas es un
 true && true        //= true
 ```
 
-Estas son fáciles de comprender, pero la clave es que toda estructura en Misti es una
+Estas son fáciles de comprender, pero la clave es que toda estructura en KS es una
 expresión, y eso veremos a continuación.
 
 ## Constantes y variables
@@ -236,7 +236,7 @@ const txt2 = "Este " <> "es " <> "un " <>
 
 ## Consideraciones
 
-Los bloques de código son una estructura fundamental en Misti. Es importante que entiendas
+Los bloques de código son una estructura fundamental en KS. Es importante que entiendas
 cómo funcionan para poder entender el resto de conceptos, como condicionales, bucles,
 funciones, etc.
 

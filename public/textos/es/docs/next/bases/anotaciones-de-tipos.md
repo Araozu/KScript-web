@@ -12,7 +12,7 @@ const nombre:< string = "Juan"
 let edad:< number = 20
 ```
 
-Esto es solo una sugerencia para el programador. Misti no verifica ninguna
+Esto es solo una sugerencia para el programador. KS no verifica ninguna
 validación de estos. Si deseas validación en tiempo de ejecución usa [Contratos](/#/docs/next/contratos)
 
 ## Discusión

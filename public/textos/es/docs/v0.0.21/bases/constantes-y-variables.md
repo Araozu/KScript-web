@@ -11,7 +11,7 @@ más rápido.
 ## Constantes
 
 
-En la programación funcional es natural trabajar con constantes, y Misti favorece
+En la programación funcional es natural trabajar con constantes, y KS favorece
 estas sobre las variables. Podemos declarar una constante del siguiente modo:
 
 ```
@@ -49,7 +49,7 @@ precio[0] = 250   // Si funciona.
 ## Variables
 
 En ciertas situaciones es más eficiente simplemente usar una variable en vez de un patron funcional.
-Por ello Misti también permite trabajar con variables de forma similar a Javascript.
+Por ello KS también permite trabajar con variables de forma similar a Javascript.
 
 Las variables se declaran de la siguiente manera:
 
@@ -67,7 +67,7 @@ edad = 21         // OK
 
 ## Identificadores
 
-Los identificadores en Misti tienen 1 adición respecto a JavaScript. 
+Los identificadores en KS tienen 1 adición respecto a JavaScript. 
 Los nombres de variables inician con un guion bajo, una letra o un dolar, y luego pueden contener
 guiones bajos, letras, numeros, **comillas simples** y dolar.
 
@@ -123,10 +123,10 @@ $pos$cursor
 
 ## Consideraciones
 
-Las variables y constantes de Misti se compilan a let y const, de modo que tienen el mismo comportamiento que en
+Las variables y constantes de KS se compilan a let y const, de modo que tienen el mismo comportamiento que en
 JavaScript, llamense hoisting, alcance, TDZ, etc.
 
-Es necesario entender estos conceptos para trabajar adecuadamente en Misti.
+Es necesario entender estos conceptos para trabajar adecuadamente en KS.
 
 A partir de ahora, al tratar nuevos temas usaré como ejemplos únicamente constantes.
 Sin embargo, los conceptos también se aplican a las variables, a menos que se indique

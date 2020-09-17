@@ -2,7 +2,7 @@
 
 > En diseño
 
-En lugar de switch, Misti tiene pattern matching!
+En lugar de switch, KS tiene pattern matching!
 
 ```
 const nombre = "Juan"

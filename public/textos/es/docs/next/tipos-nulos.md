@@ -2,7 +2,7 @@
 
 > Experimental
 
-Misti diferencia tipos nulos y tipos no nulos en las signaturas, es decir que
+KS diferencia tipos nulos y tipos no nulos en las signaturas, es decir que
 podemos indicar si una variable puede o no contener null o undefined.
 Se indica del siguiente modo:
 
@@ -12,12 +12,12 @@ Se indica del siguiente modo:
 - Una variable anotada con `string?` indica que esa variable **puede** contener un string,
   null o undefined.
 
-Misti diferencia entre `null` y `undefined` al igual que JavaScript, y puede realizar
+KS diferencia entre `null` y `undefined` al igual que JavaScript, y puede realizar
 comprobaciones a estos valores cuando sea necesario.
 
 ## undefined
 
-Es bastante comun ver y usar `undefined` en JavaScript, así que Misti ofrece un alias:
+Es bastante comun ver y usar `undefined` en JavaScript, así que KS ofrece un alias:
 `()`. De ese modo se pueden escribir 2 caracteres en lugar de 9.
 
 ```
