@@ -1,7 +1,7 @@
 <template lang="pug">
 div.repl-docs
-    textarea.entrada-kan.Fondo.TextoCod(placeholder="Código Misti" v-model="codigo")
-    div.cont-botones
+    editor(:style="{height: '50%'}")
+    // div.cont-botones
         button.boton-transpilar(@click="transpilar") Transpilar
 
     div.resultado-repl-docs
@@ -15,6 +15,7 @@ div.repl-docs
 <script lang="coffee">
     import { ref } from "vue"
     import { Lexer, parseTokens, crearCodeWithSourceMap } from "kscript"
+    import editor from "@/components/Editor/editor"
 
     reemplazarEspacios = (txt) =>
         letras = txt.split ""
@@ -48,6 +49,7 @@ div.repl-docs
 
     export default
         name: "repl-docs"
+        components: {editor}
         setup: ->
             codigo = ref ""
             resultado = ref {vacio: true}

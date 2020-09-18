@@ -5,7 +5,10 @@ div.inicio-docs
 
         h2 Versión {{ version }}
 
-        p En la barra lateral se encuentra la documentación de esta versión del lenguaje.
+        p A la izquierda se encuentra la documentación del lenguaje en su versión {{version}}.
+        p.
+            A la derecha se encuentra un editor básico. En un futuro se permitirá compilar y ejecutar
+            el código que ingreses allí.
 
     div(v-else)
         h1 404
