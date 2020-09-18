@@ -14,7 +14,7 @@ div.repl-docs
 
 <script lang="coffee">
     import { ref } from "vue"
-    import { Lexer, parseTokens, crearCodeWithSourceMap } from "misti"
+    import { Lexer, parseTokens, crearCodeWithSourceMap } from "kscript"
 
     reemplazarEspacios = (txt) =>
         letras = txt.split ""

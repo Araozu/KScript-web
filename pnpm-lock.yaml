@@ -1,7 +1,7 @@
 dependencies:
   dompurify: 2.0.11
+  kscript: 0.0.24
   marked: 1.1.0
-  misti: 0.0.23
   pug: 2.0.4
   pug-plain-loader: 1.0.0_pug@2.0.4
   vue: 3.0.0-rc.10
@@ -3989,6 +3989,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+  /kscript/0.0.24:
+    dependencies:
+      source-map: 0.7.3
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-fQ0IlPKiNcUamZOM7J23QBBCRXrW7TGqBxx1sFRuC7TBN3GwzDEAvfOg9A53kNIgs83UPT35hzxDQidQTWyMFw==
   /launch-editor-middleware/2.2.1:
     dependencies:
       launch-editor: 2.2.1
@@ -4393,13 +4400,6 @@ packages:
       node: '>=4.0.0'
     resolution:
       integrity: sha512-x471SsVjUtBRtcvd4BzKE9kFC+/2TeWgKCgw0bZcw1b9l2X3QX5vCWgF+KaZaYm87Ss//rHnWryupDrgLvmSkA==
-  /misti/0.0.23:
-    dependencies:
-      source-map: 0.7.3
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-hHu6/2KKZd0DP+a3fsa5AqoJqzpQ3rJCbEXju2W/KORRxvR40u+rqN2hmVfxVvg9MTKVO/V3G6fuMKFw26JozQ==
   /mixin-deep/1.3.2:
     dependencies:
       for-in: 1.0.2
@@ -7718,8 +7718,8 @@ specifiers:
   coffee-loader: ^1.0.0
   coffeescript: ^2.5.1
   dompurify: ^2.0.11
+  kscript: 0.0.24
   marked: ^1.1.0
-  misti: 0.0.23
   normalize.css: ^8.0.1
   pug: ^2.0.3
   pug-plain-loader: ^1.0.0
