@@ -8,8 +8,8 @@ div.pad
             div.cont-lineas
                 linea-editor-codigo(v-for="(linea, pos) in lineas"
                     :linea="linea"
-                    :resaltadoArr="resaltadoLineas[pos]"
-                    :key="linea"
+                    :resaltadoArr="resaltadoLineas[pos]? resaltadoLineas[pos]: []"
+                    :key="pos + "-" + linea"
                 )
         textarea.codigo-raw(
             ref="refTextArea"
@@ -145,23 +145,22 @@ div.pad
 
             const manejarInput = (ev) => {
                 const elem = refTextArea.value;
-                console.table({
-                    data: ev.data,
-                    type: ev.inputType,
-                    selectEnd: elem.selectionEnd
-                });
 
                 // Obtener el tipo de entrada
                 switch (ev.inputType) {
                     case "insertText": {
                         const [posAbsInicioLinea, numLineaActual] = obtNumLineaActual(elem.selectionEnd);
-                        console.log("Num linea actual =", numLineaActual);
                         const s = ev.target.value;
                         const s1 = s.substr(posAbsInicioLinea);
-                        const str = s1.substring(0, s1.indexOf("\n"));
-                        console.log(str);
+                        const str = s1.indexOf("\n") === -1? s1 : s1.substring(0, s1.indexOf("\n"));
+                        // console.log(str);
                         lineas.value[numLineaActual] = str;
-                        console.log(lineas.value);
+                        // console.log(lineas.value);
+                        break;
+                    }
+                    default: {
+                        console.log("Re-compilando desde el inicio.")
+                        lineas.value = ev.target.value.split("\n");
                     }
                 }
 
