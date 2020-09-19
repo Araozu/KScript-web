@@ -1,21 +1,27 @@
 <template lang="pug">
 div.repl-docs
-    editor(:style="{height: '50%'}")
-    // div.cont-botones
-        button.boton-transpilar(@click="transpilar") Transpilar
+    div.contenedor-editor
+        editor(style="height: 100%" v-model:codigo="codigo")
+
+    div.cont-botones(:class="claseBorde")
+        button.boton-repl.boton-repl-verde.material-icons(title="Ejecutar") play_arrow
+        button.boton-repl.boton-repl-rojo.material-icons(title="Compilar" @click="compilar") build
 
     div.resultado-repl-docs
-        div(v-if="resultado.ok" v-html="escapar(resultado.cod)")
-        div.resultado-error(v-if="resultado.err" v-html="escapar(resultado.msg, false)")
+        consola-repl-docs(v-if="accionActual === 'ejecutar'")
 
+        js-compilado-repl-docs(:codigoCompilado="resultado")
+        div.resultado-error(v-if="resultado.err" v-html="escapar(resultado.msg, false)")
 
 //
 </template>
 
 <script lang="coffee">
-    import { ref } from "vue"
+    import { ref, computed } from "vue"
     import { Lexer, parseTokens, crearCodeWithSourceMap } from "kscript"
     import editor from "@/components/Editor/editor"
+    import consolaReplDocs from "./repl-docs/consola-repl-docs.vue"
+    import JsCompiladoReplDocs from "@/components/docs/repl-docs/js-compilado-repl-docs"
 
     reemplazarEspacios = (txt) =>
         letras = txt.split ""
@@ -49,12 +55,16 @@ div.repl-docs
 
     export default
         name: "repl-docs"
-        components: {editor}
+        components: {JsCompiladoReplDocs, consolaReplDocs, editor}
         setup: ->
-            codigo = ref ""
+            accionActual = ref "ejecutar"
+            codigo = ref "console.log \"Hola mundo!\"\n"
             resultado = ref {vacio: true}
 
-            transpilar = =>
+            claseBorde = computed (=> "cont-botones-borde-#{accionActual.value}" )
+
+            compilar = =>
+                accionActual.value = "compilar"
                 lexer = new Lexer codigo.value
                 preExpresion = parseTokens lexer
                 resultado.value =
@@ -74,9 +84,11 @@ div.repl-docs
                             msg: "Error Sintáctico:\n#{preExpresion.err}"
 
             {
+                accionActual
                 codigo
                 resultado
-                transpilar
+                claseBorde
+                compilar
                 escapar
             }
 
@@ -86,33 +98,54 @@ div.repl-docs
 
 <style scoped  lang="sass">
 
-    .entrada-kan, .resultado-repl-docs
-        padding: 0.5rem
-        box-sizing: border-box
+    .repl-docs
+        border-left: solid 1px var(--color-borde)
+
+    .contenedor-editor
+        height: calc(50% - 1.5rem)
+
+    .boton-repl
+        height: 100%
+        width: 5rem
+        padding: 0
+        cursor: pointer
+        font-size: 150%
+        background-color: transparent
+        border: none
+        transition: background-color 100ms, color 100ms
+        &:hover
+            color: white
 
 
-    .entrada-kan
-        resize: none
-        font:
-            family: "JetBrains Mono", monospace
-            size: 0.85rem
-        width: 100%
-        height: 50%
+    .boton-repl-verde
+        color: #4CAF50
+        &:hover
+            background-color: #4CAF50
 
-
-    .cont-botones
-        text-align: center
-
-
-    .boton-transpilar
-        font-size: 1rem
-        padding: 0.25rem 0.5rem
+    .boton-repl-rojo
+        color: var(--colorSecundario)
+        &:hover
+            background-color: var(--colorSecundario)
 
 
     .resultado-repl-docs
-        font:
-            family: "JetBrains Mono", monospace
-            size: 0.85rem
+        box-sizing: border-box
+
+
+    .cont-botones
+        height: 2.8rem
+        border-top: solid 0.2rem var(--colorSecundario)
+        border-bottom: solid 0.2rem var(--colorSecundario)
+
+
+    .cont-botones-borde-ejecutar
+        border-color: #4CAF50
+
+    .cont-botones-borde-compilar
+        border-color: var(--colorSecundario)
+
+
+    .resultado-repl-docs
         width: 100%
         height: calc(50% - 1.5rem)
 

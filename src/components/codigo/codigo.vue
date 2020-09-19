@@ -4,7 +4,7 @@ div(ref="elem")
 </template>
 
 <script lang="coffee">
-    import { ref, onMounted } from "vue"
+    import { ref, onMounted, computed, watch } from "vue"
     import { kanAHtml } from "./kanAHTML.coffee"
 
     export default
@@ -19,11 +19,19 @@ div(ref="elem")
         setup: (props, context) =>
             elem = ref null
 
-            onMounted (=>
+            codigoRef = computed (=> props.codigo)
+
+            compilar = (codigo) =>
                 elemento = elem.value
-                elementoCodigo = kanAHtml props.codigo, props.esBloque
+                elementoCodigo = kanAHtml codigo, props.esBloque
+                if elem.value && elem.value.firstChild
+                    elem.value.removeChild elem.value.firstChild
+
                 elemento.appendChild elementoCodigo
-            )
+
+            watch codigoRef, compilar
+
+            onMounted (=> compilar props.codigo)
 
             {
                 elem
