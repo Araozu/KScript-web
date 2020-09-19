@@ -4,13 +4,13 @@ div.repl-docs
         editor(style="height: 100%" v-model:codigo="codigo")
 
     div.cont-botones(:class="claseBorde")
-        button.boton-repl.boton-repl-verde.material-icons(title="Ejecutar") play_arrow
-        button.boton-repl.boton-repl-rojo.material-icons(title="Compilar" @click="compilar") build
+        button.boton-repl.boton-repl-verde.material-icons(title="Ejecutar" @click="compilar(true)") play_arrow
+        button.boton-repl.boton-repl-rojo.material-icons(title="Compilar" @click="compilar()") build
 
     div.resultado-repl-docs
-        consola-repl-docs(v-if="accionActual === 'ejecutar'")
+        consola-repl-docs(v-if="accionActual === 'ejecutar'" :codigoCompilado="resultado")
 
-        js-compilado-repl-docs(:codigoCompilado="resultado")
+        js-compilado-repl-docs(v-if="accionActual === 'compilar'" :codigoCompilado="resultado")
         div.resultado-error(v-if="resultado.err" v-html="escapar(resultado.msg, false)")
 
 //
@@ -63,8 +63,8 @@ div.repl-docs
 
             claseBorde = computed (=> "cont-botones-borde-#{accionActual.value}" )
 
-            compilar = =>
-                accionActual.value = "compilar"
+            compilar = (esEjecucion = false) =>
+                accionActual.value = if esEjecucion then "ejecutar" else "compilar"
                 lexer = new Lexer codigo.value
                 preExpresion = parseTokens lexer
                 resultado.value =
