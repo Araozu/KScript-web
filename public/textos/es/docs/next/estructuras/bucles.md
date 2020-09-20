@@ -2,14 +2,12 @@
 
 > En diseño
 
-En KS, solo existen los bucles for each y while
-
 ## For of (arrays)
 
 ```
 const numeros = [1, 2, 3]
 
-for (pos, numero) of numeros do
+for [pos, numero] of numeros do
     console.log "Posicion ${pos}, valor ${numero}"
 ```
 
@@ -27,11 +25,11 @@ Para iterar sobre las propiedades de un objeto se usa `for in`.
 
 ```
 const persona = {
-    nombre := "Juan"
-    apellido := "Perez"
+    nombre: "Juan"
+    apellido: "Perez"
 }
 
-for (key, value) in persona do
+for [key, value] in persona do
     console.log "Clave ${key}, valor ${value}"
 ```
 
@@ -43,7 +41,7 @@ Clave apellido, valor Perez
 Si no necesitas una clave o un valor, usa el comodin `_` para ignorarlo:
 
 ```
-for (_, value) in persona do
+for [_, value] in persona do
     // ...
 ```
 
@@ -71,7 +69,7 @@ for let i = 0; i < 10; i++ do
 Se pueden usar libremente.
 
 ```
-for (_, num) of [0, 1, 2, 3, 4] do
+for [_, num] of [0, 1, 2, 3, 4] do
     if num === 2 do
         continue
     else if num === 3 do

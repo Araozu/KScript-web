@@ -1,6 +1,6 @@
 dependencies:
   dompurify: 2.0.11
-  kscript: 0.0.24
+  kscript: 0.0.27
   marked: 1.1.0
   pug: 2.0.4
   pug-plain-loader: 1.0.0_pug@2.0.4
@@ -3989,13 +3989,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
-  /kscript/0.0.24:
+  /kscript/0.0.27:
     dependencies:
       source-map: 0.7.3
     dev: false
     hasBin: true
     resolution:
-      integrity: sha512-fQ0IlPKiNcUamZOM7J23QBBCRXrW7TGqBxx1sFRuC7TBN3GwzDEAvfOg9A53kNIgs83UPT35hzxDQidQTWyMFw==
+      integrity: sha512-cC81Dszzc4/1P7rDNbHYCL+PsHqAuezxKwWvnROVJgJMZADcPuMHoJ2CXyD9ugImklWDPQWQUSHxRAQs3lmVHQ==
   /launch-editor-middleware/2.2.1:
     dependencies:
       launch-editor: 2.2.1
@@ -7718,7 +7718,7 @@ specifiers:
   coffee-loader: ^1.0.0
   coffeescript: ^2.5.1
   dompurify: ^2.0.11
-  kscript: 0.0.24
+  kscript: 0.0.27
   marked: ^1.1.0
   normalize.css: ^8.0.1
   pug: ^2.0.3

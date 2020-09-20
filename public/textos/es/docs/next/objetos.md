@@ -4,18 +4,15 @@
 
 ```
 const persona = {
-    nombre := "Abel"
-    edad := 32
+    nombre: "Abel"
+    edad: 32
 }
 
 const persona =
-    nombre := "Abel"
-    edad := 32
+    nombre: "Abel"
+    edad: 32
 
-const persona = { nombre := "Abel", edad := 32 }
-
-
-const (nombre, edad) = ("Abel", 32)
+const persona = { nombre: "Abel", edad: 32 }
 
 const persona = { nombre, edad }
 const persona = {
@@ -32,17 +29,17 @@ persona.edad
 
 ```
 const persona = {
-    nombre: string := "Abel"
-    edad: number := 32
+    nombre:> string: "Abel"
+    edad> number: 32
 }
 ```
 
 ## Signatura
 
 ```
-const persona: {nombre: string, edad: number} = {
-    nombre := "Abel"
-    edad := 32
+const persona: {nombre:> string, edad:> number} = {
+    nombre: "Abel"
+    edad: 32
 }
 ```
 
@@ -50,9 +47,9 @@ const persona: {nombre: string, edad: number} = {
 
 ```
 const persona = {
-    nombre := "Juan"
-    apellido := "Perez"
-    nombreCompleto := fn ->
+    nombre: "Juan"
+    apellido: "Perez"
+    nombreCompleto: fn ->
         @nombre <> " " <> @apellido
 }
 
@@ -63,10 +60,10 @@ persona.nombreCompleto ()  //: Juan Perez
 
 ```
 const producto = {
-    nombre := "Leche"
-    precio := 20
-    descuento := 0.05
-    precioFinal := fn ->
+    nombre: "Leche"
+    precio: 20
+    descuento: 0.05
+    precioFinal: fn ->
         // Puedes usar  `this.`  o  `@`
         const precio = this.precio
         const descuento = @descuento

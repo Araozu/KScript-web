@@ -15,7 +15,7 @@ const nombreCompleto =
     const nombre = "Juan"
     const apellido = "Perez"
 
-    nombre <> apellido
+    nombre + apellido
 
 ```
 

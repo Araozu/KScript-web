@@ -1,6 +1,6 @@
 # Operadores comunes
 
-> En uso (parcial)
+> En uso
 
 Los operadores heredados de JavaScript no realizan ningún tipo de
 verificación de los tipos de datos. Funcionan igualmente a JavaScript.
@@ -42,6 +42,19 @@ num *= 2   //: 18
 num /= 3   //: 6
 num %= 4   //: 2
 num **= 3  //: 8
+```
+
+## Operadores de incremento/decremento
+
+En KS no existen los operadores de incremento/decremento `++` y `--`, porque se
+prefiere el comportamiento funcional. En su lugar se deben incrementar los valores
+explícitamente:
+
+```
+let i = 0
+
+i + 1
+i += 1
 ```
 
 ## Discusión
