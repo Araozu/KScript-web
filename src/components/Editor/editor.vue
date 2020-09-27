@@ -152,9 +152,26 @@ div.contenedor-editor
                 switch (ev.inputType) {
                     case "insertText": {
                         const [posAbsInicioLinea, numLineaActual] = obtNumLineaActual(elem.selectionEnd);
+                        const caracterIngresado = ev.data;
                         const s = ev.target.value;
                         const s1 = s.substr(posAbsInicioLinea);
-                        lineas.value[numLineaActual] = s1.indexOf("\n") === -1 ? s1 : s1.substring(0, s1.indexOf("\n"));
+                        let strAjustado = s1.indexOf("\n") === -1 ? s1 : s1.substring(0, s1.indexOf("\n"));
+                        if (caracterIngresado === "\"" || caracterIngresado === "(") {
+                            const c = caracterIngresado === "\""? "\"": ")";
+                            const strArr = strAjustado.split("");
+                            strArr.splice(elem.selectionEnd, 0, c);
+                            strAjustado = strArr.join("");
+                        }
+                        lineas.value[numLineaActual] = strAjustado;
+                        const selectionStartAnterior = elem.selectionStart;
+                        const selectionEndAnterior = elem.selectionEnd;
+
+                        // Actualizar el textinput - necesario para que al abrir comillas se cierren
+                        ev.target.value = lineas.value.join("\n");
+
+                        // Actualizar la posicion del cursor tras actualizar el textinput
+                        elem.selectionEnd = selectionEndAnterior;
+                        elem.selectionStart = selectionStartAnterior;
                         break;
                     }
                     default: {
