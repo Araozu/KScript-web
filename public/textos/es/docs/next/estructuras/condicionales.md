@@ -4,17 +4,14 @@
 
 ## Contenido
 
-- Se coloca `if`, la condición, `do` y la expresión a ejecutar.
-- Las condiciones con `else if` funcionan igual.
-- No es necesario encerrar la condición en paréntesis
-- No es necesario colocar `do` luego de `else`.
+Se usan `if`, `do`, `elif` y `else` para definir condicionales.
 
 ```
 const nombre = "Juan"
 
 if nombre == "Pedro" do
     console.log "Hola Pedro"
-else if nombre == "Juan" do
+elif nombre == "Juan" do
     console.log "Hola Juan"
 else
     console.log "Hola forastero"
@@ -24,8 +21,7 @@ else
 Hola Juan
 ```
 
-Por cierto, no hay operador ternario `a? b: c`. Los condicionales son expresiones, y
-se usan en su lugar.
+No hay un operador ternario `a? b: c`. En su lugar se usan estos condicionales.
 
 ## Expresiones
 

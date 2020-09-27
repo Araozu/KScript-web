@@ -8,7 +8,7 @@ la expresión a ejecutar.
 ```
 if 1 + 1 == 3 do
     console.log "1 + 1 = 3"
-else if 1 + 1 == 4 do
+elif 1 + 1 == 4 do
     console.log "1 + 1 = 4"
 else
     console.log "No sé cuanto es 1 + 1"

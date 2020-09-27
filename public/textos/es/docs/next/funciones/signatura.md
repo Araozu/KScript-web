@@ -29,7 +29,7 @@ Esta signatura nos dice varias cosas:
 
 - La función devuelve un `number`
 
-  Luego de la flecla doble se encuentra `number`, este es el retorno.
+  Luego de la flecha doble se encuentra `number`, este es el retorno.
 
 El significado de las flechas se explica en la sección de 
 [Aplicacion Parcial](/#/docs/next/funciones/aplicacion-parcial/)

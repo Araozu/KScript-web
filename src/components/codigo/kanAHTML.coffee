@@ -29,7 +29,7 @@ export obtenerTokens = (entrada) =>
     tokens
 
 
-export palabrasClave = ("let const rec if else match when is in for while " +
+export palabrasClave = ("let const rec if elif else match when is in for while " +
     "fun fn class method of trait type object as impl covar pub reg def type " +
     "member extends return new this break case catch class const continue debugger " +
     "default delete do else export extends finally for function if import in " +
