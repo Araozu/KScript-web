@@ -23,6 +23,8 @@ div.contenedor-editor
     import Cursor from "./cursor";
     import LineaEditorCodigo from "./linea-editor-codigo"
 
+    const espaciosIndentacion = 4;
+
     export default {
         name: "Editor",
         components: {LineaEditorCodigo, Cursor},
@@ -125,15 +127,22 @@ div.contenedor-editor
             const fnFocus = () => enFoco.value = true;
             const fnBlur = () => enFoco.value = false;
 
-            //: number -> [posAbsolutaActual: number, lineaActual: number]
-            const obtNumLineaActual = (posAbs) => {
+            /**
+             *
+             * @param posAbs - La posición absoluta de la cual obtener la linea
+             * @param str - El string del cual obtener esos valores
+             * @returns {[number, number]} - La posicion absoluta en la que inicia la linea
+             *                             - El número de linea (basado en 0)
+             */
+            const obtNumLineaActual = (posAbs, str) => {
                 let posAbsolutaActual = 0;
                 let lineaActual = 0;
 
-                for (let i = 0; i < largosLineas.value.length; i++) {
-                    const largoLinea = largosLineas.value[i];
+                const largosLineas = str.split("\n").map(x => x.length);
+                for (let i = 0; i < largosLineas.length; i++) {
+                    const largoLinea = largosLineas[i];
 
-                    if (posAbs - 1 <= posAbsolutaActual + largoLinea) {
+                    if (posAbs <= posAbsolutaActual + largoLinea) {
                         return [posAbsolutaActual, lineaActual];
                     }
 
@@ -151,7 +160,7 @@ div.contenedor-editor
                 // Obtener el tipo de entrada
                 switch (ev.inputType) {
                     case "insertText": {
-                        const [posAbsInicioLinea, numLineaActual] = obtNumLineaActual(elem.selectionEnd);
+                        const [posAbsInicioLinea, numLineaActual] = obtNumLineaActual(elem.selectionEnd, ev.target.value);
                         const caracterIngresado = ev.data;
                         const s = ev.target.value;
                         const s1 = s.substr(posAbsInicioLinea);
@@ -243,8 +252,80 @@ div.contenedor-editor
                 setInterval(listener, 35);
             });
 
-            const enTabD = () => {
-                console.log(":D");
+            const obtIndentacion = (str) => {
+                let i = 0;
+                for (; i < str.length; i++) {
+                    if (str[i] !== " ") break;
+                }
+                return i;
+            };
+
+            const enTabD = (ev) => {
+                const elem = refTextArea.value;
+
+                const [_, numLineaActual] = obtNumLineaActual(elem.selectionEnd, ev.target.value);
+                const linea = lineas.value[numLineaActual];
+                const indentacionActual = obtIndentacion(linea);
+
+                if (numLineaActual === 0) {
+                    lineas.value[numLineaActual] = linea.substr(indentacionActual);
+
+                    // Almacenar la posicion del cursor antes del cambio
+                    const selectionStartAnterior = elem.selectionStart - indentacionActual;
+                    const selectionEndAnterior = elem.selectionEnd - indentacionActual;
+
+                    // Actualizar el textinput
+                    ev.target.value = lineas.value.join("\n");
+
+                    // Actualizar la posicion del cursor tras actualizar el textinput
+                    elem.selectionEnd = selectionEndAnterior;
+                    elem.selectionStart = selectionStartAnterior;
+                } else {
+                    const indentacionAnterior = (() => {
+                        const lineaAnterior = lineas.value[numLineaActual - 1];
+                        const indentacionAnterior = obtIndentacion(lineaAnterior);
+
+                        return indentacionAnterior;
+                    })();
+
+                    const bloquesIndentacionMaxima = Math.floor(indentacionAnterior / espaciosIndentacion) + 1;
+                    const bloqueIndentacionActual = Math.floor(indentacionActual / espaciosIndentacion);
+
+                    if (bloqueIndentacionActual >= bloquesIndentacionMaxima) {
+                        lineas.value[numLineaActual] = linea.substr(indentacionActual);
+
+                        // Almacenar la posicion del cursor antes del cambio
+                        const selectionStartAnterior = elem.selectionStart - indentacionActual;
+                        const selectionEndAnterior = elem.selectionEnd - indentacionActual;
+
+                        // Actualizar el textinput
+                        ev.target.value = lineas.value.join("\n");
+
+                        // Actualizar la posicion del cursor tras actualizar el textinput
+                        elem.selectionEnd = selectionEndAnterior;
+                        elem.selectionStart = selectionStartAnterior;
+                    } else {
+                        const nuevaIndentacion = new Array((bloqueIndentacionActual + 1) * espaciosIndentacion).fill(" ").join("");
+
+                        const diferencia = nuevaIndentacion.length - indentacionActual;
+
+                        lineas.value[numLineaActual] = nuevaIndentacion + linea.substr(indentacionActual);
+
+                        // Almacenar la posicion del cursor antes del cambio
+                        const selectionStartAnterior = elem.selectionStart + diferencia;
+                        const selectionEndAnterior = elem.selectionEnd + diferencia;
+
+                        // Actualizar el textinput
+                        ev.target.value = lineas.value.join("\n");
+
+                        // Actualizar la posicion del cursor tras actualizar el textinput
+                        elem.selectionEnd = selectionEndAnterior;
+                        elem.selectionStart = selectionStartAnterior;
+                    }
+                }
+
+                // Actualizar prop
+                emit("update:codigo", ev.target.value);
             };
 
             return {
