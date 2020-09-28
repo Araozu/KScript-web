@@ -156,13 +156,38 @@ div.contenedor-editor
                         const s = ev.target.value;
                         const s1 = s.substr(posAbsInicioLinea);
                         let strAjustado = s1.indexOf("\n") === -1 ? s1 : s1.substring(0, s1.indexOf("\n"));
-                        if (caracterIngresado === "\"" || caracterIngresado === "(") {
-                            const c = caracterIngresado === "\""? "\"": ")";
+                        if (
+                            caracterIngresado === "\"" ||
+                            caracterIngresado === "(" ||
+                            caracterIngresado === "{" ||
+                            caracterIngresado === "["
+                        ) {
+                            let c;
+                            switch (caracterIngresado) {
+                                case "\"": {
+                                    c = "\"";
+                                    break;
+                                }
+                                case "(": {
+                                    c = ")";
+                                    break;
+                                }
+                                case "{": {
+                                    c = "}";
+                                    break;
+                                }
+                                case "[": {
+                                    c = "]";
+                                    break;
+                                }
+                            }
                             const strArr = strAjustado.split("");
                             strArr.splice(elem.selectionEnd, 0, c);
                             strAjustado = strArr.join("");
                         }
                         lineas.value[numLineaActual] = strAjustado;
+
+                        // Almacenar la posicion del cursor antes del cambio
                         const selectionStartAnterior = elem.selectionStart;
                         const selectionEndAnterior = elem.selectionEnd;
 
@@ -215,7 +240,7 @@ div.contenedor-editor
                     }
                 };
 
-                setInterval(listener, 50);
+                setInterval(listener, 35);
             });
 
             const enTabD = () => {
