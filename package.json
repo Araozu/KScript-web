@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "dompurify": "^2.0.11",
+    "kscript": "0.0.28",
     "marked": "^1.1.0",
-    "kscript": "0.0.27",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "vue": "^3.0.0-rc.10",
