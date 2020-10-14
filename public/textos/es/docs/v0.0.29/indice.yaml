@@ -1,4 +1,4 @@
-ruta: docs/v0.0.27
+ruta: docs/v0.0.29
 temas:
   - titulo: Introducción
     ruta: introduccion
@@ -17,6 +17,8 @@ temas:
         ruta: expresiones
       - titulo: Anotaciones de tipos
         ruta: anotaciones-de-tipos
+  - titulo: Estructuras Basicas
+    ruta: estructuras
   - titulo: Interoperabilidad
     ruta: interoperabilidad
     temas:

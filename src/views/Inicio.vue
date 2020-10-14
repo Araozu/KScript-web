@@ -33,7 +33,7 @@ div
         h3 Expresiones
 
         p.
-            Similar a otros lenguajes funcionales, en Misti todo es una expresión.
+            Similar a otros lenguajes funcionales, en KScript todo es una expresión.
             Esto quiere decir que todas las estructuras se pueden usar en todos lados.
 
         p.
@@ -43,7 +43,7 @@ div
         codigo.language-javascript(:codigo="codigo2")
 
         p.
-            En Misti, los condicionales (y el resto de estructuras) son expresiones, por lo que
+            En KScript, los condicionales (y el resto de estructuras) son expresiones, por lo que
             se puede expresar esa misma lógica de forma segura y concisa.
 
         codigo(:codigo="codigo3")
@@ -51,7 +51,7 @@ div
         h3 Tipos de datos algebraicos
 
         p.
-            Misti ofrece acceso a los tipos de datos algebraicos a JavaScript. Son una forma
+            KScript ofrece acceso a los tipos de datos algebraicos a JavaScript. Son una forma
             rápida, concisa y segura de definir tipos de datos.
 
         p.
@@ -67,7 +67,7 @@ div
         h3 Contratos
 
         p.
-            Misti permite validación de tipos de datos y valores en tiempo de ejecución opcional.
+            KScript permite validación de tipos de datos y valores en tiempo de ejecución opcional.
             Esto es posible gracias a pattern matching.
 
         p.
