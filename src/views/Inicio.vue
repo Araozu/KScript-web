@@ -6,7 +6,7 @@ div
                 img(src="/img/KScript_logo_cuadrado_claro.svg")
             div.titulo
                 h1 KScript
-                h2 Seguridad en tiempo de ejecución para el dinamismo de ES6.
+                h2 JavaScript un poco más funcional
 
                 router-link.boton-principal(:to="rutaDocs" title="Documentación") Documentación
                 a.boton-npm(href="https://www.npmjs.com/package/kscript" target="_blank" title="Ir a npm") npm

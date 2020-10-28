@@ -43,20 +43,3 @@ Para enforzar la signatura se utilizan contratos.
 ```
 const numeros:> [4 number] = [1, "2", (), null, 5]  //! Error.
 ```
-
-## Tuplas
-
-Las tuplas en KS son simplemente una anotación para un array con un número fijo
-de elementos y sus tipos de datos. Por ejemplo, dado el siguiente array:
-
-```
-const persona = ["Juan", "Perez", 25]
-```
-
-su signatura sería `[string, string, number]`. Esto es una tupla.
-
-Las tuplas no pueden especificar el número de elementos como los arrays.
-Es decir, no se puede hacer cosas como `[2 string, 3 boolean, Date]` o similares.
-
-Y del mismo modo que los arrays, solo se verifican si se usan junto con contratos. Caso
-contrario son solo sugerencias.

@@ -21,8 +21,10 @@ temas:
   - titulo: Estructuras básicas
     ruta: estructuras # Un resumen rápido
     temas:
-      - titulo: Arrays y Tuplas
-        ruta: arrays-y-tuplas
+      - titulo: Arrays
+        ruta: arrays
+      - titulo: Tuplas
+        ruta: tuplas
       - titulo: Condicionales
         ruta: condicionales
       - titulo: Switch # Hablar de pattern matching
@@ -73,11 +75,6 @@ temas:
         ruta: estructura
   - titulo: Genéricos
     ruta: genericos
-    temas:
-      - titulo: Estructura
-        ruta: estructura
-      - titulo: Anotaciones
-        ruta: anotaciones
 
   - titulo: Tipos de Datos Algebraicos
     ruta: tda

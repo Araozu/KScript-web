@@ -1,59 +1,80 @@
 # Genéricos
 
-## Estructura
+> En diseño
 
-Se definen con una comilla simple y un identificador de tipo.
+### Propuesta 1
 
-```
-'A
-'Tipo_generico
-
-// Uso
-
-// 'A -> 'A
-fun devolverParametro x = x
-
-// ('A -> 'B) -> 'A -> 'B
-fun aplicar f x = f x
-
-// ('A -> B) -> ('B -> 'C) -> ('A -> 'C)
-fun componer f g = fn x -> g (f x)
-```
-
-## Pattern Matching
+Estilo Java
 
 ```
-// 'A -> ()
-fun imprimirTipo x =
-    console.log
-        match x with
-        | number -> "Numero"
-        | string -> "Texto"
-        | (string, number) -> "Tupla con Txt y Num"
-        | _ -> "Cualquier cosa"
+def operar <T> T -> T
+fun operar <T> (x: T) -> T = ...
+class Array<T> = ...
 
-imprimirTipo "Hola"   //: Texto
-imprimirTipo 100      //: Numero
-imprimirTipo ("A", 2) //: Tupla con Txt y Num
-imprimirTipo (0, 0)   //: Cualquier cosa
-imprimirTipo true     //: Cualquier cosa
+const instancia = Array<number> 5
 ```
 
-## Pattern matching de genéricos en funciones
+Ventajas: Familiar
+
+Problemas: Dificil de implementar (a menos que sea estricto con los espacios en blanco)
+
+### Propuesta 2
+
+Estilo Scala
 
 ```
-// 'A -> ()
-fun imprimirTipo (x: number) = console.log "Numero"
-fun imprimirTipo (x: string) = console.log "Texto"
-fun imprimirTipo (x: (string, number)) =
-    console.log "Tupla con Txt y Num"
+def operar [T] T -> T
+fun operar[T] (x: T) -> T = ...
+class Array[T] = ...
 
-fun imprimirTipo _ = console.log "Cualquier cosa"
+const instancia = Array[T] 5
+```
 
+Ventajas: Se evita usar menor/mayor que.
 
-imprimirTipo "Hola"   //: Texto
-imprimirTipo 100      //: Numero
-imprimirTipo ("A", 2) //: Tupla con Txt y Num
-imprimirTipo (0, 0)   //: Cualquier cosa
-imprimirTipo true     //: Cualquier cosa
+Problemas: ¿Cómo diferenciar entre el tipo y un parametro?
+
+```
+operar [T] 5  // 2 parametros, un array con T y un numero 5?
+              // O 1 tipo de dato T y el numero 5?
+
+arr[1]  // Parametro o tipo de dato?
+```
+
+### Propuesta 3
+
+Estilo Haskell
+
+```
+def operar T => T -> T
+fun operar x = ...
+class Array T => param = ...
+
+const instancia = Array 5
+```
+
+Problema: ¿Cómo especificar el tipo de dato?
+
+Posible solución: Usar la definicion de tipos de haskell
+
+```
+def operar T => T -> T
+fun operar x = ...
+
+def Array T => number T -> Array
+class Array param1 param2
+
+def instancia T => Array T
+const instancia = Array 5
+```
+
+### Propuesta 3
+
+??? - preferida
+
+```
+fun operar 'T x = ...
+class Array 'T param1 param 2
+
+const instancia: Array 'number = Array 'number 5
 ```

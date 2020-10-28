@@ -2,34 +2,96 @@
 
 > En diseño
 
-La signatura de una función nos dice qué parámetros toma, cuantos, de que tipo son, y qué devuelve. Por ejemplo,
-una función que suma 2 números tiene la siguiente signatura:
+## Signatura general
+
+### Propuesta 1
+
+Separar parametros con flecha, y retornos con flecha doble
 
 ```
 number -> number => number
+string -> (number => bool) => bool
 ```
 
-Esta signatura nos dice varias cosas:
+Problema: Puede ser confuso cuando usar `->` y cuando usar `=>`
 
-- La función toma 2 parámetros
+### Propuesta 2
 
-  Antes de la fecha doble `=>` hay 2 tipos separados por una flecha simple.
-    
-  ```
-  number -> number  
-  ```
+Separar parametros con comas y retornos con flechas
 
-- El primer parámetro es de tipo number
+```
+(number, number) -> number
+(string, (number -> bool) -> bool
+```
 
-  Este es el primer `number`, aparece a la izquierda de la flecha simple `->`
+Problema: Inconsistente con la forma de llamar a una funcion, y posible conflicto
+con las tuplas
 
-- El segundo parámetro es de tipo number
+### Propuesta 3 - preferida
 
-  Este es el segundo `number`, aparece a la derecha de la flecha simple `->`
+Separar parametros con espacios y retornos con flechas
 
-- La función devuelve un `number`
+```
+number number -> number
+number ...number -> number
+string (number -> bool) -> number
+```
 
-  Luego de la flecha doble se encuentra `number`, este es el retorno.
+Problema: Genéricos?
 
-El significado de las flechas se explica en la sección de 
-[Aplicacion Parcial](/#/docs/next/funciones/aplicacion-parcial/)
+## Signatura en la misma funcion
+
+### Propuesta 1
+
+Estilo de F#
+
+```
+fun sumar (x: number) (y: number): number = x + y
+fun sumar x y : number = x + y
+```
+
+Problema: `:` ya se usa para objetos (Puede que no)
+
+### Propuesta 2
+
+Estilo de Haskell
+
+```
+def sumar number number -> number  // Reemplazar
+fun sumar x y = x + y
+```
+
+### Propuesta 3
+
+Personalizado. Si los objetos ya no van a usar `:` para separar nombre de valor,
+entonces se puede usar el operador para definir tipos de datos.
+
+```
+fun sumar (x: number) (y: number) -> number = x + y
+fun sumar x y -> number = x + y
+```
+
+Bien podrian eliminarse los dos puntos...
+
+```
+fun sumar (x number) (y number) -> number = x + y
+```
+
+Esta última sería consistente con la signatura preferida
+
+```
+number number -> number
+```
+
+Aunque seria inconsistente con los tipos de objetos
+
+```
+{nombre: string}
+```
+
+Y como se anotaria un objeto y se coloca su valor?
+
+```
+{nombre: string "Juan"}   // ?
+{(nombre: string) "Juan"} // ?!
+```
