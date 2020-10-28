@@ -1,5 +1,5 @@
 <template lang="pug">
-div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'px'}]")
+div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'rem'}]")
 
 //
 </template>

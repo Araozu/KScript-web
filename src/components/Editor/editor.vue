@@ -1,7 +1,8 @@
 <template lang="pug">
-div.contenedor-editor
+div.contenedor-editor(:style="estiloVariables")
+    span.letra-prueba-tamano(style="font-family: 'JetBrains Mono', monospace" ref="refElemento") i
     div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas")
-        div.cont-num-linea
+        div.cont-num-lineas
             div.num-linea(v-for="(_, pos) in lineas") {{ pos + 1 }}
         div.cont-lineas
             linea-editor-codigo(v-for="(linea, pos) in lineas"
@@ -22,6 +23,7 @@ div.contenedor-editor
     import {computed, onMounted, ref, watchEffect} from "vue";
     import Cursor from "./cursor";
     import LineaEditorCodigo from "./linea-editor-codigo"
+    import {useTamanoLetra} from "@/components/Editor/useTamanoLetra";
 
     const espaciosIndentacion = 4;
 
@@ -39,10 +41,16 @@ div.contenedor-editor
             const refTextArea = ref(null);
             const posAbsCursor = ref(0);
             const enFoco = ref(false);
+            const {
+                refElemento,
+                altoE,
+                anchoE
+            } = useTamanoLetra();
 
             const lineas = ref(codigo.split("\n"));
             // watchEffect(() => lineas.value = codigo.split("\n"));
             const numLineas = computed(() => lineas.value.length);
+            const numDigitos = computed(() => lineas.value.length.toString().length);
             const resaltadoLineas = ref([]);
             watchEffect(() => resaltadoLineas.value = new Array(numLineas.value).fill([0, 0]));
             const largosLineas = computed(() => lineas.value.map((l) => l.length));
@@ -328,6 +336,11 @@ div.contenedor-editor
                 emit("update:codigo", ev.target.value);
             };
 
+            const estiloVariables = computed(() =>
+                `--altoE: ${altoE.value}px; --anchoE: ${anchoE.value}px; --numLineas: ${
+                numLineas.value}; --numDigitos: ${numDigitos.value};`
+            );
+
             return {
                 enTabD,
                 enFoco,
@@ -336,7 +349,9 @@ div.contenedor-editor
                 largosLineas,
                 resaltadoLineas,
                 claseContNumLineas,
-                posAbsCursor
+                posAbsCursor,
+                refElemento,
+                estiloVariables
             }
         }
     }
@@ -345,33 +360,60 @@ div.contenedor-editor
 
 <style scoped lang="sass">
 
+    .cont-num-lineas
+        padding: calc(var(--altoE) / 2) var(--anchoE)
+        border-right: solid 1px var(--color-borde)
+        line-height: calc(var(--altoE) * 1.1)
+        text-align: right
+        user-select: none
+        font-size: calc((var(--altoE) / 4px) * 3px)
+        width: calc(var(--anchoE) * var(--numDigitos))
+
+
+    .cont-lineas
+        padding: calc(var(--altoE) / 2) 0
+        font-variant-ligatures: none
+
+
+    .letra-prueba-tamano
+        font-size: 1rem
+        opacity: 0
+        user-select: none
+
+
     .contenedor-codigo
         box-sizing: border-box
         position: absolute
         top: 0
         left: 0
         width: 100%
-        min-height: 15rem
+        height: 20rem
+        grid-template-columns: calc(var(--anchoE) * (var(--numDigitos) + 2) + 1px) auto
+        overflow: auto
 
 
     .codigo-raw
         position: absolute
         top: 0
         left: 0
-        opacity: 0
+        opacity: 0.5
         box-sizing: border-box
         width: 100%
-        min-height: 15rem
+        min-height: 20rem
         resize: none
-        line-height: 1.35rem
+        line-height: calc(var(--altoE) * 1.1)
         font:
             family: "JetBrains Mono", monospace
-            size: var(--tamanoFuenteCodigo)
-        padding: 10px 30px 10px calc(15px + 1.75rem)
+            size: calc((var(--altoE) / 4px) * 3px)
+        padding-top: calc(var(--altoE) / 2)
+        padding-bottom: calc(var(--altoE) / 2)
+        padding-left: calc(var(--anchoE) * 3 + var(--anchoE) * var(--numDigitos) + 1px)
+
         margin: 0
         border: solid 1px var(--color-borde)
         background-color: var(--color-cod-fondo)
         color: var(--color-cod)
+
 
     .contenedor-editor
         position: relative

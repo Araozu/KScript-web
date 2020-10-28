@@ -1,6 +1,6 @@
 <template lang="pug">
-div.LineaCodigo.TextoCod.cont-linea-codigo(:style="estilosContLineaCodigo")
-    div.resaltado(:style="[estilosResaltado, estilosContLineaCodigo]")
+div.LineaCodigo.padding-linea-codigo.cont-linea-codigo
+    div.resaltado(:style="[estilosResaltado]")
     template(v-if="linea === ''")
         br
     template(v-else)
@@ -50,15 +50,9 @@ div.LineaCodigo.TextoCod.cont-linea-codigo(:style="estilosContLineaCodigo")
 
             watchEffect(manejarResaltado);
 
-            const px = Math.round(parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.35)
-            const estilosContLineaCodigo = ref({
-                lineHeight: `${px}px`,
-                height: `${px}px`,
-            });
             return {
                 estilosResaltado,
-                datosTokens,
-                estilosContLineaCodigo
+                datosTokens
             }
         }
     }
@@ -67,8 +61,18 @@ div.LineaCodigo.TextoCod.cont-linea-codigo(:style="estilosContLineaCodigo")
 
 <style scoped lang="sass">
 
+    .cont-linea-codigo, .resaltado
+        line-height: calc(var(--altoE) * 1.1)
+        height: calc(var(--altoE) * 1.1)
+
+
+    .padding-linea-codigo
+        padding: 0 var(--anchoE)
+
+
     .cont-linea-codigo
         position: relative
+
 
     .resaltado
         position: absolute

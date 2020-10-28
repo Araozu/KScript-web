@@ -13,7 +13,7 @@
     "marked": "^1.1.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
-    "vue": "^3.0.0-rc.10",
+    "vue": "^3.0.2",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.0.0-alpha.6",
     "vuex": "^4.0.0-alpha.1"
@@ -22,7 +22,7 @@
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
-    "@vue/compiler-sfc": "^3.0.0-rc.10",
+    "@vue/compiler-sfc": "^3.0.2",
     "bs-platform": "^7.3.2",
     "coffee-loader": "^1.0.0",
     "coffeescript": "^2.5.1",
