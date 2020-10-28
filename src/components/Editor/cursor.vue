@@ -1,5 +1,5 @@
 <template lang="pug">
-div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'rem'}]")
+div.indicador-cursor-editor(:style="[estilosIndicador, variables]")
 
 //
 </template>
@@ -41,7 +41,6 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'r
 
             const estilosIndicador = computed(() => {
                 return {
-                    transform: `translateX(${posXIndicador.value * 0.6}rem) translateY(${posYIndicador.value * 1.35}rem)`,
                     opacity: (!props.enFoco || (cursorOculto.value && !cursorMoviendose.value) ? "0" : "0.9")
                 }
             });
@@ -97,22 +96,28 @@ div.indicador(:style="[estilosIndicador, {top: posTop + 'px', left: posLeft + 'r
                 if (timeoutCursorMoviendose) clearTimeout(timeoutCursorMoviendose);
             });
 
+            const variables = computed(() => `--posX: ${posXIndicador.value}; --posY: ${posYIndicador.value};`)
+
             return {
-                estilosIndicador
+                estilosIndicador,
+                variables
             }
         }
     }
 
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" vars="{posX, posY}">
 
-    .indicador
+    .indicador-cursor-editor
         z-index: 3
         position: absolute
         width: 2px
-        height: 1rem
+        height: var(--altoE)
         background-color: var(--color-cod)
+        top: calc(var(--altoE) / 2 + 2px)
+        left: calc(var(--anchoE) * 3 + var(--anchoE) * var(--numDigitos) + 1px)
+        transform: translateX(calc(var(--posX) * var(--anchoE))) translateY(calc(var(--posY) * var(--altoE) * 1.1))
 
     //
 </style>

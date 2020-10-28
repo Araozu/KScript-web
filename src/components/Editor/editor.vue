@@ -14,7 +14,7 @@ div.contenedor-editor(:style="estiloVariables")
         ref="refTextArea"
         @keydown.tab.prevent="enTabD"
     ) {{ codigo }}
-    cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="43" :enFoco="enFoco")
+    cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="12" :enFoco="enFoco")
 
 //
 </template>
@@ -396,7 +396,7 @@ div.contenedor-editor(:style="estiloVariables")
         position: absolute
         top: 0
         left: 0
-        opacity: 0.5
+        opacity: 0
         box-sizing: border-box
         width: 100%
         min-height: 20rem
@@ -408,7 +408,6 @@ div.contenedor-editor(:style="estiloVariables")
         padding-top: calc(var(--altoE) / 2)
         padding-bottom: calc(var(--altoE) / 2)
         padding-left: calc(var(--anchoE) * 3 + var(--anchoE) * var(--numDigitos) + 1px)
-
         margin: 0
         border: solid 1px var(--color-borde)
         background-color: var(--color-cod-fondo)
