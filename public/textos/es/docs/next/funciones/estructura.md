@@ -36,7 +36,7 @@ console.log(10 + 20);  // 30
 Sin embargo, hacer algo parecido en KS da lugar a un error:
 
 ```err
-console.log 10 + 20   //! Error. El operador '+' trabaja con number.
+console.log 10 + 20   // NaN
 ```
 
 Esto se debe a que llamar a una función tiene una menor precedencia que usar un operador. En otras palabras,
@@ -56,9 +56,7 @@ console.log (10 + 20)  // 30
 
 ## Funciones sin parámetros
 
-Tecnicamente, en KS todas las funciones necesitan al menos 1 parámetro. Pero existe una forma de
-crear y llamar funciones 'sin parámetros'. Por ejemplo, la siguiente función imprime "Hola mundo" en
-la consola:
+Una función que no toma parámetros se define así:
 
 ```
 fun imprimirHolaMundo () =
@@ -71,14 +69,5 @@ imprimirHolaMundo ()
 Hola mundo
 ```
 
-En este ejemplo la función `imprimirHolaMundo` toma como primer parámetro una unidad `()`, y luego
-imprime el mensaje. Del mismo modo, al llamar la función pasamos como parámetro una unidad `()`.
-Esa unidad que se pasa como parámetro simplemente se ignora, creando una funcion 'que no toma parámetros'.
-
-
-
-
-
-
-
+Al llamar a la función se coloca `()`.
 

@@ -9,19 +9,19 @@
 Simplemente aplica la función
 
 ```
-console.log (1 + 2) (3 + 4) (5 + 6)
+console.log (1 + 2)
 ```
 
 se puede hacer
 
 ```
-console.log <| 1 + 2 <| 3 + 4 <| 5 + 6
+console.log <| 1 + 2
 ```
 
 se compila a:
 
 ```javascript
-console.log(1 + 2, 3 + 4);
+console.log(1 + 2);
 ```
 
 ## `|>`

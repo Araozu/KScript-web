@@ -6,11 +6,9 @@ KS diferencia tipos nulos y tipos no nulos en las signaturas, es decir que
 podemos indicar si una variable puede o no contener null o undefined.
 Se indica del siguiente modo:
 
-- Una variable anotada con `string` indica que esa variable contiene un string, mas no null o
-  undefined.
-  
-- Una variable anotada con `string?` indica que esa variable **puede** contener un string,
-  null o undefined.
+- Una variable anotada con `string` indica que esa variable contiene un string, mas no undefined.
+
+- Una variable anotada con `string?` indica que esa variable **puede** contener un string o undefined.
 
 KS diferencia entre `null` y `undefined` al igual que JavaScript, y puede realizar
 comprobaciones a estos valores cuando sea necesario.
@@ -26,6 +24,16 @@ const indefinido = ()
 // Es equivalente a:
 const indefinido = undefined
 ```
+
+## null
+
+`null` es su propio tipo de dato, y su signatura es, pues, null.
+
+```
+const n: null = null
+```
+
+Null no se puede usar como reemplazo de `undefined`.
 
 ## Verificar undefined/null en condicionales
 
