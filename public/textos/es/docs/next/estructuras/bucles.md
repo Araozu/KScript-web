@@ -7,7 +7,7 @@
 ```
 const numeros = [1, 2, 3]
 
-for [pos, numero] of numeros do
+for (pos, numero) of numeros do
     console.log "Posicion ${pos}, valor ${numero}"
 ```
 
@@ -29,7 +29,7 @@ const persona = {
     apellido: "Perez"
 }
 
-for [key, value] in persona do
+for (key, value) in persona do
     console.log "Clave ${key}, valor ${value}"
 ```
 
@@ -41,7 +41,7 @@ Clave apellido, valor Perez
 Si no necesitas una clave o un valor, usa el comodin `_` para ignorarlo:
 
 ```
-for [_, value] in persona do
+for (_, value) in persona do
     // ...
 ```
 
@@ -59,6 +59,8 @@ while i < 20 do
 
 > Experimental
 
+Solo se puede declarar 1 variable, una condición y una operación.
+
 ```
 for let i = 0; i < 10; i++ do
     console.log "Iteracion nro", i
@@ -69,10 +71,10 @@ for let i = 0; i < 10; i++ do
 Se pueden usar libremente.
 
 ```
-for [_, num] of [0, 1, 2, 3, 4] do
-    if num === 2 do
+for (_, num) of [0, 1, 2, 3, 4] do
+    if num == 2 do
         continue
-    else if num === 3 do
+    elif num == 3 do
         break
 ```
 

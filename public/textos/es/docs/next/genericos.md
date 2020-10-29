@@ -2,79 +2,42 @@
 
 > En diseño
 
-### Propuesta 1
-
-Estilo Java
+Para los genéricos se usa una sintaxis especial, basada en espacios blancos.
 
 ```
-def operar <T> T -> T
-fun operar <T> (x: T) -> T = ...
-class Array<T> = ...
-
-const instancia = Array<number> 5
+class Array 'T =
+    // ...
 ```
 
-Ventajas: Familiar
+La sección `'T` define el genérico. En lugar de colocar `<T>` o `[T]` se usa
+una comilla simple.
 
-Problemas: Dificil de implementar (a menos que sea estricto con los espacios en blanco)
-
-### Propuesta 2
-
-Estilo Scala
+## En clases
 
 ```
-def operar [T] T -> T
-fun operar[T] (x: T) -> T = ...
-class Array[T] = ...
-
-const instancia = Array[T] 5
+class Array 'T tamaño =
+    // ...
 ```
 
-Ventajas: Se evita usar menor/mayor que.
-
-Problemas: ¿Cómo diferenciar entre el tipo y un parametro?
+## En funciones
 
 ```
-operar [T] 5  // 2 parametros, un array con T y un numero 5?
-              // O 1 tipo de dato T y el numero 5?
-
-arr[1]  // Parametro o tipo de dato?
+fun elementoDeArray 'T arr pos = // ...
 ```
 
-### Propuesta 3
-
-Estilo Haskell
+## En llamadas a clases
 
 ```
-def operar T => T -> T
-fun operar x = ...
-class Array T => param = ...
-
-const instancia = Array 5
+const arr = new Array 'number 5
 ```
 
-Problema: ¿Cómo especificar el tipo de dato?
-
-Posible solución: Usar la definicion de tipos de haskell
+## En llamadas a funciones
 
 ```
-def operar T => T -> T
-fun operar x = ...
-
-def Array T => number T -> Array
-class Array param1 param2
-
-def instancia T => Array T
-const instancia = Array 5
+const elemento = elementoDeArray 'number [1, 2, 3] 1
 ```
 
-### Propuesta 3
+## Genéricos anidados
 
-??? - preferida
-
-```
-fun operar 'T x = ...
-class Array 'T param1 param 2
-
-const instancia: Array 'number = Array 'number 5
-```
+Los genericos son asociativos hacia la derecha. Eso quiere decir que `Array 'Array 'number` equivale a
+`Array<Array<number>>`

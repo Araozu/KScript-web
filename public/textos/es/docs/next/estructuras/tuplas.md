@@ -2,47 +2,34 @@
 
 > En diseño
 
-## Propuesta 1 - preferida
-
-Hacer que las tuplas se encierren dentro de parentesis:
+## Definición
 
 ```
-const tupla = (10, 20)
-const (v1, v2) = tupla
+const coordenada = (10, 20)
 ```
 
-Problema: La signatura de funciones podría usar los paréntesis para representar parametros
-(probablemente no)
+Los paréntesis son obligatorios.
+
+## Acceso
+
+Se pueden acceder mediante pattern matching (próximamente) o como arrays.
 
 ```
-(number, number) -> number
+const (x, y) = coordenada
+
+const x = coordenada[0]
+const y = coordenada[1]
 ```
 
-## Propuesta 2
+## Escritura
 
-Usar sintaxis de TypeScript:
+Las tuplas son inmutables, no se pueden modificar sus valores.
+Todas las tuplas son envueltas con `Object.freeze`
 
-```
-const tupla = [10, 20]
-const [v1, v2] = tupla
-```
+## Anotación
 
-Problema: Causa conflicto con la notación de arrays y es confuso:
+Los paréntesis son obligatorios en la anotación.
 
 ```
-[number]            // Array de number
-[number, number]    // Tupla de 2 number
-[[number]]          // Array de arrays de number
-[[number, number]]  // Array de tupla de 2 number
+const coordenada: (number, number) = (10, 20)
 ```
-
-## Propuesta 3
-
-Usar sintaxis nueva:
-
-```
-const tupla = #[10, 20]
-const #[v1, v2] = tupla
-```
-
-Problema: Sintaxis no familiar
