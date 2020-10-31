@@ -366,7 +366,7 @@ div.contenedor-editor(:style="estiloVariables")
         line-height: calc(var(--altoE) * 1.1)
         text-align: right
         user-select: none
-        font-size: calc((var(--altoE) / 4px) * 3px)
+        font-size: calc((var(--altoE) / 4) * 3px)
         width: calc(var(--anchoE) * var(--numDigitos))
 
 
@@ -404,7 +404,7 @@ div.contenedor-editor(:style="estiloVariables")
         line-height: calc(var(--altoE) * 1.1)
         font:
             family: "JetBrains Mono", monospace
-            size: calc((var(--altoE) / 4px) * 3px)
+            size: calc((var(--altoE) / 4) * 3px)
         padding-top: calc(var(--altoE) / 2)
         padding-bottom: calc(var(--altoE) / 2)
         padding-left: calc(var(--anchoE) * 3 + var(--anchoE) * var(--numDigitos) + 1px)
