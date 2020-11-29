@@ -117,7 +117,8 @@ export kanAHtml = (codigo, esBloque) =>
     if esBloque
         contNumLinea.className = "cont-num-linea"
         contLineas.className = "cont-lineas"
-        elemContenedor.appendChild contNumLinea
+        # Eliminar el numero de lineas
+        # elemContenedor.appendChild contNumLinea
 
     if lineas.length < 10
         elemContenedor.className += " cont-ancho-lineas-1"
