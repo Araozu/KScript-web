@@ -213,7 +213,7 @@ div
 
 
     .boton-principal
-        background-color: #f44336
+        background-color: var(--colorSecundario)
         color: white
 
 

@@ -108,13 +108,13 @@ $tamano-borde: 3px
     border-bottom: solid $tamano-borde var(--colorSecundario)
 
 .color-r:hover
-    border-bottom: solid $tamano-borde #e7b711
+    border-bottom: solid $tamano-borde var(--color-r)
 
 .color-m:hover
-    border-bottom: solid $tamano-borde #04ABFC
+    border-bottom: solid $tamano-borde var(--color-m)
 
 .color-t:hover
-    border-bottom: solid $tamano-borde #fca8d1
+    border-bottom: solid $tamano-borde var(--color-t)
 
 .color-a:hover
     border-bottom: solid $tamano-borde var(--color-a)
