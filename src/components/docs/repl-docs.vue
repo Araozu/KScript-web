@@ -125,10 +125,10 @@ export default
         background-color: var(--color-a)
 
 .boton-repl-rojo
-    color: var(--colorSecundario)
+    color: var(--color-m)
 
     &:hover
-        background-color: var(--colorSecundario)
+        background-color: var(--color-m)
 
 
 .resultado-repl-docs
@@ -137,15 +137,15 @@ export default
 
 .cont-botones
     height: 2.8rem
-    border-top: solid 0.2rem var(--colorSecundario)
-    border-bottom: solid 0.2rem var(--colorSecundario)
+    border-top: solid 0.2rem var(--color-m)
+    border-bottom: solid 0.2rem var(--color-m)
 
 
 .cont-botones-borde-ejecutar
     border-color: var(--color-a)
 
 .cont-botones-borde-compilar
-    border-color: var(--colorSecundario)
+    border-color: var(--color-m)
 
 
 .resultado-repl-docs

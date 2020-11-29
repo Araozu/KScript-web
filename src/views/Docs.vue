@@ -34,18 +34,18 @@ export default
 .contenedor-docs
     display: grid
     height: 100%
-    grid-template-columns: 17.5rem auto 35%
+    grid-template-columns: 14rem auto 35%
 
-@media only screen and (max-width: 1100px)
+@media only screen and (max-width: 1400px)
     .contenedor-docs
-        grid-template-columns: 15% auto 40%
+        grid-template-columns: 11rem auto 30%
+
+@media only screen and (max-width: 1000px)
+    .contenedor-docs
+        grid-template-columns: 8rem auto 0
+
 
 @media only screen and (max-width: 800px)
-    .contenedor-docs
-        grid-template-columns: 15% auto 30%
-
-
-@media only screen and (max-width: 700px)
     .contenedor-docs
         grid-template-columns: 9rem auto 0
 

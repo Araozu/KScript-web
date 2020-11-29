@@ -9,6 +9,8 @@ div.barra-doc
         div(v-if="!versionActualExiste")
             p No existe esta versión de la documentación, por favor escoge otra.
 
+    div.separador-barra-lateral
+
     elemento-barra(v-for="(tema, i) in datos.temas"
         :key="i"
         :tema="tema"
@@ -87,10 +89,16 @@ export default
 
 .cont-opcion-version
     padding: 0.75rem 0.5rem
+    font-family: "Source Sans Pro", Roboto, sans-serif
 
     span
         display: inline-block
         padding-bottom: 0.5rem
+
+.separador-barra-lateral
+    width: 100%
+    height: 3px
+    background-color: var(--colorSecundario)
 
 //
 </style>
