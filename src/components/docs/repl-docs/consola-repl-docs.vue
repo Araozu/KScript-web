@@ -75,7 +75,7 @@ export default {
     padding: 0.5rem
 
 .contenido
-    font-family: "JetBrains Mono", monospace
+    font-family: var(--fuente-codigo)
 
 .contenido-linea
     border-bottom: solid 1px var(--color-borde)
