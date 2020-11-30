@@ -40,29 +40,29 @@ fun descuento => this.precio * descuento
 Con esta sintaxis se pueden declarar funciones anónimas más cortas:
 
 ```
-#{$1 + $2}
+#($0 + $1)
 ```
 
 ```javascript
-($1, $2) => $1 + $2;
+($0, $1) => $0 + $1;
 ```
 
-Se acceden a los parámetros usando `$1, $2, $3`, etc.
+Se acceden a los parámetros usando `$0, $1, $2`, etc.
 
 Si la función solo toma un parámetro se puede usar solamente `$`.
 
 ```
-#{$ * $}
+#($ * $)
 ```
 
 Si la función toma un parametro rest se usa `$$`.
 
 ```
-#{$1.concat $$}
+#($.concat $$)
 ```
 
 ```javascript
-($1, ...$$) => $1.concat($$);
+($, ...$$) => $.concat($$);
 ```
 
 Estas funciones anónimas siempre se compilan a funciones flecha, y pueden

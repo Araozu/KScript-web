@@ -95,8 +95,8 @@ div
         """
         const div = document.createElement "div"
 
-        div.addEventListener "click" (fn e ->
-            e.preventDefault()
+        div.addEventListener "click" #(
+            $.preventDefault()
             alert "Hiciste click en el div."
         )
         """
@@ -129,18 +129,19 @@ div
     codigo5 =
         """
         const heroeZeuz = {
-            nombre: "Zeuz"
-            vida: 750
-            mana: 500
-            tipo: Inteligencia
+            nombre "Zeuz"
+            vida 750
+            mana 500
+            tipo Inteligencia
         }
         """
 
     codigo6 =
         """
         fun dividir
-        | x:> number
-        | y:> number where y != 0
+        | x: $ is number
+        | y: $ is number && y != 0
+        : $ is number && $ != NaN
         =
             x / y
         """
