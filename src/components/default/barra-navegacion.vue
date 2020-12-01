@@ -1,7 +1,7 @@
 <template lang="pug">
 nav.barra-nav2
     router-link.link-logo-barra-nav(to="/")
-        img.img-logo(:src="'/img/KScript_logo2.svg'" alt="Logo")
+        img.img-logo(:src="'/img/KScript_logo3.svg'" alt="Logo")
 
     ul.links
         li.ruta-barra-nav.color-y

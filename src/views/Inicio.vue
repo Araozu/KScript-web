@@ -3,7 +3,7 @@ div
     div.contenedor-principal
         div.cont-logo-principal
             div.cont-logo
-                img(src="/img/KScript_logo2.svg")
+                img(:src="'/img/KScript_logo3.svg'")
             div.titulo
                 h1 KScript
                 h2 JavaScript al estilo ML
