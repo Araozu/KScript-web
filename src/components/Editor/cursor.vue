@@ -107,12 +107,12 @@ div.indicador-cursor-editor(:style="[estilosIndicador, variables]")
 
 </script>
 
-<style lang="sass" vars="{posX, posY}">
+<style lang="sass">
 
     .indicador-cursor-editor
         z-index: 3
         position: absolute
-        width: 2px
+        width: 1px
         height: var(--altoE)
         background-color: var(--color-cod)
         top: calc(var(--altoE) / 2 + 2px)

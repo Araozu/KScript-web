@@ -1,6 +1,7 @@
 <template lang="pug">
 div.contenedor-editor(:style="estiloVariables")
-    span.letra-prueba-tamano(style="font-family: 'JetBrains Mono', monospace" ref="refElemento") i
+    span.letra-prueba-tamano(style="font-family: 'JetBrains Mono', monospace" ref="refElemento")
+        | i_i_i_i_i_
     div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas")
         div.cont-num-lineas
             div.num-linea(v-for="(_, pos) in lineas") {{ pos + 1 }}
@@ -8,6 +9,7 @@ div.contenedor-editor(:style="estiloVariables")
             linea-editor-codigo(v-for="(linea, pos) in lineas"
                 :linea="linea"
                 :resaltadoArr="resaltadoLineas[pos]? resaltadoLineas[pos]: []"
+                :anchoE="anchoE"
                 :key="pos + "-" + linea"
             )
     textarea.codigo-raw(
@@ -351,7 +353,8 @@ div.contenedor-editor(:style="estiloVariables")
                 claseContNumLineas,
                 posAbsCursor,
                 refElemento,
-                estiloVariables
+                estiloVariables,
+                anchoE
             }
         }
     }
@@ -376,7 +379,7 @@ div.contenedor-editor(:style="estiloVariables")
 
 
     .letra-prueba-tamano
-        font-size: 1rem
+        font-size: var(--tamanoFuenteCodigo)
         opacity: 0
         user-select: none
 
@@ -404,7 +407,7 @@ div.contenedor-editor(:style="estiloVariables")
         line-height: calc(var(--altoE) * 1.1)
         font:
             family: "JetBrains Mono", monospace
-            size: calc((var(--altoE) / 4) * 3px)
+            size: var(--tamanoFuenteCodigo)
         padding-top: calc(var(--altoE) / 2)
         padding-bottom: calc(var(--altoE) / 2)
         padding-left: calc(var(--anchoE) * 3 + var(--anchoE) * var(--numDigitos) + 1px)

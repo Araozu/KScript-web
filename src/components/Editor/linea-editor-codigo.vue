@@ -23,6 +23,10 @@ div.LineaCodigo.padding-linea-codigo.cont-linea-codigo
             resaltadoArr: {
                 type: Array,
                 required: true
+            },
+            anchoE: {
+                type: Number,
+                required: true
             }
         },
         setup(props) {
@@ -34,14 +38,15 @@ div.LineaCodigo.padding-linea-codigo.cont-linea-codigo
             );
 
             const estilosResaltado = ref({});
+            const anchoE = computed(() => props.anchoE);
 
             const manejarResaltado = () => {
                 const [izq, der] = props.resaltadoArr;
 
                 if (izq !== der ) {
                     estilosResaltado.value = {
-                        transform: `translateX(${izq * 0.6}rem)`,
-                        width: `${(der - izq) * 0.6}rem`
+                        transform: `translateX(${izq * anchoE.value}px)`,
+                        width: `${(der - izq) * anchoE.value}px`
                     };
                 } else {
                     estilosResaltado.value = {};
@@ -77,7 +82,7 @@ div.LineaCodigo.padding-linea-codigo.cont-linea-codigo
     .resaltado
         position: absolute
         top: 0
-        left: 15px
+        left: calc(var(--anchoE) * var(--numDigitos))
         height: 100%
         width: 0
         background-color: var(--color-cod)

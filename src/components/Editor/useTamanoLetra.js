@@ -9,7 +9,7 @@ export const useTamanoLetra = () => {
     const fnListener = () => {
         if (refElemento.value) {
             const alto = refElemento.value.scrollHeight;
-            const ancho = refElemento.value.scrollWidth;
+            const ancho = refElemento.value.scrollWidth / 10;
 
             if (altoE.value !== alto) {
                 altoE.value = alto;
