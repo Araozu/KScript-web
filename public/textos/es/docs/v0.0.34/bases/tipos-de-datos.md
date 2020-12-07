@@ -5,6 +5,8 @@ Los tipos de datos de KS son los mismos de JavaScript, con algunas diferencias.
 
 ## String (o Txt)
 
+> `"\"", {caracter-menos-comilla}, "\""`
+
 Los string tienen algunas diferencias respecto a JS.
 
 ```
@@ -42,6 +44,8 @@ Para evitar ambiguedades con el operador `+`, en KS se concatenan los strings co
 
 ## Number (o Num)
 
+> `digito, {digito}, [".", digito, {digito}]`
+
 Los números son los mismos de JS. Por ahora no soporta notación cientifica, hexadecimal, octal o binario.
 
 ```
@@ -61,6 +65,8 @@ Los números usan los operadores comunes.
 
 
 ## Boolean (o Bool)
+
+> `"true" | "false"`
 
 Los booleanos también funcionan igual a JS.
 

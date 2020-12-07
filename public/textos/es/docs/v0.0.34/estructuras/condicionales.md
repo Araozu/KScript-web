@@ -1,8 +1,14 @@
-# Estructura
+# Condicionales
 
-Por el momento solo está disponible los condicionales
+> En diseño
 
-## Condicionales
+> `"if", expresion, "do", expresion`,
+> <br>
+> `{"elif", expresion, "do", expresion},`
+> <br>
+> `["else", expresion]`
+
+La estructura es la siguiente:
 
 ```
 if nombre == "Jose Luis" do
@@ -43,3 +49,5 @@ if a && b || c
 do  //! Error de sintaxis
     console.log "incorrecto"
 ```
+
+

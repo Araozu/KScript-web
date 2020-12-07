@@ -18,7 +18,11 @@ div.repl-docs
 
 <script lang="coffee">
 import {ref, computed} from "vue"
-import {Lexer, parseTokens, crearCodeWithSourceMap} from "kscript"
+import {
+    KLexer as Lexer,
+    kparseTokens as parseTokens,
+    kcrearCodeWithSourceMap as crearCodeWithSourceMap
+} from "kscript"
 import editor from "@/components/Editor/editor"
 import consolaReplDocs from "./repl-docs/consola-repl-docs.vue"
 import JsCompiladoReplDocs from "@/components/docs/repl-docs/js-compilado-repl-docs"

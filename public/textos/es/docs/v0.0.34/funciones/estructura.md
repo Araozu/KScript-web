@@ -2,6 +2,10 @@
 
 > En diseño
 
+> `params = id, {id} | "()"`
+> <br>
+> `"fun", id, params, "=", expresion`
+
 Las funciones se declaran con la palabra clave `fun`, seguida del nombre de la función, los parámetros,
 el signo `=` y el cuerpo de la función.
 

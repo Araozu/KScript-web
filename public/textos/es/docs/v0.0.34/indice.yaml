@@ -1,4 +1,4 @@
-ruta: docs/v0.0.31
+ruta: docs/v0.0.34
 temas:
   - titulo: Introducción
     ruta: introduccion
@@ -15,14 +15,16 @@ temas:
         ruta: operadores-comunes
       - titulo: Expresiones
         ruta: expresiones
-      - titulo: Anotaciones de tipos
-        ruta: anotaciones-de-tipos
 
   - titulo: Estructuras Basicas
     ruta: estructuras
     temas:
       - titulo: Condicionales
         ruta: condicionales
+      - titulo: Arrays
+        ruta: arrays
+      - titulo: Bucles
+        ruta: bucles
 
   - titulo: Funciones
     ruta: funciones # Un resumen rápido

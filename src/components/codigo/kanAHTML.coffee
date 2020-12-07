@@ -1,4 +1,4 @@
-import { Lexer } from "kscript"
+import { KLexer as Lexer } from "kscript"
 
 crearEspBlanco = (n) => Array(n + 1).join("&nbsp;")
 

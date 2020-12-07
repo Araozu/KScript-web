@@ -1,5 +1,9 @@
 # Constantes y Variables
 
+> `"const", id, "=", expresion`
+> <br>
+> `"let", id, "=", expresion`
+
 Vamos a empezar la documentación con el concepto más básico de la programación:
 Variables.
 
