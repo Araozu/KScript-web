@@ -28,6 +28,11 @@ const routes = [
         ]
     },
     {
+        path: "/api",
+        name: "API",
+        component: () => import("../views/API.vue")
+    },
+    {
         path: "/editor",
         name: "Editor",
         component: Editor

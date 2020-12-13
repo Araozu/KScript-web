@@ -5,10 +5,10 @@ div.doc
             i.material-icons cached
             span  Recargar
 
-    div(v-if="datos.cargando && datos.cargando === true")
-        | Cargando...
-    div(v-else-if="datos.error && datos.error === true")
-        | Error al cargar el recurso. Razón: {{ datos.razon }}
+    div.contenido-tema-docs(v-if="datos.cargando && datos.cargando === true")
+        h3 Cargando la documentación...
+    div.contenido-tema-docs(v-else-if="datos.error && datos.error === true")
+        h3 Hubo un error al cargar el recurso. Razón: {{ datos.razon }}
     div.contenido-tema-docs(v-else)
         contenidoDocs(:mdhtml="htmlPagina")
 
