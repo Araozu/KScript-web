@@ -31,11 +31,3 @@ temas:
     temas:
       - titulo: Estructura # Incluir como llamar una funcion
         ruta: estructura
-
-  - titulo: Interoperabilidad
-    ruta: interoperabilidad
-    temas:
-      - titulo: Clases
-        ruta: clases
-      - titulo: Covariantes
-        ruta: covariantes

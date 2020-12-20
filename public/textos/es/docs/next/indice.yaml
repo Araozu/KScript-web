@@ -42,37 +42,23 @@ temas:
         ruta: estructura
       - titulo: Signatura
         ruta: signatura
-      - titulo: Parámetros
-        ruta: parametros
-      - titulo: Parámetros opcionales
-        ruta: parametros-opcionales
       - titulo: Parámetros por defecto
         ruta: parametros-por-defecto
       - titulo: Aplicación parcial
         ruta: aplicacion-parcial
-      - titulo: Operadores # Incluir notacion pre-fija (+)
-        ruta: operadores
-      - titulo: Parámetros nombrados
-        ruta: parametros-nombrados
       - titulo: Funciones anónimas
         ruta: funciones-anonimas
+      - titulo: Operadores
+        ruta: operadores
       - titulo: Tuberías
         ruta: tuberias
       - titulo: Composición de funciones
         ruta: composicion-de-funciones
       - titulo: Rest/Spread
         ruta: rest-spread
-  - titulo: Pattern Matching
-    ruta: pattern-matching
-    temas:
-      - titulo: Patrones activos
-        ruta: patrones-activos
 
   - titulo: Objetos
     ruta: objetos
-    temas:
-      - titulo: Estructura
-        ruta: estructura
   - titulo: Genéricos
     ruta: genericos
 
@@ -100,14 +86,6 @@ temas:
       - titulo: Recuperación
         ruta: recuperación
 
-  - titulo: Rasgos
-    ruta: rasgos
-    temas:
-      - titulo: Estructura
-        ruta: estructura
-      - titulo: Uso
-        ruta: uso
-
   - titulo: Módulos
     ruta: modulos
     temas:
@@ -133,16 +111,5 @@ temas:
   - titulo: Contratos
     ruta: contratos
 
-  - titulo: Interoperabilidad
-    ruta: interoperabilidad
-    temas:
-      - titulo: Definiciones
-        ruta: definiciones
-      - titulo: Tipos nulos
-        ruta: tipos-nulos
-      - titulo: Promesas
-        ruta: promesas
-      - titulo: async/await
-        ruta: async-await
   - titulo: JSX
     ruta: jsx

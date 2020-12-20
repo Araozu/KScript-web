@@ -51,13 +51,11 @@ const persona: {nombre: string, edad: number} = {
 
 ## Métodos
 
-> Experimental
-
 ```
 const persona = {
     nombre "Juan"
     apellido "Perez"
-    fn nombreCompleto ->
+    nombreCompleto fn () ->
         @nombre + " " + @apellido
 }
 

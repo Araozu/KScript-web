@@ -2,7 +2,7 @@
 
 > En diseño
 
-## Sintaxis verbosa
+## Sintaxis regular
 
 Usa la siguiente sintaxis:
 
@@ -35,35 +35,60 @@ fun descuento => this.precio * descuento
 (descuento) => this.precio * descuento;
 ```
 
+Una función anónima que no toma parámetros se escribe así: 
+
+```
+fn () -> 200
+```
+
+Los paréntesis son obligatorios para mantener consistencia con el resto del lenguaje.
+
 ## Sintaxis compacta
 
 Con esta sintaxis se pueden declarar funciones anónimas más cortas:
 
 ```
-#($0 + $1)
+#($1 + $2)
 ```
 
 ```javascript
-($0, $1) => $0 + $1;
+($1, $2) => $1 + $2;
 ```
 
-Se acceden a los parámetros usando `$0, $1, $2`, etc.
-
-Si la función solo toma un parámetro se puede usar solamente `$`.
-
-```
-#($ * $)
-```
+Los parámetros de la función se definen según el uso de `$1, $2, $3`, etc.
 
 Si la función toma un parametro rest se usa `$$`.
 
 ```
-#($.concat $$)
+#($1.concat $$)
 ```
 
 ```javascript
-($, ...$$) => $.concat($$);
+($1, ...$$) => $1.concat($$);
 ```
 
-Estas funciones anónimas siempre se compilan a funciones flecha, y pueden
-causar conflictos con jQuery.
+#### Usar `$` no define un único parámetro.
+
+Un único símbolo de dolar no significa nada dentro de la función. Es decir:
+
+```
+#($)
+```
+
+Se compila a:
+
+```javascript
+() => $;
+```
+
+O también:
+
+```
+#($1 + $)
+```
+
+Se compila a:
+
+```javascript
+($1) => $1 + $;
+```
