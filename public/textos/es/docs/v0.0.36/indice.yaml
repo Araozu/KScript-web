@@ -1,4 +1,4 @@
-ruta: docs/v0.0.34
+ruta: docs/v0.0.36
 temas:
   - titulo: Introducción
     ruta: introduccion
@@ -27,7 +27,10 @@ temas:
         ruta: bucles
 
   - titulo: Funciones
-    ruta: funciones # Un resumen rápido
+    ruta: funciones
     temas:
-      - titulo: Estructura # Incluir como llamar una funcion
+      - titulo: Estructura
         ruta: estructura
+
+  - titulo: Objetos
+    ruta: objetos
