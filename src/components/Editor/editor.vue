@@ -1,6 +1,6 @@
 <template lang="pug">
 div.contenedor-editor(:style="estiloVariables")
-    span.letra-prueba-tamano(style="font-family: 'JetBrains Mono', monospace" ref="refElemento")
+    span.letra-prueba-tamano(style="font-family: 'Source Code Pro', monospace" ref="refElemento")
         | i_i_i_i_i_
     div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas")
         div.cont-num-lineas
@@ -112,7 +112,12 @@ export default {
                     }
                     // Si la selección no termina en esta linea
                     else {
-                        resaltadoLineas.value[lineaActual] = [0, largoLinea];
+                        // Si la linea resaltada esta vacia asignar -1
+                        if (largoLinea === 0) {
+                            resaltadoLineas.value[lineaActual] = [-1, -1];
+                        } else {
+                            resaltadoLineas.value[lineaActual] = [0, largoLinea];
+                        }
                     }
 
                 }
