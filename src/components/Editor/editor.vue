@@ -261,6 +261,7 @@ export default {
                 if (posNuevaInicio === posNuevaFinal && (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio)) {
                     posAbsCursor.value = posNuevaFinal;
                     posAnteriorFinal = posNuevaFinal;
+                    posAnteriorInicio = posNuevaInicio;
                     limpiarResaltado();
                 } else if (posNuevaFinal !== posAnteriorFinal || posNuevaInicio !== posAnteriorInicio && posNuevaInicio !== posNuevaFinal) {
                     resaltarCodigo(posNuevaInicio, posNuevaFinal);
