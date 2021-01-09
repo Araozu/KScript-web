@@ -17,6 +17,8 @@ temas:
         ruta: anotaciones-de-tipos
       - titulo: Expresiones
         ruta: expresiones
+      - titulo: Interpolacion de strings
+        ruta: interpolacion-strings
 
   - titulo: Estructuras básicas
     ruta: estructuras # Un resumen rápido

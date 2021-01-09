@@ -128,3 +128,9 @@ fun PantallaBienvenida () =
         elementos
     ]
 ```
+
+### Limitaciones
+
+Los parámetros pasados al elemento (el objeto con los atributos y el array con los hijos)
+no pueden ser dinámicos, porque esta sintaxis se ejecutara en tiempo de compilacion y KS
+no cuenta con macros.
