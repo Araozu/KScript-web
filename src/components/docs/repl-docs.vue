@@ -1,6 +1,6 @@
 <template lang="pug">
 div.repl-docs
-    div.contenedor-editor
+    div.contenedor-editor-repl
         editor(style="height: 100%" v-model:codigo="codigo")
 
     div.cont-botones(:class="claseBorde")
@@ -105,8 +105,8 @@ export default
 .repl-docs
     border-left: solid 1px var(--color-borde)
 
-.contenedor-editor
-    height: calc(50% - 1.5rem)
+.contenedor-editor-repl
+    height: calc(50vh - 3rem)
 
 .boton-repl
     height: 100%

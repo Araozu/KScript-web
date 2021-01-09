@@ -2,7 +2,7 @@
 div.contenedor-editor(:style="estiloVariables")
     span.letra-prueba-tamano(style="font-family: 'Source Code Pro', monospace" ref="refElemento")
         | i_i_i_i_i_
-    div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas")
+    div.contenedor-codigo.cont.Fondo-alt(:class="claseContNumLineas" ref="refContenedorCodigo")
         div.cont-num-lineas
             div.num-linea(v-for="(_, pos) in lineas") {{ pos + 1 }}
         div.cont-lineas
@@ -16,7 +16,17 @@ div.contenedor-editor(:style="estiloVariables")
         ref="refTextArea"
         @keydown.tab.prevent="enTabD"
     ) {{ codigo }}
-    cursor(:largosLineas="largosLineas" :posAbsCursor="posAbsCursor" :posTop="14" :posLeft="12" :enFoco="enFoco")
+    cursor(
+        :largosLineas="largosLineas"
+        :posAbsCursor="posAbsCursor"
+        :posTop="14"
+        :posLeft="12"
+        :enFoco="enFoco"
+        :altoE="altoE"
+        :anchoE="anchoE"
+        :offsetScrollTop="offsetScrollTop"
+        :offsetScrollLeft="offsetScrollLeft"
+    )
 
 //
 </template>
@@ -57,6 +67,7 @@ export default {
             altoE,
             anchoE
         } = useTamanoLetra();
+        const refContenedorCodigo = ref(null);
 
         const lineas = ref(codigo.split("\n"));
         // watchEffect(() => lineas.value = codigo.split("\n"));
@@ -250,6 +261,22 @@ export default {
             emit("update:codigo", ev.target.value);
         };
 
+        const offsetScrollTop = ref(0);
+        const offsetScrollLeft = ref(0);
+        const manejarScroll = (ev) => {
+            const target = ev.target;
+            offsetScrollTop.value = target.scrollTop;
+            offsetScrollLeft.value = target.scrollLeft;
+
+            refTextArea.value.scrollTop = target.scrollTop;
+            refTextArea.value.screenLeft = target.scrollLeft;
+
+            console.table({
+                codigo: refContenedorCodigo.value.scrollTop,
+                textarea: refTextArea.value.scrollTop
+            });
+        };
+
         onMounted(() => {
             const elem = refTextArea.value;
             let posAnteriorInicio = 0;
@@ -258,6 +285,7 @@ export default {
             refTextArea.value.addEventListener("focus", fnFocus);
             refTextArea.value.addEventListener("blur", fnBlur);
             refTextArea.value.addEventListener("input", manejarInput);
+            refContenedorCodigo.value.addEventListener("scroll", manejarScroll);
 
             const listener = () => {
                 const posNuevaInicio = elem.selectionStart;
@@ -370,8 +398,12 @@ export default {
             claseContNumLineas,
             posAbsCursor,
             refElemento,
+            refContenedorCodigo,
             estiloVariables,
-            anchoE
+            altoE,
+            anchoE,
+            offsetScrollTop,
+            offsetScrollLeft
         }
     }
 }
@@ -407,9 +439,9 @@ export default {
     top: 0
     left: 0
     width: 100%
-    height: 20rem
+    height: calc(50vh - 3rem)
     grid-template-columns: calc(var(--anchoE) * (var(--numDigitos) + 2) + 1px) auto
-    overflow: auto
+    overflow: scroll
 
 
 .codigo-raw
@@ -419,9 +451,11 @@ export default {
     opacity: 0
     box-sizing: border-box
     width: 100%
-    min-height: 20rem
+    height: calc(50vh - 3rem)
+    overflow: scroll
     resize: none
     line-height: calc(var(--altoE) * 1.1)
+    white-space: pre
     font:
         family: "JetBrains Mono", monospace
         size: var(--tamanoFuenteCodigo)

@@ -91,7 +91,7 @@ export default {
 .resaltado
     position: absolute
     top: 0
-    left: calc(var(--anchoE) * var(--numDigitos))
+    left: calc(var(--anchoE))
     height: 100%
     width: 0
     background-color: var(--color-cod)
