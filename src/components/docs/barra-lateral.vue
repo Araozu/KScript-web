@@ -1,3 +1,4 @@
+import BotonOcultarMostrar from "@/components/docs/barra-lateral/boton-ocultar-mostrar"
 <template lang="pug">
 div.barra-doc
     div.cont-opcion-version
@@ -11,6 +12,7 @@ div.barra-doc
 
     div.separador-barra-lateral
 
+
     elemento-barra(v-for="(tema, i) in datos.temas"
         :key="i"
         :tema="tema"
@@ -19,6 +21,7 @@ div.barra-doc
         :nivel="0"
         :fragmentosUrl="fragmentosUrl")
 
+    div.mini-separador
 
 //
 </template>
@@ -33,7 +36,7 @@ import {useStore} from "vuex"
 export default
     name: "barra-lateral"
     components: {elementoBarra}
-    setup: =>
+    setup: (props) =>
         store = useStore()
         route = useRoute()
         router = useRouter()
@@ -80,6 +83,10 @@ export default
 
 <style scoped lang="sass">
 @import "src/sass/variables"
+
+.mini-separador
+    height: 20vh
+    width: 100%
 
 .barra-doc
     height: calc(100vh - 2.8rem)

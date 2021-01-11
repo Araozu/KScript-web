@@ -1,6 +1,9 @@
 <template lang="pug">
 div.doc
     div.opciones
+        div.opcion(@click="cambiarEstadoBarraLateral")
+            i.material-icons {{barraLateralOculta? 'keyboard_arrow_right': 'keyboard_arrow_left' }}
+            span {{barraLateralOculta? 'Mostrar': 'Ocultar' }}
         div.opcion(@click="cargaInicial")
             i.material-icons cached
             span  Recargar
@@ -49,10 +52,12 @@ export default
     name: "docs-sub"
     components: {codigo, contenidoDocs}
     setup: =>
-        state = useStore().state
+        store = useStore()
+        state = store.state
         route = useRoute()
         datos = ref({cargando: true})
         htmlPagina = ref("")
+        barraLateralOculta = computed => state.variables.barraLateralDocsOculta
 
         idiomaActual = computed(=> state.variables.idiomaActual)
 
@@ -83,10 +88,15 @@ export default
             cargarDatos to.fullPath.substr 6
             next()
 
+        cambiarEstadoBarraLateral = () =>
+            store.commit "variables/setBarraLateralDocsOculta", !barraLateralOculta.value
+
         {
             datos
             htmlPagina
             cargaInicial
+            cambiarEstadoBarraLateral
+            barraLateralOculta
         }
 
 #

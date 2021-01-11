@@ -20,7 +20,8 @@ export default {
         return {
             idiomaActual: "es",
             versiones: [],
-            esClaro: true
+            esClaro: true,
+            barraLateralDocsOculta: false
         }
     },
     mutations: {
@@ -40,6 +41,9 @@ export default {
         },
         estVersionesDocs(state, valor) {
             state.versiones = valor;
+        },
+        setBarraLateralDocsOculta(state, value) {
+            state.barraLateralDocsOculta = value;
         }
     },
     actions: {
