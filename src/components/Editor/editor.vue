@@ -268,8 +268,8 @@ export default {
             offsetScrollTop.value = target.scrollTop;
             offsetScrollLeft.value = target.scrollLeft;
 
-            refTextArea.value.scrollTop = target.scrollTop;
-            refTextArea.value.screenLeft = target.scrollLeft;
+            refContenedorCodigo.value.scrollTop = target.scrollTop;
+            refContenedorCodigo.value.screenLeft = target.scrollLeft;
 
             console.table({
                 codigo: refContenedorCodigo.value.scrollTop,
@@ -285,7 +285,7 @@ export default {
             refTextArea.value.addEventListener("focus", fnFocus);
             refTextArea.value.addEventListener("blur", fnBlur);
             refTextArea.value.addEventListener("input", manejarInput);
-            refContenedorCodigo.value.addEventListener("scroll", manejarScroll);
+            refTextArea.value.addEventListener("scroll", manejarScroll);
 
             const listener = () => {
                 const posNuevaInicio = elem.selectionStart;
@@ -448,7 +448,7 @@ export default {
     position: absolute
     top: 0
     left: 0
-    opacity: 0
+    opacity: 0.01
     box-sizing: border-box
     width: 100%
     height: calc(50vh - 3rem)
