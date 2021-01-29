@@ -431,6 +431,7 @@ export default {
     font-size: var(--tamanoFuenteCodigo)
     opacity: 0
     user-select: none
+    position: absolute
 
 
 .contenedor-codigo
