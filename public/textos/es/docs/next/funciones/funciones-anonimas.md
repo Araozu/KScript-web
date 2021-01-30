@@ -67,9 +67,7 @@ Si la función toma un parametro rest se usa `$$`.
 ($1, ...$$) => $1.concat($$);
 ```
 
-#### Usar `$` no define un único parámetro.
-
-Un único símbolo de dolar no significa nada dentro de la función. Es decir:
+Si la función solo toma un parámetro se puede usar `$` en lugar de `$1`:
 
 ```
 #($)
@@ -78,10 +76,10 @@ Un único símbolo de dolar no significa nada dentro de la función. Es decir:
 Se compila a:
 
 ```javascript
-() => $;
+($) => $;
 ```
 
-O también:
+Si se usan `$` junto a `$1`, `$2`, etc. entonces `$` se convierte a `$1`:
 
 ```
 #($1 + $)
@@ -90,5 +88,5 @@ O también:
 Se compila a:
 
 ```javascript
-($1) => $1 + $;
+($1) => $1 + $1;
 ```

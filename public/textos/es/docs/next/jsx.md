@@ -29,20 +29,20 @@ from "react" import React, {useState}
 fun Example () =
     const [count, setCount] = useState 0
     
-    @div [
-        @p "You clicked {count} times"
-        @button {onClick #(setCount (count + 1)}
+    #div [
+        #p "You clicked {count} times"
+        #button {onClick #(setCount (count + 1)}
             "Click me"
     ]
 ```
 
 ## API
 
-La única sintáxis nueva sería el uso de `@` para indicar una etiqueta de JSX.
+La única sintáxis nueva sería el uso de `#` para indicar una etiqueta de JSX.
 
 ```
 // Escribir
-@div
+#div
 
 // Equivale a
 <div></div>
@@ -52,7 +52,7 @@ Los atributos del elemento se pasan dentro de un objeto.
 
 ```
 // Escribir
-@div {className "contenedor"}
+#div {className "contenedor"}
 
 // Equivale a
 <div className={"contenedor"}></div>
@@ -64,7 +64,7 @@ El último parámetro determina los hijos del elemento, y puede ser un string, a
 
 ```
 // Escribir
-@div {className "contenedor"} "Hola mundo"
+#div {className "contenedor"} "Hola mundo"
 
 // Equivale a
 <div className={"contenedor"}>Hola mundo</div>
@@ -76,10 +76,10 @@ Si se pasa un array se definen varios hijos
 
 ```
 // Escribir
-@div {className "contenedor"} [
-    @h1 "Blog"
-    @br
-    @p "Bienvenido a mi blog"
+#div {className "contenedor"} [
+    #h1 "Blog"
+    #br
+    #p "Bienvenido a mi blog"
 ]
 
 // Equivale a
@@ -114,17 +114,17 @@ const estilos = Stylesheet.create {
 
 // Crear un elemento Titulo
 fun Titulo props =
-    @h1 {className css estilos.titulo} "Bienvenido, {props.usuario.nombre}!"
+    #h1 {className css estilos.titulo} "Bienvenido, {props.usuario.nombre}!"
 
 
 fun PantallaBienvenida () =
     // Crear un array de p
-    const elementos = [1, 2, 3].map #(@p {key $1} "Elemento {$}")
+    const elementos = [1, 2, 3].map #(#p {key $1} "Elemento {$}")
     
     
-    @div {className css estilos.contenedor} [
-        @Titulo {usuario {nombre "Pedro"}}
-        @br
+    #div {className css estilos.contenedor} [
+        #Titulo {usuario {nombre "Pedro"}}
+        #br
         elementos
     ]
 ```
