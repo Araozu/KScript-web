@@ -32,7 +32,7 @@ Un operador para aplicar parcialmente una función. Dada una función f con una 
 de parámetros, se aplicaría parcialmente así:
 
 ```
-const nuevaFun = ~f 1 2 3 4
+const nuevaFun = \f 1 2 3 4
 ```
 
 Esto se compila a:
