@@ -77,11 +77,6 @@ temas:
 
   - titulo: Errores
     ruta: errores
-    temas:
-      - titulo: Estructura
-        ruta: estructura
-      - titulo: Recuperación
-        ruta: recuperación
 
   - titulo: Módulos
     ruta: modulos
