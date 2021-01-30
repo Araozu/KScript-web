@@ -65,12 +65,7 @@ temas:
     ruta: genericos
 
   - titulo: Tipos de Datos Algebraicos
-    ruta: tda
-    temas:
-      - titulo: Covariantes
-        ruta: covariantes
-      - titulo: Registros
-        ruta: registros
+    ruta: tipos-de-datos-algebraicos
 
   - titulo: Pattern Matching
     ruta: pattern-matching
