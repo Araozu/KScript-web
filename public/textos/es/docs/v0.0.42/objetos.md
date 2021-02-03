@@ -16,4 +16,8 @@ persona.nombre
 persona.edad
 ```
 
-Por el momento no se pueden definir objetos en multiples lineas, ni hacer `{valor}`.
+Se puede usar la sintaxis corta:
+
+```
+{nombre, edad}
+```
