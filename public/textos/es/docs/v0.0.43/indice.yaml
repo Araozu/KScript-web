@@ -1,4 +1,4 @@
-ruta: docs/v0.0.42
+ruta: docs/v0.0.43
 temas:
   - titulo: Introducción
     ruta: introduccion
@@ -31,6 +31,8 @@ temas:
     temas:
       - titulo: Estructura
         ruta: estructura
+      - titulo: Funciones anónimas
+        ruta: funciones-anonimas
 
   - titulo: Objetos
     ruta: objetos
